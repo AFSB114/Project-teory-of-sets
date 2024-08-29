@@ -1,6 +1,163 @@
-body {
-    display: grid;
-    justify-content: center;
-    align-content: center;
-    height: 100vh
+#objeto {
+    width: 166.25px;
+    height: 343px;
+    background-image: url('../images/persona.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: absolute;
+    left: 100px;
+    top: 310px;
+    z-index: 2;
+}
+
+h1 {
+    color: white;
+    position: relative;
+}
+
+body,
+html {
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: black;
+}
+
+#gameContainer {
+    width: 1072px;
+    height: 100vh;
+    position: relative;
+    overflow: hidden;
+    margin: auto;
+}
+.escenarios {
+    width: 962px;
+    height: calc(100vh - 108px);
+    overflow: hidden;
+    margin: auto;
+    position: absolute;
+    top: 55px;
+    left: 54px;
+}
+
+.escenario {
+    width: 100vw;
+    height: 100vh;
+    position: absolute;
+    padding: 0;
+}
+.fondo {
+    width: 962px;
+    height: 600px;
+    background-image: url('../images/fondo.png');
+    background-repeat: no-repeat;
+    background-size: contain;
+    position: absolute;
+    top: 0px;
+    z-index: 0;
+}
+
+#escenario1 {
+    left: 0;
+    /* background-color: lightblue; */
+}
+
+#escenario2 {
+    left: 961px;
+    /* background-color: lightgreen; */
+}
+
+.marco {
+    width: 100vw;
+    height: 100vh;
+    background-image: url('../images/marco.png');
+    background-repeat: no-repeat;
+    background-size: contain;
+    position: absolute;
+    /* opacity: 0.2; */
+}
+
+.suelo {
+    width: 962px;
+    height: 105px;
+    background-image: url('../images/suelo.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    position: absolute;
+    bottom: 107.5px;
+}
+
+.cuadro1 {
+    background-image: url('../images/cuadro1.png');
+    background-repeat: no-repeat;
+    background-size: contain;
+    width: 190px;
+    height: 190px;
+    position: absolute;
+    top: 123px;
+    left: 75px;
+    z-index: 1;
+}
+
+.cuadro1:hover, .cuadro2:hover, .cuadro3:hover {
+    cursor: pointer;
+    opacity: 0.9;
+}
+
+.cuadro2 {
+    background-image: url('../images/cuadro2.png');
+    background-repeat: no-repeat;
+    background-size: contain;
+    width: 190px;
+    height: 190px;
+    position: absolute;
+    top: 120px;
+    left: 350px;
+    z-index: 1;
+}
+
+.cuadro3 {
+    background-image: url('../images/cuadro3.png');
+    background-repeat: no-repeat;
+    background-size: contain;
+    width: 190px;
+    height: 190px;
+    position: absolute;
+    top: 122px;
+    left: 560px;
+    z-index: 1;
+}
+
+.mesa {
+    background-image: url('../images/mesa.png');
+    background-repeat: no-repeat;
+    background-size: contain;
+    width: 250px;
+    height: 200px;
+    position: absolute;
+    bottom: 202px;
+    left: 500px;
+}
+
+.sillon {
+    background-image: url('../images/sillon.png');
+    background-repeat: no-repeat;
+    background-size: contain;
+    /* border: 1px solid white; */
+    width: 350px;
+    height: 250px;
+    position: absolute;
+    bottom: 150px;
+    left: 100px;
+}
+
+.ventana {
+    background-image: url('../images/ventana.png');
+    background-repeat: no-repeat;
+    background-size: contain;
+    width: 350px;
+    height: 270px;
+    position: absolute;
+    top: 80px;
+    left: 580px;
 }
