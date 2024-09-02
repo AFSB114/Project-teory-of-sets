@@ -1,117 +1,103 @@
-const objeto = document.getElementById("objeto");
-const escenario1 = document.getElementById("escenario1");
-const escenario2 = document.getElementById("escenario2");
+const character = document.getElementById('character')
+const speed = 10
 
-const altoVentana = escenario1.getBoundingClientRect().height
-const anchoVentana = escenario1.getBoundingClientRect().width
+let scenarios, numScenarios
+let height, width, limitLeft, limitRight
+let posX, posY
+let camera = 0
+let intervalMove = null
+let intervalAnimation = null
+let frame = 0
+const numsFrame = 4
+const widthFrame = 166.25
+let keysPress = {}
+const directionsKeys = ['ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown', 'KeyA', 'KeyD', 'KeyW', 'KeyS']
 
-let posX = 100;
-let posY = 280;
-const velocidad = 5; // Velocidad de movimiento (pixeles por tiempo)
-
-let numEscenarios = 2
-
-const limiteIzq = anchoVentana / 2 - 47;
-const limiteDer = anchoVentana * ((1 + 2 * (numEscenarios - 1)) / 2) - 47;
-let camara = 0;
-
-function mover() {
-
-
-    if (teclasPulsadas['ArrowLeft'] || teclasPulsadas['KeyA']) {
-        posX -= velocidad;
-    } else {
-        null
-    }
-    if (teclasPulsadas['ArrowRight'] || teclasPulsadas['KeyD']) {
-        posX += velocidad;
-    } else {
-        null
-    }
-    if (teclasPulsadas['ArrowUp'] || teclasPulsadas['KeyW']) {
-        posY -= velocidad;
-    } else {
-        null
-    }
-    if (teclasPulsadas['ArrowDown'] || teclasPulsadas['KeyS']) {
-        posY += velocidad;
-    } else {
-        null
-    }
-
-    // límites de movimiento
-    posX = Math.max(55, Math.min(anchoVentana * numEscenarios - 203, posX));
-    posY = Math.max(310, Math.min(altoVentana - 365, posY));
-
-    // seguimiento de camara
-    if (posX >= limiteIzq && posX <= limiteDer) {
-        camara = posX - limiteIzq;
-    } else if (posX <= limiteIzq) {
-        camara = 0;
-    } else if (posX >= limiteDer) {
-        camara = limiteDer - limiteIzq;
-    }
-
-    // Movimiento de objeto
-    objeto.style.left = `${posX - camara}px`;
-    objeto.style.top = `${posY}px`;
-
-    // movimiento escenarios(camara)
-    escenario1.style.left = -camara + 'px';
-    escenario2.style.left = (anchoVentana - camara) + 'px';
+function initialize() {
+    scenarios = document.getElementsByClassName('scenario')
+    const rect = scenarios[0].getBoundingClientRect()
+    height = rect.height
+    width = rect.width
+    posX = character.getBoundingClientRect().x - (window.innerWidth * 0.1)
+    posY = character.getBoundingClientRect().y
+    numScenarios = scenarios.length
+    limitLeft = width / 2 - character.clientWidth / 2
+    limitRight = width * numScenarios - width / 2 - character.clientWidth / 2
 }
 
-let intervalId1 = null;
-let intervalId2 = null;
-
-let currentFrame = 0;
-const frameCount = 4;
-const frameWidth = 166.25;
-const velocidadAni = 50;
-
-function updateFrame() {
-    if (teclasPulsadas['KeyA'] || teclasPulsadas['ArrowLeft']) {
-        objeto.style.transform = 'scaleX(-1)'
-    } else if (teclasPulsadas['KeyD'] || teclasPulsadas['ArrowRight']) {
-        objeto.style.transform = 'scaleX(1)'
+function move() {
+    if (keysPress['ArrowLeft'] || keysPress['KeyA']) {
+        posX -= speed
+    } else if (keysPress['ArrowRight'] || keysPress['KeyD']) {
+        posX += speed
     }
-    objeto.style.backgroundPosition = `-${currentFrame * frameWidth}px 0px`;
-    currentFrame = (currentFrame + 1) % frameCount;
-}
+    if (keysPress['ArrowUp'] || keysPress['KeyW']) {
+        posY -= speed
+    } else if (keysPress['ArrowDown'] || keysPress['KeyS']) {
+        posY += speed
+    }
 
+    posX = Math.max(0, Math.min(width * numScenarios - character.clientWidth, posX))
+    posY = Math.max(0, Math.min(height - character.clientWidth * 2, posY))
 
-function iniciarMovimiento() {
-    if (!intervalId1) {
-        intervalId2 = setInterval(updateFrame, velocidadAni);
-        intervalId1 = setInterval(mover, 1000 / 120); // 120 FPS
+    if (posX >= limitLeft && posX <= limitRight) {
+        camera = posX - limitLeft
+    } else if (posX <= limitLeft) {
+        camera = 0
+    } else if (posX >= limitRight) {
+        camera = limitRight - limitLeft
+    }
+
+    character.style.left = `${posX - camera}px`
+    character.style.top = `${posY}px`
+
+    for (let i = 0; i < numScenarios; i++) {
+        scenarios[i].style.left = `${width * i - camera}px`
     }
 }
 
-function detenerMovimiento() {
-    if (intervalId1 !== null) {
-        clearInterval(intervalId1);
-        intervalId1 = null;
-        clearInterval(intervalId2);
-        intervalId2 = null;
-        objeto.style.backgroundPosition = `0 0`
+function animation() {
+    if (keysPress['KeyA'] || keysPress['ArrowLeft']) {
+        character.style.transform = 'scaleX(-1)'
+    } else if (keysPress['KeyD'] || keysPress['ArrowRight']) {
+        character.style.transform = 'scaleX(1)'
+    }
+
+    character.style.backgroundPosition = `-${frame * widthFrame}px 0`
+    frame = (frame + 1) % numsFrame
+}
+
+function start() {
+    if (intervalMove === null) {
+        intervalMove = setInterval(move, 1000 / 60)
+        intervalAnimation = setInterval(animation, 60)
     }
 }
 
-let teclasPulsadas = {};
-const flechas = ['ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown', 'KeyA', 'KeyD', 'KeyW', 'KeyS'];
-
-document.addEventListener('keydown', (evento) => {
-    if (flechas.includes(evento.code)) {
-        teclasPulsadas[evento.code] = true;
-        iniciarMovimiento();
+function stop() {
+    if (intervalMove !== null && intervalAnimation !== null) {
+        clearInterval(intervalMove)
+        clearInterval(intervalAnimation)
+        intervalMove = null
+        intervalAnimation = null
+        character.style.backgroundPosition = '0 0'
     }
-});
+}
 
-document.addEventListener('keyup', (evento) => {
-    if (flechas.includes(evento.code)) {
-        teclasPulsadas[evento.code] = false;
-        if (!flechas.some(tecla => teclasPulsadas[tecla])) {
-            detenerMovimiento();
+document.addEventListener('keydown', (key) => {
+    if (directionsKeys.includes(key.code)) {
+        keysPress[key.code] = true
+        start()
+    }
+})
+
+document.addEventListener('keyup', (key) => {
+    if (directionsKeys.includes(key.code)) {
+        keysPress[key.code] = false
+        if (!directionsKeys.some(keyPress => keysPress[keyPress])) {
+            stop()
         }
     }
-});
+})
+
+initialize()
