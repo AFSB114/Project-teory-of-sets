@@ -2,14 +2,17 @@ const objeto = document.getElementById("objeto");
 const escenario1 = document.getElementById("escenario1");
 const escenario2 = document.getElementById("escenario2");
 
-const altoVentana = window.innerHeight
+const altoVentana = escenario1.getBoundingClientRect().height
+const anchoVentana = escenario1.getBoundingClientRect().width
 
 let posX = 100;
 let posY = 280;
 const velocidad = 5; // Velocidad de movimiento (pixeles por tiempo)
 
-const limiteIzq = 962 / 2 - 47;
-const limiteDer = 962 * (3 / 2) - 47;
+let numEscenarios = 2
+
+const limiteIzq = anchoVentana / 2 - 47;
+const limiteDer = anchoVentana * ((1 + 2 * (numEscenarios - 1)) / 2) - 47;
 let camara = 0;
 
 function mover() {
@@ -37,7 +40,7 @@ function mover() {
     }
 
     // límites de movimiento
-    posX = Math.max(55, Math.min(962 * 2 - 110, posX));
+    posX = Math.max(55, Math.min(anchoVentana * numEscenarios - 203, posX));
     posY = Math.max(310, Math.min(altoVentana - 365, posY));
 
     // seguimiento de camara
@@ -55,21 +58,21 @@ function mover() {
 
     // movimiento escenarios(camara)
     escenario1.style.left = -camara + 'px';
-    escenario2.style.left = (962 - camara) + 'px';
+    escenario2.style.left = (anchoVentana - camara) + 'px';
 }
 
 let intervalId1 = null;
 let intervalId2 = null;
 
-let currentFrame = 1;
+let currentFrame = 0;
 const frameCount = 4;
 const frameWidth = 166.25;
 const velocidadAni = 50;
 
 function updateFrame() {
-    if (teclasPulsadas['KeyA']) {
+    if (teclasPulsadas['KeyA'] || teclasPulsadas['ArrowLeft']) {
         objeto.style.transform = 'scaleX(-1)'
-    } else {
+    } else if (teclasPulsadas['KeyD'] || teclasPulsadas['ArrowRight']) {
         objeto.style.transform = 'scaleX(1)'
     }
     objeto.style.backgroundPosition = `-${currentFrame * frameWidth}px 0px`;
@@ -79,8 +82,8 @@ function updateFrame() {
 
 function iniciarMovimiento() {
     if (!intervalId1) {
-        intervalId1 = setInterval(mover, 1000 / 120); // 120 FPS
         intervalId2 = setInterval(updateFrame, velocidadAni);
+        intervalId1 = setInterval(mover, 1000 / 120); // 120 FPS
     }
 }
 
@@ -95,7 +98,7 @@ function detenerMovimiento() {
 }
 
 let teclasPulsadas = {};
-const flechas = ['ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown', 'KeyA','KeyD','KeyW','KeyS'];
+const flechas = ['ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown', 'KeyA', 'KeyD', 'KeyW', 'KeyS'];
 
 document.addEventListener('keydown', (evento) => {
     if (flechas.includes(evento.code)) {
