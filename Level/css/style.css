@@ -61,7 +61,7 @@ html, body {
     width: 166.25px;
     height: 343px;
     /* background-color: white; */
-    background-image: url('./images/persona.png');
+    background-image: url('../images/persona.png');
     background-repeat: no-repeat;
     background-size: cover;
     position: absolute;

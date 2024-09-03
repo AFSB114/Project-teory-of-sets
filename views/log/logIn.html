@@ -13,27 +13,31 @@
         <div class="box-wrapper">
             <div class="fondo">
                 <div class="tittle">VENNTURE</div>
+                <form action="" class="recuadro" onsubmit="return login()">
 
-                <form action="" class="recuadro">
                     <div class="username">
                         <div class="text">Nombre de usuario</div>
                         <div class="input-text">
-                            <input type="text" id="username">
+                            <input type="text" id="usuarios" name="usuarios" required>
                         </div>
                     </div>
+
                     <div class="password">
                         <div class="text">Contraseña</div>
                         <div class="input-text">
-                            <input type="password" id="password">
+                            <input type="password" id="contrasena" name="contrasena" required minlength="8">
                         </div>
                     </div>
-                    <a href="#" class="link">Olvide mi contraseña</a>
-                    <button class="btn" type="button">Ingresar</button>
-                    <a href="#" class="crear">Crear nueva cuenta</a>
+
+                    <a href="./contrasena.html" class="link">Olvide mi contraseña</a>
+                    <button class="btn" type="submit">Ingresar</button>
+                    <a href="./create.html" class="crear">Crear nueva cuenta</a>
                 </form>
             </div>
         </div>
     </div>
+
+    <script src="./js/script.js"></script>
 </body>
 
 </html>

@@ -78,11 +78,7 @@ body {
     font-family: 'Super Pixel';
 }
 
-.username {
-    grid-area: 2 / 2 / 3 / 3;
-    display: grid;
-    grid-template-rows: 1fr 2fr;
-}
+
 
 .input-text {
     grid-row: 2 / 3;
@@ -102,7 +98,7 @@ body {
 
 input {
     width: 87%;
-    height: 50%;
+    height: 33%;
     background-color: #00000000;
     border: 0px;
     outline: none;
@@ -110,7 +106,7 @@ input {
     font-family: 'Pixeloid Sans';
     position: relative;
     left: 28px;
-    top: 20px;
+    top: 55px;
 }
 
 .text {
@@ -119,7 +115,7 @@ input {
     font-size: 30px;
 }
 
-.password {
+.email {
     grid-area: 3 / 2 / 4 / 3;
     display: grid;
     grid-template-rows: 1fr 2fr;
@@ -181,4 +177,22 @@ input {
 
 .btn:active {
     filter: brightness(80%);
+}
+
+.btn-devolver {
+    background-image: url('../images/btn-back.svg');
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center center;
+    grid-area: 1 / 2 / 2 / 3 ;
+    width: 30%;
+    height: 60%;
+
+    position: relative;
+    right: 20%;
+    top: 15%;
+}
+
+.btn-devolver:hover{
+    filter: brightness(70%);
 }
