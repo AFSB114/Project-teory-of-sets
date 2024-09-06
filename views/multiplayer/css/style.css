@@ -59,18 +59,7 @@ html, body {
     grid-area: 2 / 2 / 3 / 3;
 }
 
-.recuadro {
-    display: grid;
-    grid-template-rows: 1fr 1fr;
-
-    grid-area: 4 / 2 / 5 / 3;
-
-    gap: 10%;
-}
-
 .input-text {
-    grid-area: 1 / 1 / 2 / 2;
-
     background-image: url('../images/text=Default.svg');
     background-size: contain;
     background-position: center center;
@@ -134,27 +123,6 @@ input {
 
 .btn:active {
     filter: brightness(80%);
-}
-
-#create {
-    background-image: url('../images/btn-2.svg');
-
-    grid-area: 3 / 2 / 4 / 3;
-
-    width: 80%;
-    height: 50%;
-
-    justify-self: center;
-    align-self: center;
-}
-
-#submit {
-    background-image: url('../images/btn-1.svg');
-
-    font-size: 3.5vh;
-
-    position: relative;
-    top: 20%;
 }
 
 .btn-back{
