@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+    <div class="container">
+        <div class="box-wrapper">
+            <div class="fondo">
+                <a href="../game_mode.html" class="btn-back"></a>
+                <div class="tittle">VENNTURE</div>
+
+                <a class="btn" href="#" id="create">crear sala</a>
+
+                <form action="" class="recuadro" onsubmit="return contrase()">
+
+                    <div class="codigo">
+                        <div class="input-text">
+                            <input type="text" id="codigo" name="codigo" placeholder="ingresa codigo" required
+                                minlength="6" maxlength="6">
+                        </div>
+                    </div>
+
+
+                    <button class="btn" type="submit" id="submit">Unirse a sala</button>
+
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="./js/script.js"></script>
+</body>
+
+</html>

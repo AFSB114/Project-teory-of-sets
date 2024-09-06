@@ -107,17 +107,11 @@ body {
 }
 
 .btn-back {
-    background-image: url('../images/btn-back.svg');
-    background-size: contain;
-    background-position: center center;
-    background-repeat: no-repeat;
-
     grid-area: 1 / 2 / 3 / 3;
+
     width: 15vh;
     height: 50%;
 
-    justify-self: start;
-    align-self: center;
-
-    z-index: 1;
+    position: relative;
+    right: 18%;
 }

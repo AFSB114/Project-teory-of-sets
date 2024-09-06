@@ -85,3 +85,15 @@ html, body {
     filter: brightness(80%);
     cursor: pointer;
 }
+
+.btn-back {
+    background-image: url('../images/btn-back.svg');
+    background-size: contain;
+    background-position: center center;
+    background-repeat: no-repeat;
+
+    justify-self: start;
+    align-self: center;
+
+    z-index: 1;
+}

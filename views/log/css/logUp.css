@@ -10,6 +10,10 @@
     row-gap: 10px;
 }
 
+.text {
+    font-size: 3.5vh;
+}
+
 .form::-webkit-scrollbar-track {
   background: #ff000000;
 }
@@ -28,10 +32,6 @@
 
 #birthdate {
     grid-area: 4 / 1 / 5 / 2;
-}
-
-#birthdate .text {
-    font-size: 4vh;
 }
 
 #email {
