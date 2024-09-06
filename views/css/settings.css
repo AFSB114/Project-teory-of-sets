@@ -1,0 +1,123 @@
+html,
+body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    width: 100vw;
+    background-color: #000000;
+}
+
+.box-wrapper {
+    width: 80%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+.fondo {
+    display: grid;
+    grid-template-columns: 1fr 2fr 3fr 2fr 1fr;
+    grid-template-rows: 2fr 3fr 1fr 14fr 14fr 1fr 3fr 1fr;
+}
+
+.tittle {
+    grid-area: 2 / 2 / 2 / 5;
+}
+
+.recuadro {
+    grid-area: 4 / 2 / 6 / 5;
+
+    background-image: url('../images/recuadro.svg');
+    background-size: contain;
+    background-position: center center;
+    background-repeat: no-repeat;
+
+    display: grid;
+    grid-template-rows: 9fr 2fr 5fr 3fr 2fr 10fr 5fr;
+    grid-template-columns: 7fr 10fr 8fr 8fr 10fr 7fr;
+
+    font-family: 'Super Pixel';
+}
+
+.idioma {
+    grid-area: 2 / 3 / 3 / 4;
+
+    display: grid;
+    grid-template-rows: 1fr 2fr;
+    
+    font-family: 'Super Pixel';
+    color: black;
+}
+
+.text {
+    grid-row: 1 / 2;
+    text-align: center;
+    font-size: 4.5vh;
+}
+
+.btn {
+    grid-area: 5 / 2 / 7 / 6;
+
+    background-image: url('../images/btnLogOut.svg');
+
+    justify-self: center;
+
+    font-size: 3.5vh;
+}
+
+.btndef {
+    grid-area: 1 / 4 / 3 / 6;
+
+    background-image: url('../images/Component 301.svg');
+
+    place-self: center center;
+
+    width: 10vh;
+    height: 50%;
+
+    font-size: 5vh;
+}
+
+.volumen {
+    grid-area: 2 / 1 / 5 / 7;
+
+    background-color: #00000000;
+    border: 0;
+
+    background-image: url('../images/volumen.svg');
+    background-size: contain;
+    background-position: center center;
+    background-repeat: no-repeat;
+
+    text-align: center;
+    place-self: end center;
+
+    width: 60vh;
+    height: 50%;
+}
+
+.btn-back {
+    background-image: url('../images/btn-back.svg');
+    background-size: contain;
+    background-position: center center;
+    background-repeat: no-repeat;
+
+    grid-area: 1 / 2 / 3 / 3;
+    width: 15vh;
+    height: 50%;
+
+    justify-self: start;
+    align-self: center;
+
+    z-index: 1;
+}

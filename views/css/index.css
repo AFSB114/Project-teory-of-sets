@@ -1,0 +1,26 @@
+.button {
+    grid-area: 4 / 2 / 5 / 3;
+    display: grid;
+    grid-template-rows: 1fr 1fr;
+    justify-self: center;
+}
+
+#jugar {
+    grid-row: 1 / 2;
+}
+
+#ajustes {
+    grid-row: 2 / 3;
+}
+
+.log {
+    grid-area: 5 / 1 / 6 / 2;
+    background-image: url('../images/log=Default.svg');
+    background-size: contain;
+    background-position: center center;
+    background-repeat: no-repeat;
+
+    justify-self: center;
+
+    width: 11vh;
+}
