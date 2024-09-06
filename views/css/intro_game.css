@@ -1,0 +1,30 @@
+.fondo {
+    grid-template-columns: 1fr 2fr 3fr 2fr 1fr;
+    grid-template-rows: 1fr 3fr 3fr 3fr 3fr;
+}
+
+.tittle {
+    grid-area: 1 / 2 / 2 / 5;
+}
+
+.cuadro{
+    grid-area: 2 / 2 / 6 / 5; 
+
+    background-image: url('../images/Cuadro.svg');
+    background-size: contain;
+    background-position: center center;
+    background-repeat: no-repeat;
+
+    justify-self: center;
+    align-self: center;
+
+    width: 100%;
+    height: 100%;
+}
+.text{
+    font-family: 'Pixeloid Sans';
+    text-align: center;
+
+    padding: 4%;
+    font-size: 3.8vh;
+}

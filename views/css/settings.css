@@ -78,7 +78,7 @@ body {
 .btndef {
     grid-area: 1 / 4 / 3 / 6;
 
-    background-image: url('../images/Component 301.svg');
+    background-image: url('../images/btn-idioma.svg');
 
     place-self: center center;
 
