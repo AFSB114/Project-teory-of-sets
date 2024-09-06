@@ -43,7 +43,7 @@ html, body {
 .tittle {
     color: #C3C3C3;
     font-family: 'Pixeloid Sans';
-    font-size: 105px;
+    font-size: 14vh;
     font-weight: 900;
     text-shadow: 
         1px 1px 0 black,
@@ -55,7 +55,6 @@ html, body {
         7px 7px 0 black,
         8px 8px 0 black;
     text-align: center;
-    top: 35px;
     align-self: center;
     grid-area: 2 / 2 / 4 / 3;
 }
@@ -64,31 +63,29 @@ html, body {
     grid-area: 4 / 2 / 5 / 3;
     display: grid;
     grid-template-rows: 1fr 1fr;
-    /* justify-self: center; */
+    justify-self: center;
 }
 
 .btn { 
     background-color: #00000000;
     border: 0;
-    margin: 8px;
+    width: 40vh;
+
     background-image: url('../images/btn-1.svg');
     background-size: contain;
     background-position: center center;
     background-repeat: no-repeat;
 
-    font-size: 35px;
+    font-size: 4.5vh;
     font-family: 'Super Pixel';
+
     color: black;
     text-align: center;
     text-decoration: none;
+    
     display: flex;
     justify-content: center;
     align-items: center;
-}
-
-.btn:hover {
-    filter: brightness(80%);
-    cursor: pointer;
 }
 
 #jugar {
@@ -108,10 +105,10 @@ html, body {
 
     justify-self: center;
 
-    width: 30%;
+    width: 11vh;
 }
 
-.log:hover {
+.hover:hover {
     filter: brightness(80%);
     cursor: pointer;
 }

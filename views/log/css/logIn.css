@@ -1,0 +1,46 @@
+#username {
+    grid-area: 2 / 2 / 3 / 3;
+}
+
+#password {
+    grid-area: 3 / 2 / 4 / 3;
+}
+
+.link {
+    grid-area: 4 / 2 / 5 / 3;
+
+    text-align: center;
+    color: #000000;
+    text-decoration: none;
+    font-size: 2vh;
+
+    width: 60%;
+
+    justify-self: center;
+}
+
+.link:hover {
+    color: rgb(0, 145, 255);
+    cursor: pointer;
+    -webkit-text-stroke: #000000 1px;
+}
+
+.crear {
+    grid-row: 7 / 8;
+    grid-column: 2 /3;
+
+    text-align: center;
+    color: #000000;
+    text-decoration: none;
+    font-size: 2vh;
+
+    width: 50%;
+
+    justify-self: center;
+}
+
+.crear:hover {
+    color: rgb(0, 145, 255);
+    cursor: pointer;
+    -webkit-text-stroke: #000000 1px;
+}

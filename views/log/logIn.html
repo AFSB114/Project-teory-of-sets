@@ -6,32 +6,37 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/logIn.css">
 </head>
 
 <body>
     <div class="container">
         <div class="box-wrapper">
             <div class="fondo">
+                <a href="../index.html" class="btn-back"></a>
                 <div class="tittle">VENNTURE</div>
                 <form action="" class="recuadro" onsubmit="return login()">
 
-                    <div class="username">
+                    <div class="field" id="username">
                         <div class="text">Nombre de usuario</div>
                         <div class="input-text">
                             <input type="text" id="usuarios" name="usuarios" required>
                         </div>
                     </div>
 
-                    <div class="password">
+                    <div class="field" id="password">
                         <div class="text">Contraseña</div>
                         <div class="input-text">
-                            <input type="password" id="contrasena" name="contrasena" required minlength="8">
+                            <input type="password" id="password" name="password" required minlength="8">
                         </div>
                     </div>
 
-                    <a href="./contrasena.html" class="link">Olvide mi contraseña</a>
+                    <a href="./forgot_pass.html" class="link">Olvide mi contraseña</a>
+
                     <button class="btn" type="submit">Ingresar</button>
-                    <a href="./create.html" class="crear">Crear nueva cuenta</a>
+
+                    <a href="./logUp.html" class="crear">Crear nueva cuenta</a>
+                    
                 </form>
             </div>
         </div>

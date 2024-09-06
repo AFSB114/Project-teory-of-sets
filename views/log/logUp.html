@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/logUp.css">
+</head>
+
+<body>
+    <div class="container">
+        <div class="box-wrapper">
+            <div class="fondo">
+                <a href="./logIn.html" class="btn-back"></a>
+                <div class="tittle">VENNTURE</div>
+
+                <form action="" class="recuadro" onsubmit="return contrase()">
+
+                    <div class="form">
+
+                        <div class="field" id="name">
+                            <div class="text">Nombre</div>
+                            <div class="input-text">
+                                <input type="text" id="name" name="name" required>
+                            </div>
+                        </div>
+
+                        <div class="field" id="surname">
+                            <div class="text">Apellido</div>
+                            <div class="input-text">
+                                <input type="text" id="surname" name="surname" required>
+                            </div>
+                        </div>
+
+                        <div class="field" id="username">
+                            <div class="text">Nombre de usuario</div>
+                            <div class="input-text">
+                                <input type="text" id="username" name="username" required>
+                            </div>
+                        </div>
+
+                        <div class="field" id="birthdate">
+                            <div class="text">Fecha de nacimiento</div>
+                            <div class="input-text">
+                                <input type="date" id="birthdate" name="birthdate" required>
+                            </div>  
+                        </div>
+
+                        <div class="field" id="email">
+                            <div class="text">Correo</div>
+                            <div class="input-text">
+                                <input type="email" id="email" name="email" required>
+                            </div>
+                        </div>
+
+                        <div class="field" id="password">
+                            <div class="text">Contraseña</div>
+                            <div class="input-text">
+                                <input type="password" id="password" name="password" required>
+                            </div>
+                        </div>
+
+                        <button class="btn" type="submit">Registrar</button>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="./js/script.js"></script>
+</body>
+
+</html>
