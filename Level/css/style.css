@@ -58,10 +58,10 @@ html, body {
 }
 
 #character {
-    width: 166.25px;
-    height: 343px;
+    width: 180px;
+    height: 200px;
     /* background-color: white; */
-    background-image: url('../images/persona.png');
+    background-image: url('../images/character.png');
     background-repeat: no-repeat;
     background-size: cover;
     position: absolute;

@@ -1,5 +1,5 @@
 const character = document.getElementById('character')
-const speed = 10
+const speed = 8
 
 let scenarios, numScenarios
 let height, width, limitLeft, limitRight
@@ -8,8 +8,8 @@ let camera = 0
 let intervalMove = null
 let intervalAnimation = null
 let frame = 0
-const numsFrame = 4
-const widthFrame = 166.25
+const numsFrame = 3
+const widthFrame = 180
 let keysPress = {}
 const directionsKeys = ['ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown', 'KeyA', 'KeyD', 'KeyW', 'KeyS']
 
@@ -70,7 +70,7 @@ function animation() {
 function start() {
     if (intervalMove === null) {
         intervalMove = setInterval(move, 1000 / 60)
-        intervalAnimation = setInterval(animation, 60)
+        intervalAnimation = setInterval(animation, 100)
     }
 }
 

@@ -31,3 +31,8 @@
     position: relative;
     top: 20%;
 }
+
+a {
+    text-decoration: none;
+    color: black;
+}
