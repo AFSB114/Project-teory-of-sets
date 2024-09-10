@@ -1,5 +1,5 @@
 const character = document.getElementById('character')
-const speed = 8
+const speed = 25
 
 let scenarios, numScenarios
 let height, width, limitLeft, limitRight
@@ -9,7 +9,7 @@ let intervalMove = null
 let intervalAnimation = null
 let frame = 0
 const numsFrame = 3
-const widthFrame = 180
+const widthFrame = character.clientWidth
 let keysPress = {}
 const directionsKeys = ['ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown', 'KeyA', 'KeyD', 'KeyW', 'KeyS']
 
@@ -28,17 +28,19 @@ function initialize() {
 function move() {
     if (keysPress['ArrowLeft'] || keysPress['KeyA']) {
         posX -= speed
-    } else if (keysPress['ArrowRight'] || keysPress['KeyD']) {
+    }
+    if (keysPress['ArrowRight'] || keysPress['KeyD']) {
         posX += speed
     }
     if (keysPress['ArrowUp'] || keysPress['KeyW']) {
         posY -= speed
-    } else if (keysPress['ArrowDown'] || keysPress['KeyS']) {
+    }
+    if (keysPress['ArrowDown'] || keysPress['KeyS']) {
         posY += speed
     }
 
-    posX = Math.max(0, Math.min(width * numScenarios - character.clientWidth, posX))
-    posY = Math.max(0, Math.min(height - character.clientWidth * 2, posY))
+    posX = Math.max(character.clientWidth / 4.6, Math.min(width * numScenarios - character.clientWidth - character.clientWidth / 4.6, posX))
+    posY = Math.max(character.clientHeight * 2.24, Math.min(height - character.clientHeight - character.clientHeight / 3.4, posY))
 
     if (posX >= limitLeft && posX <= limitRight) {
         camera = posX - limitLeft
@@ -69,8 +71,8 @@ function animation() {
 
 function start() {
     if (intervalMove === null) {
-        intervalMove = setInterval(move, 1000 / 60)
-        intervalAnimation = setInterval(animation, 100)
+        intervalMove = setInterval(move, 1000 / 120)
+        // intervalAnimation = setInterval(animation, 90)
     }
 }
 
@@ -100,4 +102,5 @@ document.addEventListener('keyup', (key) => {
     }
 })
 
-initialize()
+document.addEventListener('load', initialize())
+document.addEventListener('resize', initialize())

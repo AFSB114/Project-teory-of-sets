@@ -1,4 +1,5 @@
-html, body {
+html,
+body {
     height: 100%;
     margin: 0;
     padding: 0;
@@ -11,11 +12,11 @@ html, body {
     align-items: center;
     height: 100vh;
     width: 100vw;
-    background-color: #ffffff;
+    background-color: black;
 }
 
 .box-wrapper {
-    width: 80%;
+    width: 140vh;
     height: 100%;
     display: flex;
     justify-content: center;
@@ -26,45 +27,152 @@ html, body {
 
 .scenario {
     position: absolute;
-    
+
     /* Mantener relación de aspecto 4:3 */
     aspect-ratio: 4 / 3;
-    
+
     /* Dimensiones máximas */
     width: 100%;
     height: auto;
     max-width: 100%;
     max-height: 100%;
+
+    background-image: url('../images/Fondo.svg');
+    background-position: center top;
+    background-size: contain;
+    background-repeat: no-repeat;
+
+    background-color: black;
 }
 
-#scenario1 {
-    left: 0;
-    background-color: yellow;
+.cuadro {
+    background-position: center center;
+    background-size: contain;
+    background-repeat: no-repeat;
+
+    width: 29vh;
+    height: 29vh;
+
+    position: absolute;
+
+}
+
+.cuadro:hover {
+    filter: drop-shadow(0 0 1vh rgba(255, 255, 255, 0.249));
+    cursor: pointer;
+}
+
+.cuadro:active {
+    filter: drop-shadow(0 0 2vh rgba(255, 255, 255, 0.518));
+}
+
+.cuadro::marker {
+    background-color: red;
+}
+
+#cuadro-1 {
+    background-image: url('../images/Cuadro-cafe.png');
+
+    top: 25%;
+    left: 11%;
+}
+
+#cuadro-2 {
+    background-image: url('../images/Cuadro-verde.png');
+
+    width: 27vh;
+    height: 27vh;
+
+    top: 26%;
+    left: 39%;
+}
+
+.ventana {
+    background-image: url('../images/Ventana.png');
+    background-position: center center;
+    background-size: contain;
+    background-repeat: no-repeat;
+
+    position: absolute;
+    top: 28%;
+    right: 14.5%;
+
+    width: 30vh;
+    height: 22vh;
+}
+
+.sillon {
+    background-image: url('../images/Sillon.svg');
+    background-position: center center;
+    background-size: contain;
+    background-repeat: no-repeat;
+
+    position: absolute;
+    bottom: 19%;
+    left: 17%;
+
+    width: 40vh;
+    height: 20vh;
+}
+
+.mesa {
+    background-image: url('../images/Mesa.png');
+    background-position: center center;
+    background-size: contain;
+    background-repeat: no-repeat;
+
+    position: absolute;
+    bottom: 19%;
+    right: 30%;
+
+    width: 32vh;
+    height: 32vh;
+}
+
+.suelo {
+    background-image: url('../images/Suelo.svg');
+
+    background-position: center 91.5%;
+    background-size: contain;
+    background-repeat: no-repeat;
+
+    width: 100%;
+    height: 100%;
+}
+
+.marco {
+    background-image: url('../images/Marco.svg');
+    background-position: center center;
+    background-size: contain;
+    background-repeat: no-repeat;
+    height: 100%;
+    width: 100%;
+
+    z-index: 1;
+    clip-path: polygon(0% 0%, 0% 100%, 5.2% 100%, 5.2% 8%, 94.7% 8%, 94.7% 92%, 5.2% 92%, 5.2% 100%, 100% 100%, 100% 0%);
+    background-color: black;
 }
 
 #scenario2 {
     left: 100%;
-    background-color: blue;
 }
 
-#scenario3 {
-    left: 100%;
-    background-color: red;
-}
+#cuadro-3 {
+    background-image: url('../images/Cuadro-morado.png');
 
-#scenario4 {
-    left: 100%;
-    background-color: orange;
+    top: 26%;
+    right: 28%;
 }
 
 #character {
-    width: 180px;
-    height: 200px;
-    /* background-color: white; */
+    width: 23vh;
+    height: 25vh;
+
     background-image: url('../images/character.png');
     background-repeat: no-repeat;
     background-size: cover;
+
     position: absolute;
-    left: 100px;
-    top: 310px;
+    left: 10%;
+    top: 60%;
 }
