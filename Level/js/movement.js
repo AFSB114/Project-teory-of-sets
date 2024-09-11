@@ -1,49 +1,51 @@
-const character = document.getElementById('character')
-const speed = 5
+const character = document.getElementById('character');
+const speed = 10;
 
-let scenarios, numScenarios
-let height, width, limitLeft, limitRight
-let posX, posY
-const limitsCaracter = [character.clientWidth / 4.6, character.clientHeight * 2.24]
-let camera = 0
-let intervalMove = null
-let intervalAnimation = null
-let frame = 0
-const numsFrame = 3
-const widthFrame = character.clientWidth
-let keysPress = {}
-const directionsKeys = ['ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown', 'KeyA', 'KeyD', 'KeyW', 'KeyS']
+let scenarios, numScenarios;
+let height, width, limitLeft, limitRight;
+let posX, posY;
+const limitsCaracter = [character.clientWidth / 4.6, character.clientHeight * 2.24];
+let camera = 0;
+let animationFrameId = null;
+let frame = 0;
+const numsFrame = 3;
+const widthFrame = character.clientWidth;
+let keysPress = {};
+const directionsKeys = ['ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown', 'KeyA', 'KeyD', 'KeyW', 'KeyS'];
+
+let animationSpeed = 5; // Cuanto mayor sea este valor, más lenta será la animación
+let animationCounter = 0; // Contador para controlar la velocidad de la animación
 
 function initialize() {
-    scenarios = document.getElementsByClassName('scenario')
-    const rect = scenarios[0].getBoundingClientRect()
-    height = rect.height
-    width = rect.width
-    limitsCaracter.push(height - character.clientHeight - character.clientHeight / 3.4)
-    posX = character.getBoundingClientRect().x - (window.innerWidth * 0.15)
-    posY = character.getBoundingClientRect().y
-    numScenarios = scenarios.length
-    limitsCaracter.push(width * numScenarios - character.clientWidth - character.clientWidth / 4.6)
-    limitLeft = width / 2 - character.clientWidth / 2
-    limitRight = width * numScenarios - width / 2 - character.clientWidth / 2
+    scenarios = document.getElementsByClassName('scenario');
+    const rect = scenarios[0].getBoundingClientRect();
+    height = rect.height;
+    width = rect.width;
+    limitsCaracter.push(height - character.clientHeight - character.clientHeight / 3.4);
+    posX = character.getBoundingClientRect().x - (window.innerWidth * 0.15);
+    posY = character.getBoundingClientRect().y;
+    numScenarios = scenarios.length;
+    limitsCaracter.push(width * numScenarios - character.clientWidth - character.clientWidth / 4.6);
+    limitLeft = width / 2 - character.clientWidth / 2;
+    limitRight = width * numScenarios - width / 2 - character.clientWidth / 2;
 }
 
 function move() {
     if (keysPress['ArrowLeft'] || keysPress['KeyA']) {
-        posX -= speed
+        posX -= speed;
     }
     if (keysPress['ArrowRight'] || keysPress['KeyD']) {
-        posX += speed
+        posX += speed;
     }
     if (keysPress['ArrowUp'] || keysPress['KeyW']) {
-        posY -= speed
+        posY -= speed;
     }
     if (keysPress['ArrowDown'] || keysPress['KeyS']) {
-        posY += speed
+        posY += speed;
     }
 
-    posX = Math.max(limitsCaracter[0], Math.min(limitsCaracter[3], posX))
-    posY = Math.max(limitsCaracter[1], Math.min(limitsCaracter[2], posY))
+    posX = Math.max(limitsCaracter[0], Math.min(limitsCaracter[3], posX));
+    posY = Math.max(limitsCaracter[1], Math.min(limitsCaracter[2], posY));
 
     if (posX < limitLeft) {
         camera = 0;
@@ -52,59 +54,66 @@ function move() {
     } else {
         camera = posX - limitLeft;
     }
-    
-    for (let i = 0; i < numScenarios; i++) {
-        scenarios[i].style.left = `${width * i - camera}px`
-    }
-    
-    character.style.left = `${posX - camera}px`
-    character.style.top = `${posY}px`
 
+    for (let i = 0; i < numScenarios; i++) {
+        scenarios[i].style.left = `${width * i - camera}px`;
+    }
+
+    character.style.left = `${posX - camera}px`;
+    character.style.top = `${posY}px`;
 }
 
 function animation() {
     if (keysPress['KeyA'] || keysPress['ArrowLeft']) {
-        character.style.transform = 'scaleX(-1)'
+        character.style.transform = 'scaleX(-1)';
     } else if (keysPress['KeyD'] || keysPress['ArrowRight']) {
-        character.style.transform = 'scaleX(1)'
+        character.style.transform = 'scaleX(1)';
     }
 
-    character.style.backgroundPosition = `-${frame * widthFrame}px 0`
-    frame = (frame + 1) % numsFrame
+    // Incrementa el contador de animación y cambia el frame solo cuando sea el momento
+    animationCounter++;
+    if (animationCounter >= animationSpeed) {
+        character.style.backgroundPosition = `-${frame * widthFrame}px 0`;
+        frame = (frame + 1) % numsFrame;
+        animationCounter = 0; // Reiniciar el contador
+    }
+}
+
+function loop() {
+    move();
+    animation();
+    animationFrameId = requestAnimationFrame(loop);
 }
 
 function start() {
-    if (intervalMove === null) {
-        intervalMove = setInterval(move, 1000 / 120)
-        intervalAnimation = setInterval(animation, 80)
+    if (!animationFrameId) {
+        loop();
     }
 }
 
 function stop() {
-    if (intervalMove !== null && intervalAnimation !== null) {
-        clearInterval(intervalMove)
-        clearInterval(intervalAnimation)
-        intervalMove = null
-        intervalAnimation = null
-        character.style.backgroundPosition = '0 0'
+    if (animationFrameId) {
+        cancelAnimationFrame(animationFrameId);
+        animationFrameId = null;
+        character.style.backgroundPosition = '0 0';
     }
 }
 
 document.addEventListener('keydown', (key) => {
     if (directionsKeys.includes(key.code)) {
-        keysPress[key.code] = true
-        start()
+        keysPress[key.code] = true;
+        start();
     }
-})
+});
 
 document.addEventListener('keyup', (key) => {
     if (directionsKeys.includes(key.code)) {
-        keysPress[key.code] = false
+        keysPress[key.code] = false;
         if (!directionsKeys.some(keyPress => keysPress[keyPress])) {
-            stop()
+            stop();
         }
     }
-})
+});
 
-document.addEventListener('load', initialize())
-document.addEventListener('resize', initialize())
+window.addEventListener('load', initialize);
+window.addEventListener('resize', initialize);

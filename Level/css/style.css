@@ -122,7 +122,6 @@ body {
     position: absolute;
     bottom: 22%;
     left: 10%;
-
 }
 
 .puerta:hover {
@@ -130,8 +129,23 @@ body {
     cursor: pointer;
 }
 
-.puerta:active {
-    filter: drop-shadow(0 0 2vh rgba(255, 255, 255, 0.518));
+.libreria {
+    background-image: url('../images/Libreria.png');
+    background-position: center center;
+    background-size: contain;
+    background-repeat: no-repeat;
+
+    width: 30vh;
+    height: 30vh;
+
+    position: absolute;
+    bottom: 19.5%;
+    right: 5.8%;
+}
+
+#scenario3 {
+    left: 200%;
+    background-image: url('../images/Escenario.png');
 }
 
 #character {
