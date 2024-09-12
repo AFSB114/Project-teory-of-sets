@@ -32,6 +32,6 @@ puerta.addEventListener('click', () => {
         });
         pass.fill('');
     } else {
-        window.location.href = '../views/index.html';
+        window.location.href = '../views/game_mode.html';
     }
 });

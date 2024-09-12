@@ -1,6 +1,8 @@
 const character = document.getElementById('character');
 const speed = 10;
 
+const scenariosContainer = document.getElementById('scenarios')
+
 let scenarios, numScenarios;
 let height, width, limitLeft, limitRight;
 let posX, posY;
@@ -37,30 +39,26 @@ function move() {
     if (keysPress['ArrowRight'] || keysPress['KeyD']) {
         posX += speed;
     }
-    if (keysPress['ArrowUp'] || keysPress['KeyW']) {
-        posY -= speed;
-    }
-    if (keysPress['ArrowDown'] || keysPress['KeyS']) {
-        posY += speed;
-    }
+    // if (keysPress['ArrowUp'] || keysPress['KeyW']) {
+    //     posY -= speed;
+    // }
+    // if (keysPress['ArrowDown'] || keysPress['KeyS']) {
+    //     posY += speed;
+    // }
 
     posX = Math.max(limitsCaracter[0], Math.min(limitsCaracter[3], posX));
-    posY = Math.max(limitsCaracter[1], Math.min(limitsCaracter[2], posY));
+    // posY = Math.max(limitsCaracter[1], Math.min(limitsCaracter[2], posY));
 
-    if (posX < limitLeft) {
-        camera = 0;
-    } else if (posX > limitRight) {
+    if (posX > limitRight) {
         camera = limitRight - limitLeft;
     } else {
         camera = posX - limitLeft;
     }
 
-    for (let i = 0; i < numScenarios; i++) {
-        scenarios[i].style.left = `${width * i - camera}px`;
-    }
+    scenariosContainer.style.transform = `translateX(-${camera}px)`;
 
-    character.style.left = `${posX - camera}px`;
-    character.style.top = `${posY}px`;
+    character.style.left = `${posX}px`;
+    // character.style.top = `${posY}px`;
 }
 
 function animation() {
@@ -70,12 +68,11 @@ function animation() {
         character.style.transform = 'scaleX(1)';
     }
 
-    // Incrementa el contador de animación y cambia el frame solo cuando sea el momento
     animationCounter++;
     if (animationCounter >= animationSpeed) {
         character.style.backgroundPosition = `-${frame * widthFrame}px 0`;
         frame = (frame + 1) % numsFrame;
-        animationCounter = 0; // Reiniciar el contador
+        animationCounter = 0;
     }
 }
 
@@ -115,5 +112,4 @@ document.addEventListener('keyup', (key) => {
     }
 });
 
-window.addEventListener('load', initialize);
-window.addEventListener('resize', initialize);
+window.addEventListener('DOMContentLoaded', initialize);
