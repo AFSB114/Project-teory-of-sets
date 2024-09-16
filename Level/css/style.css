@@ -456,9 +456,6 @@ body {
     grid-area: 2 / 2 / 3 / 3;
 }
 
-.conjunto:nth-child(0) {
-}
-
 .conjunto:nth-child(2) {
     background-image: url('../images/conjunto-cafe.svg');
     grid-area: 2 / 3 / 3 / 4;

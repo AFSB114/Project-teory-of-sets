@@ -1,3 +1,11 @@
+@font-face {
+    font-family: 'Super Pixel';
+    src: url('../../fonts/Super\ Pixel\ Personal\ Use.ttf') format('ttf');
+    
+    font-family: 'Pixeloid';
+    src: url('../../fonts/PixeloidSans.ttf') format('ttf');
+}
+
 html, body {
     height: 100%;
     margin: 0;
