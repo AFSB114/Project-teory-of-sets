@@ -5,8 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/logIn.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/logIn.css">
 </head>
 
 <body>
@@ -15,7 +15,8 @@
             <div class="fondo">
                 <a href="../index.html" class="btn-back"></a>
                 <div class="tittle">VENNTURE</div>
-                <form action="" class="recuadro" onsubmit="return login()">
+
+                <form class="recuadro" id="form">
 
                     <div class="field" id="username">
                         <div class="text">Nombre de usuario</div>
@@ -27,7 +28,7 @@
                     <div class="field" id="password">
                         <div class="text">Contraseña</div>
                         <div class="input-text">
-                            <input type="password" id="password" name="password" required minlength="8">
+                            <input type="password" id="password" name="password" required>
                         </div>
                     </div>
 
@@ -42,7 +43,7 @@
         </div>
     </div>
 
-    <script src="./js/script.js"></script>
+    <script src="assets/js/logIn.js"></script>
 </body>
 
 </html>
