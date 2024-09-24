@@ -8,28 +8,31 @@ document.getElementById('form').addEventListener('submit', async (event) => {
     let email = event.target[4].value
     let password = event.target[5].value
 
-    const res = await fetch('../../api/logUp.php', {
+    await fetch('../../php/api/logUp.php', {
         method: 'POST',
         headers: { 'content-type': 'application/json' },
         body: JSON.stringify({
-            name: name,
-            surname: surname,
-            nickname: nickname,
-            birthday: birthday,
-            email: email,
-            password: password
+            name,
+            surname,
+            nickname,
+            birthday,
+            email,
+            password
         })
     })
+        .then(res => res.json())
+        .then(res => {
+            console.log(res)
+        })
+        .catch(err => console.log(err))
 
-    let resJson = await res.json()
+    // if (resJson.nickname) {
+    //     console.log('El nombre de usuario ya esta en uso')
+    // } else if (resJson.email) {
+    //     console.log('El email ya se encuentra vinculado a otra cuenta')
+    // }
 
-    if (resJson.nickname) {
-        console.log('El nombre de usuario ya esta en uso')
-    } else if (resJson.email) {
-        console.log('El email ya se encuentra vinculado a otra cuenta')
-    }
-
-    if (resJson.status === 'OK') {
-        window.location.href = './logIn'
-    }
+    // if (resJson.status === 'OK') {
+    //     window.location.href = './logIn'
+    // }
 })

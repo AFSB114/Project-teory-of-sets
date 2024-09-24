@@ -17,5 +17,3 @@ try {
     // En caso de error, capturamos la excepción
     die("Error de conexión: " . $err->getMessage());
 }
-
-
