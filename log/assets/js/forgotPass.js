@@ -3,21 +3,19 @@ document.getElementById('form').addEventListener('submit', async (event) => {
 
     let email = event.target[0].value
 
-    const res = await fetch('../../api/logIn.php',{
+    await fetch('../../php/api/forgotPass.php', {
         method: 'POST',
         headers: { 'content-type': 'application/json' },
         body: JSON.stringify({
             email: email
         })
     })
-
-    resJson = await res.json()
-    console.log(resJson)
-
-    if (resJson.ok) {
-        console.log('Correo Enviado')
-        // Enviar correo
-    } else {
-        console.log('Correo no enviado')
-    }
+        .then(res => res.json())
+        .then(res => {
+            console.log(res)
+        })
+        .catch(err => console.log(err))
+        .finally(() => {
+            window.location.href = './log_in.html'
+        })
 })
