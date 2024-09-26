@@ -65,9 +65,18 @@ try {
    $res = new Res("success", "Registro exitoso");
    http_response_code(200);
    echo json_encode($res);
-} catch (PDOException $e) {    
-    $res = new Res("error", "Error en la conexión a la base de datos", $e);
-    http_response_code(500);
+} catch (PDOException $e) {
+
+    if ($e->getCode() === '23505') {
+        if (strpos($e->getMessage(), 'email') !== false) {
+            $res = new Res("error", "El email ya se encuentra vinculado a otra cuenta", 'email');
+        } else {
+            $res = new Res("error", "El nombre de usuario ya esta en uso", 'username');
+        }
+        http_response_code(409);
+    } else {
+        $res = new Res("error", "Error en la conexión a la base de datos", $e);
+        http_response_code(500);
+    }
     echo json_encode($res);
-    exit();
 }

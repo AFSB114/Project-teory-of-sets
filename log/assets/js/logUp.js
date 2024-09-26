@@ -23,16 +23,22 @@ document.getElementById('form').addEventListener('submit', async (event) => {
         .then(res => res.json())
         .then(res => {
             console.log(res)
+            if (res.status === 'success') {
+                window.location.href = './log_in.html?success=true'
+            } else {
+                document.getElementById('error').children[0].innerHTML = res.message
+
+                document.getElementById('error').style.display = 'block'
+                document.getElementById('error').classList.add('show')
+                setTimeout(() => {
+                    document.getElementById('error').classList.remove('show')
+                    document.getElementById('error').classList.add('hide')
+                    setTimeout(() => {
+                        document.getElementById('error').style.display = 'none'
+                        document.getElementById('error').classList.remove('hide')
+                    }, 500)
+                }, 2500)
+            }
         })
         .catch(err => console.log(err))
-
-    // if (resJson.nickname) {
-    //     console.log('El nombre de usuario ya esta en uso')
-    // } else if (resJson.email) {
-    //     console.log('El email ya se encuentra vinculado a otra cuenta')
-    // }
-
-    // if (resJson.status === 'OK') {
-    //     window.location.href = './logIn'
-    // }
 })
