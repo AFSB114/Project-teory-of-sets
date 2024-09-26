@@ -24,20 +24,9 @@ document.getElementById('form').addEventListener('submit', async (event) => {
         .then(res => {
             console.log(res)
             if (res.status === 'success') {
-                window.location.href = './log_in.html?success=true'
+                window.location.href = `./log_in.html?success=true&message=${res.message}`
             } else {
-                document.getElementById('error').children[0].innerHTML = res.message
-
-                document.getElementById('error').style.display = 'block'
-                document.getElementById('error').classList.add('show')
-                setTimeout(() => {
-                    document.getElementById('error').classList.remove('show')
-                    document.getElementById('error').classList.add('hide')
-                    setTimeout(() => {
-                        document.getElementById('error').style.display = 'none'
-                        document.getElementById('error').classList.remove('hide')
-                    }, 500)
-                }, 2500)
+                showMessage('message', res.message)
             }
         })
         .catch(err => console.log(err))

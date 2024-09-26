@@ -62,7 +62,7 @@ try {
 
    $pdo->commit();
 
-   $res = new Res("success", "Registro exitoso");
+   $res = new Res("success", "Te has registrado correctamente");
    http_response_code(200);
    echo json_encode($res);
 } catch (PDOException $e) {

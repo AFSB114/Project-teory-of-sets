@@ -15,6 +15,11 @@ document.getElementById('form').addEventListener('submit', async (event) => {
         .then(res => res.json())
         .then(res => {
             console.log(res)
+            if (res.status === 'success') {
+                window.location.href = `../../?success=true&name=${res.data.name}&surname=${res.data.surname}`
+            } else {
+                showMessage('message', res.message)
+            }
         })
         .catch(err => console.log(err))
 })
@@ -22,22 +27,13 @@ document.getElementById('form').addEventListener('submit', async (event) => {
 document.addEventListener('DOMContentLoaded', () => {
     const urlParams = new URLSearchParams(window.location.search);
     const success = urlParams.get('success');
+    const message = urlParams.get('message');
 
     // Quita los parámetros de la URL sin recargar la página
     const newUrl = window.location.protocol + "//" + window.location.host + window.location.pathname;
     window.history.pushState({ path: newUrl }, '', newUrl);
 
     if (success === 'true') {
-        document.getElementById('log-up-success').style.display = 'block';
-        document.getElementById('log-up-success').classList.add('show');
-        setTimeout(() => {
-            document.getElementById('log-up-success').classList.remove('show');
-            document.getElementById('log-up-success').classList.add('hide');
-
-            setTimeout(() => {                
-                document.getElementById('log-up-success').style.display = 'none';
-                document.getElementById('error').classList.remove('hide')
-            }, 500);
-        }, 2500);
+        showMessage('message', message)
     }
 })
