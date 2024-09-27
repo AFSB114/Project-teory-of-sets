@@ -3,9 +3,10 @@ include_once '../connection/connection.php';
 header("Content-Type: application/json; charset=UTF-8");
 header("Access-Control-Allow-Methods: POST");
 
-$req = json_decode(file_get_contents("php://input"), true);//Devuelve los datos en un array asociativo si esta true
+$req = json_decode(file_get_contents("php://input"), true); //Devuelve los datos en un array asociativo si esta true
 
-class User {
+class User
+{
     public string $name;
     public string $surname;
     public string $nickname;
@@ -13,7 +14,8 @@ class User {
     public string $email;
     public string $password;
 
-    public function __construct($data){
+    public function __construct($data)
+    {
         $this->name = $data['name'];
         $this->surname = $data['surname'];
         $this->nickname = $data['nickname'];
@@ -38,33 +40,33 @@ $now = new DateTime();
 $dateNow = $now->format('Y-m-d');
 
 try {
-   $pdo->beginTransaction();
+    $pdo->beginTransaction();
 
-   $query = "INSERT INTO log (nickname, email, password, create_date) VALUES (:nickname, :email, :password, :create_date)";
-   $stmt = $pdo->prepare($query);
-   $stmt->execute([
-       ':nickname' => $user->nickname,
-       ':email' => $user->email,
-       ':password' => $user->password,
-       ':create_date' => $dateNow
-   ]);
+    $query = "INSERT INTO log (nickname, email, password, create_date) VALUES (:nickname, :email, :password, :create_date)";
+    $stmt = $pdo->prepare($query);
+    $stmt->execute([
+        ':nickname' => $user->nickname,
+        ':email' => $user->email,
+        ':password' => $user->password,
+        ':create_date' => $dateNow
+    ]);
 
-   $id = $pdo->lastInsertId();
-   $query = "INSERT INTO users (id, name, surname, birthday, create_date) VALUES (:id, :name, :surname, :birthday, :create_date)";
-   $stmt = $pdo->prepare($query);
-   $stmt->execute([
-       ':id' => $id,
-       ':name' => $user->name,
-       ':surname' => $user->surname,
-       ':birthday' => $user->birthday,
-       ':create_date' => $dateNow
-   ]);
+    $id = $pdo->lastInsertId();
+    $query = "INSERT INTO users (id, name, surname, birthday, create_date) VALUES (:id, :name, :surname, :birthday, :create_date)";
+    $stmt = $pdo->prepare($query);
+    $stmt->execute([
+        ':id' => $id,
+        ':name' => $user->name,
+        ':surname' => $user->surname,
+        ':birthday' => $user->birthday,
+        ':create_date' => $dateNow
+    ]);
 
-   $pdo->commit();
+    $pdo->commit();
 
-   $res = new Res("success", "Te has registrado correctamente");
-   http_response_code(200);
-   echo json_encode($res);
+    $res = new Res("success", "Te has registrado correctamente");
+    http_response_code(200);
+    echo json_encode($res);
 } catch (PDOException $e) {
 
     if ($e->getCode() === '23505') {

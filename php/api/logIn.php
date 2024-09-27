@@ -1,20 +1,13 @@
 <?php
 include_once '../connection/connection.php';
+global $pdo;
+include_once 'schemas/response.php';
 header("Content-Type: application/json; charset=UTF-8");
 header("Access-Control-Allow-Methods: POST");
 
 $req = json_decode(file_get_contents("php://input"), true); //Devuelve los datos en un array asociativo si esta true
 
 $query = "SELECT log.id, log.nickname, log.email, users.name, users.surname from log inner join users ON users.id = log.id AND log.nickname = :username AND log.password = :password";
-
-class Res
-{
-    public function __construct(
-        public string $status,
-        public string $message,
-        public mixed $data = null,
-    ) {}
-}
 
 class User
 {
@@ -47,16 +40,14 @@ try {
     exit();
 }
 
-
 if ($stmt->rowCount() == 0) {
     $res = new Res("error", "Usuario o contraseña incorrectos");
     http_response_code(400);
-    echo json_encode($res);
-    exit();
 } else {
     $data_User = new User($stmt->fetch(PDO::FETCH_ASSOC));
     $res = new Res("success", "Logueado correctamente", $data_User);
     http_response_code(200);
-    echo json_encode($res);
-    exit();
 }
+
+echo json_encode($res);
+exit();
