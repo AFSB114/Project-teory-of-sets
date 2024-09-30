@@ -1,5 +1,6 @@
 <?php
 include_once '../connection/connection.php';
+include_once 'schemas/response.php';
 header("Content-Type: application/json; charset=UTF-8");
 header("Access-Control-Allow-Methods: POST");
 
@@ -23,15 +24,6 @@ class User
         $this->email = $data['email'];
         $this->password = $data['password'];
     }
-}
-
-class Res
-{
-    public function __construct(
-        public string $status,
-        public string $message,
-        public mixed $data = null,
-    ) {}
 }
 
 $user = new User($req);
@@ -66,11 +58,10 @@ try {
 
     $res = new Res("success", "Te has registrado correctamente");
     http_response_code(200);
-    echo json_encode($res);
 } catch (PDOException $e) {
 
     if ($e->getCode() === '23505') {
-        if (strpos($e->getMessage(), 'email') !== false) {
+        if (str_contains($e->getMessage(), 'email')) {
             $res = new Res("error", "El email ya se encuentra vinculado a otra cuenta", 'email');
         } else {
             $res = new Res("error", "El nombre de usuario ya esta en uso", 'username');
@@ -80,5 +71,6 @@ try {
         $res = new Res("error", "Error en la conexión a la base de datos", $e);
         http_response_code(500);
     }
+} finally {
     echo json_encode($res);
 }

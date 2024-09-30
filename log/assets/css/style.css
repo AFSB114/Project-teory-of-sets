@@ -1,3 +1,24 @@
+@font-face {
+    font-family: 'Super Pixel';
+    src: url('../fonts/Super-Pixel-Personal-Use.ttf') format('truetype'),
+        url('../fonts/super-pixel-personal-use-webfont.woff') format('woff'),
+        url('../fonts/super-pixel-personal-use-webfont.woff2') format('woff2');
+}
+
+@font-face {
+    font-family: 'Pixeloid Sans';
+    src: url('../fonts/PixeloidSans.ttf') format('truetype'),
+        url('../fonts/pixeloidsans-webfont.woff') format('woff'),
+        url('../fonts/pixeloidsans-webfont.woff2') format('woff2');
+}
+
+@font-face {
+    font-family: 'Pixeloid Sans Bold';
+    src: url('../fonts/PixeloidSans-Bold.ttf') format('truetype'),
+        url('../fonts/pixeloidsans-bold-webfont.woff') format('woff'),
+        url('../fonts/pixeloidsans-bold-webfont.woff2') format('woff2');
+}
+
 html,
 body {
     height: 100%;
@@ -46,7 +67,7 @@ body {
 
 .tittle {
     color: #C3C3C3;
-    font-family: 'Pixeloid Sans';
+    font-family: 'Pixeloid Sans Bold';
     font-size: 14vh;
 
     font-weight: 900;
@@ -181,3 +202,9 @@ input {
     grid-template-rows: 1fr 2fr;
     gap: 0;
 }
+
+@media screen and (orientation: portrait) {
+    .fondo {
+        display: none;
+    }
+  }

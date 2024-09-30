@@ -1,20 +1,12 @@
 <?php
 include_once '../connection/connection.php';
+include_once 'schemas/response.php';
 header("Content-Type: application/json; charset=UTF-8");
 header("Access-Control-Allow-Methods: POST");
 
 $req = json_decode(file_get_contents("php://input"), true);//Devuelve los datos en un array asociativo si esta true
 
 $query = "SELECT id,nickname,email FROM log WHERE email = :email";
-
-class Res
-{
-    public function __construct(
-        public string $status,
-        public string $message,
-        public mixed $data = null,
-    ) {}
-}
 
 class User {
     public int $id;
@@ -45,11 +37,10 @@ if ($stmt->rowCount() === 1) {
     $data_User = new User($stmt->fetch(PDO::FETCH_ASSOC));
     $res = new Res("success", "Email enviado",$data_User);
     http_response_code(200);
-    echo json_encode($res);
-    exit();
 } else {
     $res = new Res("error", "Email no encontrado");
     http_response_code(404);
-    echo json_encode($res);
-    exit();
 }
+
+echo json_encode($res);
+exit();
