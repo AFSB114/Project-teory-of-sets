@@ -1,8 +1,9 @@
 <?php
 include_once '../connection/connection.php';
 include_once 'schemas/response.php';
-header("Content-Type: application/json; charset=UTF-8");
+header('Access-Control-Allow-Origin: *');
 header("Access-Control-Allow-Methods: POST");
+header("Content-Type: application/json; charset=UTF-8");
 
 $req = json_decode(file_get_contents("php://input"), true); //Devuelve los datos en un array asociativo si esta true
 
