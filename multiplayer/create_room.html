@@ -20,44 +20,47 @@
 
                 <div class="tittle">CREAR SALA</div>
 
-                <div class="cuadro">
+                <form id="options">
 
-                    <div class="selection">
-                        <div class="text">NUMERO DE NIVELES</div>
+                    <div class="cuadro">
 
-                        <select class="options hover" id="" name="">
-                            <option selected disabled value="">SELECCIONA</option>
-                            <option value="1">OPCION 1</option>
-                            <option value="2">OPCION 2</option>
-                            <option value="3">OPCION 3</option>
-                        </select>
-                    </div>
-
-                   <div class="selection">
-                     <div class="text">TIEMPO POR NIVEL</div>
-                    
-                     <select class="options hover" id="" name="">
-                         <option selected disabled value="">SELECCIONA</option>
-                         <option value="1">OPCION 1</option>
-                         <option value="2">OPCION 2</option>
-                         <option value="3">OPCION 3</option>
-                     </select>
-                   </div>
-
-                    <div class="selection">
-                        <div class="text">DIFICULTAD</div>
+                        <div class="selection">
+                            <div class="text">NUMERO DE NIVELES</div>
+    
+                            <select class="options hover" id="" name="">
+                                <option selected disabled value="0">SELECCIONA</option>
+                                <option value="1">OPCION 1</option>
+                                <option value="2">OPCION 2</option>
+                                <option value="3">OPCION 3</option>
+                            </select>
+                        </div>
+    
+                       <div class="selection">
+                         <div class="text">TIEMPO POR NIVEL</div>
                         
-                        <select class="options hover" id="" name="">
-                            <option selected disabled value="">SELECCIONA</option>
-                            <option value="1">OPCION 1</option>
-                            <option value="2">OPCION 2</option>
-                            <option value="3">OPCION 3</option>
-                        </select>
+                         <select class="options hover" id="" name="">
+                             <option selected disabled value="0">SELECCIONA</option>
+                             <option value="1">OPCION 1</option>
+                             <option value="2">OPCION 2</option>
+                             <option value="3">OPCION 3</option>
+                         </select>
+                       </div>
+    
+                        <div class="selection">
+                            <div class="text">DIFICULTAD</div>
+                            
+                            <select class="options hover" id="" name="">
+                                <option selected disabled value="0">SELECCIONA</option>
+                                <option value="1">OPCION 1</option>
+                                <option value="2">OPCION 2</option>
+                                <option value="3">OPCION 3</option>
+                            </select>
+                        </div>
                     </div>
 
-                </div>
-
-                    <a href="./room_admin.html" class="btn">CREAR</a>
+                    <button type="submit" class="btn">CREAR</button>
+                </form>
+                
 
                 <div class="code">
                     <div class="text" id="codeRoom">CODIGO DE SALA</div>
@@ -66,6 +69,8 @@
             </div>
         </div>
     </div>
+
+    <script src="./assets/js/createRoom.js"></script>
 </body>
 
 </html>

@@ -1,24 +1,14 @@
 <?php
 include_once '../connection/connection.php';
+global $pdo;
 include_once 'schemas/response.php';
+include_once 'schemas/user.php';
 header("Content-Type: application/json; charset=UTF-8");
 header("Access-Control-Allow-Methods: POST");
 
 $req = json_decode(file_get_contents("php://input"), true);//Devuelve los datos en un array asociativo si esta true
 
 $query = "SELECT id,nickname,email FROM log WHERE email = :email";
-
-class User {
-    public int $id;
-    public string $nickname;
-    public string $email;
-
-    public function __construct($data){
-        $this->id = $data['id'];
-        $this->nickname = $data['nickname'];
-        $this->email = $data['email'];
-    }
-}
 
 try {
     $stmt = $pdo->prepare($query);

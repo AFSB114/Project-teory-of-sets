@@ -1,31 +1,14 @@
 <?php
 include_once '../connection/connection.php';
+global $pdo;
 include_once 'schemas/response.php';
-header('Access-Control-Allow-Origin: *');
+include_once 'schemas/user.php';
 header("Access-Control-Allow-Methods: POST");
 header("Content-Type: application/json; charset=UTF-8");
 
 $req = json_decode(file_get_contents("php://input"), true); //Devuelve los datos en un array asociativo si esta true
 
 $query = "SELECT log.id, log.nickname, log.email, users.name, users.surname from log inner join users ON users.id = log.id AND log.nickname = :username AND log.password = :password";
-
-class User
-{
-    public int $id;
-    public string $nickname;
-    public string $email;
-    public string $name;
-    public string $surname;
-
-    public function __construct($data)
-    {
-        $this->id = $data['id'];
-        $this->nickname = $data['nickname'];
-        $this->email = $data['email'];
-        $this->name = $data['name'];
-        $this->surname = $data['surname'];
-    }
-}
 
 try {
     $stmt = $pdo->prepare($query);

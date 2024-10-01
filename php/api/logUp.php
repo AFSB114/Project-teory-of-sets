@@ -1,30 +1,12 @@
 <?php
 include_once '../connection/connection.php';
+global $pdo;
 include_once 'schemas/response.php';
+include_once 'schemas/user.php';
 header("Content-Type: application/json; charset=UTF-8");
 header("Access-Control-Allow-Methods: POST");
 
 $req = json_decode(file_get_contents("php://input"), true); //Devuelve los datos en un array asociativo si esta true
-
-class User
-{
-    public string $name;
-    public string $surname;
-    public string $nickname;
-    public string $birthday;
-    public string $email;
-    public string $password;
-
-    public function __construct($data)
-    {
-        $this->name = $data['name'];
-        $this->surname = $data['surname'];
-        $this->nickname = $data['nickname'];
-        $this->birthday = $data['birthday'];
-        $this->email = $data['email'];
-        $this->password = $data['password'];
-    }
-}
 
 $user = new User($req);
 
@@ -62,9 +44,9 @@ try {
 
     if ($e->getCode() === '23505') {
         if (str_contains($e->getMessage(), 'email')) {
-            $res = new Res("error", "El email ya se encuentra vinculado a otra cuenta", 'email');
+            $res = new Res("error", "El email ya se encuentra vinculado a otra cuenta");
         } else {
-            $res = new Res("error", "El nombre de usuario ya esta en uso", 'username');
+            $res = new Res("error", "El nombre de usuario ya esta en uso");
         }
         http_response_code(409);
     } else {
