@@ -24,7 +24,7 @@ document.getElementById('form').addEventListener('submit', async (event) => {
         .then(res => {
             console.log(res)
             if (res.status === 'success') {
-                window.location.href = `./log_in.html?success=true&message=${res.message}`
+                window.location.href = `./log_in.html?message=${res.message}`
             } else {
                 showMessage('message', res.message)
             }

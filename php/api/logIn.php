@@ -10,6 +10,7 @@ $req = json_decode(file_get_contents("php://input"), true); //Devuelve los datos
 
 $query = "SELECT log.id, log.nickname, log.email, users.name, users.surname from log inner join users ON users.id = log.id AND log.nickname = :username AND log.password = :password";
 
+
 try {
     $stmt = $pdo->prepare($query);
     $stmt->execute([
@@ -27,7 +28,16 @@ if ($stmt->rowCount() == 0) {
     $res = new Res("error", "Usuario o contraseña incorrectos");
     http_response_code(400);
 } else {
+    session_start();
     $data_User = new User($stmt->fetch(PDO::FETCH_ASSOC));
+    $_SESSION['user_id'] = $data_User->id;
+    setcookie('session_token', $data_User->id, [
+        'expires' => time() + (86400 * 30),
+        'path' => '/',
+        'httponly' => true,
+        'secure' => true,
+        'samesite' => 'strict'
+    ]);
     $res = new Res("success", "Logueado correctamente", $data_User);
     http_response_code(200);
 }

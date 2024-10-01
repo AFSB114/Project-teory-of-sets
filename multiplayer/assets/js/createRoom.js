@@ -15,9 +15,8 @@ document.getElementById("options").addEventListener("submit", (e) => {
             'difficulty': difficulty
         })
     }).then(res => res.json()).then(res => {
-        console.log(res);
         if (res.status === "success") {
-            // window.location.href = "./room_admin.html";
+            window.location.href = `./room_admin.html?code=${res.data}`;
         }
     });
 });
