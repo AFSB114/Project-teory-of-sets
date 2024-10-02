@@ -7,13 +7,13 @@ use Ratchet\ConnectionInterface;
 
 require __DIR__ . '/vendor/autoload.php';
 
-class SalaChat implements MessageComponentInterface {
+class room implements MessageComponentInterface {
     protected $clients;
-    protected $salas;
+    public $rooms;
 
     public function __construct() {
         $this->clients = new \SplObjectStorage;
-        $this->salas = [];
+        $this->rooms = [];
     }
 
     public function onOpen(ConnectionInterface $conn) {
@@ -25,14 +25,21 @@ class SalaChat implements MessageComponentInterface {
         $data = json_decode($msg, true);
         
         if ($data['action'] === 'create') {
-            $codigoSala = $this->generarCodigoSala();
-            $this->salas[$codigoSala] = ['host' => $from, 'miembros' => []];
-            $from->send(json_encode(['action' => 'salaCreada', 'codigo' => $codigoSala]));
+            
+            $codeRoom = $data['code'];
+            $this->rooms[$codeRoom] =  ['host' => $from, 'id' => $data['id'], 'members' => []];
+
+            $from->send(json_encode(['action' => 'createdRoom', 'code' => $codeRoom]));
+
         } elseif ($data['action'] === 'join') {
-            if (isset($this->salas[$data['codigo']])) {
-                $this->salas[$data['codigo']]['miembros'][] = $from;
-                $from->send(json_encode(['action' => 'unidoASala', 'codigo' => $data['codigo']]));
-                $this->salas[$data['codigo']]['host']->send(json_encode(['action' => 'nuevoMiembro', 'id' => $from->resourceId]));
+
+            if (isset($this->rooms[$data['code']])) {
+                
+                $this->rooms[$data['code']]['members'][] = ['$from' => $from, 'id' => $data['id']];
+                $from->send(json_encode(['action' => 'joinRoom', 'code' => $data['code']]));
+                
+                $this->rooms[$data['code']]['host']->send(json_encode(['action' => 'newMember', 'id' => $data['id']]));
+
             } else {
                 $from->send(json_encode(['action' => 'error', 'mensaje' => 'Sala no encontrada']));
             }
@@ -48,16 +55,12 @@ class SalaChat implements MessageComponentInterface {
         echo "Un error ha ocurrido: {$e->getMessage()}\n";
         $conn->close();
     }
-
-    private function generarCodigoSala() {
-        return substr(str_shuffle(str_repeat($x='0123456789abcdefghijklmnopqrstuvwxyz', ceil(6/strlen($x)) )),1,6);
-    }
 }
 
 $server = IoServer::factory(
     new HttpServer(
         new WsServer(
-            new SalaChat()
+            new room()
         )
     ),
     8080

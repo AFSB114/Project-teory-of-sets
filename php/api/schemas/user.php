@@ -1,7 +1,7 @@
 <?php
 class User
 {
-    public int $id;
+    public mixed $id;
     public mixed $name;
     public mixed $surname;
     public mixed $nickname;

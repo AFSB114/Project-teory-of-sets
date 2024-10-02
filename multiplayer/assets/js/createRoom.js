@@ -16,7 +16,7 @@ document.getElementById("options").addEventListener("submit", (e) => {
         })
     }).then(res => res.json()).then(res => {
         if (res.status === "success") {
-            window.location.href = `./room_admin.html?code=${res.data}`;
+            window.location.href = `./room_admin.html?code=${res.data}&action=create`
         }
     });
 });

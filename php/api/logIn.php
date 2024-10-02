@@ -30,14 +30,16 @@ if ($stmt->rowCount() == 0) {
 } else {
     session_start();
     $data_User = new User($stmt->fetch(PDO::FETCH_ASSOC));
+
     $_SESSION['user_id'] = $data_User->id;
+
     setcookie('session_token', $data_User->id, [
         'expires' => time() + (86400 * 30),
         'path' => '/',
-        'httponly' => true,
         'secure' => true,
         'samesite' => 'strict'
     ]);
+    
     $res = new Res("success", "Logueado correctamente", $data_User);
     http_response_code(200);
 }
