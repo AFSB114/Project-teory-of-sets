@@ -1,91 +1,93 @@
-let socket;
+class SocketConnection {
 
-function conectar() {
-    socket = new WebSocket('ws://localhost:8080');
-
-    socket.onopen = function (event) {
-        console.log("Conexión establecida");
-
-        const urlParams = new URLSearchParams(window.location.search);
-        const action = urlParams.get('action');
-        let code = urlParams.get('code');
-
-        if (!code.includes('-')) {
-            code = code.replace(/(\d{3})(\d{3})/g, '$1-$2');
-        }
-        
-        document.getElementById('code').innerHTML = code;
-
-        if (action === 'create') {
-            createRoom(code);
-        } else if (action === 'join') {
-            joinRoom(code);
-        };
-
-
-        const newUrl = window.location.protocol + "//" + window.location.host + window.location.pathname;
-        window.history.pushState({ path: newUrl }, '', newUrl);
-
-
-        socket.onmessage = function (event) {
-
-            const data = JSON.parse(event.data);
-
-            if (data.action === 'createdRoom') {
-                console.log(`Sala creada con codido ${data.code}`);
-
-            } else if (data.action === 'joinRoom') {
-                console.log(`Unido a la sala ${data.code}`);
-
-            } else if (data.action === 'newMember') {
-                alert(`Nuevo miembro ${data.id}`);
-
-            } else if (data.action === 'error') {
-                alert(data.mensaje);
-
-            }
-        };
-
-        socket.onclose = function (event) {
-            if (event.wasClean) {
-                console.log(`Conexión cerrada limpiamente, código=${event.code} razón=${event.reason}`);
-            } else {
-                console.log('Conexión murió');
-            }
-        };
-
-        socket.onerror = function (error) {
-            console.log(`Error: ${error.message}`);
-        };
+    constructor(url) {
+        this.url = url
+        this.socket = null
     }
 
-    function createRoom(cod) {
-        socket.send(JSON.stringify({
+    connect() {
+        return new Promise((resolve, reject) => {
+            this.socket = new WebSocket(this.url)
+
+            this.socket.onopen = () => {
+                console.log('Conexión establecida')
+                resolve(this.socket)
+            }
+
+            this.socket.onclose = (event) => {
+                if (event.wasClean) {
+                    console.log(`Conexión cerrada limpiamente, código=${event.code} razón=${event.reason}`)
+                } else {
+                    console.log('Conexión murió')
+                }
+            }
+
+            this.socket.onerror = (error) => {
+                console.error('Error en la conexión:', error)
+                reject(error)
+            }
+
+            this.socket.onmessage = (event) => {
+                const data = JSON.parse(event.data)
+                // console.log(data)
+                switch (data.action) {
+                    case 'createdRoom':
+                        let code = `${data.data}`
+                        code = code.replace(/(\d{3})(\d{3})/g, '$1-$2')
+                        document.getElementById('code').innerHTML = code
+                        break
+                    case 'joinedRoom':
+                        console.log(`Unido a la sala ${data.data}`)
+                        break
+                    case 'joined':
+                        alert(`${data.data} se ha unido a la sala`)
+                        break
+                    case 'play':
+                        alert('Jugador juega')
+                        break
+                    case 'error':
+                        alert(data.mensaje)
+                        break
+                    default:
+                        console.log(data)
+                        break
+                }
+            }
+        })
+    }
+
+    createRoom(id, numLevels, timePerLevel) {
+        this.socket.send(JSON.stringify({
             action: 'create',
-            code: cod,
-            id: getCookie('session_token')
-        }));
+            id: id,
+            numLevels: numLevels,
+            timePerLevel: timePerLevel
+        }))
     }
 
-    function joinRoom(cod) {
-        socket.send(JSON.stringify({
+    joinRoom(code, id) {
+        this.socket.send(JSON.stringify({
             action: 'join',
-            code: cod,
-            id: getCookie('session_token')
-        }));
+            code: code,
+            id: id
+        }))
     }
 
-}
-
-function getCookie(nombre) {
-    const nombreEQ = nombre + "=";
-    const ca = document.cookie.split(';');
-    for (let i = 0; i < ca.length; i++) {
-        let c = ca[i];
-        while (c.charAt(0) === ' ') c = c.substring(1, c.length);
-        if (c.indexOf(nombreEQ) === 0) return c.substring(nombreEQ.length, c.length);
+    play(code) {
+        this.socket.send(JSON.stringify({
+            action: 'play',
+            code: code
+        }))
     }
-    return null; // Si no se encuentra la cookie
+
+    // Puedes agregar más métodos para manejar eventos del socket
+    // sendMessage(message) {
+    //     if (this.socket && this.socket.readyState === WebSocket.OPEN) {
+    //         this.socket.send(message)
+    //     } else {
+    //         console.error('El socket no está abierto')
+    //     }
+    // }
 }
 
-document.addEventListener('DOMContentLoaded', conectar);
+export default SocketConnection

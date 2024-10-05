@@ -1,0 +1,52 @@
+.container-modal {
+    display: none;
+    opacity: 0;
+
+    position: absolute;
+    z-index: 3;
+    right: -10%;
+    bottom: 2.5%;
+
+    width: auto;
+    max-width: 25vw;
+    height: auto;
+    font-size: 4vh;
+    font-family: 'Pixeloid Sans';
+    text-align: center;
+
+    padding: 2%;
+    background-color: rgb(199, 199, 199);
+    border: 1.5vh solid black;
+}
+
+.show {
+    animation: show 0.5s ease-in-out forwards;
+}
+
+.hide {
+    animation: hide 0.5s ease-in-out forwards;
+}
+
+@keyframes show {
+    from {
+        right: -10%;
+        opacity: 0;
+    }
+
+    to {
+        right: 5%;
+        opacity: 1;
+    }
+}
+
+@keyframes hide {
+    from {
+        right: 5%;
+        opacity: 1;
+    }
+
+    to {
+        right: -10%;
+        opacity: 0;
+    }
+}

@@ -1,7 +1,6 @@
 import SocketConnection from './socket.js'
 
 async function init() {
-
     // Función para obtener el valor de una cookie por su nombre
     function getCookie(nombre) {
         // Dividir las cookies en un array
@@ -32,26 +31,24 @@ async function init() {
     const newUrl = window.location.protocol + "//" + window.location.host + window.location.pathname
     window.history.pushState({ path: newUrl }, '', newUrl)
 
-    let res = await fetch('../../../php/api/getDataSession.php').then(res => res.json())
+    let code = urlParams.get('code')
 
-    let numLevels = urlParams.get('numLevels')
-    let timePerLevel = urlParams.get('timePerLevel')
-
-    console.log(numLevels, timePerLevel)
+    const res = await fetch('../../../php/api/getDataSession.php').then(res => res.json())
 
     try {
         const socketConn = await socket.connect()
 
-        socket.createRoom(res.id, numLevels, timePerLevel)
+        socket.joinRoom(code, res.id)
 
     } catch (err) {
         console.error('No se pudo establecer conexión', err)
     }
 
-    document.getElementById('play').addEventListener('click', async () => {
-        socket.play(code)
-    })
+    if (!code.includes('-')) {
+        code = code.replace(/(\d{3})(\d{3})/g, '$1-$2')
+    }
+
+    document.getElementById('code').innerHTML = code
 }
 
 init()
-

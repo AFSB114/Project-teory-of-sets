@@ -2,8 +2,8 @@
 
 session_start();
 
-if (isset($_SESSION['user_id'])) {
-    echo json_encode(['authenticated' => true, 'user_id' => $_SESSION['user_id']]);
+if (isset($_SESSION['id'])) {
+    echo json_encode(['authenticated' => true, 'id' => $_SESSION['id']]);
 } else {
     echo json_encode(['authenticated' => false]);
 }

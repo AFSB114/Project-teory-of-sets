@@ -42,6 +42,8 @@ try {
     http_response_code(200);
 } catch (PDOException $e) {
 
+    $pdo->rollBack();
+
     if ($e->getCode() === '23505') {
         if (str_contains($e->getMessage(), 'email')) {
             $res = new Res("error", "El email ya se encuentra vinculado a otra cuenta");

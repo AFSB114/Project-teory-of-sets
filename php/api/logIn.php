@@ -3,6 +3,7 @@ include_once '../connection/connection.php';
 global $pdo;
 include_once 'schemas/response.php';
 include_once 'schemas/user.php';
+
 header("Access-Control-Allow-Methods: POST");
 header("Content-Type: application/json; charset=UTF-8");
 
@@ -17,31 +18,32 @@ try {
         ':username' => $req['username'],
         ':password' => $req['password']
     ]);
+
 } catch (PDOException $e) {
     $res = new Res("error", "Error en la conexión a la base de datos");
     http_response_code(500);
     echo json_encode($res);
     exit();
+
 }
 
 if ($stmt->rowCount() == 0) {
     $res = new Res("error", "Usuario o contraseña incorrectos");
     http_response_code(400);
+
 } else {
     session_start();
     $data_User = new User($stmt->fetch(PDO::FETCH_ASSOC));
 
-    $_SESSION['user_id'] = $data_User->id;
-
-    setcookie('session_token', $data_User->id, [
-        'expires' => time() + (86400 * 30),
-        'path' => '/',
-        'secure' => true,
-        'samesite' => 'strict'
-    ]);
+    $_SESSION['id'] = $data_User->id;
+    $_SESSION['nickname'] = $data_User->nickname;
+    $_SESSION['email'] = $data_User->email;
+    $_SESSION['name'] = $data_User->name;
+    $_SESSION['surname'] = $data_User->surname;
     
     $res = new Res("success", "Logueado correctamente", $data_User);
     http_response_code(200);
+
 }
 
 echo json_encode($res);

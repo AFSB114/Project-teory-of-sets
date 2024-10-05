@@ -1,6 +1,6 @@
-document.getElementById('join').addEventListener('submit', (e) => {
-    e.preventDefault();
-    const codigo = document.getElementById('codigo').value;
-    
-    window.location.href = `./room_guest.html?code=${codigo}&action=join`
+document.getElementById('join').addEventListener('submit', async (event) => {
+    event.preventDefault();
+    let code = document.getElementById('codigo').value;
+
+    window.location.href = `./room_guest.html?code=${code}`
 });
