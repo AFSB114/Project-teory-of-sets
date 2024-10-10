@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nivel 10
+    </title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+    <div class="container">
+        <div class="box-wrapper">
+
+            <div class="menu" id="menu"></div>
+
+            <div class="modal contrast" id="modal-menu">
+                <div class="contenido-modal-menu">
+                    <div class="btn" id="continuar">Continuar</div>
+                    <a href="" class="btn">Reiniciar</a>
+                    <a href="../index.html" class="btn">Mapa</a>
+                    <a href="../index.html" class="btn">Salir</a>
+                </div>
+            </div>
+
+            <div class="help" id="help"></div>
+
+            <div class="modal modal-help">
+                <div class="contenido-modal-help">
+                    Enciende el computador
+                </div>
+            </div>
+
+            <div class="modal modal-help">
+                <div class="img-help2">
+
+                </div>
+            </div>
+
+            <div class="marco"></div>
+
+
+            <div class="scenarios" id="scenarios">
+
+                <div class="scenario" id="scenario1">
+
+                    
+
+                </div>
+
+                <div class="scenario" id="scenario2">
+                    <div class="puerta" id="puerta"></div>
+                    <audio id="close" src="./sounds/door-knock-1.mp3"></audio>
+                    <audio id="open" src="./sounds/door-1-open.mp3"></audio>
+                </div>
+
+                <div class="scenario" id="scenario3">
+                  
+                </div>
+
+                <div id="character"></div>
+            </div>
+
+        </div>
+
+        <div class="modal contrast" id="modal-ask">
+            <div class="contenido-modal-ask">
+                <a href="" class="btn-close"></a>
+
+                <div class="text-1">INGRESA <br> LA <br> CONTRASEÑA</div>
+                <div class="botellas"></div>
+                <div class="silla"></div>
+                <div class="florero"></div>
+            </div>
+
+        </div>
+
+    </div>
+    </div>
+    <script src="js/movement.js"></script>
+    <script src="js/game.js"></script>
+    <script src="js/modal.js"></script>
+</body>
+
+</html>

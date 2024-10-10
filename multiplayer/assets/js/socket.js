@@ -27,32 +27,7 @@ class SocketConnection {
                 reject(error)
             }
 
-            this.socket.onmessage = (event) => {
-                const data = JSON.parse(event.data)
-                // console.log(data)
-                switch (data.action) {
-                    case 'createdRoom':
-                        let code = `${data.data}`
-                        code = code.replace(/(\d{3})(\d{3})/g, '$1-$2')
-                        document.getElementById('code').innerHTML = code
-                        break
-                    case 'joinedRoom':
-                        console.log(`Unido a la sala ${data.data}`)
-                        break
-                    case 'joined':
-                        alert(`${data.data} se ha unido a la sala`)
-                        break
-                    case 'play':
-                        alert('Jugador juega')
-                        break
-                    case 'error':
-                        alert(data.mensaje)
-                        break
-                    default:
-                        console.log(data)
-                        break
-                }
-            }
+            this.socket.onmessage = (event) => {}
         })
     }
 

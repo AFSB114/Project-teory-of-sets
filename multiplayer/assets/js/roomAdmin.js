@@ -1,7 +1,9 @@
 import SocketConnection from './socket.js'
+import AddPlayer from './addPlayers.js'
+
+let players = new AddPlayer()
 
 async function init() {
-
     // Función para obtener el valor de una cookie por su nombre
     function getCookie(nombre) {
         // Dividir las cookies en un array
@@ -24,8 +26,7 @@ async function init() {
 
     const sessionId = getCookie('PHPSESSID')
 
-
-    const socket = new SocketConnection(`ws://localhost:8080?session_id=${sessionId}`)
+    const connection = new SocketConnection(`ws://localhost:8080?session_id=${sessionId}`)
 
     const urlParams = new URLSearchParams(window.location.search)
 
@@ -37,20 +38,51 @@ async function init() {
     let numLevels = urlParams.get('numLevels')
     let timePerLevel = urlParams.get('timePerLevel')
 
-    console.log(numLevels, timePerLevel)
-
     try {
-        const socketConn = await socket.connect()
+        const socketConn = await connection.connect()
 
-        socket.createRoom(res.id, numLevels, timePerLevel)
+        connection.createRoom(res.id, numLevels, timePerLevel)
 
     } catch (err) {
         console.error('No se pudo establecer conexión', err)
     }
 
     document.getElementById('play').addEventListener('click', async () => {
-        socket.play(code)
+        let code = document.getElementById('code').innerHTML
+        code = code.replace('-', '')
+        code = parseInt(code)
+        connection.play(code)
     })
+
+    connection.socket.onmessage = (event) => {
+        const data = JSON.parse(event.data)
+
+        switch (data.action) {
+            case 'createdRoom':
+                let code = `${data.data}`
+                code = code.replace(/(\d{3})(\d{3})/g, '$1-$2')
+                document.getElementById('code').innerHTML = code
+                players.addPlayer()
+                break
+            case 'joined':
+                alert(`${data.data} se ha unido a la sala`)
+                players.addPlayer()
+                break
+            case 'play':
+                window.location.href = `../../level/index.html`
+                break
+            case 'exit':
+                alert(data.message)
+                break
+            case 'error':
+                alert(data.message)
+                break
+            default:
+                console.log(data)
+                alert(data.message)
+                break
+        }
+    }
 }
 
 init()

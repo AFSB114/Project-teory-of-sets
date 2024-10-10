@@ -1,4 +1,6 @@
 import SocketConnection from './socket.js'
+import AddPlayer from './addPlayers.js'
+let players = new AddPlayer()
 
 async function init() {
     // Función para obtener el valor de una cookie por su nombre
@@ -24,7 +26,7 @@ async function init() {
     const sessionId = getCookie('PHPSESSID')
 
 
-    const socket = new SocketConnection(`ws://localhost:8080?session_id=${sessionId}`)
+    const connection = new SocketConnection(`ws://localhost:8080?session_id=${sessionId}`)
 
     const urlParams = new URLSearchParams(window.location.search)
 
@@ -36,9 +38,9 @@ async function init() {
     const res = await fetch('../../../php/api/getDataSession.php').then(res => res.json())
 
     try {
-        const socketConn = await socket.connect()
+        const socketConn = await connection.connect()
 
-        socket.joinRoom(code, res.id)
+        connection.joinRoom(code, res.id)
 
     } catch (err) {
         console.error('No se pudo establecer conexión', err)
@@ -49,6 +51,32 @@ async function init() {
     }
 
     document.getElementById('code').innerHTML = code
+
+    connection.socket.onmessage = (event) => {
+        const data = JSON.parse(event.data)
+
+        switch (data.action) {
+            case 'joinedRoom':
+                console.log(`Unido a la sala ${data.data}`)
+                players.addPlayer()
+                break
+            case 'play':
+                window.location.href = `../../level/index.html`
+                break
+            case 'joined':
+                break
+            case 'error':
+                alert(data.message)
+                break
+            case 'closed':
+                // window.location.href = './multiplayer.html'
+                alert(data.data)
+                break
+            default:
+                console.log(data)
+                break
+        }
+    }
 }
 
 init()
