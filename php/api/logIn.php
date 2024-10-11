@@ -11,7 +11,6 @@ $req = json_decode(file_get_contents("php://input"), true); //Devuelve los datos
 
 $query = "SELECT log.id, log.nickname, log.email, users.name, users.surname from log inner join users ON users.id = log.id AND log.nickname = :username AND log.password = :password";
 
-
 try {
     $stmt = $pdo->prepare($query);
     $stmt->execute([

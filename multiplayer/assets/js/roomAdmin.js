@@ -69,7 +69,7 @@ async function init() {
                 players.addPlayer()
                 break
             case 'play':
-                window.location.href = `../../level/index.html`
+                window.location.href = `../../level1/index.html`
                 break
             case 'exit':
                 alert(data.message)

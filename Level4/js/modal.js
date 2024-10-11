@@ -4,7 +4,7 @@ const continuar = document.getElementById('continuar');
 const modalContent = modalMenu.children[0];
 const help = document.getElementById('help');
 const modalHelp = document.getElementsByClassName('modal-help');
-const computador = document.getElementById('computador');
+const horno = document.getElementById('horno');
 const ask = document.getElementById('modal-ask');
 
 let seeAsk = false;
@@ -65,9 +65,11 @@ help.addEventListener('click', () => {
     showModal(modalToShow);
 });
 
-computador.addEventListener('click', () => {
+horno.addEventListener('click', () => {
     ask.style.display = 'block';
     ask.children[0].classList.add('show-ask');
+
+    /*horno.style.backgroundImage = "url('../images/hornoApagado.png')";*/
 
     seeAsk = true
 });

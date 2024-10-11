@@ -4,7 +4,7 @@ const continuar = document.getElementById('continuar');
 const modalContent = modalMenu.children[0];
 const help = document.getElementById('help');
 const modalHelp = document.getElementsByClassName('modal-help');
-const computador = document.getElementById('computador');
+const reja = document.getElementById('reja');
 const ask = document.getElementById('modal-ask');
 
 let seeAsk = false;
@@ -65,9 +65,38 @@ help.addEventListener('click', () => {
     showModal(modalToShow);
 });
 
-computador.addEventListener('click', () => {
+
+let llaveUsada = false;
+
+key.addEventListener('dragstart', (event) => {
+    console.log("Llave arrastrada");
+    event.dataTransfer.setData('text', event.target.id);
+});
+
+reja.addEventListener('dragover', (event) => {
+    event.preventDefault();
+    console.log("Sobre la reja");
+});
+
+reja.addEventListener('drop', (event) => {
+    event.preventDefault();
+    console.log("Llave soltada en la reja");
+    const keyId = event.dataTransfer.getData('text');
+    const keyElement = document.getElementById(keyId);
+    reja.appendChild(keyElement);
+    
+   llaveUsada = true;
+    keyElement.style.display = 'none';
+
     ask.style.display = 'block';
     ask.children[0].classList.add('show-ask');
+});
 
-    seeAsk = true
+reja.addEventListener('click', () => {
+    if (llaveUsada) { 
+        ask.style.display = 'block';
+        ask.children[0].classList.add('show-ask');
+    }else{
+        console.log("No se usó la llave");
+    }
 });

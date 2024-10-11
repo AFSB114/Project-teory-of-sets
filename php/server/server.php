@@ -74,6 +74,7 @@ class room implements MessageComponentInterface
 
             $createRoom = new CreateRoom($userId, $timePerLevel, $numLevels, $clientId, $this->dbConnection);
             $create = $createRoom->createRoom();
+            $createRoom->
 
             $from->send(json_encode(['action' => 'createdRoom', 'data' => $create->data]));
             $from->codeRoom = $create->data;

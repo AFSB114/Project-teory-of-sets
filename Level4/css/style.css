@@ -102,17 +102,10 @@ body {
     background-image: url('../images/LEVEL\ 4.2.png');
 }
 
-
-
-
-
-
 #scenario3 {
     left: 198%;
     background-image: url('../images/LEVEL\ 4.3.png');
 }
-
-
 
 #scenario4 {
     left: 297%;
@@ -137,6 +130,185 @@ body {
 .puerta:hover {
     filter: drop-shadow(0 0 1vh rgba(255, 255, 255, 0.249));
     cursor: pointer;
+}
+
+.horno {
+    background-image: url('../images/hornoEncendido.png');
+    background-position: center center;
+    background-size: contain;
+    background-repeat: no-repeat;
+
+    width: 30vh;
+    height: 85vh;
+
+    position: absolute;
+    bottom: 10%;
+    left: 70%;
+}
+
+.horno:hover {
+    filter: drop-shadow(0 0 1vh rgba(255, 255, 255, 0.249));
+    cursor: pointer;
+}
+
+.horno:active {
+    background-image: url('../images/hornoApagado.png');
+}
+
+.libro {
+    background-image: url('../images/libro.png');
+    background-position: center center;
+    background-size: contain;
+    background-repeat: no-repeat;
+
+    width: 10vh;
+    height: 10vh;
+
+    position: absolute;
+    bottom: 49%;
+    left: 17%;
+}
+
+.libro:hover {
+    filter: drop-shadow(0 0 1vh rgba(255, 255, 255, 0.249));
+    cursor: pointer;
+}
+
+.cuadro:hover {
+    filter: drop-shadow(0 0 1vh rgba(255, 255, 255, 0.249));
+    cursor: pointer;
+}
+
+.cuadro:active {
+    filter: drop-shadow(0 0 2vh rgba(255, 255, 255, 0.518));
+}
+
+.cuadroPaisajeMar {
+    grid-area: 3 / 4 / 4 / 5;
+    background-image: url('../images/cuadroPaisajeMar.png');
+    background-position: center center;
+    background-size: contain;
+    background-repeat: no-repeat;
+
+    width: 10vh;
+    height: 10vh;
+
+    position: absolute;
+    bottom: 20%;
+    left: -13%;
+}
+
+.cuadroSenora {
+    grid-area: 3 / 2 / 4 / 3;
+    background-image: url('../images/cuadroSenora.png');
+    background-position: center center;
+    background-size: contain;
+    background-repeat: no-repeat;
+
+    width: 10vh;
+    height: 10vh;
+
+    position: absolute;
+    bottom: 20%;
+    left: 90%;
+}
+
+.cuadroTorre {
+    grid-area: 4 / 4 / 5 / 5;
+    background-image: url('../images/cuadroTorre.png');
+    background-position: center center;
+    background-size: contain;
+    background-repeat: no-repeat;
+
+    width: 10vh;
+    height: 10vh;
+
+    position: absolute;
+    bottom: 35%;
+    left: -13%;
+}
+
+.cuadroVanG {
+    grid-area: 4 / 2 / 5 / 3;
+    background-image: url('../images/cuadroVanG.png');
+    background-position: center center;
+    background-size: contain;
+    background-repeat: no-repeat;
+
+    width: 10vh;
+    height: 10vh;
+
+    position: absolute;
+    bottom: 35%;
+    left: 90%;
+}
+
+.cuadroNino {
+    grid-area: 5 / 2 / 6 / 3;
+    background-image: url('../images/cuadroNino.png');
+    background-position: center center;
+    background-size: contain;
+    background-repeat: no-repeat;
+
+    width: 10vh;
+    height: 10vh;
+
+    position: absolute;
+    bottom: 10%;
+    left: 25%;
+}
+
+.cuadroNino:hover {
+    filter: drop-shadow(0 0 1vh rgba(255, 255, 255, 0.249));
+    cursor: pointer;
+}
+
+.cuadroMontana {
+    grid-area: 5 / 3 / 6 / 4;
+    background-image: url('../images/cuadroMontana.png');
+    background-position: center center;
+    background-size: contain;
+    background-repeat: no-repeat;
+
+    width: 40vh;
+    height: 10vh;
+
+    position: absolute;
+    left: -25%;
+    bottom: 10%;
+}
+
+.cuadroMontana:hover {
+    filter: drop-shadow(0 0 1vh rgba(255, 255, 255, 0.249));
+    cursor: pointer;
+}
+
+.cuadroNina {
+    grid-area: 5 / 4 / 6 / 5;
+    background-image: url('../images/cuadroNina.png');
+    background-position: center center;
+    background-size: contain;
+    background-repeat: no-repeat;
+
+    width: 10vh;
+    height: 10vh;
+
+    position: absolute;
+    bottom: 10%;
+    left: 30%;
+}
+
+.cuadroNina:hover {
+    filter: drop-shadow(0 0 1vh rgba(255, 255, 255, 0.249));
+    cursor: pointer;
+}
+
+.interrogacion {
+    grid-area: 3 / 3 / 4 / 4;
+
+    position: absolute;
+    left: 50%;
+    bottom: 10%;
 }
 
 #character {
@@ -391,11 +563,12 @@ body {
 }
 
 .contenido-modal-ask {
-    width: 30%;
-    height: 55vh;
+    width: 50%;
+    height: 60vh;
 
-    background-image: url('../images/Question\ Pass.png');
+    background-image: url('../images/recuadroPregunta.png');
     background-repeat: no-repeat;
+    background-position: center center;
     background-size: contain;
 
     padding: 2vh;
@@ -404,11 +577,11 @@ body {
 
     position: absolute;
     top: 20%;
-    left: 35%;
+    left: 25%;
 
     display: grid;
-    grid-template-rows: 2fr 2fr 1fr 1fr;
-    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: 1fr 1fr 2fr  2fr 2fr;
+    grid-template-columns: 1fr 2fr  2fr 2fr 1fr;
 
     font-size: 4vh;
     font-family: 'Pixeloid Sans';
@@ -463,82 +636,21 @@ body {
     align-self: center;
 
     margin-bottom: 50%;
-
-}
-
-.botellas {
-    background-image: url('../images/Water\ Bottle\ 1.png');
-    background-repeat: no-repeat;
-    background-size: contain;
-    background-position: center center;
-
-    /* border: 1px #af2b2b solid; */
-    width: 7vh;
-    height: 7vh;
-    grid-area: 2/ 2 / 3 / 3;
-    display: grid;
-
-    justify-self: center;
-    align-self: center;
-
-    margin-bottom: 10%;
-    /* bottom: 45%; */
-}
-
-.silla {
-    background-image: url('../images/armchair_left.png');
-    background-repeat: no-repeat;
-    background-size: contain;
-    background-position: center;
-
-    /* border: 1px #af2b2b solid; */
-    width: 7vh;
-    height: 7vh;
-    grid-area: 2/ 3 / 3 / 4;
-    display: grid;
-
-    justify-self: center;
-    align-self: center;
-
-    margin-bottom: 9%;
-    /* bottom: 45%; */
-
-}
-
-.florero {
-    background-image: url('../images/cactus_pot\ 2.png');
-    background-repeat: no-repeat;
-    background-size: contain;
-    background-position: center;
-
-    /* border: 1px #af2b2b solid; */
-    width: 7vh;
-    height: 7vh;
-    grid-area: 2/ 4 / 3 / 5;
-    display: grid;
-
-    justify-self: center;
-    align-self: center;
-
-    margin-bottom: 4%;
-
-    /* bottom: 40%; */
+    margin-left: -250%;
 
 }
 
 
 .text-1 {
     /* border: 1px #af2b2b solid; */
-    color: #00BD09;
-    grid-area: 1 / 1 / 2 / 6;
+    grid-area: 1 / 2 / 2 / 5;
     text-align: center;
     display: grid;
 
     justify-self: center;
     align-self: center;
 
-    margin-top: 10%;
-    font-family: 'Press Start 2P';
+    margin-top: 5%;
 }
 
 .numeros{

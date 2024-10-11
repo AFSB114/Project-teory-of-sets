@@ -1,6 +1,6 @@
 const cuadros = Array.from(document.getElementsByClassName('cuadro'));
 let pass = ['', '', ''];
-const passCorrect = ['cuadro-1', 'cuadro-2', 'cuadro-3'];
+const passCorrect = ['cuadroNino'];
 const puerta = document.getElementById('puerta');
 const knock = document.getElementById('close');
 const doorOpen = document.getElementById('open');
@@ -35,3 +35,4 @@ puerta.addEventListener('click', () => {
         window.location.href = '../game_mode.html';
     }
 });
+

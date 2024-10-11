@@ -102,17 +102,91 @@ body {
     background-image: url('../images/LEVEL\ 3.2.png');
 }
 
+.reja{
+    background-image: url('../images/reja.png');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+
+    width: 25vh;
+    height: 20vh;
+
+    position: absolute;
+    top: 41%;
+    left: 46%;
+
+    transition: all 0.5s ease;
+}
 
 
+.reja:hover{
+    filter: drop-shadow(0 0 1vh rgba(255, 255, 255, 0.249));
+    cursor: pointer;
+}
 
+.reja-abierta {
+    background-image: url('../images/contenido.png');
+    transition: all 0.5s ease;
 
-
+}
 #scenario3 {
     left: 198%;
     background-image: url('../images/LEVEL\ 3.3.png');
 }
 
+.llave {
 
+    background-image: url('../images/key.png');
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: contain;
+
+
+    transform: rotate(90deg);
+    width: 10%;
+    height: 10%;
+
+    top: 26%;
+    left: 19.8%;
+
+    cursor: grab; /* Cursor de agarre */
+    position: absolute; 
+  
+    /* border: 1px solid #00BD09; */
+}
+
+.cuadro-llave{
+    background-image: url('../images/cuadro.png');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+
+    width: 20vh;
+    height: 35vh;
+
+    position: absolute;
+    top: 20%;
+    left: 22%;
+    z-index: 1;
+
+    /* border: 1px solid #00BD09; */
+}
+
+.sofa{
+    background-image: url('../images/sofa.png');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+
+    width: 62vh;
+    height: 60vh;
+
+    position: absolute;
+    top: 42%;
+    left: 21%;
+
+    z-index: 100;
+}   
 
 
 .puerta {
@@ -145,7 +219,9 @@ body {
 
     position: absolute;
     left: 10%;
-    top: 60%;
+    top: 65%;
+
+    z-index: 100;
 }
 
 .menu {
@@ -217,7 +293,7 @@ body {
     display: none;
 
     position: absolute;
-    z-index: 3;
+    z-index: 3;                 
     left: 0;
     top: 0;
 
@@ -387,23 +463,23 @@ body {
 }
 
 .contenido-modal-ask {
-    width: 30%;
-    height: 55vh;
+    width: 40%;
+    height: 60vh;
 
-    background-image: url('../images/Question\ Pass.png');
+    background-image: url('../images/contenido.png');
     background-repeat: no-repeat;
-    background-size: contain;
+    background-size: cover;
+    background-position: center;
 
     padding: 2vh;
 
-    opacity: 0;
-
+    border: 3px #3e463e solid;
     position: absolute;
     top: 20%;
-    left: 35%;
+    left: 30%;
 
     display: grid;
-    grid-template-rows: 2fr 2fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
     grid-template-columns: repeat(5, 1fr);
 
     font-size: 4vh;
@@ -443,192 +519,289 @@ body {
     }
 }
 
-.btn-close {
-    background-image: url('../images/exit.png');
+
+
+.caja1{
+    background-image: url('../images/caja.png');
     background-repeat: no-repeat;
-    background-size: contain;
     background-position: center;
-
-    /* border: 1px #af2b2b solid; */
-    width: 5vh;
-    height: 5vh;
-    grid-area: 1/5/2/6;
+    background-size: contain;
     display: grid;
+    grid-area: 5/1/6/3;
 
-    justify-self: center;
-    align-self: center;
-
-    margin-bottom: 50%;
+    width: 25vh;
+    height: 15vh;
 
 }
 
-.botellas {
-    background-image: url('../images/Water\ Bottle\ 1.png');
-    background-repeat: no-repeat;
-    background-size: contain;
-    background-position: center center;
+.caja1:hover{
+    filter: drop-shadow(0 0 1vh rgba(255, 255, 255, 0.249));
+    cursor: pointer;
+    background-image: url('../images/caja-abierta.png');
+    position: relative;
+    top: -5%;
 
-    /* border: 1px #af2b2b solid; */
-    width: 7vh;
-    height: 7vh;
-    grid-area: 2/ 2 / 3 / 3;
-    display: grid;
-
-    justify-self: center;
-    align-self: center;
-
-    margin-bottom: 10%;
-    /* bottom: 45%; */
+    width: 25vh;
+    height: 15vh;
 }
 
-.silla {
-    background-image: url('../images/armchair_left.png');
+.caja2{
+    background-image: url('../images/caja.png');
     background-repeat: no-repeat;
-    background-size: contain;
     background-position: center;
-
-    /* border: 1px #af2b2b solid; */
-    width: 7vh;
-    height: 7vh;
-    grid-area: 2/ 3 / 3 / 4;
-    display: grid;
-
-    justify-self: center;
-    align-self: center;
-
-    margin-bottom: 9%;
-    /* bottom: 45%; */
-
-}
-
-.florero {
-    background-image: url('../images/cactus_pot\ 2.png');
-    background-repeat: no-repeat;
     background-size: contain;
-    background-position: center;
-
-    /* border: 1px #af2b2b solid; */
-    width: 7vh;
-    height: 7vh;
-    grid-area: 2/ 4 / 3 / 5;
     display: grid;
+    grid-area: 5/3/6/5;
 
-    justify-self: center;
-    align-self: center;
+    width: 25vh;
+    height: 15vh;
 
-    margin-bottom: 4%;
-
-    /* bottom: 40%; */
+    
 
 }
 
+.caja2:hover{
+    filter: drop-shadow(0 0 1vh rgba(255, 255, 255, 0.249));
+    cursor: pointer;
+    background-image: url('../images/caja-abierta.png');
+    position: relative;
+    top: -5%;
+
+    width: 25vh;
+    height: 15vh;
+}
+
+
+.caja3{
+    background-image: url('../images/caja.png');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    display: grid;
+    grid-area: 5/5/6/6;
+
+    width: 25vh;
+    height: 15vh;
+
+
+}
+
+.caja3:hover{
+    filter: drop-shadow(0 0 1vh rgba(255, 255, 255, 0.249));
+    cursor: pointer;
+    background-image: url('../images/caja-abierta.png');
+    position: relative;
+    top: -5%;
+
+    width: 25vh;
+    height: 15vh;
+}
+
+h3{
+    position: relative;
+    top: 5%;
+}
 
 .text-1 {
     /* border: 1px #af2b2b solid; */
-    color: #00BD09;
+    color: #bac5ba;
     grid-area: 1 / 1 / 2 / 6;
     text-align: center;
     display: grid;
 
-    justify-self: center;
+    
     align-self: center;
 
-    margin-top: 10%;
-    font-family: 'Press Start 2P';
+    font-size: 1.5vh;
+    font-family: 'Pixeloid Sans';
 }
 
-.numeros{
 
-    grid-area: 3/2/5/5;
+.almohada{
+    background-image: url('../images/almohada.png');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
 
-    width: 100%;
-    height: 100%;
+   grid-area: 2/1/3/2;
+   cursor: grab;
+}
+
+.mesa{
+    background-image: url('../images/mesas.png');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+
+    grid-area: 2/2/3/3;
+    cursor: grab;
+}
+
+.revista{
+    background-image: url('../images/revista.png');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    grid-area: 2/3/3/4;
+    cursor: grab;
+}
+
+.florero{
+    background-image: url('../images/florero.png');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+
+    grid-area: 2/4/3/5;
+    cursor: grab;
+}
+
+.copa{
+    background-image: url('../images/vino.png');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+
+    grid-area: 2/5/3/6;
+    cursor: grab;
+
+    width: 9vh;
+    height: 9vh;
 
     display: grid;
-    grid-template-rows: 1fr 1fr;
-    grid-template-columns: repeat(5, 1fr);
-}
 
-.btn-numbers{
-    border: none;
-    background-color: transparent;
-    color: #00BD09;
-    width: 5vh;
-    height: 5vh;
-    font-family: 'Press Start 2P';
-
-
-    font-size: 4vh;
-
-}
-
-.btn-numbers :hover{
-    filter: brightness(80%);
-    cursor: pointer;
-}
-.uno {
-    grid-area: 1 / 1 / 2 / 2;
-    justify-self: center;
-}
-
-.dos {
-    grid-area: 1 / 2 / 2 / 3;
-
-    justify-self: center;
-}
-
-.tres {
-    grid-area: 1 / 3 / 2 / 4;
-    justify-self: center;
-
-}
-
-.cuatro {
-    grid-area: 1 / 4 / 2 / 5;
-   
-}
-
-.cinco {
-    grid-area: 1 / 5 / 2 / 6;
- 
-
-    justify-self: center;
-}
-
-.sub{
     position: relative;
-    bottom: 4vh;
+    left: 22%;
+    top: 15%;
+
+}  
+.cuadro{
+    background-image: url('../images/caudro.png');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;   
+
+    grid-area: 3/1/4/2;
+    cursor: grab;
+}
+.espejo{
+    background-image: url('../images/espejo.png');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+
+    grid-area: 3/2/4/3;
+    cursor: grab;
 }
 
-.six {
-    grid-area: 2 / 1 / 3 / 2;
-    
-    justify-self: center;
-    align-self: center;
+.tacon{
+    background-image: url('../images/tacon.png');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+
+   grid-area: 3/3/4/4;
+   cursor: grab;
+
 }
 
-.siete {
-    grid-area: 2 / 2 / 3 / 3;
+.escritorio{
+    background-image: url('../images/escritorio.png');
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: contain;
 
-    align-self: center;
+    grid-area: 3/4/4/5;
+    cursor: grab;
+
+    width: 9vh;
+    height: 9vh;
+
+    display: grid;
+
+    position: absolute;
+    left: 22%;
+    top: 15%;
 }
 
-.ocho {
-    grid-area: 2 / 3 / 3 / 4;
+.libro{
+    background-image: url('../images/libro.png');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
 
-    justify-self: center;
-    align-self: center;
+    grid-area: 3/5/4/6;
+    cursor: grab;
+
+    width: 10vh;
+    height: 10vh;
+
+    display: grid;
+
+    position: relative;
+    left: 25%;
+    top: 15%;
 }
 
-.nueve {
-    grid-area: 2 / 4 / 3 / 5;
-    
-    align-self: center;
+.sofas{
+    background-image: url('../images/sofa1.png');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+
+    grid-area: 4/1/5/2;
+    cursor: grab;
+
 }
 
-.cero {
-    grid-area: 2 / 5 / 3 / 6;
+.ropa{
+    background-image: url('../images/ropa.png');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
 
-    justify-self: center;
-    align-self: center;
+    grid-area: 4/2/5/3;
+    cursor: grab;
+
 }
+
+.lampara{
+    background-image: url('../images/lampara.png');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+
+    grid-area: 4/3/5/4;
+    cursor: grab;
+
+}
+
+.taza{
+    background-image: url('../images/taza.png');
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: contain;
+
+    grid-area: 4/4/5/5;
+    cursor: grab;
+
+    width: 10vh;
+    height: 10vh;
+
+    display: grid;
+
+    position: absolute;
+    left: 22%;
+
+}
+
+.silla{
+    background-image: url('../images/silla.png');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+
+    grid-area: 4/5/5/6;
+    cursor: grab;
+
+}   

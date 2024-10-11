@@ -18,8 +18,8 @@
                 <div class="contenido-modal-menu">
                     <div class="btn" id="continuar">Continuar</div>
                     <a href="" class="btn">Reiniciar</a>
-                    <a href="../index.html" class="btn">Mapa</a>
-                    <a href="../index.html" class="btn">Salir</a>
+                    <a href="../views/index.html" class="btn">Mapa</a>
+                    <a href="../views/index.html" class="btn">Salir</a>
                 </div>
             </div>
 
@@ -27,7 +27,7 @@
 
             <div class="modal modal-help">
                 <div class="contenido-modal-help">
-                    Enciende el computador
+                    Busca la llave para abrir la rejilla
                 </div>
             </div>
 
@@ -44,6 +44,8 @@
 
                 <div class="scenario" id="scenario1">
 
+
+
                     <div class="puerta" id="puerta"></div>
                     <audio id="close" src="./sounds/door-knock-1.mp3"></audio>
                     <audio id="open" src="./sounds/door-1-open.mp3"></audio>
@@ -51,11 +53,14 @@
                 </div>
 
                 <div class="scenario" id="scenario2">
-
+                    <div class="reja" id="reja"></div>
                 </div>
 
                 <div class="scenario" id="scenario3">
-
+                    <div class="cuadro-llave"></div>
+                    <div id="sofa" class="sofa">
+                    </div>
+                    <div class="llave" id="key" draggable="true"></div>
                 </div>
 
 
@@ -66,54 +71,50 @@
 
         <div class="modal contrast" id="modal-ask">
             <div class="contenido-modal-ask">
-                <a href="" class="btn-close"></a>
-
-                <div class="text-1">INGRESA <br> LA <br> CONTRASEÑA</div>
-                <div class="botellas"></div>
-                <div class="silla"></div>
-                <div class="florero"></div>
-
-                <div class="numeros">
-
-                    <div class="uno">
-                        <button type="button" class="btn-numbers">1</button>
-                    </div>
-                    <div class="dos">
-                        <button type="button" class="btn-numbers">2</button>
-                    </div>
-                    <div class="tres">
-                        <button type="button" class="btn-numbers">3</button>
-
-                    </div>
-                    <div class="cuatro">
-                        <button type="button" class="btn-numbers">4</button>
-                    </div>
-                    <div class="cinco">
-                        <button type="button" class="btn-numbers">5</button>
-                    </div>
-                    <div class="six">
-                        <button type="button" class="btn-numbers sub">6</button>
-                    </div>
-                    <div class="siete">
-                        <button type="button" class="btn-numbers sub">7</button>
-                    </div>
-                    <div class="ocho">
-                        <button type="button" class="btn-numbers sub">8</button>
-                    </div>
-                    <div class="nueve">
-                        <button type="button" class="btn-numbers sub">9</button>
-                    </div>
-                    <div class="cero">
-                        <button type="button" class="btn-numbers sub">0</button>
-                    </div>
-
+                <div class="caja1">
+                    <h3>a</h3>
                 </div>
+                <div class="caja2">
+                    <h3>b</h3>
+                </div>
+                <div class="caja3">
+                    <h3>c</h3>
+                </div>
+
+                <div class="text-1">
+                    <p>Arrastra los objetos a las cajas correspondientes según las siguientes categorías:
+                        <br>
+                        La caja <strong>A</strong> debe contener objetos que son muebles.
+                        <br>
+                        La caja <strong>B</strong> debe contener objetos que son decorativos.
+                        <br>
+                        La caja <strong>C</strong> debe contener objetos que se pueden usar para leer o beber.
+                    </p>
+                </div>
+
+                    <div class="almohada" id="almohada" draggable="true"></div>
+                    <div class="mesa" id="mesa" draggable="true"></div>
+                    <div class="revista" id="revista" draggable="true"></div>
+                    <div class="florero" id="florero" draggable="true"></div>
+                    <div class="copa" id="copa" draggable="true"></div>
+                    <div class="cuadro" id="cuadro" draggable="true"></div>
+                    <div class="espejo" id="espejo" draggable="true"></div>
+                    <div class="tacon" id="tacon" draggable="true"></div>
+                    <div class="escritorio" id="escritorio" draggable="true"></div>
+                    <div class="libro" id="libro" draggable="true"></div>
+                    <div class="sofas" id="sofas" draggable="true"></div>
+                    <div class="ropa" id="ropa" draggable="true"></div>
+                    <div class="lampara" id="lampara" draggable="true"></div>
+                    <div class="taza" id="taza" draggable="true"></div>
+                    <div class="silla" id="silla" draggable="true"></div>
+                
+
             </div>
 
         </div>
 
     </div>
-    </div>
+    <!-- <script src="js/funcion.js"></script> -->
     <script src="js/movement.js"></script>
     <script src="js/game.js"></script>
     <script src="js/modal.js"></script>
