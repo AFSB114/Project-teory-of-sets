@@ -12,7 +12,7 @@ include '../room/getAdminRoom.php';
 include '../room/getDataGuest.php';
 include '../room/getRoomGuest.php';
 include '../room/deletePlayer.php';
-include '../api/schemas/response.php';
+include '../schema/response.php';
 
 include '../connection/connection-1.php';
 

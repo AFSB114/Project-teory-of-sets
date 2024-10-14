@@ -7,8 +7,8 @@ CREATE TABLE log(
     nickname VARCHAR(40) NOT NULL,
     email VARCHAR(40) NOT NULL,
     password VARCHAR(40) NOT NULL,
-    create_date DATE,
-    update_date DATE,
+    date_create DATE,
+    date_update DATE,
     PRIMARY KEY(id)
 );
 
@@ -17,7 +17,7 @@ CREATE TABLE users(
     name VARCHAR(40) NOT NULL,
     surname VARCHAR(40) NOT NULL,
     birthday DATE,
-    create_date DATE,
+    date_create DATE,
     rol_id INT DEFAULT 2,
     PRIMARY KEY(id),
     FOREIGN KEY(id) REFERENCES log(id) ON DELETE CASCADE

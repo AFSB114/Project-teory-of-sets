@@ -1,21 +1,21 @@
 document.getElementById('form').addEventListener('submit', async (event) => {
     event.preventDefault()
 
-    let username = event.target[0].value
+    let nickname = event.target[0].value
     let password = event.target[1].value
 
-    await fetch('../../php/api/logIn.php', {
+    await fetch('../../php/controller/log.php', {
         method: 'POST',
         headers: { 'content-type': 'application/json' },
         body: JSON.stringify({
-            username,
+            action: 'logIn',
+            nickname,
             password
         })
     })
         .then(res => res.json())
         .then(res => {
-            console.log(res)
-            if (res.status === 'success') {
+            if (res.status === 'OK') {
                 window.location.href = `../../?success=true&name=${res.data.name}&surname=${res.data.surname}`
             } else {
                 showMessage('message', res.message)

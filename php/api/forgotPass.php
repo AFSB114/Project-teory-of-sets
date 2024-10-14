@@ -1,8 +1,8 @@
 <?php
 include_once '../connection/connection.php';
 global $pdo;
-include_once 'schemas/response.php';
-include_once 'schemas/user.php';
+include_once '../schema/response.php';
+include_once '../schema/user.php';
 header("Content-Type: application/json; charset=UTF-8");
 header("Access-Control-Allow-Methods: POST");
 
