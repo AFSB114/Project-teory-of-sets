@@ -6,47 +6,40 @@ use Ratchet\WebSocket\WsServer;
 use Ratchet\MessageComponentInterface;
 use Ratchet\ConnectionInterface;
 
-include '../room/joinRoom.php';
-include '../room/createRoom.php';
-include '../room/getAdminRoom.php';
-include '../room/getDataGuest.php';
-include '../room/getRoomGuest.php';
-include '../room/deletePlayer.php';
-include '../schema/response.php';
+include 'controller/joinRoom.php';
+include 'controller/createRoom.php';
+include 'controller/getAdminRoom.php';
+include 'controller/getDataGuest.php';
+include 'controller/getRoomGuest.php';
+include 'controller/deletePlayer.php';
 
-include '../connection/connection-1.php';
+include 'connection/connection.php';
 
 require __DIR__ . '/vendor/autoload.php';
 
-class room implements MessageComponentInterface
+class Multiplayer implements MessageComponentInterface
 {
-    protected SplObjectStorage $clients;
-    protected array $rooms;
-    private DatabaseConnection $dbConnection;
-
-    public function __construct()
-    {
-        $this->clients = new SplObjectStorage;
-        $this->dbConnection = new DatabaseConnection();
-    }
+    public function __construct(
+        protected SplObjectStorage $clients = new SplObjectStorage,
+        private DatabaseConnection $dbConnection = new DatabaseConnection(),
+        private array $clientLookup = [] // Inicializar el array
+    ) {}
 
     public function onOpen(ConnectionInterface $conn): void
     {
         $this->clients->attach($conn);
+        $this->clientLookup[$conn->sessionId] = $conn; // Almacenar el cliente por sessionId
 
         $queryString = $conn->httpRequest->getUri()->getQuery();
         parse_str($queryString, $queryParams);
         $sessionId = $queryParams['session_id'];
 
-        foreach ($this->clients as $client) {
-            if (!isset($client->sessionId)) {
-                $conn->sessionId = $sessionId;
-                break;
-            } elseif ($client->sessionId == $sessionId) {
-                $this->clients->detach($conn);
-                $conn = $client;
-                break;
-            }
+        if (!isset($this->clientLookup[$sessionId])) {
+            $conn->sessionId = $sessionId;
+        } else {
+            // Si el cliente ya existe, desconectar la nueva conexión
+            $this->clients->detach($conn);
+            $conn = $this->clientLookup[$sessionId];
         }
 
         echo "Nueva conexión! ($conn->sessionId)\n";
@@ -54,113 +47,92 @@ class room implements MessageComponentInterface
 
     public function onMessage(ConnectionInterface $from, $msg): void
     {
-        foreach ($this->clients as $client) {
-            if ($from == $client && isset($client->sessionId)) {
-                $clientId = $client->sessionId;
-                $from = $client;
-                break;
-            }
-        }
-//        echo "Este es él, id del cliente $clientId\n";
-
         $data = json_decode($msg, true);
-        $userId = $data['id'];
-        $codeRoom = $data['code'];
-        $numLevels = $data['numLevels'];
-        $timePerLevel = $data['timePerLevel'];
+        if (json_last_error() !== JSON_ERROR_NONE) {
+            $from->send(json_encode(['action' => 'error', 'message' => 'Mensaje malformado']));
+            return;
+        }
 
-        if ($data['action'] === 'create') {
-            $from->rol = 'ADMIN';
+        $userId = $data['id'] ?? null;
+        $codeRoom = $data['code'] ?? null;
+        $numLevels = $data['numLevels'] ?? null;
+        $timePerLevel = $data['timePerLevel'] ?? null;
+        $clientData = $from->sessionId;
 
-            $createRoom = new CreateRoom($userId, $timePerLevel, $numLevels, $clientId, $this->dbConnection);
-            $create = $createRoom->createRoom();
-            $createRoom->
+        switch ($data['action']) {
+            case 'create':
+                $from->rol = 'ADMIN';
 
-            $from->send(json_encode(['action' => 'createdRoom', 'data' => $create->data]));
-            $from->codeRoom = $create->data;
+                $createRoom = new Room($userId, $timePerLevel, $numLevels, $clientData, $this->dbConnection);
+                $create = $createRoom->createRoom();
+                $from->send(json_encode(['action' => 'createdRoom', 'data' => $create->data]));
+                $from->codeRoom = $create->data;
+                break;
 
-        } elseif ($data['action'] === 'join') {
-            $from->rol = 'GUEST';
-            $from->codeRoom = $codeRoom;
-
-            $joinRoom = new JoinRoom($codeRoom, $userId, $clientId, $this->dbConnection);
-            $roomEnable = $joinRoom->checkRoom();
-
-            if ($roomEnable->status == 'success') {
-
-                $join = $joinRoom->joinRoom();
-
-                $getAdmin = new GetAdminRoom($codeRoom, $this->dbConnection);
-                $admin = $getAdmin->getAdminRoom();
-
-                if ($join->status == 'error') {
-                    echo 'No se pudo completar la union ' . $join->data;
-
-                } else {
-
-                    $from->send(json_encode(['action' => 'joinedRoom', 'data' => 'Joined correct']));
-
-                    $getDataGuest = new GetDataGuest($clientId, $codeRoom, $this->dbConnection);
-                    $dataGuest = $getDataGuest->getDataGuest();
-
-                    foreach ($this->clients as $client) {
-                        if ($admin['data'] == $client->sessionId) {
-                            $client->send(json_encode(['action' => 'joined', 'data' => $dataGuest['nickname']]));
-                            break;
+            case 'join':
+                $from->rol = 'GUEST';
+                $from->codeRoom = $codeRoom;
+                $joinRoom = new JoinRoom($codeRoom, $userId, $clientData, $this->dbConnection);
+                $roomEnable = $joinRoom->checkRoom();
+                if ($roomEnable->status == 'success') {
+                    $join = $joinRoom->joinRoom();
+                    $getAdmin = new GetAdminRoom($codeRoom, $this->dbConnection);
+                    $admin = $getAdmin->getAdminRoom();
+                    if ($join->status == 'error') {
+                        echo 'No se pudo completar la unión: ' . $join->data;
+                    } else {
+                        $from->send(json_encode(['action' => 'joinedRoom', 'data' => 'Joined correct']));
+                        $getDataGuest = new GetDataGuest($clientData, $codeRoom, $this->dbConnection);
+                        $dataGuest = $getDataGuest->getDataGuest();
+                        if (isset($this->clientLookup[$admin['data']])) {
+                            $this->clientLookup[$admin['data']]->send(json_encode(['action' => 'joined', 'data' => $dataGuest['nickname']]));
                         }
                     }
+                } else {
+                    $from->send(json_encode(['action' => 'error', 'mensaje' => 'Sala no encontrada']));
                 }
+                break;
 
-            } else {
-                $from->send(json_encode(['action' => 'error', 'mensaje' => 'Sala no encontrada']));
-            }
-        } elseif ($data['action'] === 'play') {
-
-            $roomGuests = new GetRoomGuest($codeRoom, $this->dbConnection);
-            $guests = $roomGuests->getRoomGuest();
-
-            $from->send(json_encode(['action' => 'play']));
-
-            foreach ($guests as $guest) {
-                foreach ($this->clients as $client) {
-                    if ($guest['data'] == $client->sessionId) {
-                        $client->send(json_encode(['action' => 'play', 'message' => 'Empieza el juego']));
-                        break;
+            case 'play':
+                $roomGuests = new GetRoomGuest($codeRoom, $this->dbConnection);
+                $guests = $roomGuests->getRoomGuest();
+                $from->send(json_encode(['action' => 'play']));
+                foreach ($guests as $guest) {
+                    if (isset($this->clientLookup[$guest['data']])) {
+                        $this->clientLookup[$guest['data']]->send(json_encode(['action' => 'play', 'message' => 'Empieza el juego']));
                     }
                 }
-            }
+                break;
         }
     }
 
     public function onClose(ConnectionInterface $conn): void
     {
         $deletePlayer = new DeletePlayer($conn->sessionId, $conn->codeRoom, $this->dbConnection);
+        $message = '';
 
         switch ($conn->rol) {
             case 'ADMIN':
-                $res = $deletePlayer->leftAdmin();
+                $deletePlayer->leftAdmin();
                 $message = json_encode(['action' => 'closed', 'message' => 'El admin ha cerrado la sala']);
                 break;
             case 'GUEST':
-                $res = $deletePlayer->leftGuest();
+                $deletePlayer->leftGuest();
                 $message = json_encode(['action' => 'exit', 'message' => 'El guest ha salido de la sala']);
                 break;
         }
+
         $roomGuests = new GetRoomGuest($conn->codeRoom, $this->dbConnection);
         $guests = $roomGuests->getRoomGuest();
-
         foreach ($guests as $guest) {
-            foreach ($this->clients as $client) {
-                if ($guest['data'] == $client->sessionId) {
-                    $client->send($message);
-                    break;
-                }
+            if (isset($this->clientLookup[$guest['data']])) {
+                $this->clientLookup[$guest['data']]->send($message);
             }
         }
 
         $conn->send($message);
-
         $this->clients->detach($conn);
+        unset($this->clientLookup[$conn->sessionId]); // Eliminar del lookup
         echo "Conexión $conn->sessionId se ha desconectado\n";
     }
 
@@ -174,10 +146,9 @@ class room implements MessageComponentInterface
 $server = IoServer::factory(
     new HttpServer(
         new WsServer(
-            new room()
+            new Multiplayer()
         )
     ),
     8080
 );
-
 $server->run();

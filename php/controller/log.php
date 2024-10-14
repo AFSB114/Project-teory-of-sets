@@ -1,6 +1,6 @@
 <?php
 
-include_once '../connection/connection-1.php';
+include_once '../connection/connection.php';
 include_once '../schema/user.php';
 include_once '../schema/log.php';
 
@@ -57,14 +57,32 @@ switch ($req["action"]) {
         }
         break;
 
+    case "checkLogIn":
+        session_start();
+
+        if (isset($_SESSION['id'])) {
+            echo json_encode(['authenticated' => true, 'id' => $_SESSION['id']]);
+        } else {
+            echo json_encode(['authenticated' => false]);
+        }
+        break;
+
+    case "getData":
+        session_start();
+
+        echo json_encode($_SESSION);
+        break;
+
+
     case "logOut":
         session_start();
         session_destroy();
-        echo json_encode(['status' => 'OK', 'message'=>'Ha cerrado sesión exitosamente']);
+        echo json_encode(['status' => 'OK', 'message' => 'Ha cerrado sesión exitosamente']);
         break;
 
-    case "forgotPass":
+    case "recover":
 
+        break;
 
     default:
         echo json_encode(['status' => 'ERROR', 'message' => 'Acción no valida']);

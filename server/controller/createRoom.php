@@ -63,3 +63,32 @@ do {
 
 echo json_encode($res);
 exit();
+
+
+class Room
+{
+    private string $code;
+    public function __construct(
+        protected int $admin,
+        protected int $time,
+        protected int $numLevels,
+        protected int $data,
+        protected DatabaseConnection $pdo
+    ){}
+
+    private function generateCode(): void
+    {
+        $caracteres = '123456789'; // Solo números
+        $patron = '/^[0-9]{3}-[0-9]{3}$/'; // Patrón para validar que sea 3 números, un guion, y otros 3 números
+        do {
+            $shuffled = str_shuffle($caracteres);
+            $code = substr($shuffled, 0, 3) . '-' . substr($shuffled, 3, 3);
+        } while (!preg_match($patron, $code));
+        $this->code = $code;
+    }
+
+    public function createRoom() : int
+    {
+
+    }
+}

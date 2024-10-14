@@ -1,7 +1,15 @@
 document.getElementById('multiplayer').addEventListener('click', async(event) => {
     event.preventDefault();
 
-    await fetch('../../php/api/checkAuth.php')
+    await fetch('../../php/controller/log.php', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            action: 'checkLogIn'
+        })
+    })
         .then(res => res.json())
         .then(res => {
             if (res.authenticated) {
