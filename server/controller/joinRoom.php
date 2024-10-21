@@ -1,5 +1,4 @@
 <?php
-
 class JoinRoom
 {
     protected string $query1;
@@ -9,16 +8,16 @@ class JoinRoom
         protected int                $roomId,
         protected int                $userId,
         protected string             $data,
-        protected DatabaseConnection $dbConnection
+        protected Connection $pdo = new Connection()
     )
     {
         $this->query1 = "SELECT status_id FROM room WHERE id = :room_id AND status_id = 1";
         $this->query2 = "INSERT INTO user_room (user_id, room_id, rol_id, data) VALUES (:user_id, :room_id, 4, :data)";
     }
 
-    public function checkRoom(): Res
+    public function checkRoom(): array
     {
-        $pdo = $this->dbConnection->connection();
+        $pdo = $this->pdo->connection();
 
         try {
             $stmt = $pdo->prepare($this->query1);
@@ -27,19 +26,20 @@ class JoinRoom
             ]);
 
             $res = match ($stmt->rowCount()) {
-                0 => new Res("error", "Sala no encontrada"),
-                default => new Res("success", "Sala disponible")
+                0 => ['status'=>"ERROR", 'message'=>"Sala no encontrada"],
+                default => ['status'=>"OK",'message'=> "Sala disponible"]
             };
+
         } catch (PDOException $error) {
-            $res = new Res("error", "Error de conexión", $error);
+            $res = ['status'=>"ERROR", 'message'=>"Error de conexión", 'data'=>$error];
         } finally {
             return $res;
         }
     }
 
-    public function joinRoom(): Res
+    public function joinRoom(): array
     {
-        $pdo = $this->dbConnection->connection();
+        $pdo = $this->pdo->connection();
 
         try {
             $stmt = $pdo->prepare($this->query2);
@@ -49,13 +49,13 @@ class JoinRoom
                 ':data' => $this->data
             ]);
 
-            $res = new Res("success", "Te has unido correctamente a la sala", $this->userId);
+            $res = ['status'=>"OK", 'message'=>"Te has unido correctamente a la sala"];
 
         } catch (PDOException $error) {
             if ($error->getCode() === '23505') {
-                $res = new Res("join", "Ya te has unido a la sala en otra sesión", $error);
+                $res = ['status'=>"JOINED", 'message'=>"Ya te has unido a la sala en otra sesión",'data'=> $error];
             } else {
-                $res = new Res("error", "Error de conexión", $error);
+                $res = ['status'=> "ERROR",'message'=> "Error de conexión", 'data'=>$error];
             }
         } finally {
             return $res;

@@ -6,9 +6,9 @@ class DeletePlayer
     protected string $query2;
 
     public function __construct(
-        protected string             $sessionId,
-        protected int|null           $roomId,
-        protected DatabaseConnection $dbConnection
+        protected string     $sessionId,
+        protected int|string        $roomId,
+        protected Connection $dbConnection = new Connection()
     )
     {
         $this->query1 = "DELETE FROM user_room ur USING room r WHERE ur.data = :data AND ur.room_id = r.id AND r.id = :room_id";
@@ -26,7 +26,7 @@ class DeletePlayer
                 "room_id" => $this->roomId
             ]);
 
-            $res = new Res('success', 'El admin ha abandonado la sala',$stm);
+            $res = new Res('success', 'El admin ha abandonado la sala', $stm);
         } catch (PDOException $error) {
             $res = new Res('error', 'Error de conexión', $error);
         } finally {

@@ -7,7 +7,7 @@ class GetDataGuest
     public function __construct(
         protected string             $data,
         protected int                $roomId,
-        protected DatabaseConnection $dbConnection
+        protected Connection $dbConnection
     )
     {
         $this->query = "SELECT nickname FROM log WHERE id = (SELECT user_id FROM user_room WHERE data = :data AND room_id = :room_id)";

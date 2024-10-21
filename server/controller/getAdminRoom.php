@@ -6,7 +6,7 @@ class GetAdminRoom
 
     public function __construct(
         protected int                $roomId,
-        protected DatabaseConnection $dbConnection
+        protected Connection $dbConnection
     )
     {
         $this->query = "SELECT data FROM user_room WHERE rol_id = 3 AND room_id = :room_id";

@@ -1,94 +1,74 @@
 <?php
-include_once '../connection/connection.php';
-global $pdo;
-include_once 'schemas/response.php';
-include_once 'schemas/user.php';
-
-header("Content-Type: application/json; charset=UTF-8");
-header("Access-Control-Allow-Methods: POST");
-
-$req = json_decode(file_get_contents("php://input"), true); //Devuelve los datos en un array asociativo si esta true
-
-
-function generateCode() : string
-{
-    $caracteres = '123456789'; // Solo números
-    $patron = '/^[0-9]{3}-[0-9]{3}$/'; // Patrón para validar que sea 3 números, un guion, y otros 3 números
-    do {
-        $shuffled = str_shuffle($caracteres);
-        $code = substr($shuffled, 0, 3) . '-' . substr($shuffled, 3, 3);
-    } while (!preg_match($patron, $code));
-    return $code;
-}
-
-$while = true;
-
-session_start();
-do {
-    try {
-        $pdo->beginTransaction();
-        
-        $query = "INSERT INTO room (id, max_time, nums_levels, status_id) VALUES (:id, :max_time, :num_levels, 1)";
-        $code = generateCode();
-
-        $stmt = $pdo->prepare($query);
-        $stmt->execute([
-            ':id' => str_replace('-', '', $code),
-            ':max_time' => $req['time'],
-            ':num_levels' => $req['numLevels']
-        ]);
-
-        $query = "INSERT INTO user_room (user_id, room_id, rol_id) VALUES (:user_id, :room_id, 3)";
-        $stmt = $pdo->prepare($query);
-        $stmt->execute([
-            ':user_id' => $_SESSION['id'],
-            ':room_id' => str_replace('-', '', $code)
-        ]);
-        
-        $pdo->commit();
-
-        $res = new Res("success", "Sala creada", $code);
-        http_response_code(200);
-
-        $while = false;
-
-    } catch (PDOException $e) {
-        if (!$e->getCode() == "23505") {
-            $res = new Res("error", "Error al crear sala", $e);
-            http_response_code(400);
-            $while = false;
-        }
-    }
-} while ($while);
-
-echo json_encode($res);
-exit();
-
-
 class Room
 {
     private string $code;
+
     public function __construct(
-        protected int $admin,
-        protected int $time,
-        protected int $numLevels,
-        protected int $data,
-        protected DatabaseConnection $pdo
-    ){}
+        protected int        $admin,
+        protected int        $time,
+        protected int        $numLevels,
+        protected string     $data,
+        protected Connection $pdo
+    )
+    { }
 
     private function generateCode(): void
     {
-        $caracteres = '123456789'; // Solo números
-        $patron = '/^[0-9]{3}-[0-9]{3}$/'; // Patrón para validar que sea 3 números, un guion, y otros 3 números
-        do {
-            $shuffled = str_shuffle($caracteres);
-            $code = substr($shuffled, 0, 3) . '-' . substr($shuffled, 3, 3);
-        } while (!preg_match($patron, $code));
-        $this->code = $code;
+        // Generar el primer dígito (1-9)
+        $firstNum = rand(1, 9);
+
+        // Generar los siguientes 5 dígitos (0-9)
+        $nextNums = '';
+        for ($i = 0; $i < 5; $i++) {
+            $nextNums .= rand(0, 9);
+        }
+
+        // Concatenar el primer dígito con los siguientes
+        $this->code= (int)($firstNum . $nextNums);
     }
 
-    public function createRoom() : int
+    public function createRoom(): array
     {
+        $conn = $this->pdo->connection();
 
+        $while = true;
+
+        do {
+
+            try {
+                $conn->beginTransaction();
+
+                $this->generateCode();
+
+                $query = "INSERT INTO room (id, max_time, nums_levels, status_id) VALUES (:id, :max_time, :num_levels, 1)";
+                $res = $conn->prepare($query);
+                $res->execute([
+                    "id" => $this->code,
+                    "max_time" => $this->time,
+                    "num_levels" => $this->numLevels
+                ]);
+
+                $query = "INSERT INTO user_room (user_id, room_id, rol_id, data) VALUES (:user_id, :room_id, 3, :data)";
+                $res = $conn->prepare($query);
+                $res->execute([
+                    "user_id" => $this->admin,
+                    "room_id" => $this->code,
+                    "data" => $this->data
+                ]);
+
+                $conn->commit();
+
+                $while = false;
+            } catch (PDOException $e) {
+                $conn->rollBack();
+                if (!$e->getCode() == "23505") {
+                    return ["message", "Error al crear sala", 'data' => $e];
+                    echo json_encode($e);
+                    $while = false;
+                }
+            }
+        } while ($while);
+
+        return ['code' => $this->code];
     }
 }

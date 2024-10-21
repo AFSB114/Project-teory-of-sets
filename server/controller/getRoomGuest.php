@@ -4,17 +4,18 @@ class GetRoomGuest
 {
     protected string $query;
 
+
     public function __construct(
-        protected int                $roomId,
-        protected DatabaseConnection $dbConnection
+        protected int $roomId,
+        protected Connection $pdo = new Connection()
     )
     {
         $this->query = "SELECT data FROM user_room WHERE rol_id = 4 AND room_id = :room_id";
     }
 
-    public function getRoomGuest(): array | Res
+    public function getRoomGuest(): array
     {
-        $pdo = $this->dbConnection->connection();
+        $pdo = $this->pdo->connection();
 
         try {
             $stmt = $pdo->prepare($this->query);
@@ -25,7 +26,7 @@ class GetRoomGuest
             $res = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
         } catch (PDOException $error) {
-            $res = new Res('error', 'Error de conexión', $error);
+            $res = ['status' => 'error', 'message' => 'Error de conexión', 'data' => $error];
 
         } finally {
             return $res;
