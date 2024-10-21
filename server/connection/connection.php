@@ -1,5 +1,5 @@
 <?php
-class DatabaseConnection {
+class Connection {
     private PDO $pdo;
 
     public function __construct(
@@ -18,6 +18,7 @@ class DatabaseConnection {
                 $this->password,
                 [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]
             );
+
         } catch (PDOException $err) {
             die("Error de conexión: " . $err->getMessage());
         }

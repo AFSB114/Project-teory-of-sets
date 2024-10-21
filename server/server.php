@@ -7,8 +7,8 @@ use Ratchet\MessageComponentInterface;
 use Ratchet\ConnectionInterface;
 
 require_once 'connection/connection.php';
-require_once 'controller-1/createRoom.php';
-require_once 'controller-1/joinRoom.php';
+require_once 'controller/createRoom.php';
+require_once 'controller/joinRoom.php';
 
 require __DIR__ . '/vendor/autoload.php';
 
@@ -49,23 +49,23 @@ class MultiplayerServer implements MessageComponentInterface
                 $this->rooms["$code"] = new SplObjectStorage();
                 $this->rooms["$code"]->attach($from);
 
-                $from->send(json_encode(['action' => 'CREATE', 'code' => $code]));
+                $from->send(json_encode(['action' => 'CREATE', 'code' => $code, 'nickname' => $from->nickname]));
 
                 break;
             case 'JOIN':
 
                 $join = new JoinRoom($data['code'], $from->id, $from->token);
 
-                if ($join->checkRoom()['status'] == 'OK'){
-                    if ($join->joinRoom()['status'] == 'OK'){
+                if ($join->checkRoom()['status'] == 'OK') {
+                    if ($join->joinRoom()['status'] == 'OK') {
 
                         $this->rooms["{$data['code']}"]->attach($from);
-                        $from->send(json_encode(['action' => 'JOIN', 'message' => 'Joined to room successfully!']));
 
-                        foreach ($this->rooms["{$data['code']}"] as $client){
-                            if ($client != $from){
+                        foreach ($this->rooms["{$data['code']}"] as $client) {
+                            if ($client != $from) {
                                 $client->send(json_encode(['action' => 'NEW_PLAYER', 'message' => 'New player has been joined!', 'nickname' => $from->nickname]));
                             }
+                            $from->send(json_encode(['action' => 'JOIN', 'message' => 'Joined to room successfully!', 'nickname' => $client->nickname]));
                         }
                     }
                 }

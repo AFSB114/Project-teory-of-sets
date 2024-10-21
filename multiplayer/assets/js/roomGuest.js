@@ -25,8 +25,19 @@ async function init() {
 
     const sessionId = getCookie('PHPSESSID')
 
+    let res = await fetch('../../../php/controller/log.php',
+        {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                action: 'getData'
+            })
+        }
+    ).then(res => res.json())
 
-    const connection = new SocketConnection(`ws://localhost:8080?session_id=${sessionId}`)
+    const connection = new SocketConnection(`ws://localhost:8080?token=${sessionId}&id=${res.id}&nickname=${res.nickname}`)
 
     const urlParams = new URLSearchParams(window.location.search)
 
@@ -35,12 +46,10 @@ async function init() {
 
     let code = urlParams.get('code')
 
-    const res = await fetch('../../../php/api/getDataSession.php').then(res => res.json())
-
     try {
         const socketConn = await connection.connect()
 
-        connection.joinRoom(code, res.id)
+        connection.joinRoom(code)
 
     } catch (err) {
         console.error('No se pudo establecer conexión', err)
@@ -56,9 +65,13 @@ async function init() {
         const data = JSON.parse(event.data)
 
         switch (data.action) {
-            case 'joinedRoom':
-                console.log(`Unido a la sala ${data.data}`)
-                players.addPlayer()
+            case 'JOIN':
+                console.log(`${data.message}`)
+                players.addPlayer(data.nickname)
+                break
+            case 'NEW_PLAYER':
+                // alert(`${data.message} ${data.nickname}`)
+                players.addPlayer(data.nickname)
                 break
             case 'play':
                 window.location.href = `../../level1/index.html`
@@ -81,22 +94,3 @@ async function init() {
 
 init()
 
-window.addEventListener('load', async () => {
-    await fetch('../../php/controller/log.php', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-            action: 'checkLogIn'
-        })
-    })
-        .then(res => res.json())
-        .then(res => {
-            if (res.authenticated) {
-                window.location.href = `./multiplayer/intro_multiplayer.html`
-            } else {
-                window.location.href = '../log/log_in.html?message=Debes estar logueado para poder jugar multijugador'
-            }
-        })
-})

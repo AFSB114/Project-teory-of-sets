@@ -31,26 +31,24 @@ class SocketConnection {
         })
     }
 
-    createRoom(id, numLevels, timePerLevel) {
+    createRoom(numLevels, timePerLevel) {
         this.socket.send(JSON.stringify({
-            action: 'create',
-            id: id,
+            action: 'CREATE',
             numLevels: numLevels,
             timePerLevel: timePerLevel
         }))
     }
 
-    joinRoom(code, id) {
+    joinRoom(code) {
         this.socket.send(JSON.stringify({
-            action: 'join',
-            code: code,
-            id: id
+            action: 'JOIN',
+            code: code
         }))
     }
 
     play(code) {
         this.socket.send(JSON.stringify({
-            action: 'play',
+            action: 'PLAY',
             code: code
         }))
     }

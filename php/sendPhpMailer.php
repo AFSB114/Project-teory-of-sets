@@ -1,34 +1,48 @@
 <?php
+//Import PHPMailer classes into the global namespace
+//These must be at the top of your script, not inside a function
 use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception;
 
-// Cargar el autoloader de Composer
+//Load Composer's autoloader
 require 'vendor/autoload.php';
 
+//Create an instance; passing `true` enables exceptions
 $mail = new PHPMailer(true);
 
 try {
-    // Configuración del servidor SMTP
-    $mail->isSMTP();
-    $mail->Host       = 'smtp.resend.com'; // Servidor SMTP
-    $mail->SMTPAuth   = true;
-    $mail->Username   = 'vennture24@resend.com'; // Tu correo de Gmail
-    $mail->Password   = 'Af300407'; // Tu contraseña o contraseña de aplicación
-    $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
-    $mail->Port       = 465;
+    //Server settings
+    $mail->SMTPDebug = SMTP::DEBUG_SERVER;                      //Enable verbose debug output
+    $mail->isSMTP();                                            //Send using SMTP
+    $mail->Host = 'smtp.gmail.com';                             //Set the SMTP server to send through
+    $mail->SMTPAuth = true;                                     //Enable SMTP authentication
+    $mail->Username = 'vennture412@gmail.com';                  //SMTP username
+    $mail->Password = 'vhhp ncch wlcw opoq';                    //SMTP password vhhp ncch wlcw opoq
+    $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;             //Enable implicit TLS encryption
+    $mail->Port = 465;                                          //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
 
-    // Destinatarios
-    $mail->setFrom('vennture24@hotmail.com', 'Nombre Remitente');
-    $mail->addAddress('asuazab14@gmail.com', 'Nombre Destinatario');
+    //Recipients
+    $mail->setFrom('vennture412@gmail.com', 'VENNTURE');
+    $mail->addAddress('asuazab13@gmail.com', 'Andres');       //Add a recipient
+//    $mail->addAddress('ellen@example.com');                               //Name is optional
+//    $mail->addReplyTo('info@example.com', 'Information');
+//    $mail->addCC('cc@example.com');
+//    $mail->addBCC('bcc@example.com');
 
-    // Contenido del correo
-    $mail->isHTML(true);
-    $mail->Subject = 'Asunto del correo';
-    $mail->Body    = 'Este es el cuerpo del correo en HTML.';
-    $mail->AltBody = 'Este es el cuerpo del correo en texto plano.';
+    //Attachments
+//    $mail->addAttachment('/var/tmp/file.tar.gz');         //Add attachments
+//    $mail->addAttachment('/tmp/image.jpg', 'new.jpg');    //Optional name
+
+    //Content
+    $mail->isHTML(true);                                  //Set email format to HTML
+    $mail->Subject = 'Here is the subject';
+    $mail->Body = 'This is the HTML message body <b>in bold!</b>';
+
 
     $mail->send();
-    echo 'Correo enviado con éxito';
+    echo 'Message has been sent';
 } catch (Exception $e) {
-    echo "Error al enviar el correo: {$mail->ErrorInfo}";
+    
+    echo "Message could not be sent. Mailer Error: $mail->ErrorInfo";
 }
