@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="preload" href="../../../multiplayer/assets/fonts/pixeloidsans-webfont.woff" as="font" type="font/woff" crossorigin>
+    <link rel="preload" href="../../../multiplayer/assets/fonts/super-pixel-personal-use-webfont.woff" as="font" type="font/woff" crossorigin>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="multiplayer.css">
+    <link rel="stylesheet" href="../css/modal.css">
+</head>
+
+<body>
+    <div class="container">
+        <div class="box-wrapper">
+            <div class="fondo">
+                <a href="../../game_mode/index.html" class="btn-back"></a>
+                <div class="tittle">VENNTURE</div>
+
+                <a class="btn" href="../create_room/create_room.html" id="create">crear sala</a>
+
+                <form action="" class="recuadro" id="join">
+
+                    <div class="codigo">
+                        <div class="input-text">
+                            <input type="text" id="codigo" name="codigo" placeholder="Ingresa el codigo" required
+                                minlength="6" maxlength="6">
+                        </div>
+                    </div>
+
+                    <button class="btn" type="submit" id="submit">Unirse a sala</button>
+
+                </form>
+
+                <div class="container-modal" id="message">
+                    <div class="modal"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="../js/modal.js"></script>
+    <script src="multiplayer.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VENNTURE</title>
+
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="logIn.css">
+    <link rel="stylesheet" href="../assets/css/modal.css">
+</head>
+
+<body>
+    <div class="container">
+        <div class="box-wrapper">
+            <div class="fondo">
+                <a href="../../start/" class="btn-back"></a>
+                <div class="tittle">VENNTURE</div>
+
+                <form class="recuadro" id="form">
+
+                    <div class="field" id="username">
+                        <div class="text">Nombre de usuario</div>
+                        <div class="input-text">
+                            <input type="text" id="usuarios" name="usuarios" required aria-autocomplete="none">
+                        </div>
+                    </div>
+
+                    <div class="field" id="password">
+                        <div class="text">Contraseña</div>
+                        <div class="input-text">
+                            <input type="password" id="password" name="password" required aria-autocomplete="none">
+                        </div>
+                    </div>
+
+                    <a href="../forgot_pass/forgot_pass.html" class="link">Olvide mi contraseña</a>
+
+                    <button class="btn" type="submit">Ingresar</button>
+
+                    <a href="../log_up/log_up.html" class="crear">Crear nueva cuenta</a>
+                    
+                </form>
+
+                <div class="container-modal" id="message">
+                    <div class="modal"></div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <script src="logIn.js"></script>
+    <script src="../assets/js/modal.js"></script>
+</body>
+
+</html>
