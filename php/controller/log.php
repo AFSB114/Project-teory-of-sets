@@ -1,6 +1,6 @@
 <?php
 
-include_once '../connection/connection.php';
+include_once '../config/connection.php';
 include_once '../schema/user.php';
 include_once '../schema/log.php';
 

@@ -2,7 +2,7 @@
     grid-template-columns: 1fr 4fr 1fr 4fr 1fr 4fr 1fr 4fr 1fr;
     grid-template-rows: 1fr 3fr 2fr 2fr 5fr 1fr 3fr 2fr;
 
-    background-image: url('../assets/images/waitingRoomADM.svg');
+    background-image: url('../images/waitingRoomADM.svg');
 }
 
 .tittle {
@@ -26,7 +26,7 @@
     grid-area: 3 / 3 / 3 / 8;
     border: 0;
 
-    background-image: url('../assets/images/codigo.svg');
+    background-image: url('../images/codigo.svg');
     background-size: contain;
     background-position: center center;
     background-repeat: no-repeat;
@@ -48,7 +48,7 @@
 
 .btn {
     grid-area: 6 / 4 / 8 / 7;
-    background-image: url('../assets/images/btn-blue.svg');
+    background-image: url('../images/btn-blue.svg');
     align-self: end;
     width: 35vh;
     /* background-color: red; */
@@ -94,7 +94,7 @@
 .cuadroPersonaje {
     grid-row: 1 / 2;
 
-    background-image: url('../assets/images/user.svg');
+    background-image: url('../images/user.svg');
     background-size: contain;
     background-position: center center;
     background-repeat: no-repeat;
@@ -111,7 +111,7 @@
 .personaje {
     grid-area: 2 / 2 / 3 / 3;
 
-    background-image: url('../assets/images/personaje.png');
+    background-image: url('../images/personaje.png');
     background-size: contain;
     background-position: center center;
     background-repeat: no-repeat;

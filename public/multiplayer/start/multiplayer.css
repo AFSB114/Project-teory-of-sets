@@ -12,7 +12,7 @@
 }
 
 #create {
-    background-image: url('../images/btn-2.svg');
+    background-image: url('../assets/images/btn-2.svg');
 
     grid-area: 3 / 2 / 4 / 3;
 
@@ -24,7 +24,7 @@
 }
 
 #submit {
-    background-image: url('../images/btn-1.svg');
+    background-image: url('../assets/images/btn-1.svg');
 
     font-size: 3.5vh;
 

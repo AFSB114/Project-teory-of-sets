@@ -1,22 +1,22 @@
 @font-face {
     font-family: 'Super Pixel';
-    src: url('../fonts/Super-Pixel-Personal-Use.ttf') format('truetype'),
-        url('../fonts/super-pixel-personal-use-webfont.woff') format('woff'),
-        url('../fonts/super-pixel-personal-use-webfont.woff2') format('woff2');
+    src: url('../../../log/assets/fonts/Super-Pixel-Personal-Use.ttf') format('truetype'),
+        url('../../../log/assets/fonts/super-pixel-personal-use-webfont.woff') format('woff'),
+        url('../../../log/assets/fonts/super-pixel-personal-use-webfont.woff2') format('woff2');
 }
 
 @font-face {
     font-family: 'Pixeloid Sans';
-    src: url('../fonts/PixeloidSans.ttf') format('truetype'),
-        url('../fonts/pixeloidsans-webfont.woff') format('woff'),
-        url('../fonts/pixeloidsans-webfont.woff2') format('woff2');
+    src: url('../../../log/assets/fonts/PixeloidSans.ttf') format('truetype'),
+        url('../../../log/assets/fonts/pixeloidsans-webfont.woff') format('woff'),
+        url('../../../log/assets/fonts/pixeloidsans-webfont.woff2') format('woff2');
 }
 
 @font-face {
     font-family: 'Pixeloid Sans Bold';
-    src: url('../fonts/PixeloidSans-Bold.ttf') format('truetype'),
-        url('../fonts/pixeloidsans-bold-webfont.woff') format('woff'),
-        url('../fonts/pixeloidsans-bold-webfont.woff2') format('woff2');
+    src: url('../../../log/assets/fonts/PixeloidSans-Bold.ttf') format('truetype'),
+        url('../../../log/assets/fonts/pixeloidsans-bold-webfont.woff') format('woff'),
+        url('../../../log/assets/fonts/pixeloidsans-bold-webfont.woff2') format('woff2');
 }
 
 html,
@@ -59,7 +59,7 @@ body {
     max-width: 100%;
     max-height: 100%;
 
-    background-image: url('../../../public/logs/assets/images/Fondo.svg');
+    background-image: url('../assets/images/Fondo.svg');
     background-size: contain;
     background-position: center center;
     background-repeat: no-repeat;
@@ -89,7 +89,7 @@ body {
 .recuadro {
     grid-area: 2 / 2 / 6 / 5;
 
-    background-image: url('../../../public/logs/assets/images/recuadro.svg');
+    background-image: url('../assets/images/recuadro.svg');
     background-size: contain;
     background-position: center center;
     background-repeat: no-repeat;
@@ -104,7 +104,7 @@ body {
 .input-text {
     grid-row: 2 / 3;
 
-    background-image: url('../../../public/logs/assets/images/text=Default.svg');
+    background-image: url('../assets/images/text=Default.svg');
     background-size: contain;
     background-position: center center;
     background-repeat: no-repeat;
@@ -142,7 +142,7 @@ input {
 }
 
 .btn-back {
-    background-image: url('../../../public/logs/assets/images/btn-back.svg');
+    background-image: url('../assets/images/btn-back.svg');
     background-size: contain;
     background-position: center center;
     background-repeat: no-repeat;
@@ -169,7 +169,7 @@ input {
     background-color: #00000000;
     border: 0;
 
-    background-image: url('../../../public/logs/assets/images/btnLog.svg');
+    background-image: url('../assets/images/btnLog.svg');
     background-size: contain;
     background-position: center center;
     background-repeat: no-repeat;

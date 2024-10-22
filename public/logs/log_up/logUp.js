@@ -8,7 +8,7 @@ document.getElementById('form').addEventListener('submit', async (event) => {
     let email = event.target[4].value
     let password = event.target[5].value
 
-    await fetch('../../php/controller/log.php', {
+    await fetch('../../../php/controller/log.php', {
         method: 'POST',
         headers: { 'content-type': 'application/json' },
         body: JSON.stringify({
@@ -25,7 +25,7 @@ document.getElementById('form').addEventListener('submit', async (event) => {
         .then(res => {
             console.log(res)
             if (res.status === 'OK') {
-                window.location.href = `./log_in.html?message=${res.message}`
+                window.location.href = `../log_in/?message=Cuenta creada con exito`
             } else {
                 showMessage('message', res.message)
             }

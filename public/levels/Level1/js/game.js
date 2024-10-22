@@ -8,7 +8,7 @@ puerta.addEventListener('click', () => {
     if (!passTrue) {
         knock.play();
     } else {
-        window.location.href = '../level2/index.html';
+        window.location.href = '../../levels/Level2/';
     }
 });
 

@@ -73,6 +73,6 @@ puerta.addEventListener('click', () => {
         knock.play();
         alert('La puerta no se abrirá hasta que todos los objetos estén en sus cajas correctas.');
     } else {
-        window.location.href = '../level4/index.html'; 
+        window.location.href = '../../levels/Level4/';
     }
 });

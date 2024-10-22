@@ -1,5 +1,5 @@
-import SocketConnection from './socket.js'
-import AddPlayer from './addPlayers.js'
+import SocketConnection from '../assets/js/socket.js'
+import AddPlayer from '../assets/js/addPlayers.js'
 let players = new AddPlayer()
 
 async function init() {
@@ -66,15 +66,13 @@ async function init() {
 
         switch (data.action) {
             case 'JOIN':
-                console.log(`${data.message}`)
                 players.addPlayer(data.nickname)
                 break
             case 'NEW_PLAYER':
-                // alert(`${data.message} ${data.nickname}`)
                 players.addPlayer(data.nickname)
                 break
-            case 'play':
-                window.location.href = `../../level1/index.html`
+            case 'PLAY':
+                window.location.href = `../../levels/Level1/?code=${data.code}`
                 break
             case 'joined':
                 break
@@ -82,7 +80,7 @@ async function init() {
                 alert(data.message)
                 break
             case 'closed':
-                // window.location.href = './multiplayer.html'
+                // window.location.href = './start.html'
                 alert(data.data)
                 break
             default:

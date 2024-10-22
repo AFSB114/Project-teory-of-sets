@@ -1,22 +1,22 @@
 @font-face {
     font-family: 'Super Pixel';
-    src: url('../assets/fonts/Super-Pixel-Personal-Use.ttf') format('truetype'),
-        url('../assets/fonts/super-pixel-personal-use-webfont.woff') format('woff'),
-        url('../assets/fonts/super-pixel-personal-use-webfont.woff2') format('woff2');
+    src: url('../fonts/Super-Pixel-Personal-Use.ttf') format('truetype'),
+        url('../fonts/super-pixel-personal-use-webfont.woff') format('woff'),
+        url('../fonts/super-pixel-personal-use-webfont.woff2') format('woff2');
 }
 
 @font-face {
     font-family: 'Pixeloid Sans';
-    src: url('../assets/fonts/PixeloidSans.ttf') format('truetype'),
-        url('../assets/fonts/pixeloidsans-webfont.woff') format('woff'),
-        url('../assets/fonts/pixeloidsans-webfont.woff2') format('woff2');
+    src: url('../fonts/PixeloidSans.ttf') format('truetype'),
+        url('../fonts/pixeloidsans-webfont.woff') format('woff'),
+        url('../fonts/pixeloidsans-webfont.woff2') format('woff2');
 }
 
 @font-face {
     font-family: 'Pixeloid Sans Bold';
-    src: url('../assets/fonts/PixeloidSans-Bold.ttf') format('truetype'),
-        url('../assets/fonts/pixeloidsans-bold-webfont.woff') format('woff'),
-        url('../assets/fonts/pixeloidsans-bold-webfont.woff2') format('woff2');
+    src: url('../fonts/PixeloidSans-Bold.ttf') format('truetype'),
+        url('../fonts/pixeloidsans-bold-webfont.woff') format('woff'),
+        url('../fonts/pixeloidsans-bold-webfont.woff2') format('woff2');
 }
 
 html,
@@ -58,7 +58,7 @@ body {
     max-width: 100%;
     max-height: 100%;
 
-    background-image: url('../assets/images/Fondo.svg');
+    background-image: url('../images/Fondo.svg');
     background-size: contain;
     background-position: center center;
     background-repeat: no-repeat;
@@ -88,7 +88,7 @@ body {
     border: 0;
     width: 40vh;
 
-    background-image: url('../assets/images/btn-1.svg');
+    background-image: url('../images/btn-1.svg');
     background-size: contain;
     background-position: center center;
     background-repeat: no-repeat;
@@ -111,7 +111,7 @@ body {
 }
 
 .btn-back {
-    background-image: url('../assets/images/btn-back.svg');
+    background-image: url('../images/btn-back.svg');
     background-size: contain;
     background-position: center center;
     background-repeat: no-repeat;

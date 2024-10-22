@@ -32,7 +32,7 @@ puerta.addEventListener('click', () => {
         });
         pass.fill('');
     } else {
-        window.location.href = '../../public/game_mode/game_mode.html';
+        window.location.href = '../../../game_mode/index.html';
     }
 });
 

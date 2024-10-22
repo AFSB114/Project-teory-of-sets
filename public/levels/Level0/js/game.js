@@ -32,6 +32,6 @@ puerta.addEventListener('click', () => {
         });
         pass.fill('');
     } else {
-        window.location.href = '../Level1/index.html';
+        window.location.href = '../../levels/Level1/';
     }
 });

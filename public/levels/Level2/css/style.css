@@ -1,29 +1,29 @@
 @font-face {
     font-family: 'Super Pixel';
-    src: url('../../public/assets/fonts/Super-Pixel-Personal-Use.ttf') format('truetype'),
-        url('../../public/assets/fonts/super-pixel-personal-use-webfont.woff') format('woff'),
-        url('../../public/assets/fonts/super-pixel-personal-use-webfont.woff2') format('woff2');
+    src: url('../../../assets/fonts/Super-Pixel-Personal-Use.ttf') format('truetype'),
+        url('../../../assets/fonts/super-pixel-personal-use-webfont.woff') format('woff'),
+        url('../../../assets/fonts/super-pixel-personal-use-webfont.woff2') format('woff2');
 }
 
 @font-face {
     font-family: 'Pixeloid Sans';
-    src: url('../../public/assets/fonts/PixeloidSans.ttf') format('truetype'),
-        url('../../public/assets/fonts/pixeloidsans-webfont.woff') format('woff'),
-        url('../../public/assets/fonts/pixeloidsans-webfont.woff2') format('woff2');
+    src: url('../../../assets/fonts/PixeloidSans.ttf') format('truetype'),
+        url('../../../assets/fonts/pixeloidsans-webfont.woff') format('woff'),
+        url('../../../assets/fonts/pixeloidsans-webfont.woff2') format('woff2');
 }
 
 @font-face {
     font-family: 'Pixeloid Sans Bold';
-    src: url('../../public/assets/fonts/PixeloidSans-Bold.ttf') format('truetype'),
-        url('../../public/assets/fonts/pixeloidsans-bold-webfont.woff') format('woff'),
-        url('../../public/assets/fonts/pixeloidsans-bold-webfont.woff2') format('woff2');
+    src: url('../../../assets/fonts/PixeloidSans-Bold.ttf') format('truetype'),
+        url('../../../assets/fonts/pixeloidsans-bold-webfont.woff') format('woff'),
+        url('../../../assets/fonts/pixeloidsans-bold-webfont.woff2') format('woff2');
 }
 
 @font-face {
     font-family: 'Press Start 2P';
-    src: url('../../public/assets/fonts/PressStart2P.ttf') format('truetype'),
-        url('../../public/assets/fonts/pressstart2p-webfont.woff') format('woff'),
-        url('../../public/assets/fonts/pressstart2p-webfont.woff2') format('woff2');
+    src: url('../../../assets/fonts/PressStart2P.ttf') format('truetype'),
+        url('../../../assets/fonts/pressstart2p-webfont.woff') format('woff'),
+        url('../../../assets/fonts/pressstart2p-webfont.woff2') format('woff2');
 }
 
 html,
@@ -587,7 +587,7 @@ body {
 }
 
 .cuadro4 {
-    background-image: url('../images/Cuadro4.png');
+    background-image: url('../images/cuadro4.png');
     background-repeat: no-repeat;
     background-size: contain;
     background-position: center center;
@@ -598,7 +598,7 @@ body {
 }
 
 .espejo {
-    background-image: url('../images/Espejo.png');
+    background-image: url('../images/espejo.png');
     background-repeat: no-repeat;
     background-size: contain;
     background-position: center center;
@@ -609,7 +609,7 @@ body {
 }
 
 .espejo3 {
-    background-image: url('../images/Espejo3.png');
+    background-image: url('../images/espejo3.png');
     background-repeat: no-repeat;
     background-size: contain;
     background-position: center center;

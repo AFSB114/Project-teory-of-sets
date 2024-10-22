@@ -3,7 +3,7 @@ document.getElementById('form').addEventListener('submit', async (event) => {
 
     let email = event.target[0].value
 
-    await fetch('../../php/api/forgotPass.php', {
+    await fetch('../../../php/api/forgotPass.php', {
         method: 'POST',
         headers: { 'content-type': 'application/json' },
         body: JSON.stringify({
@@ -16,6 +16,6 @@ document.getElementById('form').addEventListener('submit', async (event) => {
         })
         .catch(err => console.log(err))
         .finally(() => {
-            window.location.href = './log_in.html'
+            window.location.href = '../log_in/'
         })
 })

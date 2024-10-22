@@ -11,7 +11,7 @@
 .cuadro {
     grid-area: 3 / 2 / 6 / 5;
 
-    background-image: url('../images/Cuadro.svg');
+    background-image: url('../assets/images/Cuadro.svg');
     background-position: center center;
     background-size: contain;
     background-repeat: no-repeat;
@@ -31,7 +31,7 @@
 }
 
 .btn {
-    background-image: url('../images/btn-blue.svg');
+    background-image: url('../assets/images/btn-blue.svg');
 
     font-size: 4vh;
 }

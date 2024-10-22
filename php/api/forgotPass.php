@@ -1,5 +1,5 @@
 <?php
-include_once '../connection/connection.php';
+include_once '../config/connection.php';
 global $pdo;
 include_once '../schema/response.php';
 include_once '../schema/user.php';

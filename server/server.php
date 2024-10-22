@@ -23,15 +23,18 @@ class MultiplayerServer implements MessageComponentInterface
 
     public function onOpen(ConnectionInterface $conn): void
     {
-
         $this->clients->attach($conn);
 
         $queryString = $conn->httpRequest->getUri()->getQuery(); //
         parse_str($queryString, $queryParams);
 
-        $conn->token = $queryParams['token'];
         $conn->id = $queryParams['id'];
+        $conn->token = $queryParams['token'];
         $conn->nickname = $queryParams['nickname'];
+
+        if ($this->rooms["{$queryParams['code']}"]) {
+            $this->rooms["{$queryParams['code']}"]->attach($conn);
+        }
 
         echo "New connection ({$conn->nickname})\n";
     }
@@ -45,6 +48,7 @@ class MultiplayerServer implements MessageComponentInterface
                 $room = new Room($from->id, $data['numLevels'], $data['timePerLevel'], $from->token, new Connection());
 
                 $code = $room->createRoom()['code'];
+                $from->code = $code;
 
                 $this->rooms["$code"] = new SplObjectStorage();
                 $this->rooms["$code"]->attach($from);
@@ -53,6 +57,8 @@ class MultiplayerServer implements MessageComponentInterface
 
                 break;
             case 'JOIN':
+
+                $from->code = $data['code'];
 
                 $join = new JoinRoom($data['code'], $from->id, $from->token);
 
@@ -71,15 +77,22 @@ class MultiplayerServer implements MessageComponentInterface
                 }
 
                 break;
+            case 'PLAY':
+
+                foreach ($this->rooms["{$data['code']}"] as $client) {
+                    $client->send(json_encode(['action' => 'PLAY', 'code' => $data['code']]));
+                }
         }
 
     }
 
     public function onClose(ConnectionInterface $conn): void
     {
+
+        $this->rooms["{$conn->code}"]->detach($conn);
         $this->clients->detach($conn);
 
-        echo "Exit ({$conn->resourceId})\n";
+        echo "Exit ({$conn->nickname})\n";
     }
 
     public function onError(ConnectionInterface $conn, \Exception $e): void

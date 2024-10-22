@@ -37,7 +37,7 @@ body {
 .recuadro {
     grid-area: 4 / 2 / 6 / 5;
 
-    background-image: url('../images/recuadro.svg');
+    background-image: url('../assets/images/recuadro.svg');
     background-size: contain;
     background-position: center center;
     background-repeat: no-repeat;
@@ -68,7 +68,7 @@ body {
 .btn {
     grid-area: 5 / 2 / 7 / 6;
 
-    background-image: url('../images/btnLogOut.svg');
+    background-image: url('../assets/images/btnLogOut.svg');
 
     justify-self: center;
 
@@ -78,7 +78,7 @@ body {
 .btndef {
     grid-area: 1 / 4 / 3 / 6;
 
-    background-image: url('../images/btn-idioma.svg');
+    background-image: url('../assets/images/btn-idioma.svg');
 
     place-self: center center;
 
@@ -94,7 +94,7 @@ body {
     background-color: #00000000;
     border: 0;
 
-    background-image: url('../images/volumen.svg');
+    background-image: url('../assets/images/volumen.svg');
     background-size: contain;
     background-position: center center;
     background-repeat: no-repeat;

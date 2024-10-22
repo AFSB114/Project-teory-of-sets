@@ -13,9 +13,9 @@ document.getElementById('multiplayer').addEventListener('click', async(event) =>
         .then(res => res.json())
         .then(res => {
             if (res.authenticated) {
-                window.location.href = `./multiplayer/intro_multiplayer.html`
+                window.location.href = `../multiplayer/intro_multiplayer/`
             } else {
-                window.location.href = './log/log_in.html?message=Debes estar logueado para poder jugar multijugador'
+                window.location.href = '../logs/log_in/?message=Debes estar logueado para jugar'
             }
         })
 })

@@ -13,7 +13,7 @@ document.getElementById('logOut').addEventListener('submit', async (event) => {
         .then(res => res.json())
         .then(res => {
             if (res.status === 'OK') {
-                window.location.href = '../../public/index.html'
+                window.location.href = '../start/'
             }
         })
 })
