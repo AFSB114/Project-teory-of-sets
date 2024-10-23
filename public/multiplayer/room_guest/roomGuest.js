@@ -74,6 +74,17 @@ async function init() {
             case 'PLAY':
                 window.location.href = `../../levels/Level1/?code=${data.code}`
                 break
+            case 'MESSAGE':
+                let message = document.createElement('div')
+                if (res.id == data.id) {
+                    message.classList.add('me')
+                    message.innerHTML = `${data.message} <strong>:TÚ</strong>`
+                } else {
+                    message.innerHTML = `<strong>${data.nickname}:</strong> ${data.message}`
+                }
+                document.getElementById('messages').appendChild(message)
+                document.getElementById('messages').scrollTop = document.getElementById('messages').scrollHeight
+                break
             case 'joined':
                 break
             case 'error':
@@ -88,6 +99,15 @@ async function init() {
                 break
         }
     }
+
+    document.getElementById('send').addEventListener('click', async (event) => {
+        event.preventDefault()
+        const message = document.getElementById('message').value
+        document.getElementById('message').value = ''
+        let code = document.getElementById('code').innerHTML
+        code = code.replace('-', '')
+        connection.sendMessage(message, code)
+    })
 }
 
 init()

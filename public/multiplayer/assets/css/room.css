@@ -54,7 +54,8 @@
     /* background-color: red; */
     height: 10vh;
     font-size: 4vh;
-    position: relative; /*Agregar posición absoluta*/
+    position: relative;
+    /*Agregar posición absoluta*/
     bottom: 30%;
     /*left: 50%;
     transform: translateX(-50%); /* Centrar horizontalmente */
@@ -75,8 +76,10 @@
 
     /*grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Ajusta los objetos automáticamente */
     /*gap: 20px; /* Espacio entre objetos */
-    justify-items: center; /* Centra cada objeto horizontalmente */
-    justify-content: center; /* Centra el contenido total de la fila */
+    justify-items: center;
+    /* Centra cada objeto horizontalmente */
+    justify-content: center;
+    /* Centra el contenido total de la fila */
 }
 
 #listaJugadores {
@@ -138,4 +141,80 @@
 a {
     text-decoration: none;
     color: black;
+}
+
+.chat {
+
+    position: absolute;
+
+    right: 2.5%;
+    bottom: 5%;
+
+    width: 30vw;
+
+    height: auto;
+    max-height: 80vh;
+
+    background-color: rgba(255, 247, 230, 0.7);
+    border: 1.2vh solid black;
+
+    display: flex;
+    flex-direction: column;
+
+    padding: 1.5%;
+}
+
+.chat-messages {
+    overflow-y: auto;
+    scroll-behavior: smooth;
+
+    overflow-x: hidden;
+
+    word-break: break-all;
+    height: auto;
+    min-height: 10vh;
+
+    font-family: 'Pixeloid Sans';
+}
+
+.chat-form {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+
+    height: 5vh;
+    margin-top: 5%;
+}
+
+.message-sent {
+    font-size: 3vh;
+    height: 100%;
+    background-color: rgb(255, 255, 255);
+    border: 0.5vh solid black;
+
+    text-align: left;
+}
+
+.send {
+    all: unset;
+
+    font-size: 2vh;
+    color: white;
+    background-color: black;
+    border: 0.5vh solid black;
+    height: 100%;
+
+    width: 15%;
+    text-align: center;
+}
+
+.message {
+    font-size: 3vh;
+
+    text-overflow: clip;
+}
+
+.me {
+    text-align: right;
 }

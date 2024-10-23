@@ -53,6 +53,14 @@ class SocketConnection {
         }))
     }
 
+    sendMessage(message, code) {
+        this.socket.send(JSON.stringify({
+            action: 'MESSAGE',
+            message: message,
+            code: code
+        }))
+    }
+
     // Puedes agregar más métodos para manejar eventos del socket
     // sendMessage(message) {
     //     if (this.socket && this.socket.readyState === WebSocket.OPEN) {

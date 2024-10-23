@@ -82,6 +82,10 @@ class MultiplayerServer implements MessageComponentInterface
                 foreach ($this->rooms["{$data['code']}"] as $client) {
                     $client->send(json_encode(['action' => 'PLAY', 'code' => $data['code']]));
                 }
+                case 'MESSAGE':
+                    foreach ($this->rooms["{$data['code']}"] as $client) {
+                        $client->send(json_encode(['action' => 'MESSAGE', 'id' => $from->id, 'nickname'=>$from->nickname, 'message' => $data['message']]));
+                    }
         }
 
     }
