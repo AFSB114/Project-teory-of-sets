@@ -69,6 +69,18 @@ body {
     background-repeat: no-repeat;
 }
 
+.time {
+    position: absolute; 
+    top: 12%;
+    left: 14%;
+    font-size: 3vh;
+    font-family: 'Pixeloid Sans';
+    color: white;
+    /* border: 1px solid rgb(23, 221, 188); */
+    z-index: 100;
+}
+
+
 .scenario {
     position: absolute;
 

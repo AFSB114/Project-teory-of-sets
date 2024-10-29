@@ -29,9 +29,9 @@ function initialize() {
     limitsCaracter.push(width * numScenarios - character.clientWidth - character.clientWidth / 4.6);
     limitLeft = width / 2 - character.clientWidth / 2;
     limitRight = width * numScenarios - width / 2 - character.clientWidth / 2;
-    character.style.left = `${limitRight + character.clientWidth / 2}px`;
+    character.style.left = `${limitRight + character.clientWidth / 1}px`;
     posX = character.getBoundingClientRect().x - (window.innerWidth * 0.15);
-    scenariosContainer.style.transform = `translateX(-${posX - width * 0.529}px)`;
+    scenariosContainer.style.transform = `translateX(-${posX - width * 0.651}px)`;
 }
 
 function move() {
