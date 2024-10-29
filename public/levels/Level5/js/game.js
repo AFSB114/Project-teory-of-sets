@@ -4,6 +4,10 @@ const passCorrect = ['cuadro-1', 'cuadro-2', 'cuadro-3'];
 const puerta = document.getElementById('puerta');
 const knock = document.getElementById('close');
 const doorOpen = document.getElementById('open');
+// const cajon = document.getElementById('cajon');
+// const openGab = document.getElementById('open-cajon');
+// const closeGab = document.getElementById('close-cajon');
+
 let passTrue = false;
 
 cuadros.forEach(cuadro => {

@@ -102,17 +102,103 @@ body {
     background-image: url('../images/LEVEL\ 5.2.png');
 }
 
+.mueble{
+    background-image: url('../images/mueble.png');
+    background-position: center center;
+    background-size: contain;
+    background-repeat: no-repeat;
 
+    width: 85%;
+    height: 41%;
 
+    position: absolute;
+    top: 48%;
+    right: 25%;
+}
 
+.lava-platos{
+    background-image: url('../images/lava-platos.png');
+    background-position: center center;
+    background-size: contain;
+    background-repeat: no-repeat;
 
+    width: 17%;
+    height: 31%;
+
+    position: absolute;
+
+    /* border: 1px solid #09cf23; */
+    top: 52%;
+    left: 1%;
+}
+
+.lava-platos:hover{
+    filter: drop-shadow(0 0 1vh rgba(255, 255, 255, 0.249));
+    cursor: pointer;
+}
+
+.cajon{
+    background-image: url('../images/cajon.png');
+    background-position: center center;
+    background-size: contain;
+    background-repeat: no-repeat;
+
+    width: 25%;
+    height: 21%;
+
+    position: absolute;
+    top: 47.9%;
+    left: 41%;
+}
+
+.cajon:hover{
+    filter: drop-shadow(0 0 1vh rgba(255, 255, 255, 0.249));
+    cursor: pointer;
+}
 
 #scenario3 {
     left: 198%;
     background-image: url('../images/LEVEL\ 5.3.png');
 }
 
+.mueble-platos{
+    background-image: url('../images/mueble-platos.png');
+    background-position: center center;
+    background-size: contain;
+    background-repeat: no-repeat;
 
+    width: 35%;
+    height: 25%;
+
+    position: absolute;
+    top: 59.3%;
+    left: 9%;
+}
+
+.mueble-platos:hover{
+    filter: drop-shadow(0 0 1vh rgba(255, 255, 255, 0.249));
+    cursor: pointer;
+}
+
+.estante-platos{
+    background-image: url('../images/estante-platos.png');
+    background-position: center center;
+    background-size: contain;
+    background-repeat: no-repeat;
+
+    width: 17.9%;
+    height: 40%;
+
+    /* border: 1px solid #09cf23; */
+    position: absolute;
+    top: 45%;
+    left: -1.6%;
+}
+
+.estante-platos:hover{
+    filter: drop-shadow(0 0 1vh rgba(255, 255, 255, 0.249));
+    cursor: pointer;
+}
 
 #scenario4 {
     left: 297%;
@@ -392,23 +478,24 @@ body {
 
 .contenido-modal-ask {
     width: 30%;
-    height: 55vh;
+    height: 65vh;
+    border: 1px solid #09cf23;
 
-    background-image: url('../images/Question\ Pass.png');
+    background-image: url('../images/cajon-abierto.png');
     background-repeat: no-repeat;
-    background-size: contain;
+    background-size:contain;
 
     padding: 2vh;
 
     opacity: 0;
 
     position: absolute;
-    top: 20%;
+    top: 15%;
     left: 35%;
 
     display: grid;
-    grid-template-rows: 2fr 2fr 1fr 1fr;
-    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: 1fr 1fr 1fr 1fr;
+    grid-template-columns: repeat(4, 1fr);
 
     font-size: 4vh;
     font-family: 'Pixeloid Sans';
@@ -447,6 +534,118 @@ body {
     }
 }
 
+.nothing {
+    width: 41%;
+    height: 68vh;
+    /* border: 1px solid #0143fa; */
+
+    background-image: url('../images/gabinete.png');
+    background-repeat: no-repeat;
+    background-size:contain;
+
+    padding: 2vh;
+
+    opacity: 0;
+
+    /* border: 1px solid #0143fa; */
+    position: absolute;
+    top: 15%;
+    left: 28%;
+
+
+    font-size: 4vh;
+    font-family: 'Pixeloid Sans';
+    text-align: center;
+}
+
+.show-nothing {
+    animation: show-nothing 0.5s ease-in-out forwards;
+}
+
+@keyframes show-nothing {
+    from {
+        opacity: 0;
+        top: -20%;
+    }
+
+    to {
+        opacity: 1;
+        top: 20;
+    }
+}
+
+.hide-nothing {
+    animation: hide-nothing 0.5s ease-in-out forwards;
+}
+
+@keyframes hide-nothing {
+    from {
+        opacity: 1;
+        top: 20;
+    }
+
+    to {
+        opacity: 0;
+        top: -20%;
+    }
+}
+
+.armario {
+    width: 18%;
+    height: 72vh;
+    /* border: 1px solid #0143fa; */
+
+    background-image: url('../images/armario.png');
+    background-repeat: no-repeat;
+    background-size:contain;
+
+    padding: 2vh;
+
+    opacity: 0;
+
+    /* border: 1px solid #0143fa; */
+    position: absolute;
+    top: 13%;
+    left: 40%;
+
+    font-size: 4vh;
+    font-family: 'Pixeloid Sans';
+    text-align: center;
+}
+
+.show-armarios {
+    animation: show-armarios 0.5s ease-in-out forwards;
+}
+
+@keyframes show-armarios {
+    from {
+        opacity: 0;
+        top: -20%;
+    }
+
+    to {
+        opacity: 1;
+        top: 20;
+    }
+}
+
+.hide-armarios {
+    animation: hide-armarios 0.5s ease-in-out forwards;
+}
+
+@keyframes hide-armarios {
+    from {
+        opacity: 1;
+        top: 20;
+    }
+
+    to {
+        opacity: 0;
+        top: -20%;
+    }
+}
+
+
 .btn-close {
     background-image: url('../images/exit.png');
     background-repeat: no-repeat;
@@ -466,173 +665,69 @@ body {
 
 }
 
-.botellas {
-    background-image: url('../images/Water\ Bottle\ 1.png');
-    background-repeat: no-repeat;
-    background-size: contain;
-    background-position: center center;
-
-    /* border: 1px #af2b2b solid; */
-    width: 7vh;
-    height: 7vh;
-    grid-area: 2/ 2 / 3 / 3;
-    display: grid;
-
-    justify-self: center;
-    align-self: center;
-
-    margin-bottom: 10%;
-    /* bottom: 45%; */
-}
-
-.silla {
-    background-image: url('../images/armchair_left.png');
+.pelador{
+    background-image: url('../images/pelador.png');
     background-repeat: no-repeat;
     background-size: contain;
     background-position: center;
 
-    /* border: 1px #af2b2b solid; */
-    width: 7vh;
-    height: 7vh;
-    grid-area: 2/ 3 / 3 / 4;
+    width: 10vh;
+    height: 10vh;
+    grid-area: 1/3/2/4;
     display: grid;
 
     justify-self: center;
     align-self: center;
-
-    margin-bottom: 9%;
-    /* bottom: 45%; */
-
+    
+    position: inherit;
+    top: 30%;
 }
 
-.florero {
-    background-image: url('../images/cactus_pot\ 2.png');
+.cuchillo{
+    background-image: url('../images/cuchillo.png');
     background-repeat: no-repeat;
     background-size: contain;
     background-position: center;
 
-    /* border: 1px #af2b2b solid; */
-    width: 7vh;
-    height: 7vh;
-    grid-area: 2/ 4 / 3 / 5;
+    width: 20vh;
+    height: 10vh;
+    grid-area: 1/1/2/3;
+    display: grid;
+
+    justify-self: center ;
+    align-self: center;
+}
+
+.tijeras{
+    background-image: url('../images/tijeras.png');
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+
+    width: 10vh;
+    height: 10vh;
+    grid-area: 2/2/3/3;
     display: grid;
 
     justify-self: center;
     align-self: center;
-
-    margin-bottom: 4%;
-
-    /* bottom: 40%; */
-
 }
 
+.rallador{
+    background-image: url('../images/rallador.png');
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
 
-.text-1 {
-    /* border: 1px #af2b2b solid; */
-    color: #00BD09;
-    grid-area: 1 / 1 / 2 / 6;
-    text-align: center;
+    width: 17vh;
+    height: 20vh;
+    grid-area: 2/1/3/2;
     display: grid;
 
     justify-self: center;
+    
     align-self: center;
 
-    margin-top: 10%;
-    font-family: 'Press Start 2P';
-}
-
-.numeros{
-
-    grid-area: 3/2/5/5;
-
-    width: 100%;
-    height: 100%;
-
-    display: grid;
-    grid-template-rows: 1fr 1fr;
-    grid-template-columns: repeat(5, 1fr);
-}
-
-.btn-numbers{
-    border: none;
-    background-color: transparent;
-    color: #00BD09;
-    width: 5vh;
-    height: 5vh;
-    font-family: 'Press Start 2P';
-
-
-    font-size: 4vh;
-
-}
-
-.btn-numbers :hover{
-    filter: brightness(80%);
-    cursor: pointer;
-}
-.uno {
-    grid-area: 1 / 1 / 2 / 2;
-    justify-self: center;
-}
-
-.dos {
-    grid-area: 1 / 2 / 2 / 3;
-
-    justify-self: center;
-}
-
-.tres {
-    grid-area: 1 / 3 / 2 / 4;
-    justify-self: center;
-
-}
-
-.cuatro {
-    grid-area: 1 / 4 / 2 / 5;
-   
-}
-
-.cinco {
-    grid-area: 1 / 5 / 2 / 6;
- 
-
-    justify-self: center;
-}
-
-.sub{
     position: relative;
-    bottom: 4vh;
-}
-
-.six {
-    grid-area: 2 / 1 / 3 / 2;
-    
-    justify-self: center;
-    align-self: center;
-}
-
-.siete {
-    grid-area: 2 / 2 / 3 / 3;
-
-    align-self: center;
-}
-
-.ocho {
-    grid-area: 2 / 3 / 3 / 4;
-
-    justify-self: center;
-    align-self: center;
-}
-
-.nueve {
-    grid-area: 2 / 4 / 3 / 5;
-    
-    align-self: center;
-}
-
-.cero {
-    grid-area: 2 / 5 / 3 / 6;
-
-    justify-self: center;
-    align-self: center;
+    left: 20%;
 }

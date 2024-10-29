@@ -4,8 +4,15 @@ const continuar = document.getElementById('continuar');
 const modalContent = modalMenu.children[0];
 const help = document.getElementById('help');
 const modalHelp = document.getElementsByClassName('modal-help');
-const computador = document.getElementById('computador');
+const cajon = document.getElementById('cajon');
+const lavaplatos = document.getElementById('lava-platos');
 const ask = document.getElementById('modal-ask');
+const nothings = document.getElementById('modal-nothing');
+const muebleplatos = document.getElementById('mueble-platos');
+const armarios = document.getElementById('armario');
+const armario = document.getElementById('modal-armario');
+
+
 
 let seeAsk = false;
 
@@ -42,6 +49,24 @@ const hideAsk = () => {
     }, 500)
 }
 
+const hideNothing = () => {
+    nothings.children[0].classList.remove('show-nothing')
+    nothings.children[0].classList.add('hide-nothing')
+    setTimeout(() => {
+        nothings.children[0].classList.remove('hide-nothing')
+        nothings.style.display = 'none'
+    }, 500)
+}
+
+const hideArmario = () => {
+    armario.children[0].classList.remove('show-armarios')
+    armario.children[0].classList.add('hide-armarios')
+    setTimeout(() => {
+        armario.children[0].classList.remove('hide-armarios')
+        armario.style.display = 'none'
+    }, 500)
+}
+
 const handleWindowClick = (event) => {
     if (event.target === modalMenu) {
         closeModal();
@@ -49,6 +74,10 @@ const handleWindowClick = (event) => {
         hideModal(event.target);
     } else if (event.target === ask) {
         hideAsk()
+    }else if (event.target === nothings) {  
+        hideNothing()
+    }else if (event.target === armario){
+        hideArmario()
     }
 };
 
@@ -65,9 +94,31 @@ help.addEventListener('click', () => {
     showModal(modalToShow);
 });
 
-computador.addEventListener('click', () => {
+cajon.addEventListener('click', () => {
     ask.style.display = 'block';
     ask.children[0].classList.add('show-ask');
 
     seeAsk = true
 });
+
+lavaplatos.addEventListener('click', () => {
+    nothings.style.display = 'block';
+    nothings.children[0].classList.add('show-nothing');
+
+    seeAsk = true
+});
+
+muebleplatos.addEventListener('click', () => {
+    nothings.style.display = 'block';
+    nothings.children[0].classList.add('show-nothing');
+
+    seeAsk = true
+});
+
+armarios.addEventListener('click', () => {
+    armario.style.display = 'block';
+    armario.children[0].classList.add('show-armarios');
+
+    seeAsk = true
+});
+
