@@ -1,4 +1,6 @@
 <?php
+
+namespace email;
 //Import PHPMailer classes into the global namespace
 //These must be at the top of your script, not inside a function
 use PHPMailer\PHPMailer\PHPMailer;
@@ -7,6 +9,43 @@ use PHPMailer\PHPMailer\Exception;
 
 //Load Composer's autoloader
 require 'vendor/autoload.php';
+
+class sendEmail {
+    /**
+     * @throws Exception
+     */
+    public function __construct(
+        protected PHPMailer $mail = new PHPMailer()
+    ){
+        //SERVER SETTINGS
+        $this->mail->SMTPDebug = SMTP::DEBUG_OFF;
+        $this->mail->isSMTP();
+        $this->mail->Host = 'smtp.gmail.com';
+        $this->mail->SMTPAuth = true;
+        $this->mail->Username = 'vennture412@gmail.com';
+        $this->mail->Password = 'vhhp ncch wlcw opoq';
+        $this->mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
+        $this->mail->Port = 587;
+
+        //FROM
+        $this->mail->setFrom('vennture412@gmail.com', 'VENNTURE');
+
+        //CONTENT SETTINGS
+        $this->mail->CharSet = 'UTF-8';
+        $this->mail->setLanguage('es');
+        $this->mail->isHTML(true);
+    }
+
+    public function sendVerication($to)
+    {
+        $this->mail->addAddress($to);
+
+        $this->mail->Subject = 'Verificacion de cuenta';
+        $this->mail->Body = 'Este email tendra un link para verificar el correo';
+
+        return $this->mail->send();
+    }
+}
 
 //Create an instance; passing `true` enables exceptions
 $mail = new PHPMailer(true);
@@ -23,7 +62,6 @@ try {
     $mail->Port = 465;                                          //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
 
     //Recipients
-    $mail->setFrom('vennture412@gmail.com', 'VENNTURE');
     $mail->addAddress('asuazab13@gmail.com', 'Andres');       //Add a recipient
 //    $mail->addAddress('ellen@example.com');                               //Name is optional
 //    $mail->addReplyTo('info@example.com', 'Information');
