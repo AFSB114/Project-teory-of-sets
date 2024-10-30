@@ -7,10 +7,9 @@ class Log
     ) {
     }
 
-    protected function dateNow(): string
+    protected function generateToken()
     {
-        $now = new DateTime();
-        return $now->format('Y-m-d');
+
     }
 
     public function up(): array
@@ -22,25 +21,23 @@ class Log
             // Cifrar la contraseña antes de almacenarla
             $this->user->setPassword(password_hash($this->user->getPassword(), PASSWORD_BCRYPT));
 
-            $query = "INSERT INTO log (nickname, email, password, create_date) VALUES (:nickname, :email, :password, :create_date)";
+            $query = "INSERT INTO log (nickname, email, password, update_date) VALUES (:nickname, :email, :password, NULL)";
             $res = $conn->prepare($query);
             $res->execute([
                 "nickname" => $this->user->getNickname(),
                 "email" => $this->user->getEmail(),
-                "password" => $this->user->getPassword(),
-                "create_date" => $this->dateNow()
+                "password" => $this->user->getPassword()
             ]);
 
             $this->user->setId($conn->lastInsertId());
 
-            $query = "INSERT INTO users (id, name, surname, birthday, create_date) VALUES (:id, :name, :surname, :birthday, :create_date)";
+            $query = "INSERT INTO users (id, name, surname, birthday) VALUES (:id, :name, :surname, :birthday)";
             $res = $conn->prepare($query);
             $res->execute([
                 "id" => $this->user->getId(),
                 "name" => $this->user->getName(),
                 "surname" => $this->user->getSurname(),
-                "birthday" => $this->user->getBirthday(),
-                "create_date" => $this->dateNow()
+                "birthday" => $this->user->getBirthday()
             ]);
 
             $conn->commit();

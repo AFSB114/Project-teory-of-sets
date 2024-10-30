@@ -1,86 +1,81 @@
 <?php
 
-namespace email;
-//Import PHPMailer classes into the global namespace
-//These must be at the top of your script, not inside a function
+namespace Mailer;
+
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception;
 
-//Load Composer's autoloader
-require 'vendor/autoload.php';
+require dirname(__DIR__) . '/vendor/autoload.php';
 
-class sendEmail {
-    /**
-     * @throws Exception
-     */
-    public function __construct(
-        protected PHPMailer $mail = new PHPMailer()
-    ){
-        //SERVER SETTINGS
-        $this->mail->SMTPDebug = SMTP::DEBUG_OFF;
-        $this->mail->isSMTP();
-        $this->mail->Host = 'smtp.gmail.com';
-        $this->mail->SMTPAuth = true;
-        $this->mail->Username = 'vennture412@gmail.com';
-        $this->mail->Password = 'vhhp ncch wlcw opoq';
-        $this->mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
-        $this->mail->Port = 587;
+class MailService
+{
+    private PHPMailer $mail;
+    private array $config;
 
-        //FROM
-        $this->mail->setFrom('vennture412@gmail.com', 'VENNTURE');
-
-        //CONTENT SETTINGS
-        $this->mail->CharSet = 'UTF-8';
-        $this->mail->setLanguage('es');
-        $this->mail->isHTML(true);
-    }
-
-    public function sendVerication($to)
+    public function __construct()
     {
-        $this->mail->addAddress($to);
+        $this->config = [
+            'smtp_debug' => SMTP::DEBUG_OFF,
+            'host' => 'smtp.gmail.com',
+            'username' => 'vennture412@gmail.com',
+            'password' => 'vhhp ncch wlcw opoq',
+            'port' => 465,
+            'encryption' => PHPMailer::ENCRYPTION_SMTPS
+        ];
 
-        $this->mail->Subject = 'Verificacion de cuenta';
-        $this->mail->Body = 'Este email tendra un link para verificar el correo';
-
-        return $this->mail->send();
+        $this->initialize();
     }
-}
 
-//Create an instance; passing `true` enables exceptions
-$mail = new PHPMailer(true);
+    private function initialize(): void
+    {
+        $this->mail = new PHPMailer(true);
 
-try {
-    //Server settings
-    $mail->SMTPDebug = SMTP::DEBUG_SERVER;                      //Enable verbose debug output
-    $mail->isSMTP();                                            //Send using SMTP
-    $mail->Host = 'smtp.gmail.com';                             //Set the SMTP server to send through
-    $mail->SMTPAuth = true;                                     //Enable SMTP authentication
-    $mail->Username = 'vennture412@gmail.com';                  //SMTP username
-    $mail->Password = 'vhhp ncch wlcw opoq';                    //SMTP password vhhp ncch wlcw opoq
-    $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;             //Enable implicit TLS encryption
-    $mail->Port = 465;                                          //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
+        try {
+            // Server settings
+            $this->mail->SMTPDebug = $this->config['smtp_debug'];
+            $this->mail->isSMTP();
+            $this->mail->Host = $this->config['host'];
+            $this->mail->SMTPAuth = true;
+            $this->mail->Username = $this->config['username'];
+            $this->mail->Password = $this->config['password'];
+            $this->mail->SMTPSecure = $this->config['encryption'];
+            $this->mail->Port = $this->config['port'];
+            $this->mail->addReplyTo('asuazab14@gmail.com', 'Error');
 
-    //Recipients
-    $mail->addAddress('asuazab13@gmail.com', 'Andres');       //Add a recipient
-//    $mail->addAddress('ellen@example.com');                               //Name is optional
-//    $mail->addReplyTo('info@example.com', 'Information');
-//    $mail->addCC('cc@example.com');
-//    $mail->addBCC('bcc@example.com');
+            $this->mail->setFrom($this->config['username'], 'vennture');
+        } catch (Exception $e) {
+            throw new Exception("Error initializing mailer: {$e->getMessage()}");
+        }
+    }
 
-    //Attachments
-//    $mail->addAttachment('/var/tmp/file.tar.gz');         //Add attachments
-//    $mail->addAttachment('/tmp/image.jpg', 'new.jpg');    //Optional name
+    public function addRecipient(string $email, string $name = '')
+    {
+        $this->mail->addAddress($email, $name);
+        return $this;
+    }
 
-    //Content
-    $mail->isHTML(true);                                  //Set email format to HTML
-    $mail->Subject = 'Here is the subject';
-    $mail->Body = 'This is the HTML message body <b>in bold!</b>';
+    public function setContent(string $subject, string $htmlBody)
+    {
+        $this->mail->isHTML(true);
+        $this->mail->Subject = $subject;
+        $this->mail->Body = $htmlBody;
+        return $this;
+    }
 
+    public function send()
+    {
+        try {
+            $this->mail->send();
 
-    $mail->send();
-    echo 'Message has been sent';
-} catch (Exception $e) {
-    
-    echo "Message could not be sent. Mailer Error: $mail->ErrorInfo";
+            return true;
+        } catch (Exception $e) {
+            throw new Exception("Message could not be sent. Mailer Error: {$this->mail->ErrorInfo}");
+        }
+    }
+
+    public function getMailer(): PHPMailer
+    {
+        return $this->mail;
+    }
 }

@@ -1,6 +1,6 @@
 <?php
 
-class Securiy
+class Security
 {
     private function generateToken(): string
     {
@@ -23,7 +23,7 @@ class Securiy
         return ['data'=>base64_encode($dataEncrypted . '::' . $iv), 'key'=>$key];
     }
 
-    public function decryptData(string $data, string $key): string
+    public function decryptData(string $data, string $key): array
     {
         $method = 'AES-256-CBC';
 

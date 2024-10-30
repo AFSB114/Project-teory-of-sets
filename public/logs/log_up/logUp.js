@@ -8,7 +8,10 @@ document.getElementById('form').addEventListener('submit', async (event) => {
     let email = event.target[4].value
     let password = event.target[5].value
 
-    await fetch('../../../php/controller/log.php', {
+    document.getElementById('btn-text').classList.add('spin');
+    document.getElementById('btn-text').innerHTML = '';
+
+    await fetch('../../../php/controller/sendEmail.php', {
         method: 'POST',
         headers: { 'content-type': 'application/json' },
         body: JSON.stringify({
@@ -23,10 +26,11 @@ document.getElementById('form').addEventListener('submit', async (event) => {
     })
         .then(res => res.json())
         .then(res => {
-            console.log(res)
             if (res.status === 'OK') {
-                window.location.href = `../log_in/?message=Cuenta creada con exito`
+                window.location.href = `../log_in/?message=Revisa tu correo para validar tu cuenta`;
             } else {
+                document.getElementById('btn-text').classList.remove('spin');
+                document.getElementById('btn-text').innerHTML = 'Registrar';
                 showMessage('message', res.message)
             }
         })
