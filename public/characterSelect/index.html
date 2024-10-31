@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+
+<body>
+    <div class="container">
+        <div class="box-wrapper">
+            <div class="fondo">
+                <a href="../settings/" class="btn-back hover"></a>
+                <div class="tittle">PERSONAJE</div>
+                <div class="recuadro">
+                    <div class="slider">
+                        <div class="slides">
+                            <div class="characterGroup active" id="firstSet">
+                                <div class="characterFemaleContainer">
+                                    <div id="1" class="characterFemale1 character" onclick="cambiarPersonaje(1)"></div>
+                                    <div id="2" class="characterFemale2 character" onclick="cambiarPersonaje(2)"></div>
+                                    <div id="3" class="characterFemale3 character" onclick="cambiarPersonaje(3)"></div>
+                                    <div id="4" class="characterFemale4 character" onclick="cambiarPersonaje(4)"></div>
+                                </div>
+                                <div class="characterMaleContainer">
+                                    <div id="8" class="characterMale1 character" onclick="cambiarPersonaje(8)"></div>
+                                    <div id="9" class="characterMale2 character" onclick="cambiarPersonaje(9)"></div>
+                                    <div id="10" class="characterMale3 character" onclick="cambiarPersonaje(10)"></div>
+                                    <div id="11" class="characterMale4 character" onclick="cambiarPersonaje(11)"></div>
+                                </div>
+                            </div>
+                            
+                            <div class="characterGroup" id="secondSet">
+                                <div class="characterFemaleContainer">
+                                    <div id="5" class="characterFemale5 character" onclick="cambiarPersonaje(5)"></div>
+                                    <div id="6" class="characterFemale6 character" onclick="cambiarPersonaje(6)"></div>
+                                    <div id="7" class="characterFemale7 character" onclick="cambiarPersonaje(7)"></div>
+                                </div>
+                                <div class="characterMaleContainer">
+                                    <div id="12" class="characterMale5 character" onclick="cambiarPersonaje(12)"></div>
+                                    <div id="13" class="characterMale6 character" onclick="cambiarPersonaje(13)"></div>
+                                    <div id="14" class="characterMale7 character" onclick="cambiarPersonaje(14)"></div>
+                                </div>
+                            </div>            
+                        </div>
+                        <button class="prev" onclick="cambiarSlide(-1)">&#10094;</button>
+                        <button class="next" onclick="cambiarSlide(1)">&#10095;</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="assets/js/characterSelect.js"></script>
+    <script src="assets/js/selectionCharacter.js"></script>
+    <script src="assets/js/slider.js"></script>
+</body>
+</html>

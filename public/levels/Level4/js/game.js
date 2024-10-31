@@ -1,15 +1,55 @@
+const stickers = Array.from(document.getElementsByClassName('sticker'));
+let passSticker = ['', '', ''];
+const passStickerCorrect = ['stickerNino', 'stickerNina', 'stickerMontana'];
 const cuadros = Array.from(document.getElementsByClassName('cuadro'));
-let pass = ['', '', ''];
-const passCorrect = ['cuadroNino'];
+let pass = ['']; // Cambiar a un array vacío
+const passCorrect = ['cuadro-1'];
 const puerta = document.getElementById('puerta');
 const knock = document.getElementById('close');
 const doorOpen = document.getElementById('open');
+let passStickerTrue = false;
 let passTrue = false;
+
+stickers.forEach(sticker => {
+    sticker.addEventListener('click', () => {
+        sticker.classList.add('desactivado');
+
+        for (let i = 0; i < passSticker.length; i++) { // Cambiar pass a passSticker
+            if (passSticker[i] === '') {
+                passSticker[i] = sticker.id;
+                break;
+            }
+        }
+
+        if (passSticker.join('') === passStickerCorrect.join('')) {
+            cuadros.forEach(div => {
+                if (div.classList.length === 3) {
+                    div.classList.remove(div.classList.item(div.classList.length - 1)); // Elimina la última clase
+                    div.classList.add('hover');
+                }
+            });
+            cuadros.forEach((div, index) => { // Cambiar divs a cuadros
+                div.id = `cuadro-${index + 1}`; // Asigna un id único como "cuadro1", "cuadro2", etc.
+            });
+            passStickerTrue = true;
+        }
+    });
+});
+
+horno.addEventListener('click', () => {
+    if (!passStickerTrue) {
+        stickers.forEach(sticker => { // Cambiar sticker a stickers
+            sticker.classList.remove('desactivado');
+        });
+        passSticker.fill('');
+    } else {
+        null;
+    }
+});
 
 cuadros.forEach(cuadro => {
     cuadro.addEventListener('click', () => {
-        cuadro.style.filter = 'drop-shadow(0 0 2vh rgba(255, 255, 255, 0.249))';
-        
+        console.log(cuadro.id);
         for (let i = 0; i < pass.length; i++) {
             if (pass[i] === '') {
                 pass[i] = cuadro.id;
@@ -32,7 +72,6 @@ puerta.addEventListener('click', () => {
         });
         pass.fill('');
     } else {
-        window.location.href = '../../../game_mode/index.html';
+        window.location.href = '../../levels/Level5/';
     }
 });
-

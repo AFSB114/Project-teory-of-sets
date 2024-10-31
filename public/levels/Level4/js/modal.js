@@ -6,8 +6,11 @@ const help = document.getElementById('help');
 const modalHelp = document.getElementsByClassName('modal-help');
 const horno = document.getElementById('horno');
 const ask = document.getElementById('modal-ask');
+const libro = document.getElementById('libro');
+const ask2 = document.getElementById('modal-ask2');
 
 let seeAsk = false;
+let seeAsk2 = false;
 
 const showModal = (modal) => {
     modal.style.display = 'block';
@@ -42,6 +45,21 @@ const hideAsk = () => {
     }, 500)
 }
 
+const closeAskBtn = document.getElementById('closeAsk');
+closeAskBtn.addEventListener('click', hideAsk);
+
+const hideAsk2 = () => {
+    ask2.children[0].classList.remove('show-ask2')
+    ask2.children[0].classList.add('hide-ask2')
+    setTimeout(() => {
+        ask2.children[0].classList.remove('hide-ask2')
+        ask2.style.display = 'none'
+    }, 500)
+}
+
+const closeAskBtn2 = document.getElementById('closeAsk2');
+closeAskBtn2.addEventListener('click', hideAsk2);
+
 const handleWindowClick = (event) => {
     if (event.target === modalMenu) {
         closeModal();
@@ -65,11 +83,19 @@ help.addEventListener('click', () => {
     showModal(modalToShow);
 });
 
+const hornoDiv = document.getElementById('horno');
+
 horno.addEventListener('click', () => {
     ask.style.display = 'block';
     ask.children[0].classList.add('show-ask');
-
-    /*horno.style.backgroundImage = "url('../images/hornoApagado.png')";*/
+    hornoDiv.classList.add('apagado');
 
     seeAsk = true
+});
+
+libro.addEventListener('click', () => {
+    ask2.style.display = 'block';
+    ask2.children[0].classList.add('show-ask2');
+
+    seeAsk2 = true
 });

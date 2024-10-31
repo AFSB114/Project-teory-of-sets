@@ -18,8 +18,8 @@
                 <div class="contenido-modal-menu">
                     <div class="btn" id="continuar">Continuar</div>
                     <a href="" class="btn">Reiniciar</a>
-                    <a href="../views/index.html" class="btn">Mapa</a>
-                    <a href="../views/index.html" class="btn">Salir</a>
+                    <a href="../../start/" class="btn">Mapa</a>
+                    <a href="../../start/" class="btn">Salir</a>
                 </div>
             </div>
 
@@ -33,7 +33,6 @@
 
             <div class="modal modal-help">
                 <div class="img-help2">
-
                 </div>
             </div>
 
@@ -51,8 +50,8 @@
 
                 <div class="scenario" id="scenario3">
                     <div class="puerta" id="puerta"></div>
-                    <audio id="close" src="sounds/door-knock-1.mp3"></audio>
-                    <audio id="open" src="sounds/door-1-open.mp3"></audio>
+                    <audio id="close" src="./sounds/door-knock-1.mp3"></audio>
+                    <audio id="open" src="./sounds/door-1-open.mp3"></audio>
                 </div>
 
                 <div class="scenario" id="scenario4">
@@ -64,9 +63,19 @@
 
         </div>
 
+        <div class="modal contrast" id="modal-ask2">
+            <div class="contenido-modal-ask2">
+                <a href="javascript:void(0);" class="btn-close2" id="closeAsk2"></a>
+
+                <div class="sticker cuadroMontanaBook" id="stickerMontana"></div>
+                <div class="sticker cuadroNinaBook" id="stickerNina"></div>
+                <div class="sticker cuadroNinoBook" id="stickerNino"></div>
+            </div>
+
+        </div>
         <div class="modal contrast" id="modal-ask">
             <div class="contenido-modal-ask">
-                <a href="" class="btn-close"></a>
+                <a href="javascript:void(0);" class="btn-close" id="closeAsk"></a>
 
                 <div class="text-1">Encuentra la <b>unión</b></div>
                 
@@ -77,9 +86,10 @@
 
                 <div class="interrogacion">?</div>
                 
-                <div class="cuadro cuadroMontana" id="cuadroMontana"></div>
-                <div class="cuadro cuadroNina" id="cuadroNina"></div>
-                <div class="cuadro cuadroNino" id="cuadroNino"></div>
+                <div class="cuadro cuadroNino cuadroNinoDesactivado"></div>
+                <div class="cuadro cuadroMontana cuadroMontanaDesactivado"></div>
+                <div class="cuadro cuadroNina cuadroNinaDesactivado"></div>
+                
             </div>
 
         </div>
