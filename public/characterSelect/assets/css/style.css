@@ -142,60 +142,60 @@ body {
 }
 
 .characterFemale1 {
-    background-image: url('../images/characters/femaleCharacterProfile1.png');
+    background-image: url('../../../assets/character/femaleCharacter/femaleCharacterProfile1.png');
 }
 
 .characterFemale2 {
-    background-image: url('../images/characters/femaleCharacterProfile2.png');
+    background-image: url('../../../assets/character/femaleCharacter/femaleCharacterProfile2.png');
 }
 
 .characterFemale3 {
-    background-image: url('../images/characters/femaleCharacterProfile3.png');
+    background-image: url('../../../assets/character/femaleCharacter/femaleCharacterProfile3.png');
 }
 
 .characterFemale4 {
-    background-image: url('../images/characters/femaleCharacterProfile4.png');
+    background-image: url('../../../assets/character/femaleCharacter/femaleCharacterProfile4.png');
 }
 
 .characterFemale5 {
-    background-image: url('../images/characters/femaleCharacterProfile5.png');
+    background-image: url('../../../assets/character/femaleCharacter/femaleCharacterProfile5.png');
 }
 
 .characterFemale6 {
-    background-image: url('../images/characters/femaleCharacterProfile6.png');
+    background-image: url('../../../assets/character/femaleCharacter/femaleCharacterProfile6.png');
 }
 
 .characterFemale7 {
-    background-image: url('../images/characters/femaleCharacterProfile7.png');
+    background-image: url('../../../assets/character/femaleCharacter/femaleCharacterProfile7.png');
 }
 
 /* Imágenes de fondo para personajes masculinos */
 .characterMale1 {
-    background-image: url('../images/characters/maleCharacterProfile1.png');
+    background-image: url('../../../assets/character/maleCharacter/maleCharacterProfile1.png');
 }
 
 .characterMale2 {
-    background-image: url('../images/characters/maleCharacterProfile2.png');
+    background-image: url('../../../assets/character/maleCharacter/maleCharacterProfile2.png');
 }
 
 .characterMale3 {
-    background-image: url('../images/characters/maleCharacterProfile3.png');
+    background-image: url('../../../assets/character/maleCharacter/maleCharacterProfile3.png');
 }
 
 .characterMale4 {
-    background-image: url('../images/characters/maleCharacterProfile4.png');
+    background-image: url('../../../assets/character/maleCharacter/maleCharacterProfile4.png');
 }
 
 .characterMale5 {
-    background-image: url('../images/characters/maleCharacterProfile5.png');
+    background-image: url('../../../assets/character/maleCharacter/maleCharacterProfile5.png');
 }
 
 .characterMale6 {
-    background-image: url('../images/characters/maleCharacterProfile6.png');
+    background-image: url('../../../assets/character/maleCharacter/maleCharacterProfile6.png');
 }
 
 .characterMale7 {
-    background-image: url('../images/characters/maleCharacterProfile7.png');
+    background-image: url('../../../assets/character/maleCharacter/maleCharacterProfile7.png');
 }
 
 .characterFemale1,
@@ -251,8 +251,4 @@ body {
 
 .select {
     border: #0c8302 solid 6px;
-}
-.hola{
-    background-image: url('../../../../php/schema/getCharacter.php');
-    background-image: url('../../characterSelect.html');
 }
