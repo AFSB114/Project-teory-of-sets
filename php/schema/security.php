@@ -6,6 +6,48 @@ class Security
     {
         return bin2hex(random_bytes(10));
     }
+
+    public function generateTokenTemporary(int $expireMinutes = 30) {
+        // Genera un string aleatorio usando caracteres seguros
+        $randomBytes = bin2hex(random_bytes(32));
+
+        // Obtiene el timestamp actual y de expiración
+        $currentTime = time();
+        $expirationTime = $currentTime + ($expireMinutes * 60);
+
+        // Combina los datos para crear el token
+        $tokenData = [
+            'random' => $randomBytes,
+            'timestamp' => $currentTime,
+            'expiration' => $expirationTime
+        ];
+
+        // Codifica el token en base64 para hacerlo más corto y manejable
+        $token = base64_encode(json_encode($tokenData));
+
+        return [
+            'token' => $token,
+            'expires_at' => date('Y-m-d H:i:s', $expirationTime)
+        ];
+    }
+
+    public function verifyToken($token) {
+        try {
+            // Decodifica el token
+            $tokenData = json_decode(base64_decode($token), true);
+
+            // Verifica que el token tenga la estructura correcta
+            if (!isset($tokenData['expiration'])) {
+                return false;
+            }
+
+            // Verifica si el token ha expirado
+            return time() <= $tokenData['expiration'];
+
+        } catch (Exception $e) {
+            return false;
+        }
+    }
     public function encryptData(array $data): array
     {
         $method = 'AES-256-CBC';

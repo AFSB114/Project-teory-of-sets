@@ -5,10 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cambio Contraseña</title>
-    <link rel="preload" href="../../../log/assets/fonts/pixeloidsans-webfont.woff" as="font" type="font/woff" crossorigin>
-    <link rel="preload" href="../../../log/assets/fonts/super-pixel-personal-use-webfont.woff" as="font" type="font/woff" crossorigin>
-    <link rel="stylesheet" href="cambiar_contrasenia.css">
-    <link rel="stylesheet" href="../log_in/logIn.css">
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="change_pass.css">
     <link rel="stylesheet" href="../assets/css/modal.css">
 </head>
 
@@ -21,25 +19,21 @@
 
                 <form class="recuadro" id="form">
 
-                    <div class="field" id="username">
+                    <div class="field" id="password1">
                         <div class="text">Nueva Contraseña</div>
                         <div class="input-text">
-                            <input type="text" id="usuarios" name="usuarios" required aria-autocomplete="none">
+                            <input type="password" id="passwords1" name="password1" required aria-autocomplete="none">
                         </div>
                     </div>
 
-                    <div class="field" id="password">
+                    <div class="field" id="password2">
                         <div class="text">Repetir Contraseña</div>
                         <div class="input-text">
-                            <input type="password" id="password" name="password" required aria-autocomplete="none">
+                            <input type="password" id="passwords2" name="password2" required aria-autocomplete="none">
                         </div>
                     </div>
 
-                    <!-- <a href="./index.html" class="link">Olvide mi contraseña</a> -->
-
                     <button class="btn" type="submit">Cambiar</button>
-
-                    <!-- <a href="./index.html" class="crear">Crear nueva cuenta</a> -->
                     
                 </form>
 
@@ -51,7 +45,7 @@
         </div>
     </div>
 
-    <script src="../log_in/logIn.js"></script>
+    <script src="changePass.js"></script>
     <script src="../assets/js/modal.js"></script>
 </body>
 

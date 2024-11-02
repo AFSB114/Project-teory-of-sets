@@ -1,6 +1,7 @@
 import SocketConnection from '../assets/js/socket.js'
 import AddPlayer from '../assets/js/addPlayers.js'
-
+import TextToSpeech from '../assets/js/readText.js'
+const tts = new TextToSpeech()
 let players = new AddPlayer()
 
 const links = document.getElementsByTagName('link')
@@ -47,7 +48,7 @@ async function init() {
         }
     ).then(res => res.json())
 
-    const connection = new SocketConnection(`ws://localhost:8080?token=${sessionId}&id=${res.id}&nickname=${res.nickname}`)
+    const connection = new SocketConnection(`ws://192.168.1.18:8080?token=${sessionId}&id=${res.id}&nickname=${res.nickname}`)
 
     const urlParams = new URLSearchParams(window.location.search)
 
@@ -97,6 +98,7 @@ async function init() {
                     message.innerHTML = `${data.message} <strong>:TÚ</strong>`
                 } else {
                     message.innerHTML = `<strong>${data.nickname}:</strong> ${data.message}`
+                    tts.speak(data.message)
                 }
                 document.getElementById('messages').appendChild(message)
                 document.getElementById('messages').scrollTop = document.getElementById('messages').scrollHeight

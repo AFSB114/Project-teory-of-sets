@@ -93,7 +93,7 @@ class MultiplayerServer implements MessageComponentInterface
     public function onClose(ConnectionInterface $conn): void
     {
 
-        $this->rooms["{$conn->code}"]->detach($conn);
+//        $this->rooms["{$conn->code}"]->detach($conn);
         $this->clients->detach($conn);
 
         echo "Exit ({$conn->nickname})\n";
