@@ -21,8 +21,11 @@ if (isset($req['data']) && isset($req['key'])) {
     }
     $security = new Security();
 
+
     $req = $security->decryptData($req['data'], $req['key']);
-    $req['password'] = $password;
+    if (isset($password)) {
+        $req['password'] = $password;
+    }
 }
 
 $user = new User($req);
@@ -119,7 +122,7 @@ switch ($req["action"]) {
         break;
 
     default:
-        echo json_encode(['status' => 'ERROR', 'message' => 'Acción no valida', 'accion' => $req['action']]);
+        echo json_encode(['status' => 'ERROR', 'message' => 'Acción no valida', 'action' => $req['action']]);
         break;
 }
 
