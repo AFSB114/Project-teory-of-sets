@@ -1,8 +1,8 @@
-#username {
+#password1 {
     grid-area: 2 / 2 / 3 / 3;
 }
 
-#password {
+#password2 {
     grid-area: 3 / 2 / 4 / 3;
 }
 

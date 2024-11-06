@@ -7,11 +7,6 @@ class Log
     ) {
     }
 
-    protected function generateToken()
-    {
-
-    }
-
     public function up(): array
     {
         $conn = $this->pdo->connection();

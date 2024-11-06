@@ -1,37 +1,75 @@
-const cuadros = Array.from(document.getElementsByClassName('cuadro'));
-let pass = ['', '', ''];
-const passCorrect = ['cuadro-1', 'cuadro-2', 'cuadro-3'];
+const conjuntoA = document.querySelector('.conjunto2'); // Conjunto de espejos
+const conjuntoB = document.querySelector('.conjunto1'); // Conjunto de cuadros
 const puerta = document.getElementById('puerta');
 const knock = document.getElementById('close');
 const doorOpen = document.getElementById('open');
-let passTrue = false;
 
-cuadros.forEach(cuadro => {
-    cuadro.addEventListener('click', () => {
-        cuadro.style.filter = 'drop-shadow(0 0 2vh rgba(255, 255, 255, 0.249))';
-        
-        for (let i = 0; i < pass.length; i++) {
-            if (pass[i] === '') {
-                pass[i] = cuadro.id;
-                break;
+// Objetos para cada categoría
+const espejos = ['espejo1', 'espejo2'];
+const cuadros = ['cuadro1', 'cuadro2', 'cuadro3'];
+
+let objetosCorrectos = 0;
+const totalObjetos = espejos.length + cuadros.length;
+
+[conjuntoA, conjuntoB].forEach((conjunto) => {
+    conjunto.addEventListener('dragover', (event) => {
+        event.preventDefault();
+        conjunto.classList.add('conjunto-hover');
+    });
+
+    conjunto.addEventListener('dragleave', () => {
+        conjunto.classList.remove('conjunto-hover');
+    });
+
+    conjunto.addEventListener('drop', (event) => {
+        event.preventDefault();
+        const objetoId = event.dataTransfer.getData('text');
+        const objeto = document.getElementById(objetoId);
+
+        if (
+            (conjunto === conjuntoA && espejos.includes(objetoId)) ||
+            (conjunto === conjuntoB && cuadros.includes(objetoId))
+        ) {
+            // Posiciona el objeto en las coordenadas del evento drop
+            const rect = conjunto.getBoundingClientRect();
+            const offsetX = event.clientX - rect.left;
+            const offsetY = event.clientY - rect.top;
+
+            objeto.style.position = 'absolute';
+            objeto.style.left = `${offsetX - objeto.offsetWidth / 2}px`;
+            objeto.style.top = `${offsetY - objeto.offsetHeight / 2}px`;
+
+            conjunto.appendChild(objeto);
+            objetosCorrectos++;
+
+            // Verificar si todos los objetos están en su lugar
+            if (objetosCorrectos === totalObjetos) {
+                abrirPuerta();
             }
+        } else {
+            alert('Este objeto no pertenece a este conjunto.');
         }
 
-        if (pass.join('') === passCorrect.join('')) {
-            doorOpen.play();
-            passTrue = true;
-        }
+        conjunto.classList.remove('conjunto-hover');
     });
 });
 
-puerta.addEventListener('click', () => {
-    if (!passTrue) {
-        knock.play();
-        cuadros.forEach(cuadro => {
-            cuadro.style.filter = '';
-        });
-        pass.fill('');
-    } else {
-        window.location.href = '../../../game_mode/';
-    }
+// Hacer los objetos arrastrables
+const objetos = document.querySelectorAll('[draggable="true"]');
+objetos.forEach((objeto) => {
+    objeto.addEventListener('dragstart', (event) => {
+        event.dataTransfer.setData('text', event.target.id);
+    });
 });
+
+// Función para abrir la puerta
+function abrirPuerta() {
+    console.log('¡Todos los objetos están en su lugar! La puerta se abre.');
+    doorOpen.play(); // Reproducir sonido de apertura
+    puerta.classList.add('abrir-puerta'); // Aplicar animación
+
+    // Permitir abrir la puerta al hacer clic
+    puerta.addEventListener('click', () => {
+        window.location.href = '../level3/index.html'; // Redirigir al siguiente nivel
+    });
+}

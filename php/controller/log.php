@@ -5,6 +5,7 @@ include_once '../config/connection.php';
 include_once '../schema/user.php';
 include_once '../schema/log.php';
 include_once '../schema/security.php';
+include_once '../schema/resetPass.php';
 
 header("Access-Control-Allow-Origin: *");
 header("Content-Type: application/json; charset=UTF-8");
@@ -12,10 +13,16 @@ header("Access-Control-Allow-Methods: *");
 
 $req = json_decode(file_get_contents("php://input"), true);
 
-if (isset($req['data']) && isset($req['token'])){
+
+if (isset($req['data']) && isset($req['key'])) {
+    if (isset($req['token'])) {
+        $token = $req['token'];
+        $password = $req['password'];
+    }
     $security = new Security();
 
-    $req = $security->decryptData($req['data'], $req['token']);
+    $req = $security->decryptData($req['data'], $req['key']);
+    $req['password'] = $password;
 }
 
 $user = new User($req);
@@ -24,24 +31,24 @@ $log = new Log($user, new DatabaseConnection());
 switch ($req["action"]) {
     case "logUp":
 
-            $res = $log->up();
+        $res = $log->up();
 
-            if ($res['status'] == 'OK') {
-                http_response_code(200);
-                echo json_encode(['status' => 'OK', 'message' => $res['message']]);
+        if ($res['status'] == 'OK') {
+            http_response_code(200);
+            echo json_encode(['status' => 'OK', 'message' => $res['message']]);
 
-            } else {
-                if ($res['code'] == 23505) {
-                    http_response_code(409);
-                    if (str_contains($res['message'], "email")) {
-                        echo json_encode(['status' => 'ERROR', 'message' => 'Ese email ya se encuentra registrado.']);
-                    } else {
-                        echo json_encode(['status' => 'ERROR', 'message' => 'Ese nombre de usuario ya se encuentra en uso.']);
-                    }
+        } else {
+            if ($res['code'] == 23505) {
+                http_response_code(409);
+                if (str_contains($res['message'], "email")) {
+                    echo json_encode(['status' => 'ERROR', 'message' => 'Ese email ya se encuentra registrado.']);
                 } else {
-                    echo json_encode(['status' => 'ERROR', 'message' => $res['message']]);
+                    echo json_encode(['status' => 'ERROR', 'message' => 'Ese nombre de usuario ya se encuentra en uso.']);
                 }
+            } else {
+                echo json_encode(['status' => 'ERROR', 'message' => $res['message']]);
             }
+        }
 
         break;
 
@@ -92,12 +99,27 @@ switch ($req["action"]) {
         echo json_encode(['status' => 'OK', 'message' => 'Ha cerrado sesión exitosamente']);
         break;
 
-    case "recover":
+    case "forgotPass":
+        $reset = new ResetPass($user, new DatabaseConnection());
+        if ($security->verifyToken($token)) {
+            $res = $reset->change();
+
+            if ($res['status'] == 'OK') {
+                http_response_code(200);
+                echo json_encode(['status' => 'OK', 'message' => $res['message']]);
+            } else {
+                http_response_code(500);
+                echo json_encode(['status' => 'ERROR', 'message' => $res['message']]);
+            }
+        } else {
+            http_response_code(401);
+            echo json_encode(['status' => 'ERROR', 'message' => 'Token invalido']);
+        }
 
         break;
 
     default:
-        echo json_encode(['status' => 'ERROR', 'message' => 'Acción no valida', 'accion'=>$req['action']]);
+        echo json_encode(['status' => 'ERROR', 'message' => 'Acción no valida', 'accion' => $req['action']]);
         break;
 }
 

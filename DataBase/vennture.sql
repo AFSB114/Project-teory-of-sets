@@ -2,13 +2,14 @@ CREATE DATABASE vennture;
 
 USE vennture;
 
-CREATE TABLE log(
-    Id SERIAL NOT NULL,
+CREATE TABLE logs(
+    id SERIAL NOT NULL,
     nickname VARCHAR(40) NOT NULL,
     email VARCHAR(40) NOT NULL,
-    password VARCHAR(40) NOT NULL,
-    date_create DATE,
-    date_update DATE,
+    password VARCHAR(100) NOT NULL,
+    date_create TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL,
+    date_update DATE DEFAULT CURRENT_DATE NULL,
+    token VARCHAR(100),
     PRIMARY KEY(id)
 );
 

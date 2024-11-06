@@ -16,24 +16,44 @@ $mailService = new email($user);
 
 $verify = $mailService->verifyData();
 
-if ($verify['email']=== 'available' && $verify['nickname'] === 'available') {
-    $security = new Security();
-    $encrypt = $security->encryptData($req);
-    try {
+$security = new Security();
 
-        $res = $mailService->sendVerification($encrypt);
+switch ($req['action']) {
+    case 'logUp':
+        if ($verify['email'] === 'available' && $verify['nickname'] === 'available') {
+            $encrypt = $security->encryptData($req);
+            try {
 
-        echo json_encode(['status' => 'OK']);
+                $res = $mailService->sendVerification($encrypt);
 
-    } catch (Exception $e) {
-        echo json_encode(['status' => 'ERROR', 'message' => $e->getMessage()]);
-    }
-} elseif ($verify['email'] === 'unavailable' && $verify['nickname'] === 'unavailable') {
-    echo json_encode(['status' => 'ERROR', 'message' => 'La dirección de correo y el nombre de usuario ya se encuentran en uso']);
-} elseif ($verify['email'] === 'available' && $verify['nickname'] === 'unavailable') {
-    echo json_encode(['status' => 'ERROR', 'message' => 'El nombre de usuario ya se encuentra en uso']);
-} else {
-    echo json_encode(['status' => 'ERROR', 'message' => 'La dirección de correo ya se encuentra en uso']);
+                echo json_encode(['status' => 'OK']);
+
+            } catch (Exception $e) {
+                echo json_encode(['status' => 'ERROR', 'message' => $e->getMessage()]);
+            }
+        } elseif ($verify['email'] === 'unavailable' && $verify['nickname'] === 'unavailable') {
+            echo json_encode(['status' => 'ERROR', 'message' => 'La dirección de correo y el nombre de usuario ya se encuentran en uso']);
+        } elseif ($verify['email'] === 'available' && $verify['nickname'] === 'unavailable') {
+            echo json_encode(['status' => 'ERROR', 'message' => 'El nombre de usuario ya se encuentra en uso']);
+        } else {
+            echo json_encode(['status' => 'ERROR', 'message' => 'La dirección de correo ya se encuentra en uso']);
+        }
+        break;
+    case 'forgotPass':
+        if ($verify['email'] === 'unavailable') {
+            $encrypt = $security->encryptData($req);
+            try {
+                $tokenTemporary = $security->generateTokenTemporary();
+                $res = $mailService->sendResetPass($encrypt, $tokenTemporary['token']);
+                echo json_encode(['status' => 'OK','message'=>'Revisa tu email para recuperar tu contraseña']);
+            } catch (Exception $e) {
+                http_response_code(500);
+                echo json_encode(['status' => 'ERROR', 'message' => $e->getMessage()]);
+            }
+        } else {
+            http_response_code(400);
+            echo json_encode(['status' => 'OK', 'message' => 'Ha ocurrido un error al enviar el correo']);
+        }
 }
 
 

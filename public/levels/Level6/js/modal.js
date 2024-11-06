@@ -4,7 +4,7 @@ const continuar = document.getElementById('continuar');
 const modalContent = modalMenu.children[0];
 const help = document.getElementById('help');
 const modalHelp = document.getElementsByClassName('modal-help');
-const computador = document.getElementById('computador');
+const computador = document.getElementById('teatro');
 const ask = document.getElementById('modal-ask');
 
 let seeAsk = false;
