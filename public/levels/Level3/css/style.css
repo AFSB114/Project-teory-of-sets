@@ -79,7 +79,6 @@ body {
     /* border: 1px solid rgb(23, 221, 188); */
     z-index: 100;
 }
-
 .scenario {
     position: absolute;
 
@@ -113,7 +112,7 @@ body {
     background-image: url('../images/LEVEL\ 3.2.png');
 }
 
-.reja{
+.reja {
     background-image: url('../images/reja.png');
     background-repeat: no-repeat;
     background-position: center;
@@ -130,7 +129,7 @@ body {
 }
 
 
-.reja:hover{
+.reja:hover {
     filter: drop-shadow(0 0 1vh rgba(255, 255, 255, 0.249));
     cursor: pointer;
 }
@@ -140,6 +139,7 @@ body {
     transition: all 0.5s ease;
 
 }
+
 #scenario3 {
     left: 198%;
     background-image: url('../images/LEVEL\ 3.3.png');
@@ -160,13 +160,14 @@ body {
     top: 26%;
     left: 19.8%;
 
-    cursor: grab; /* Cursor de agarre */
-    position: absolute; 
-  
+    cursor: grab;
+    /* Cursor de agarre */
+    position: absolute;
+
     /* border: 1px solid #00BD09; */
 }
 
-.cuadro-llave{
+.cuadro-llave {
     background-image: url('../images/cuadro.png');
     background-repeat: no-repeat;
     background-position: center;
@@ -183,7 +184,7 @@ body {
     /* border: 1px solid #00BD09; */
 }
 
-.sofa{
+.sofa {
     background-image: url('../images/sofa.png');
     background-repeat: no-repeat;
     background-position: center;
@@ -197,7 +198,7 @@ body {
     left: 21%;
 
     z-index: 100;
-}   
+}
 
 
 .puerta {
@@ -304,7 +305,7 @@ body {
     display: none;
 
     position: absolute;
-    z-index: 3;                 
+    z-index: 3;
     left: 0;
     top: 0;
 
@@ -482,7 +483,7 @@ body {
     background-size: cover;
     background-position: center;
 
-    padding: 2vh;
+    padding: 1vh;
 
     border: 3px #3e463e solid;
     position: absolute;
@@ -490,7 +491,7 @@ body {
     left: 30%;
 
     display: grid;
-    grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
+    grid-template-rows: repeat(6, 1fr);
     grid-template-columns: repeat(5, 1fr);
 
     font-size: 4vh;
@@ -532,31 +533,45 @@ body {
 
 
 
-.caja1{
+.caja1 {
     background-image: url('../images/caja.png');
     background-repeat: no-repeat;
     background-position: center;
     background-size: contain;
     display: grid;
-    grid-area: 5/1/6/3;
+    grid-area: 5/1/7/3;
 
-    width: 25vh;
+    width: 15vh;
     height: 15vh;
+
+    position: absolute;
+    top: 16%;
+    left: 10%;
 
 }
 
-.caja1:hover{
+.caja1:hover {
     filter: drop-shadow(0 0 1vh rgba(255, 255, 255, 0.249));
     cursor: pointer;
     background-image: url('../images/caja-abierta.png');
     position: relative;
-    top: -5%;
+    top: 16%;
 
-    width: 25vh;
+    width: 16vh;
     height: 15vh;
 }
 
-.caja2{
+.text-muebles {
+    grid-area: 6/1/7/3;
+    color: #bac5ba;
+
+    top: 50%;
+    position: absolute;
+    left: 7%;
+
+}
+
+.caja2 {
     background-image: url('../images/caja.png');
     background-repeat: no-repeat;
     background-position: center;
@@ -564,26 +579,38 @@ body {
     display: grid;
     grid-area: 5/3/6/5;
 
-    width: 25vh;
+    width: 15vh;
     height: 15vh;
 
-    
+
+    position: relative;
+    top: 20%;
 
 }
 
-.caja2:hover{
+.caja2:hover {
     filter: drop-shadow(0 0 1vh rgba(255, 255, 255, 0.249));
     cursor: pointer;
     background-image: url('../images/caja-abierta.png');
     position: relative;
-    top: -5%;
+    top: 16%;
 
-    width: 25vh;
+    width: 16vh;
     height: 15vh;
 }
 
+.text-decorativos {
+    align-items: center;
+    grid-area: 6/3/7/4;
 
-.caja3{
+    color: #bac5ba;
+    font-size: 4vh;
+    top: 50%;
+    position: absolute;
+    left: -26%;
+}
+
+.caja3 {
     background-image: url('../images/caja.png');
     background-repeat: no-repeat;
     background-position: center;
@@ -591,24 +618,37 @@ body {
     display: grid;
     grid-area: 5/5/6/6;
 
-    width: 25vh;
+    width: 15vh;
     height: 15vh;
 
+    position: absolute;
+    top: 20%;
+    left: -8%;
 
 }
 
-.caja3:hover{
+.caja3:hover {
     filter: drop-shadow(0 0 1vh rgba(255, 255, 255, 0.249));
     cursor: pointer;
     background-image: url('../images/caja-abierta.png');
     position: relative;
-    top: -5%;
+    top: 20%;
 
-    width: 25vh;
+    width: 16vh;
     height: 15vh;
 }
 
-h3{
+.text-b-l {
+    grid-area: 6/5/7/6;
+
+    color: #bac5ba;
+    font-size: 3.6vh;
+    top: 50%;
+    position: absolute;
+    left: -25%;
+}
+
+h3 {
     position: relative;
     top: 5%;
 }
@@ -620,44 +660,68 @@ h3{
     text-align: center;
     display: grid;
 
-    
+    padding: -10%;
     align-self: center;
 
-    font-size: 1.5vh;
+    font-size: 3vh;
     font-family: 'Pixeloid Sans';
 }
 
 
-.almohada{
+.almohada {
     background-image: url('../images/almohada.png');
     background-repeat: no-repeat;
     background-position: center;
     background-size: contain;
 
-   grid-area: 2/1/3/2;
-   cursor: grab;
+    width: 10vh;
+    height: 8vh;
+    grid-area: 2/1/3/2;
+    cursor: grab;
+
+    position: relative;
+    top: 0vh;
+    left: 25%;
+    /* border: 1px solid #3ee70b; */
 }
 
-.mesa{
+.mesa {
     background-image: url('../images/mesas.png');
     background-repeat: no-repeat;
     background-position: center;
     background-size: contain;
 
+    width: 9vh;
+    height: 8vh;
+
     grid-area: 2/2/3/3;
     cursor: grab;
+
+    position: relative;
+    top: 0vh;
+    left: 20%;
+    
+    /* border: 1px solid #3ee70b; */
 }
 
-.revista{
+.revista {
     background-image: url('../images/revista.png');
     background-repeat: no-repeat;
     background-position: center;
     background-size: contain;
     grid-area: 2/3/3/4;
     cursor: grab;
+
+    width: 8vh;
+    height: 8vh;
+
+    position: relative;
+    top: 1vh;
+    left: 28%;
+    /* border: 1px solid #3ee70b; */
 }
 
-.florero{
+.florero {
     background-image: url('../images/florero.png');
     background-repeat: no-repeat;
     background-position: center;
@@ -665,9 +729,17 @@ h3{
 
     grid-area: 2/4/3/5;
     cursor: grab;
+    
+    width: 8vh;
+    height: 8vh;
+
+    /* border: 1px solid #3ee70b; */
+    position: relative;
+    top: 1vh;
+    left: 23%;
 }
 
-.copa{
+.copa {
     background-image: url('../images/vino.png');
     background-repeat: no-repeat;
     background-position: center;
@@ -676,8 +748,8 @@ h3{
     grid-area: 2/5/3/6;
     cursor: grab;
 
-    width: 9vh;
-    height: 9vh;
+    width: 8vh;
+    height: 8vh;
 
     display: grid;
 
@@ -685,17 +757,30 @@ h3{
     left: 22%;
     top: 15%;
 
-}  
-.cuadro{
+    
+    /* border: 1px solid #3ee70b; */
+
+}
+
+.cuadro {
     background-image: url('../images/caudro.png');
     background-repeat: no-repeat;
     background-position: center;
-    background-size: contain;   
+    background-size: contain;
 
     grid-area: 3/1/4/2;
     cursor: grab;
+
+    width: 9vh;
+    height: 8vh;
+    
+    position: relative;
+    top: 1vh;
+    left: 23%;
+    /* border: 1px solid #3ee70b; */
 }
-.espejo{
+
+.espejo {
     background-image: url('../images/espejo.png');
     background-repeat: no-repeat;
     background-position: center;
@@ -703,20 +788,37 @@ h3{
 
     grid-area: 3/2/4/3;
     cursor: grab;
+
+    width: 8vh;
+    height: 8vh;
+
+    position: relative;
+    top: 1vh;
+    left: 25%;
+    
+    /* border: 1px solid #3ee70b; */
 }
 
-.tacon{
+.tacon {
     background-image: url('../images/tacon.png');
     background-repeat: no-repeat;
     background-position: center;
     background-size: contain;
 
-   grid-area: 3/3/4/4;
-   cursor: grab;
 
+    grid-area: 3/3/4/4;
+    cursor: grab;
+
+    width: 10vh;
+    height: 8vh;
+
+    position: relative;
+    top: 1vh;
+    left: 20%;
+    /* border: 1px solid #3ee70b; */
 }
 
-.escritorio{
+.escritorio {
     background-image: url('../images/escritorio.png');
     background-repeat: no-repeat;
     background-position: center center;
@@ -725,17 +827,18 @@ h3{
     grid-area: 3/4/4/5;
     cursor: grab;
 
-    width: 9vh;
-    height: 9vh;
+    width: 8vh;
+    height: 8vh;
 
     display: grid;
-
-    position: absolute;
+    
+    /* border: 1px solid #3ee70b; */
+    position: relative;
     left: 22%;
-    top: 15%;
+    top: 18%;
 }
 
-.libro{
+.libro {
     background-image: url('../images/libro.png');
     background-repeat: no-repeat;
     background-position: center;
@@ -744,17 +847,19 @@ h3{
     grid-area: 3/5/4/6;
     cursor: grab;
 
-    width: 10vh;
-    height: 10vh;
+    width: 8vh;
+    height: 7vh;
 
     display: grid;
 
     position: relative;
     left: 25%;
     top: 15%;
+    
+    /* border: 1px solid #3ee70b; */
 }
 
-.sofas{
+.sofas {
     background-image: url('../images/sofa1.png');
     background-repeat: no-repeat;
     background-position: center;
@@ -763,9 +868,18 @@ h3{
     grid-area: 4/1/5/2;
     cursor: grab;
 
+    width: 13vh;
+    height: 8vh;
+
+    position: relative;
+    top: 2vh;
+    left: 15%;
+    
+    /* border: 1px solid #3ee70b; */
+
 }
 
-.ropa{
+.ropa {
     background-image: url('../images/ropa.png');
     background-repeat: no-repeat;
     background-position: center;
@@ -774,9 +888,16 @@ h3{
     grid-area: 4/2/5/3;
     cursor: grab;
 
+    width: 9vh;
+    height: 9vh;
+    
+    position: relative;
+    top: 1vh;
+    left: 25%;
+    /* border: 1px solid #3ee70b; */
 }
 
-.lampara{
+.lampara {
     background-image: url('../images/lampara.png');
     background-repeat: no-repeat;
     background-position: center;
@@ -785,9 +906,18 @@ h3{
     grid-area: 4/3/5/4;
     cursor: grab;
 
+    width: 8vh;
+    height: 8vh;
+
+    position: relative;
+    top: 1vh;
+    left: 25%;
+
+    /* border: 1px solid #3ee70b; */
+
 }
 
-.taza{
+.taza {
     background-image: url('../images/taza.png');
     background-repeat: no-repeat;
     background-position: center center;
@@ -796,17 +926,20 @@ h3{
     grid-area: 4/4/5/5;
     cursor: grab;
 
-    width: 10vh;
-    height: 10vh;
+    width: 7vh;
+    height: 7vh;
 
     display: grid;
 
     position: absolute;
-    left: 22%;
+    left: 25%;
+    top: 2vh;
+    
+    /* border: 1px solid #3ee70b; */
 
 }
 
-.silla{
+.silla {
     background-image: url('../images/silla.png');
     background-repeat: no-repeat;
     background-position: center;
@@ -815,4 +948,11 @@ h3{
     grid-area: 4/5/5/6;
     cursor: grab;
 
-}   
+    width: 9vh;
+    height: 9vh;
+    /* border: 1px solid #3ee70b; */
+
+    position: absolute;
+    top: 1vh;
+    left: 25%;
+}
