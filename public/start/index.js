@@ -4,19 +4,19 @@ const name = urlParams.get('name');
 const surname = urlParams.get('surname');
 
 const data = urlParams.get('data');
-const token  = urlParams.get('token');
+const key  = urlParams.get('key');
 
 // Quita los parámetros de la URL sin recargar la página
 const newUrl = window.location.protocol + "//" + window.location.host + window.location.pathname;
 window.history.pushState({ path: newUrl }, '', newUrl);
 
-async function sendData(data, token) { 
+async function sendData(data, key) { 
     fetch('../../php/controller/log.php', {
         method: 'POST',
         headers: { 'content-type': 'application/json' },
         body: JSON.stringify({
             data,
-            token
+            key
         })
     }).then(res => res.json())
     .then(res => {
@@ -31,6 +31,6 @@ if (success && name && surname) {
     if (success === 'true') {
         showMessage("message", message)
     }
-} else if (data && token) { 
-    sendData(data, token)
+} else if (data && key) { 
+    sendData(data, key)
 }
