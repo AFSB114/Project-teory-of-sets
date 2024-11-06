@@ -172,6 +172,14 @@ body {
     background-image: url('../images/LEVEL\ 5.3.png');
 }
 
+video{
+    width: 30%;
+    height: 25%;
+    position: absolute;
+    top: 18%;
+    right: 35%;
+}
+
 .mueble-platos{
     background-image: url('../images/mueble-platos.png');
     background-position: center center;
@@ -214,6 +222,38 @@ body {
 #scenario4 {
     left: 297%;
     background-image: url('../images/LEVEL\ 5.4.png');
+}
+
+.cuadro{
+    background-image: url('../images/cuadro.png');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    
+    width: 30%;
+    height: 40%;
+    /* border: 1px solid #09cf23; */
+    
+    position: absolute;
+    top: 16%;
+    left: 14%;
+
+    cursor: pointer;
+    transition: all 0.6s ease-in-out;
+}
+
+.cuadro:hover{
+    filter: drop-shadow(0 0 2vh rgba(255, 255, 255, 0.249));
+   
+}
+
+.cuadro:active{
+    background-image: url('../images/cuadro-caido.png');
+    width: 30%;
+    height: 40%;
+
+    position: absolute;
+    top: 40%;
 }
 
 .puerta {
@@ -492,7 +532,7 @@ body {
     height: 65vh;
     border: 1px solid #09cf23;
 
-    background-image: url('../images/cajon-abierto.png');
+    background-image: url('');
     background-repeat: no-repeat;
     background-size:contain;
 
@@ -534,6 +574,64 @@ body {
 }
 
 @keyframes hide-ask {
+    from {
+        opacity: 1;
+        top: 20;
+    }
+
+    to {
+        opacity: 0;
+        top: -20%;
+    }
+}
+
+.cajones {
+    width: 30%;
+    height: 65vh;
+   
+    border: 1px solid #0d230f;
+    background-image: url('../images/cajon-abierto.png');
+    background-repeat: no-repeat;
+    background-size:contain;
+
+    padding: 2vh;
+
+    opacity: 0;
+
+    position: absolute;
+    top: 15%;
+    left: 35%;
+
+    display: grid;
+    grid-template-rows: 1fr 1fr 1fr 1fr;
+    grid-template-columns: repeat(4, 1fr);
+
+    font-size: 4vh;
+    font-family: 'Pixeloid Sans';
+    text-align: center;
+}
+
+.show-cajones {
+    animation: show-cajones 0.5s ease-in-out forwards;
+}
+
+@keyframes show-cajones {
+    from {
+        opacity: 0;
+        top: -20%;
+    }
+
+    to {
+        opacity: 1;
+        top: 20;
+    }
+}
+
+.hide-cajones {
+    animation: hide-cajones 0.5s ease-in-out forwards;
+}
+
+@keyframes hide-cajones {
     from {
         opacity: 1;
         top: 20;

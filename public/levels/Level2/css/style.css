@@ -1,29 +1,29 @@
 @font-face {
     font-family: 'Super Pixel';
-    src: url('../../../assets/fonts/Super-Pixel-Personal-Use.ttf') format('truetype'),
-        url('../../../assets/fonts/super-pixel-personal-use-webfont.woff') format('woff'),
-        url('../../../assets/fonts/super-pixel-personal-use-webfont.woff2') format('woff2');
+    src: url('/public/assets/fonts/Super-Pixel-Personal-Use.ttf') format('truetype'),
+        url('/public/assets/fonts/super-pixel-personal-use-webfont.woff') format('woff'),
+        url('/public/assets/fonts/super-pixel-personal-use-webfont.woff2') format('woff2');
 }
 
 @font-face {
     font-family: 'Pixeloid Sans';
-    src: url('../../../assets/fonts/PixeloidSans.ttf') format('truetype'),
-        url('../../../assets/fonts/pixeloidsans-webfont.woff') format('woff'),
-        url('../../../assets/fonts/pixeloidsans-webfont.woff2') format('woff2');
+    src: url('/public/assets/fonts/PixeloidSans.ttf') format('truetype'),
+        url('/public/assets/fonts/pixeloidsans-webfont.woff') format('woff'),
+        url('/public/assets/fonts/pixeloidsans-webfont.woff2') format('woff2');
 }
 
 @font-face {
     font-family: 'Pixeloid Sans Bold';
-    src: url('../../../assets/fonts/PixeloidSans-Bold.ttf') format('truetype'),
-        url('../../../assets/fonts/pixeloidsans-bold-webfont.woff') format('woff'),
-        url('../../../assets/fonts/pixeloidsans-bold-webfont.woff2') format('woff2');
+    src: url('/public/assets/fonts/PixeloidSans-Bold.ttf') format('truetype'),
+        url('/public/assets/fonts/pixeloidsans-bold-webfont.woff') format('woff'),
+        url('/public/assets/fonts/pixeloidsans-bold-webfont.woff2') format('woff2');
 }
 
 @font-face {
     font-family: 'Press Start 2P';
-    src: url('../../../assets/fonts/PressStart2P.ttf') format('truetype'),
-        url('../../../assets/fonts/pressstart2p-webfont.woff') format('woff'),
-        url('../../../assets/fonts/pressstart2p-webfont.woff2') format('woff2');
+    src: url('/public/assets/fonts/PressStart2P.ttf') format('truetype'),
+        url('/public/assets/fonts/pressstart2p-webfont.woff') format('woff'),
+        url('/public/assets/fonts/pressstart2p-webfont.woff2') format('woff2');
 }
 
 html,
@@ -67,6 +67,17 @@ body {
     background-position: center center;
     background-size: contain;
     background-repeat: no-repeat;
+}
+
+.time {
+    position: absolute; 
+    top: 12%;
+    left: 14%;
+    font-size: 3vh;
+    font-family: 'Pixeloid Sans';
+    color: white;
+    /* border: 1px solid rgb(23, 221, 188); */
+    z-index: 100;
 }
 
 .scenario {
@@ -558,10 +569,11 @@ body {
     background-repeat: no-repeat;
     background-size: contain;
     background-position: center center;
-    width: 100%;
-    height: 100%;
+    width: 70%;
+    height: 70%;
 
     grid-area: 2 / 1 /3 /2;
+    position: absolute;
 }
 
 .cuadro2 {
@@ -569,10 +581,12 @@ body {
     background-repeat: no-repeat;
     background-size: contain;
     background-position: center center;
-    width: 100%;
-    height: 100%;
+    width: 70%;
+    height: 70%;
 
     grid-area: 2 / 2 /3 /3;
+    position: absolute;
+    right: 10%;
 }
 
 .cuadro3 {
@@ -580,43 +594,69 @@ body {
     background-repeat: no-repeat;
     background-size: contain;
     background-position: center center;
-    width: 100%;
-    height: 100%;
+    width: 70%;
+    height: 70%;
 
     grid-area: 2 / 3 /3 /4;
+    position: relative;
+    right: 25%;
 }
 
 .cuadro4 {
-    background-image: url('../images/cuadro4.png');
+    background-image: url('../images/Cuadro4.png');
     background-repeat: no-repeat;
     background-size: contain;
     background-position: center center;
-    width: 100%;
-    height: 100%;
+    width: 70%;
+    height: 70%;
 
     grid-area: 2 / 4 / 3 / 5;
+    position: relative;
+    right: 33%;
 }
 
-.espejo {
-    background-image: url('../images/espejo.png');
+.espejo1 {
+    background-image: url('../images/Espejo.png');
     background-repeat: no-repeat;
     background-size: contain;
     background-position: center center;
-    width: 100%;
-    height: 100%;
+    width: 62%;
+    height: 62%;
 
+    cursor: grab;
     grid-area: 2 / 5 /3 /6;
+    position: relative;
+    right: 30%;
+    top: 2%;
 }
 
+.espejo2 {
+    background-image: url('../images/tocador.png');
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center center;
+    width: 65%;
+    height: 65%;
+
+    cursor: grab;
+    grid-area: 2 / 6 /3 /8;
+    position: relative;
+    right: -30%;
+    top: 2%;
+}
 .espejo3 {
     background-image: url('../images/espejo3.png');
     background-repeat: no-repeat;
     background-size: contain;
     background-position: center center;
-    width: 100%;
-    height: 100%;
+    width: 65%;
+    height: 65%;
 
-    grid-area: 2 / 6 /3 /7;
+    cursor: grab;
+    grid-area: 2 / 5 /3 /7;
+    position: relative;
+    right: -7%;
+    top: 2%;
 }
 
 .imagen-arrastrable {

@@ -1,37 +1,82 @@
-const cuadros = Array.from(document.getElementsByClassName('cuadro'));
-let pass = ['', '', ''];
-const passCorrect = ['cuadro-1', 'cuadro-2', 'cuadro-3'];
-const puerta = document.getElementById('puerta');
-const knock = document.getElementById('close');
-const doorOpen = document.getElementById('open');
-let passTrue = false;
+document.addEventListener('DOMContentLoaded', () => {
+    const colorSelectA = document.getElementById('colorSelectA');
+    const colorSelectB = document.getElementById('colorSelectB');
+    const selectColorButton = document.getElementById('selectColorButton');
+    const items = document.querySelectorAll('.item');
+    const verifyButton = document.getElementById('verifyButton');
+    const errorMessage = document.getElementById('error-message');
+    const puerta = document.getElementById('puerta');
+    const knock = document.getElementById('close');
+    const doorOpen = document.getElementById('open');
+    const teatro = document.getElementById('teatro'); 
 
-cuadros.forEach(cuadro => {
-    cuadro.addEventListener('click', () => {
-        cuadro.style.filter = 'drop-shadow(0 0 2vh rgba(255, 255, 255, 0.249))';
-        
-        for (let i = 0; i < pass.length; i++) {
-            if (pass[i] === '') {
-                pass[i] = cuadro.id;
-                break;
+    let selectedColorA = colorSelectA.value;
+    let selectedColorB = colorSelectB.value;
+    let activeColor = null;
+    let selectedItems = [];
+    let passTrue = false;
+
+    selectColorButton.addEventListener('click', () => {
+        selectedColorA = colorSelectA.value;
+        selectedColorB = colorSelectB.value;
+        activeColor = selectedColorA; // Inicialmente, se selecciona el color A
+        items.forEach(item => {
+            item.style.borderColor = '';
+            item.classList.remove('selected');
+        }); 
+        selectedItems = [];
+        errorMessage.textContent = '';
+    });
+
+    items.forEach(item => {
+        item.addEventListener('click', () => {
+            const itemSet = item.getAttribute('data-set');
+            if ((activeColor === selectedColorA && itemSet === 'A') || 
+                (activeColor === selectedColorB && itemSet === 'B')) {
+                if (selectedItems.includes(item)) {
+                    item.classList.remove('selected');
+                    item.style.borderColor = 'transparent';
+                    selectedItems = selectedItems.filter(i => i !== item);
+                } else {
+                    item.classList.add('selected');
+                    item.style.borderColor = activeColor;
+                    selectedItems.push(item);
+                }
+            } else {
+                errorMessage.textContent = 'Seleccionaste un objeto incorrecto. Reintenta.';
             }
-        }
+        });
+    });
 
-        if (pass.join('') === passCorrect.join('')) {
-            doorOpen.play();
+    verifyButton.addEventListener('click', () => {
+    
+        const setAItems = Array.from(items).filter(item => item.getAttribute('data-set') === 'A');
+        const setBItems = Array.from(items).filter(item => item.getAttribute('data-set') === 'B');
+
+        const allASelected = setAItems.every(item => selectedItems.includes(item));
+        const allBSelected = setBItems.every(item => selectedItems.includes(item));
+
+        if (activeColor === selectedColorA && allASelected) {
+            activeColor = selectedColorB;
+            errorMessage.textContent = 'Ahora selecciona los objetos del Conjunto B.';
+        } else if (activeColor === selectedColorB && allBSelected) {
             passTrue = true;
+            doorOpen.play();
+            errorMessage.textContent = '¡Selección correcta! Ahora puedes abrir la puerta.';
+
+            // Abre el telón añadiendo la clase 'active' al elemento teatro
+            teatro.classList.add('active');
+        } else {
+            errorMessage.textContent = 'No todos los elementos están seleccionados correctamente. Intenta de nuevo.';
         }
     });
-});
 
-puerta.addEventListener('click', () => {
-    if (!passTrue) {
-        knock.play();
-        cuadros.forEach(cuadro => {
-            cuadro.style.filter = '';
-        });
-        pass.fill('');
-    } else {
-        window.location.href = '../../../game_mode/index.html';
-    }
+    puerta.addEventListener('click', () => {
+        if (!passTrue) {
+            knock.play();
+        } else {
+            // Al hacer clic en la puerta con el passTrue activo, se abre el siguiente nivel
+            window.location.href = '../Level7/index.html';
+        }
+    });
 });

@@ -18,9 +18,13 @@
                 <div class="contenido-modal-menu">
                     <div class="btn" id="continuar">Continuar</div>
                     <a href="" class="btn">Reiniciar</a>
-                    <a href="../../start/" class="btn">Mapa</a>
-                    <a href="../../start/" class="btn">Salir</a>
+                    <a href="../views/index.html" class="btn">Mapa</a>
+                    <a href="../views/index.html" class="btn">Salir</a>
                 </div>
+            </div>
+
+            <div id="timer" class="time">
+                00:00
             </div>
 
             <div class="help" id="help"></div>
@@ -45,8 +49,8 @@
                 <div class="scenario" id="scenario1">
 
                     <div class="puerta" id="puerta"></div>
-                    <audio id="close" src="sounds/door-knock-1.mp3"></audio>
-                    <audio id="open" src="sounds/door-1-open.mp3"></audio>
+                    <audio id="close" src="./sounds/door-knock-1.mp3"></audio>
+                    <audio id="open" src="./sounds/door-1-open.mp3"></audio>
 
                 </div>
 
@@ -66,20 +70,24 @@
             </div>
 
         </div>
-
+        
         <div class="modal contrast" id="modal-ask">
             <div class="contenido-modal-ask">
                 <a href="" class="btn-close"></a>
                 <div class="text-1">FORMA CONJUNTOS</div>
+                
 
-                <div class="cuadro1 imagen-arrastrable"></div>
-                <div class="cuadro2 imagen-arrastrable"></div>
-                <div class="cuadro3 imagen-arrastrable"></div>
-                <div class="cuadro4 imagen-arrastrable"></div>
-                <div class="espejo"></div>
-                <div class="espejo3"></div>
-                <div class="conjunto1" id="zona-espejos"></div>
-                <div class="conjunto2" id="zona-cuadros"></div>
+                <div class="conjunto1"></div>
+                <div class="conjunto2"></div>
+                
+                <div class="cuadro1 imagen-arrastrable" id="cuadro1" draggable="true"></div>
+                <div class="cuadro2 imagen-arrastrable" id="cuadro2" draggable="true"></div>
+                <div class="cuadro3 imagen-arrastrable" id="cuadro3" draggable="true"></div>
+                <div class="cuadro4 imagen-arrastrable" id="cuadro4" draggable="true"></div>
+                <div class="espejo1 imagen-arrastrable" id="espejo1" draggable="true"></div>
+                <div class="espejo2 imagen-arrastrable" id="espejo2" draggable="true"></div>
+                <div class="espejo3 imagen-arrastrable" id="espejo3" draggable="true"></div>
+                
             </div>
         </div>
     </div>
@@ -89,9 +97,10 @@
     </div>
     </div>
     <script src="js/movement.js"></script>
-    <script src="js/game.js"></script>
+    <script src="js/respaldo.js"></script>
     <script src="js/modal.js"></script>
-    <script src="js/arrastra.js"></script>
+    <script src="js/time.js"></script>
+ 
 </body>
 
 </html>

@@ -4,13 +4,16 @@ const continuar = document.getElementById('continuar');
 const modalContent = modalMenu.children[0];
 const help = document.getElementById('help');
 const modalHelp = document.getElementsByClassName('modal-help');
-const cajon = document.getElementById('cajon');
+const cuadro = document.getElementById('cuadro');
 const lavaplatos = document.getElementById('lava-platos');
 const ask = document.getElementById('modal-ask');
+const cajon = document.getElementById('cajon');
+const cajones = document.getElementById('modal-cajones');
 const nothings = document.getElementById('modal-nothing');
 const muebleplatos = document.getElementById('mueble-platos');
 const armarios = document.getElementById('armario');
 const armario = document.getElementById('modal-armario');
+
 
 
 
@@ -49,6 +52,15 @@ const hideAsk = () => {
     }, 500)
 }
 
+const hideCajon = () => {
+    cajones.children[0].classList.remove('show-cajones')
+    cajones.children[0].classList.add('hide-cajones')
+    setTimeout(() => {
+        cajones.children[0].classList.remove('hide-cajones')
+        cajones.style.display = 'none'
+    }, 500)
+}
+
 const hideNothing = () => {
     nothings.children[0].classList.remove('show-nothing')
     nothings.children[0].classList.add('hide-nothing')
@@ -73,11 +85,13 @@ const handleWindowClick = (event) => {
     } else if (event.target === modalHelp[0] || event.target === modalHelp[1]) {
         hideModal(event.target);
     } else if (event.target === ask) {
-        hideAsk()
-    }else if (event.target === nothings) {  
-        hideNothing()
-    }else if (event.target === armario){
-        hideArmario()
+        hideAsk();
+    } else if (event.target === cajones) {
+        hideCajon();
+    } else if (event.target === nothings) {
+        hideNothing();
+    } else if (event.target === armario) {
+        hideArmario();
     }
 };
 
@@ -94,9 +108,16 @@ help.addEventListener('click', () => {
     showModal(modalToShow);
 });
 
-cajon.addEventListener('click', () => {
+cuadro.addEventListener('click', () => {
     ask.style.display = 'block';
     ask.children[0].classList.add('show-ask');
+
+    seeAsk = true
+});
+
+cajon.addEventListener('click', () => {
+    cajones.style.display = 'block';
+    cajones.children[0].classList.add('show-cajones');
 
     seeAsk = true
 });

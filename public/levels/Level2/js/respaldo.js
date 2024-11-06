@@ -13,12 +13,12 @@ const totalObjetos = espejos.length + cuadros.length;
 
 [conjuntoA, conjuntoB].forEach((conjunto) => {
     conjunto.addEventListener('dragover', (event) => {
-        event.preventDefault();
-        conjunto.classList.add('conjunto-hover');
+        event.preventDefault(); 
+        conjunto.classList.add('conjunto-hover'); 
     });
 
     conjunto.addEventListener('dragleave', () => {
-        conjunto.classList.remove('conjunto-hover');
+        conjunto.classList.remove('conjunto-hover'); 
     });
 
     conjunto.addEventListener('drop', (event) => {
@@ -30,27 +30,18 @@ const totalObjetos = espejos.length + cuadros.length;
             (conjunto === conjuntoA && espejos.includes(objetoId)) ||
             (conjunto === conjuntoB && cuadros.includes(objetoId))
         ) {
-            // Posiciona el objeto en las coordenadas del evento drop
-            const rect = conjunto.getBoundingClientRect();
-            const offsetX = event.clientX - rect.left;
-            const offsetY = event.clientY - rect.top;
-
-            objeto.style.position = 'absolute';
-            objeto.style.left = `${offsetX - objeto.offsetWidth / 2}px`;
-            objeto.style.top = `${offsetY - objeto.offsetHeight / 2}px`;
-
-            conjunto.appendChild(objeto);
-            objetosCorrectos++;
+            conjunto.appendChild(objeto); 
+            objetosCorrectos++; 
 
             // Verificar si todos los objetos están en su lugar
             if (objetosCorrectos === totalObjetos) {
-                abrirPuerta();
+                abrirPuerta(); 
             }
         } else {
             alert('Este objeto no pertenece a este conjunto.');
         }
 
-        conjunto.classList.remove('conjunto-hover');
+        
     });
 });
 
@@ -73,3 +64,11 @@ function abrirPuerta() {
         window.location.href = '../level3/index.html'; // Redirigir al siguiente nivel
     });
 }
+
+// Control de clic en la puerta si no están todos los objetos
+puerta.addEventListener('click', () => {
+    if (objetosCorrectos < totalObjetos) {
+        knock.play(); // Reproducir sonido de golpe
+        alert('La puerta no se abrirá hasta que todos los objetos estén en sus conjuntos correctos.');
+    }
+});
