@@ -9,12 +9,13 @@ const lavaplatos = document.getElementById('lava-platos');
 const ask = document.getElementById('modal-ask');
 const cajon = document.getElementById('cajon');
 const cajones = document.getElementById('modal-cajones');
+const despensa = document.getElementById('modal-despensa');
 const nothings = document.getElementById('modal-nothing');
 const muebleplatos = document.getElementById('mueble-platos');
 const armarios = document.getElementById('armario');
 const armario = document.getElementById('modal-armario');
-
-
+const clave = document.getElementById('clave');
+const claveModal = document.getElementById('modal-clave');
 
 
 let seeAsk = false;
@@ -44,13 +45,16 @@ const closeModal = () => {
 };
 
 const hideAsk = () => {
-    ask.children[0].classList.remove('show-ask')
-    ask.children[0].classList.add('hide-ask')
+    ask.children[0].classList.remove('show-ask');
+    ask.children[0].classList.add('hide-ask');
+
+    // Después de la animación de ocultar el modal, ocultamos el modal y restauramos la posición del cuadro
     setTimeout(() => {
-        ask.children[0].classList.remove('hide-ask')
-        ask.style.display = 'none'
-    }, 500)
-}
+        ask.children[0].classList.remove('hide-ask');
+        ask.style.display = 'none';
+        cuadro.classList.remove('cuadro-caido'); 
+    }, 500); 
+};
 
 const hideCajon = () => {
     cajones.children[0].classList.remove('show-cajones')
@@ -58,6 +62,15 @@ const hideCajon = () => {
     setTimeout(() => {
         cajones.children[0].classList.remove('hide-cajones')
         cajones.style.display = 'none'
+    }, 500)
+}
+
+const hideDespensa = () => {
+    despensa.children[0].classList.remove('show-despensa')
+    despensa.children[0].classList.add('hide-despensa')
+    setTimeout(() => {
+        despensa.children[0].classList.remove('hide-despensa')
+        despensa.style.display = 'none'
     }, 500)
 }
 
@@ -79,6 +92,15 @@ const hideArmario = () => {
     }, 500)
 }
 
+const hideClave = () => {
+    claveModal.children[0].classList.remove('show-clave')
+    claveModal.children[0].classList.add('hide-clave')
+    setTimeout(() => {
+        claveModal.children[0].classList.remove('hide-clave')
+        claveModal.style.display = 'none'
+    }, 500)
+}
+
 const handleWindowClick = (event) => {
     if (event.target === modalMenu) {
         closeModal();
@@ -88,8 +110,12 @@ const handleWindowClick = (event) => {
         hideAsk();
     } else if (event.target === cajones) {
         hideCajon();
+    }else if (event.target === despensa) {
+        hideDespensa();
     } else if (event.target === nothings) {
         hideNothing();
+    }else if (event.target === claveModal) {
+        hideClave();
     } else if (event.target === armario) {
         hideArmario();
     }
@@ -109,10 +135,12 @@ help.addEventListener('click', () => {
 });
 
 cuadro.addEventListener('click', () => {
-    ask.style.display = 'block';
-    ask.children[0].classList.add('show-ask');
+    ask.style.display = 'block'; // Muestra el modal
+    ask.children[0].classList.add('show-ask'); // Agrega la clase para mostrar la animación del modal
 
-    seeAsk = true
+    cuadro.classList.add('cuadro-caido'); // Cambia la posición del cuadro al abrir el modal
+
+    seeAsk = true;
 });
 
 cajon.addEventListener('click', () => {
@@ -123,11 +151,19 @@ cajon.addEventListener('click', () => {
 });
 
 lavaplatos.addEventListener('click', () => {
-    nothings.style.display = 'block';
-    nothings.children[0].classList.add('show-nothing');
+    despensa.style.display = 'block';
+    despensa.children[0].classList.add('show-despensa');
 
     seeAsk = true
 });
+
+clave.addEventListener('click', () => {
+    claveModal.style.display = 'block';
+    claveModal.children[0].classList.add('show-clave');
+
+    seeAsk = true
+});
+
 
 muebleplatos.addEventListener('click', () => {
     nothings.style.display = 'block';

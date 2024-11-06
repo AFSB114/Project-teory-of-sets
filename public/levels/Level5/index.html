@@ -37,7 +37,7 @@
 
             <div class="modal modal-help">
                 <div class="contenido-modal-help">
-                    Busca el cajon con los utensilios
+                    Busca los ingredientes para ingresar la contraseña
                 </div>
             </div>
 
@@ -60,7 +60,7 @@
                     <audio id="open-cajon" src="sounds/open-gabinete.mp3"></audio>
                     <audio id="close-cajon" src="sounds/close-cajon.mp3"></audio>
 
-                    
+
                 </div>
 
                 <div class="scenario" id="scenario3">
@@ -72,6 +72,8 @@
                 <div class="scenario" id="scenario4">
                     <div class="cuadro" id="cuadro"></div>
                     <div class="puerta" id="puerta"></div>
+                    <div class="sala"></div>
+                    <div class="clave" id="clave"></div>
                     <audio id="close" src="sounds/door-knock-1.mp3"></audio>
                     <audio id="open" src="sounds/door-1-open.mp3"></audio>
                 </div>
@@ -83,6 +85,16 @@
 
         <div class="modal contrast" id="modal-ask">
             <div class="contenido-modal-ask">
+                <div class="letra">Poción de <br> sabiduría</div>
+                <div class="harina">harina</div>
+                <div class="azucar">azucar</div>
+                <div class="huevos">huevos</div>
+                <div class="leche">leche</div>
+                <div class="sal">sal</div>
+                <div class="canela">canela</div>
+                <div class="levadura">levadura</div>
+
+                <div class="text-2">Mezclar y Hornear a 150°C </div>
             </div>
 
         </div>
@@ -96,13 +108,49 @@
             </div>
 
         </div>
+
+        <div class="modal contrast" id="modal-despensa">
+            <div class="despensa">
+            </div>
+
+        </div>
+
         <div class="modal contrast" id="modal-armario">
             <div class="armario">
             </div>
 
         </div>
 
-    </div>
+        <div class="modal contrast" id="modal-clave">
+            <div class="claves">
+                <div class="text-claves">¿Qué ingredientes te hacen falta para poder abrir la puerta?</div>
+               
+                <div>
+                    <input type="checkbox" id="canela" name="respuesta" value="canela">
+                    <label for="canela">Canela</label>
+                </div>
+                <div>
+                    <input type="checkbox" id="leche" name="respuesta" value="leche">
+                    <label for="leche">Leche</label>
+                </div>
+                <div>
+                    <input type="checkbox" id="pimienta" name="respuesta" value="pimienta">
+                    <label for="pimienta">Pimienta</label>
+                </div>
+                <div>
+                    <input type="checkbox" id="polvo" name="respuesta" value="polvo">
+                    <label for="polvo">Levadura</label>
+                </div>
+                <div>
+                    <input type="checkbox" id="mermelada" name="respuesta" value="mermelada">
+                    <label for="polvo">Mermelada</label>
+                </div>
+                
+             
+                <button onclick="verificarRespuesta()">Enviar</button>
+            </div>
+        </div>
+        
     </div>
     <script src="js/movement.js"></script>
     <script src="js/game.js"></script>

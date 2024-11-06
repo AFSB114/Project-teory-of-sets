@@ -36,6 +36,35 @@ puerta.addEventListener('click', () => {
         });
         pass.fill('');
     } else {
-        window.location.href = '../../../game_mode/index.html';
+        window.location.href = '../../levels/Level6/';
     }
 });
+
+function verificarRespuesta() {
+    
+    const respuestasCorrectas = ["canela", "leche", "polvo"];
+    
+  
+    const opciones = document.getElementsByName("respuesta");
+    let respuestasSeleccionadas = [];
+
+    // Añadir las respuestas seleccionadas a la lista
+    for (const opcion of opciones) {
+        if (opcion.checked) {
+            respuestasSeleccionadas.push(opcion.value.toLowerCase());
+        }
+    }
+
+    // Comprobar que todas las respuestas correctas estén seleccionadas y que no haya más seleccionadas
+    const esCorrecto = respuestasCorrectas.every(respuesta => 
+        respuestasSeleccionadas.includes(respuesta)
+    ) && respuestasSeleccionadas.length === respuestasCorrectas.length;
+
+    if (esCorrecto) {
+        hideClave(); // Cierra el modal si las respuestas son correctas
+        passTrue = true;  // Desbloquea la puerta
+        doorOpen.play();  // Reproduce el sonido de la puerta abriéndose
+    } else {
+        alert("Algunas respuestas son incorrectas. Intenta de nuevo.");
+    }
+}
