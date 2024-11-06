@@ -448,8 +448,8 @@ body {
     grid-template-rows: 2fr 2fr 1fr 1fr;
     grid-template-columns: repeat(5, 1fr);
 
-    font-size: 4vh;
-    font-family: 'Pixeloid Sans';
+    font-size: 2vh;
+    font-family: 'Pixeloid Sans Bold';
     text-align: center;
 }
 
@@ -515,7 +515,7 @@ body {
     align-self: center;
 
     margin-top: -5%;
-    font-family: 'Pixeloid Sans';
+    font-family: 'Pixeloid Sans Bold';
     position: relative;
     left: -2.5%;
 }
@@ -532,7 +532,8 @@ body {
 #selectColorButton{
     width: 30%;
     height: 15%;
-    font-size: 50%;
+    font-size: 80%;
+    font-family: 'Pixeloid Sans';
     margin-top:4%;
     left: 20%;
     border-radius: 3.5%;
@@ -618,13 +619,14 @@ body {
 
 #verifyButton{
     left: -210%;
-    top: 120%;
-    width: 100%;
-    height: 25%;
+    top: 110%;
+    width: 110%;
+    height: 30%;
     position: relative;
     border-radius: 3px;
     border: none;
-    font-size: 45%;
+    font-size: 80%;
+    font-family: 'Pixeloid Sans';
 }
 #error-message {
     color: rgb(0, 0, 0);
