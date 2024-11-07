@@ -6,8 +6,10 @@ include_once './user.php';
 header("Access-Control-Allow-Methods: GET");
 header("Content-Type: application/json; charset=UTF-8");
 
+$connection = new DatabaseConnection();
+$pdo = $connection->connection();
 session_start();
-$user_id = $_SESSION['user_id'];
+$user_id = $_SESSION['id'];
 
 // Consulta para obtener el personaje seleccionado y el sprite del personaje
 $query = "SELECT c.id, c.profileurl, c.spritesurl

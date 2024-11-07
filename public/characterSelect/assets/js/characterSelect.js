@@ -7,7 +7,7 @@ async function cambiarPersonaje(character_id) {
     .then(res => res.json())
     .then(res => {
         if (res.status === 'success') {
-            window.location.href = `../index.html`;
+            window.location.href = `../settings/`;
         } else {
             showMessage('message', res.message);
         }

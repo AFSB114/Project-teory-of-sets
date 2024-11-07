@@ -9,6 +9,7 @@ class User
     private string $nickname;
     private string $email;
     private string $password;
+    private int $characterId;
     public function __construct(array $data)
     {
         $this->id = $data['id'] ?? 0;
@@ -18,6 +19,7 @@ class User
         $this->nickname = $data['nickname'] ?? '';
         $this->email = $data['email'] ?? '';
         $this->password = $data['password'] ?? '';
+        $this->characterId = $data['characterId'] ?? 0;
     }
 
     public function getId(): int
@@ -88,5 +90,15 @@ class User
     public function setPassword(string $password): void
     {
         $this->password = $password;
+    }
+
+    public function getcharacterId(): int
+    {
+        return $this->characterId;
+    }
+
+    public function setcharacterId(int $characterId): void
+    {
+        $this->characterId = $characterId;
     }
 }

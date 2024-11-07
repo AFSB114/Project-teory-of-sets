@@ -13,6 +13,13 @@ CREATE TABLE logs(
     PRIMARY KEY(id)
 );
 
+CREATE TABLE character(
+    id SERIAL NOT NULL,
+    profileurl VARCHAR(70),
+    spritesurl VARCHAR(70),
+    PRIMARY KEY(id)
+);
+
 CREATE TABLE users(
     id INT NOT NULL,
     name VARCHAR(40) NOT NULL,
@@ -20,7 +27,9 @@ CREATE TABLE users(
     birthday DATE,
     date_create DATE,
     rol_id INT DEFAULT 2,
+     character_id INT DEFAULT 1,
     PRIMARY KEY(id),
+    FOREIGN KEY(character_id) REFERENCES character(id),
     FOREIGN KEY(id) REFERENCES log(id) ON DELETE CASCADE
 );
 
