@@ -7,10 +7,11 @@ header("Access-Control-Allow-Methods: POST");
 header("Content-Type: application/json; charset=UTF-8");
 
 $req = json_decode(file_get_contents("php://input"), true);
-
+$connection = new DatabaseConnection();
+$pdo = $connection->connection();
 $character_id = $req['character_id'];
 session_start();
-$user_id = $_SESSION['user_id'];
+$user_id = $_SESSION['id'];
 
 // Actualiza el personaje en la base de datos
 $query = "UPDATE users SET character_id = :character_id WHERE id = :user_id";

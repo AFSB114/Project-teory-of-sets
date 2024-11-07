@@ -246,9 +246,14 @@ body {
 .character:hover {
     filter: brightness(150%);
     cursor: pointer;
-    border: #15ff00 solid 6px;
+    /*border: #15ff00 solid 6px;*/
+    transform: scale(1.05);
+    transition: transform 0.2s;
 }
 
 .select {
-    border: #0c8302 solid 6px;
+    /*border: #0c8302 solid 6px;*/
+    background-color: #009dc995;
+    mask-image: linear-gradient(to top, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0.95), rgba(0, 0, 0, 0));
+    border-bottom: #026783 solid 6px;
 }

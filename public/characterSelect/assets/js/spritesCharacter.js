@@ -14,6 +14,7 @@ const cargarPersonaje = async () => {
         // Verificar si la respuesta fue exitosa
         if (res.status === 'success') {
             const character = res.data;
+            console.log(character);
             mostrarPersonaje(character.spritesurl);
         } else {
             console.error("Error al obtener el personaje:", res.message);
@@ -28,7 +29,7 @@ const cargarPersonaje = async () => {
 const mostrarPersonaje = (sprites) => {
     const personajeDiv = document.getElementsByClassName('character')[0];
     if (personajeDiv) {
-        personajeDiv.style.backgroundImage = `url(${sprites})`;
+        personajeDiv.style.backgroundImage = `url('../${sprites}')`;
     } else {
         console.error("No se encontró el elemento con la clase 'character'");
     }
