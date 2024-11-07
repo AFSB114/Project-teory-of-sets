@@ -31,13 +31,22 @@
 
             <div class="modal modal-help">
                 <div class="contenido-modal-help">
-                    Encuentra el cuadro que se mueve
+                    En una pared parece estar quieto, <br> pero en realidad guarda un secreto. <br>
+                    Si lo encuentras, algo abrirás. <br>
+                    ¿Qué es lo que debes buscar?
                 </div>
             </div>
 
             <div class="modal modal-help">
                 <div class="contenido-modal-help">
-                    Busca los ingredientes para ingresar la contraseña
+                    Para cocinar con destreza y hacer magia en la mesa, <br>
+                    ¿qué es lo que debes buscar?
+                </div>
+            </div>
+
+            <div class="modal modal-help">
+                <div class="contenido-modal-help">
+                    Ingresa la contraseña
                 </div>
             </div>
 
@@ -124,33 +133,37 @@
         <div class="modal contrast" id="modal-clave">
             <div class="claves">
                 <div class="text-claves">¿Qué ingredientes te hacen falta para poder abrir la puerta?</div>
-               
-                <div>
+
+                <div class="text-canela">
                     <input type="checkbox" id="canela" name="respuesta" value="canela">
                     <label for="canela">Canela</label>
                 </div>
-                <div>
+                <div class="text-leche">
                     <input type="checkbox" id="leche" name="respuesta" value="leche">
                     <label for="leche">Leche</label>
                 </div>
-                <div>
+                <div class="text-pimienta">
                     <input type="checkbox" id="pimienta" name="respuesta" value="pimienta">
                     <label for="pimienta">Pimienta</label>
                 </div>
-                <div>
+                <div class="text-levadura">
                     <input type="checkbox" id="polvo" name="respuesta" value="polvo">
                     <label for="polvo">Levadura</label>
                 </div>
-                <div>
+                <div class="text-mermelada">
                     <input type="checkbox" id="mermelada" name="respuesta" value="mermelada">
-                    <label for="polvo">Mermelada</label>
+                    <label for="mermelada">Huevos</label>
                 </div>
-                
-             
-                <button onclick="verificarRespuesta()">Enviar</button>
+                <div class="text-miel">
+                    <input type="checkbox" name="respuesta" id="miel" value="miel">
+                    <label for="miel">Miel</label>
+                </div>
+
+
+                <button onclick="verificarRespuesta()" class="boton-enviar">Enviar</button>
             </div>
         </div>
-        
+
     </div>
     <script src="js/movement.js"></script>
     <script src="js/game.js"></script>
