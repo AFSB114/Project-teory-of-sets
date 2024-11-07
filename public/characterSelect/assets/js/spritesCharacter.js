@@ -20,7 +20,7 @@ const cargarPersonaje = async () => {
             console.error("Error al obtener el personaje:", res.message);
         }
     } catch (error) {
-        const characterDefault = '../../assets/character/femaleCharacter/sprites/femaleCharacter1.png'; 
+        const characterDefault = '../assets/character/femaleCharacter/sprites/femaleCharacter1.png'; 
         mostrarPersonaje(characterDefault);
     }
 };
