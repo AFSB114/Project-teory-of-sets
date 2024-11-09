@@ -3,6 +3,9 @@ document.getElementById('form').addEventListener('submit', async (event) => {
 
     let email = event.target[0].value
 
+    document.getElementById('btn-text').classList.add('spin');
+    document.getElementById('btn-text').innerHTML = '';
+
     await fetch('../../../php/controller/sendEmail.php', {
         method: 'POST',
         headers: { 'content-type': 'application/json' },

@@ -5,7 +5,7 @@ USE vennture;
 CREATE TABLE logs(
     id SERIAL NOT NULL,
     nickname VARCHAR(40) NOT NULL,
-    email VARCHAR(40) NOT NULL,
+    email VARCHAR(100) NOT NULL,
     password VARCHAR(100) NOT NULL,
     date_create TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL,
     date_update DATE DEFAULT CURRENT_DATE NULL,

@@ -207,4 +207,67 @@ input {
     .fondo {
         display: none;
     }
-  }
+}
+
+.spin {
+    width: 20%;
+    height: auto;
+
+    aspect-ratio: 1/1;
+
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+
+    animation: spin infinite 1.2s linear;
+}
+
+@keyframes spin {
+    0% {
+        background-image: url('../images/Default-0.png');
+    }
+
+    8% {
+        background-image: url('../images/Default-1.png');
+    }
+
+    16% {
+        background-image: url('../images/Default-2.png');
+    }
+
+    24% {
+        background-image: url('../images/Default-3.png');
+    }
+
+    33% {
+        background-image: url('../images/Default-4.png');
+    }
+
+    41% {
+        background-image: url('../images/Default-5.png');
+    }
+
+    49% {
+        background-image: url('../images/Default-6.png');
+    }
+
+    58% {
+        background-image: url('../images/Default-7.png');
+    }
+
+    66% {
+        background-image: url('../images/Default-8.png');
+    }
+
+    74% {
+        background-image: url('../images/Default-9.png');
+    }
+
+    83% {
+        background-image: url('../images/Default-10.png');
+    }
+
+    100% {
+        background-image: url('../images/Default-11.png');
+    }
+}
