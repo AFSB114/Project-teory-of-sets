@@ -49,10 +49,10 @@ const closeAskBtn = document.getElementById('closeAsk');
 closeAskBtn.addEventListener('click', hideAsk);
 
 const hideAsk2 = () => {
-    ask2.children[0].classList.remove('show-ask2')
-    ask2.children[0].classList.add('hide-ask2')
+    ask2.children[0].classList.remove('show-ask')
+    ask2.children[0].classList.add('hide-ask')
     setTimeout(() => {
-        ask2.children[0].classList.remove('hide-ask2')
+        ask2.children[0].classList.remove('hide-ask')
         ask2.style.display = 'none'
     }, 500)
 }
@@ -63,7 +63,7 @@ closeAskBtn2.addEventListener('click', hideAsk2);
 const handleWindowClick = (event) => {
     if (event.target === modalMenu) {
         closeModal();
-    } else if (event.target === modalHelp[0] || event.target === modalHelp[1]) {
+    } else if (event.target === modalHelp[0] || event.target === modalHelp[1] || event.target === modalHelp[2]) {
         hideModal(event.target);
     } else if (event.target === ask) {
         hideAsk()
@@ -79,7 +79,7 @@ window.addEventListener('click', handleWindowClick);
 continuar.addEventListener('click', closeModal);
 
 help.addEventListener('click', () => {
-    const modalToShow = seeAsk ? modalHelp[1] : modalHelp[0];
+    const modalToShow = seeAsk2 ? modalHelp[2] : (seeAsk ? modalHelp[1] : modalHelp[0]);
     showModal(modalToShow);
 });
 
@@ -95,7 +95,7 @@ horno.addEventListener('click', () => {
 
 libro.addEventListener('click', () => {
     ask2.style.display = 'block';
-    ask2.children[0].classList.add('show-ask2');
+    ask2.children[0].classList.add('show-ask');
 
     seeAsk2 = true
 });

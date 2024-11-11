@@ -13,6 +13,8 @@ let frame = 0;
 const numsFrame = 4;
 const widthFrame = character.clientWidth;
 let keysPress = {};
+const leftButton = document.getElementById('left');
+const rightButton = document.getElementById('right');
 const directionsKeys = ['ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown', 'KeyA', 'KeyD', 'KeyW', 'KeyS'];
 
 let animationSpeed = 9; // Cuanto mayor sea este valor, más lenta será la animación
@@ -34,11 +36,33 @@ function initialize() {
     scenariosContainer.style.transform = `translateX(-${posX - width * 0.418}px)`;
 }
 
+leftButton.addEventListener('touchstart', () => {
+    keysPress['leftButton'] = true;
+    start();
+});
+leftButton.addEventListener('touchend', () => {
+    keysPress['leftButton'] = false;
+    if (!Object.values(keysPress).includes(true)) {
+        stop();
+    }
+});
+
+rightButton.addEventListener('touchstart', () => {
+    keysPress['rightButton'] = true;
+    start();
+});
+rightButton.addEventListener('touchend', () => {
+    keysPress['rightButton'] = false;
+    if (!Object.values(keysPress).includes(true)) {
+    stop();
+}
+});
+
 function move() {
-    if (keysPress['ArrowLeft'] || keysPress['KeyA']) {
+    if (keysPress['ArrowLeft'] || keysPress['KeyA'] || keysPress['leftButton']) {
         posX -= speed;
     }
-    if (keysPress['ArrowRight'] || keysPress['KeyD']) {
+    if (keysPress['ArrowRight'] || keysPress['KeyD'] || keysPress['rightButton']) {
         posX += speed;
     }
     // if (keysPress['ArrowUp'] || keysPress['KeyW']) {
@@ -64,9 +88,9 @@ function move() {
 }
 
 function animation() {
-    if (keysPress['KeyA'] || keysPress['ArrowLeft']) {
+    if (keysPress['KeyA'] || keysPress['ArrowLeft'] || keysPress['leftButton']) {
         character.style.transform = 'scaleX(-1)';
-    } else if (keysPress['KeyD'] || keysPress['ArrowRight']) {
+    } else if (keysPress['KeyD'] || keysPress['ArrowRight'] || keysPress['rightButton']) {
         character.style.transform = 'scaleX(1)';
     }
 

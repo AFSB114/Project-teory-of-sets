@@ -2,7 +2,7 @@ const stickers = Array.from(document.getElementsByClassName('sticker'));
 let passSticker = ['', '', ''];
 const passStickerCorrect = ['stickerNino', 'stickerNina', 'stickerMontana'];
 const cuadros = Array.from(document.getElementsByClassName('cuadro'));
-let pass = ['']; // Cambiar a un array vacío
+let pass = [''];
 const passCorrect = ['cuadro-1'];
 const puerta = document.getElementById('puerta');
 const knock = document.getElementById('close');
@@ -14,7 +14,7 @@ stickers.forEach(sticker => {
     sticker.addEventListener('click', () => {
         sticker.classList.add('desactivado');
 
-        for (let i = 0; i < passSticker.length; i++) { // Cambiar pass a passSticker
+        for (let i = 0; i < passSticker.length; i++) {
             if (passSticker[i] === '') {
                 passSticker[i] = sticker.id;
                 break;
@@ -28,7 +28,7 @@ stickers.forEach(sticker => {
                     div.classList.add('hover');
                 }
             });
-            cuadros.forEach((div, index) => { // Cambiar divs a cuadros
+            cuadros.forEach((div, index) => {
                 div.id = `cuadro-${index + 1}`; // Asigna un id único como "cuadro1", "cuadro2", etc.
             });
             passStickerTrue = true;
@@ -38,7 +38,7 @@ stickers.forEach(sticker => {
 
 horno.addEventListener('click', () => {
     if (!passStickerTrue) {
-        stickers.forEach(sticker => { // Cambiar sticker a stickers
+        stickers.forEach(sticker => {
             sticker.classList.remove('desactivado');
         });
         passSticker.fill('');
