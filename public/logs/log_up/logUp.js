@@ -1,3 +1,17 @@
+let today = new Date()
+let dateMax = today.toISOString().split('T')[0]
+let dateMin = new Date()
+dateMin.setFullYear(today.getFullYear() - 100)
+dateMin = dateMin.toISOString().split('T')[0]
+
+const birthdate = document.getElementById('birthdate').children[1].children[0]
+birthdate.setAttribute('min', dateMin)
+birthdate.setAttribute('max', dateMax)
+
+function showMessage(id, message) {
+    document.getElementById(id).children[0].innerHTML = message
+}
+
 document.getElementById('form').addEventListener('submit', async (event) => {
     event.preventDefault()
 
