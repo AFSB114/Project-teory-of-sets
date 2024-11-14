@@ -199,6 +199,7 @@ a {
 .send {
     all: unset;
 
+    font-family: 'Pixeloid Sans';
     font-size: 2vh;
     color: white;
     background-color: black;
