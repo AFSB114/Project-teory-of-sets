@@ -16,7 +16,7 @@ class Log
             // Cifrar la contraseña antes de almacenarla
             $this->user->setPassword(password_hash($this->user->getPassword(), PASSWORD_BCRYPT));
 
-            $query = "INSERT INTO log (nickname, email, password, update_date) VALUES (:nickname, :email, :password, NULL)";
+            $query = "INSERT INTO log (nickname, email, password, date_update) VALUES (:nickname, :email, :password, NULL)";
             $res = $conn->prepare($query);
             $res->execute([
                 "nickname" => $this->user->getNickname(),
@@ -40,7 +40,7 @@ class Log
             return ['status' => 'OK', 'message' => 'Registrado correctamente'];
         } catch (PDOException $e) {
             $conn->rollBack();
-            return ['status' => 'ERROR', 'message' => 'Error en el registro'];
+            return ['status' => 'ERROR', 'message' => 'Error en el registro', 'error' => $e->getMessage()];
         }
     }
 

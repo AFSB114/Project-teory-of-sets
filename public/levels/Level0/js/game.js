@@ -1,3 +1,6 @@
+import StoreLevelCompleted from '../../assets/js/storeLevelCompleted.js'
+const store = new StoreLevelCompleted(0)
+store.addStartedLevel()
 const cuadros = Array.from(document.getElementsByClassName('cuadro'));
 let pass = ['', '', ''];
 const passCorrect = ['cuadro-1', 'cuadro-2', 'cuadro-3'];
@@ -20,11 +23,12 @@ cuadros.forEach(cuadro => {
         if (pass.join('') === passCorrect.join('')) {
             doorOpen.play();
             passTrue = true;
+            stopTimer()
         }
     });
 });
 
-puerta.addEventListener('click', () => {
+puerta.addEventListener('click',() => {
     if (!passTrue) {
         knock.play();
         cuadros.forEach(cuadro => {
@@ -32,6 +36,6 @@ puerta.addEventListener('click', () => {
         });
         pass.fill('');
     } else {
-        window.location.href = '../../levels/Level1/';
+        store.addCompletedLevel(document.getElementById('timer').innerHTML, 'Level1')
     }
 });

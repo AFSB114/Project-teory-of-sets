@@ -1,3 +1,6 @@
+import StoreLevelCompleted from '../../assets/js/storeLevelCompleted.js'
+const store = new StoreLevelCompleted(1)
+store.addStartedLevel()
 const puerta = document.getElementById('puerta');
 const knock = document.getElementById('close');
 const doorOpen = document.getElementById('open');
@@ -8,7 +11,7 @@ puerta.addEventListener('click', () => {
     if (!passTrue) {
         knock.play();
     } else {
-        window.location.href = '../../levels/Level2/';
+        store.addCompletedLevel(document.getElementById('timer').innerHTML, 'Level2')
     }
 });
 
@@ -68,5 +71,6 @@ function checkPass() {
         doorOpen.play();
         passTrue = true;
         correct.play();
+        stopTimer()
     }
 }

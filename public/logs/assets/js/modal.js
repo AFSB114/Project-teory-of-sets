@@ -17,5 +17,5 @@ function showMessage(id, message) {
     showModal(id)
     setTimeout(() => {
         hideModal(id)
-    }, 2500);
+    }, 3000);
 }

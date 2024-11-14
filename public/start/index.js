@@ -19,7 +19,8 @@ async function sendData(data, key) {
             key
         })
     }).then(res => res.json())
-    .then(res => {
+        .then(res => {
+        console.log(res)
         showMessage('message', res.message)
     })
     .catch(err => console.log(err))

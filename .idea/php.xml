@@ -13,26 +13,26 @@
   <component name="PhpIncludePathManager">
     <include_path>
       <path value="$PROJECT_DIR$/php/vendor/composer" />
-      <path value="$PROJECT_DIR$/server/vendor/symfony/deprecation-contracts" />
-      <path value="$PROJECT_DIR$/server/vendor/symfony/http-foundation" />
-      <path value="$PROJECT_DIR$/server/vendor/symfony/polyfill-mbstring" />
-      <path value="$PROJECT_DIR$/server/vendor/symfony/polyfill-php83" />
-      <path value="$PROJECT_DIR$/server/vendor/symfony/routing" />
       <path value="$PROJECT_DIR$/server/vendor/composer" />
-      <path value="$PROJECT_DIR$/server/vendor/evenement/evenement" />
-      <path value="$PROJECT_DIR$/server/vendor/ralouphie/getallheaders" />
-      <path value="$PROJECT_DIR$/server/vendor/guzzlehttp/psr7" />
-      <path value="$PROJECT_DIR$/server/vendor/psr/http-factory" />
-      <path value="$PROJECT_DIR$/server/vendor/psr/http-message" />
-      <path value="$PROJECT_DIR$/server/vendor/react/cache" />
-      <path value="$PROJECT_DIR$/server/vendor/react/dns" />
-      <path value="$PROJECT_DIR$/server/vendor/react/event-loop" />
-      <path value="$PROJECT_DIR$/server/vendor/react/promise" />
-      <path value="$PROJECT_DIR$/server/vendor/react/socket" />
-      <path value="$PROJECT_DIR$/server/vendor/react/stream" />
+      <path value="$PROJECT_DIR$/php/vendor/phpmailer/phpmailer" />
       <path value="$PROJECT_DIR$/server/vendor/cboden/ratchet" />
       <path value="$PROJECT_DIR$/server/vendor/ratchet/rfc6455" />
-      <path value="$PROJECT_DIR$/php/vendor/phpmailer/phpmailer" />
+      <path value="$PROJECT_DIR$/server/vendor/evenement/evenement" />
+      <path value="$PROJECT_DIR$/server/vendor/ralouphie/getallheaders" />
+      <path value="$PROJECT_DIR$/server/vendor/react/cache" />
+      <path value="$PROJECT_DIR$/server/vendor/react/dns" />
+      <path value="$PROJECT_DIR$/server/vendor/symfony/deprecation-contracts" />
+      <path value="$PROJECT_DIR$/server/vendor/react/event-loop" />
+      <path value="$PROJECT_DIR$/server/vendor/symfony/http-foundation" />
+      <path value="$PROJECT_DIR$/server/vendor/react/promise" />
+      <path value="$PROJECT_DIR$/server/vendor/symfony/polyfill-mbstring" />
+      <path value="$PROJECT_DIR$/server/vendor/react/socket" />
+      <path value="$PROJECT_DIR$/server/vendor/symfony/polyfill-php83" />
+      <path value="$PROJECT_DIR$/server/vendor/psr/http-message" />
+      <path value="$PROJECT_DIR$/server/vendor/react/stream" />
+      <path value="$PROJECT_DIR$/server/vendor/symfony/routing" />
+      <path value="$PROJECT_DIR$/server/vendor/psr/http-factory" />
+      <path value="$PROJECT_DIR$/server/vendor/guzzlehttp/psr7" />
     </include_path>
   </component>
   <component name="PhpProjectSharedConfiguration" php_language_level="8.1">
@@ -43,6 +43,7 @@
   </component>
   <component name="PhpUnit">
     <phpunit_settings>
+      <PhpUnitSettings custom_loader_path="$PROJECT_DIR$/server/vendor/autoload.php" />
       <PhpUnitSettings custom_loader_path="$PROJECT_DIR$/php/vendor/autoload.php" />
     </phpunit_settings>
   </component>

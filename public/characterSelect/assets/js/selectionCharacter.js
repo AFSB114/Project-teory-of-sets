@@ -1,6 +1,6 @@
 const cargarPersonaje = async () => {
     try {
-        const response = await fetch('../../../php/schema/getCharacter.php', {
+        const response = await fetch('../../php/schema/getCharacter.php', {
             method: 'GET',
             headers: { 'Content-Type': 'application/json' }
         });
