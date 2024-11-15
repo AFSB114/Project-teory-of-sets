@@ -10,12 +10,12 @@ const limitsCaracter = [character.clientWidth / 4.6, character.clientHeight * 2.
 let camera = 0;
 let animationFrameId = null;
 let frame = 0;
-const numsFrame = 4;
+const numsFrame = 3;
 const widthFrame = character.clientWidth;
 let keysPress = {};
 const directionsKeys = ['ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown', 'KeyA', 'KeyD', 'KeyW', 'KeyS'];
 
-let animationSpeed = 9; // Cuanto mayor sea este valor, más lenta será la animación
+let animationSpeed = 5; // Cuanto mayor sea este valor, más lenta será la animación
 let animationCounter = 0; // Contador para controlar la velocidad de la animación
 
 function initialize() {
