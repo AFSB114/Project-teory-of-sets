@@ -10,12 +10,12 @@ const limitsCaracter = [character.clientWidth / 4.6, character.clientHeight * 2.
 let camera = 0;
 let animationFrameId = null;
 let frame = 0;
-const numsFrame = 3;
+const numsFrame = 4;
 const widthFrame = character.clientWidth;
 let keysPress = {};
 const directionsKeys = ['ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown', 'KeyA', 'KeyD', 'KeyW', 'KeyS'];
 
-let animationSpeed = 5; // Cuanto mayor sea este valor, más lenta será la animación
+let animationSpeed = 9; // Cuanto mayor sea este valor, más lenta será la animación
 let animationCounter = 0; // Contador para controlar la velocidad de la animación
 
 function initialize() {
@@ -29,7 +29,7 @@ function initialize() {
     limitsCaracter.push(width * numScenarios - character.clientWidth - character.clientWidth / 4.6);
     limitLeft = width / 2 - character.clientWidth / 2;
     limitRight = width * numScenarios - width / 2 - character.clientWidth / 2;
-    character.style.left = `${  width * 3 / 2}px`;
+    character.style.left = `${  width * 2 / 2}px`;
     posX = character.getBoundingClientRect().x - (window.innerWidth * 0.15);
     scenariosContainer.style.transform = `translateX(-${posX - width * 0.418}px)`;
 }
