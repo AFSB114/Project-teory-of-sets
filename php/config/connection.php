@@ -4,7 +4,7 @@ class DatabaseConnection {
 
     public function __construct(
         private string $host = "localhost",
-        private string $db = "vennture",
+        private string $db = "vennture2",
         private string $user = "postgres",
         private string $password = "Af300407",
         private string $port = "5432"

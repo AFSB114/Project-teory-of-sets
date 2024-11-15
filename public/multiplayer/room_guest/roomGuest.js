@@ -39,7 +39,7 @@ async function init() {
         }
     ).then(res => res.json())
 
-    const connection = new SocketConnection(`ws://192.168.1.18:8080?token=${sessionId}&id=${res.id}&nickname=${res.nickname}`)
+    const connection = new SocketConnection(`ws://localhost:8080?token=${sessionId}&id=${res.id}&nickname=${res.nickname}`)
 
     const urlParams = new URLSearchParams(window.location.search)
 

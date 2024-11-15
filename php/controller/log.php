@@ -41,16 +41,8 @@ switch ($req["action"]) {
             echo json_encode(['status' => 'OK', 'message' => $res['message']]);
 
         } else {
-            if ($res['code'] == 23505) {
-                http_response_code(409);
-                if (str_contains($res['message'], "email")) {
-                    echo json_encode(['status' => 'ERROR', 'message' => 'Ese email ya se encuentra registrado.']);
-                } else {
-                    echo json_encode(['status' => 'ERROR', 'message' => 'Ese nombre de usuario ya se encuentra en uso.']);
-                }
-            } else {
-                echo json_encode(['status' => 'ERROR', 'message' => $res['message']]);
-            }
+            echo json_encode(['status' => 'ERROR', 'message' => $res['message'], 'error' => $res['error']]);
+
         }
 
         break;

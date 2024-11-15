@@ -4,6 +4,7 @@ document.getElementById('form').addEventListener('submit', async (event) => {
     let nickname = event.target[0].value
     let password = event.target[1].value
 
+    
     document.getElementById('btn-text').classList.add('spin');
     document.getElementById('btn-text').innerHTML = '';
 

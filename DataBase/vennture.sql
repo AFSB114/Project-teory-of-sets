@@ -2,14 +2,13 @@ CREATE DATABASE vennture;
 
 USE vennture;
 
-CREATE TABLE logs(
+CREATE TABLE log(
     id SERIAL NOT NULL,
     nickname VARCHAR(40) NOT NULL,
     email VARCHAR(100) NOT NULL,
     password VARCHAR(100) NOT NULL,
     date_create TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL,
     date_update DATE DEFAULT CURRENT_DATE NULL,
-    token VARCHAR(100),
     PRIMARY KEY(id)
 );
 
@@ -20,6 +19,22 @@ CREATE TABLE character(
     PRIMARY KEY(id)
 );
 
+INSERT INTO character (profileurl, spritesurl) VALUES
+('femaleCharacter/femaleCharacterProfile1.png', 'femaleCharacter/sprites/femaleCharacter1.png'),
+('femaleCharacter/femaleCharacterProfile2.png', 'femaleCharacter/sprites/femaleCharacter2.png'),
+('femaleCharacter/femaleCharacterProfile3.png', 'femaleCharacter/sprites/femaleCharacter3.png'),
+('femaleCharacter/femaleCharacterProfile4.png', 'femaleCharacter/sprites/femaleCharacter4.png'),
+('femaleCharacter/femaleCharacterProfile5.png', 'femaleCharacter/sprites/femaleCharacter5.png'),
+('femaleCharacter/femaleCharacterProfile6.png', 'femaleCharacter/sprites/femaleCharacter6.png'),
+('femaleCharacter/femaleCharacterProfile7.png', 'femaleCharacter/sprites/femaleCharacter7.png'),
+('maleCharacter/maleCharacterProfile1.png', 'maleCharacter/sprites/maleCharacter1.png'),
+('maleCharacter/maleCharacterProfile2.png', 'maleCharacter/sprites/maleCharacter2.png'),
+('maleCharacter/maleCharacterProfile3.png', 'maleCharacter/sprites/maleCharacter3.png'),
+('maleCharacter/maleCharacterProfile4.png', 'maleCharacter/sprites/maleCharacter4.png'),
+('maleCharacter/maleCharacterProfile5.png', 'maleCharacter/sprites/maleCharacter5.png'),
+('maleCharacter/maleCharacterProfile6.png', 'maleCharacter/sprites/maleCharacter6.png'),
+('maleCharacter/maleCharacterProfile7.png', 'maleCharacter/sprites/maleCharacter7.png');
+
 CREATE TABLE users(
     id INT NOT NULL,
     name VARCHAR(40) NOT NULL,
@@ -27,7 +42,7 @@ CREATE TABLE users(
     birthday DATE,
     date_create DATE,
     rol_id INT DEFAULT 2,
-     character_id INT DEFAULT 1,
+    character_id INT DEFAULT 1,
     PRIMARY KEY(id),
     FOREIGN KEY(character_id) REFERENCES character(id),
     FOREIGN KEY(id) REFERENCES log(id) ON DELETE CASCADE
@@ -38,6 +53,8 @@ CREATE TABLE rol(
     name VARCHAR(30),
     PRIMARY KEY(id)
 );
+
+INSERT INTO rol (name) VALUES ('admin'), ('user'), ('admin_room'), ('guest_room');
 
 ALTER TABLE users
 ADD FOREIGN KEY(rol_id) REFERENCES rol(id);
@@ -64,7 +81,7 @@ CREATE TABLE level(
     name VARCHAR(50),
     description TEXT,
     difficulty_id INT NOT NULL,
-    add_date DATE,
+    add_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL,
     PRIMARY KEY(id)
 );
 
@@ -99,3 +116,14 @@ CREATE TABLE user_level(
     FOREIGN KEY(status_id) REFERENCES status(id)
 );
 
+-- Primero cambiar el tipo
+ALTER TABLE user_level
+ALTER COLUMN time TYPE VARCHAR(5);
+
+-- Luego agregar la restricción (opcional pero recomendado)
+ALTER TABLE user_level
+ADD CONSTRAINT check_formato_tiempo 
+CHECK (time ~ '^[0-5][0-9]:[0-5][0-9]$');
+
+ALTER TABLE user_level
+ALTER COLUMN time DROP NOT NULL;
