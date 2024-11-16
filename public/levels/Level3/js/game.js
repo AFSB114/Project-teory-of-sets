@@ -5,7 +5,6 @@ const puerta = document.getElementById('puerta');
 const knock = document.getElementById('close');  
 const doorOpen = document.getElementById('open');
 
-
 const muebles = ['almohada', 'mesa', 'escritorio', 'sofas', 'silla'];
 const decorativos = ['florero', 'cuadro', 'espejo', 'lampara'];
 const leerBeber = ['revista', 'libro', 'copa', 'taza'];
@@ -46,7 +45,6 @@ const totalObjetos = muebles.length + decorativos.length + leerBeber.length;
         } else {
             alert('Este objeto no pertenece a esta caja.');
         }
-
         caja.classList.remove('caja-hover');  // Quitar estilo de hover
     });
 });
@@ -59,6 +57,95 @@ objetos.forEach(objeto => {
     });
 });
 
+let Dragging = false;
+let objetoArrastrado = null;
+let posicionInicial = {};
+let setX, setY;
+
+objetos.forEach(objeto => {
+    objeto.addEventListener('touchstart', (event) => {
+        console.log('Arrastrando objeto');
+        const touch = event.touches[0]; // Obtener el primer toque
+        const rect = objeto.getBoundingClientRect();
+
+        posicionInicial[objeto.id] = { left: objeto.style.left, top: objeto.style.top };
+    
+        // Calcular la diferencia entre la posición del toque y la posición del elemento
+        setX = touch.clientX - rect.left;
+        setY = touch.clientY - rect.top;
+    
+        Dragging = true;
+        objetoArrastrado = objeto;
+        event.preventDefault(); // Prevenir comportamientos por defecto
+    });
+});
+
+[cajaA, cajaB, cajaC].forEach(caja => {
+    document.addEventListener('touchmove', (event) => {
+        if (Dragging) {
+            const touch = event.touches[0];
+            
+            const leftPosition = touch.clientX - setX - 400; 
+            const topPosition = touch.clientY - setY - 250;
+    
+            // Mover la llave a la posición calculada
+            objetoArrastrado.style.position = 'absolute';
+            objetoArrastrado.style.left = leftPosition + 'px';
+            objetoArrastrado.style.top = topPosition + 'px';
+    
+            event.preventDefault();
+        }
+    });
+    document.addEventListener('touchend', (event) => {
+        if (Dragging) {
+            console.log("Objeto soltado");
+            const objetoId = objetoArrastrado.id;
+            const touch = event.changedTouches[0];
+    
+            // Verificar en qué caja se ha soltado el objeto
+            let cajaCorrecta = null;
+    
+            [cajaA, cajaB, cajaC].forEach(caja => {
+                const cajaRect = caja.getBoundingClientRect();
+                if (
+                    touch.clientX >= cajaRect.left && touch.clientX <= cajaRect.right && 
+                    touch.clientY >= cajaRect.top && touch.clientY <= cajaRect.bottom
+                ) {
+                    cajaCorrecta = caja;
+                }
+            });
+    
+            if (cajaCorrecta) {
+                // Verificar si el objeto pertenece a la caja correcta
+                if (
+                    (cajaCorrecta === cajaA && muebles.includes(objetoId)) ||
+                    (cajaCorrecta === cajaB && decorativos.includes(objetoId)) ||
+                    (cajaCorrecta === cajaC && leerBeber.includes(objetoId))
+                ) {
+                    cajaCorrecta.appendChild(objetoArrastrado);  // Añadir objeto a la caja
+                    objetoArrastrado.style.display = 'none';  // Ocultar el objeto
+                    objetosCorrectos++;  // Incrementar contador de objetos correctos
+    
+                    // Verificar si todos los objetos están en sus cajas correctas
+                    if (objetosCorrectos === totalObjetos) {
+                        abrirPuerta();  // Llamar a la función para abrir la puerta
+                    }
+                } else {
+                    alert('Este objeto no pertenece a esta caja.');
+                    // Restablecer la posición inicial del objeto
+                    objetoArrastrado.style.left = posicionInicial[objetoId].left;
+                    objetoArrastrado.style.top = posicionInicial[objetoId].top;
+                    }
+            }
+    
+            Dragging = false;
+            objetoArrastrado = null;
+
+            event.preventDefault();
+        }
+    });
+});
+
 // Función para abrir la puerta cuando se colocan todos los objetos correctamente
 function abrirPuerta() {
     console.log('¡Todos los objetos están en su lugar! La puerta se abre.');
@@ -66,7 +153,6 @@ function abrirPuerta() {
     passTrue = true;  
     puerta.classList.add('abrir-puerta');  // Aplica animación al abrir la puerta
 }
-
 
 puerta.addEventListener('click', () => {
     if (!passTrue) {  
