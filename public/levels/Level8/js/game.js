@@ -1,37 +1,58 @@
-const cuadros = Array.from(document.getElementsByClassName('cuadro'));
-let pass = ['', '', ''];
-const passCorrect = ['cuadro-1', 'cuadro-2', 'cuadro-3'];
-const puerta = document.getElementById('puerta');
-const knock = document.getElementById('close');
-const doorOpen = document.getElementById('open');
-let passTrue = false;
+document.addEventListener('DOMContentLoaded', function() {
+    const silla = document.querySelector('.silla');
+    const mesa = document.querySelector('.mesa');
+    const cande = document.querySelector('.cande');
+    const puerta = document.getElementById('puerta');
+    let passTrue = false;
 
-cuadros.forEach(cuadro => {
-    cuadro.addEventListener('click', () => {
-        cuadro.style.filter = 'drop-shadow(0 0 2vh rgba(255, 255, 255, 0.249))';
-        
-        for (let i = 0; i < pass.length; i++) {
-            if (pass[i] === '') {
-                pass[i] = cuadro.id;
-                break;
-            }
-        }
 
-        if (pass.join('') === passCorrect.join('')) {
-            doorOpen.play();
+    function cambiarImagen(elemento, nuevaClase) {
+        elemento.classList.add(nuevaClase);
+        verificarCambio();
+    }
+
+
+    function verificarCambio() {
+        const sillaCambiada = silla.classList.contains('silla-cambiada');
+        const mesaCambiada = mesa.classList.contains('mesa-cambiada');
+        const candeCambiada = cande.classList.contains('cande-cambiada');
+
+        if (sillaCambiada && mesaCambiada && candeCambiada) {
             passTrue = true;
+        } else {
+            passTrue = false; 
+        }
+    }
+
+    silla.addEventListener('click', function() {
+        cambiarImagen(silla, 'silla-cambiada');
+    });
+
+    mesa.addEventListener('click', function() {
+        cambiarImagen(mesa, 'mesa-cambiada');
+    });
+
+    cande.addEventListener('click', function() {
+        cambiarImagen(cande, 'cande-cambiada');
+    });
+
+    puerta.addEventListener('click', () => {
+        if (!passTrue) {
+            document.getElementById('close').play();
+        } else {
+            document.getElementById('open1').play();
+            window.location.href = '../Level9/index.html';
         }
     });
 });
 
-puerta.addEventListener('click', () => {
-    if (!passTrue) {
-        knock.play();
-        cuadros.forEach(cuadro => {
-            cuadro.style.filter = '';
-        });
-        pass.fill('');
-    } else {
-        window.location.href = '../../../game_mode/index.html';
-    }
+document.addEventListener('DOMContentLoaded', () => {
+    const cofre = document.getElementById('cofre');
+    
+    cofre.addEventListener('click', () => {
+        cofre.classList.add('moved');
+        document.getElementById('modal-ask').classList.add('show-ask')
+    });
+    
 });
+

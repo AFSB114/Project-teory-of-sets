@@ -7,9 +7,12 @@ header("Access-Control-Allow-Methods: POST");
 header("Content-Type: application/json; charset=UTF-8");
 
 $req = json_decode(file_get_contents("php://input"), true);
+
+$character_id = $req['character_id'];
+
 $connection = new DatabaseConnection();
 $pdo = $connection->connection();
-$character_id = $req['character_id'];
+
 session_start();
 $user_id = $_SESSION['id'];
 
@@ -24,12 +27,12 @@ try {
     ]);
 
     // Devuelve una respuesta exitosa
-    $res = new Res("success", "Personaje seleccionado correctamente");
+    $res = ['status'=>"success", 'message'=>"Personaje seleccionado correctamente"];
     http_response_code(200);
 
 } catch (Exception $e) {
     // Si ocurre un error, devuelve una respuesta de error
-    $res = new Res("error", $e->getMessage());
+    $res = ['status'=>"error", 'message'=>$e->getMessage()];
     http_response_code(400);
     
 }

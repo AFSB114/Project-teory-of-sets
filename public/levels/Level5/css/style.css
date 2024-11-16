@@ -619,13 +619,13 @@ video {
 }
 
 .letra {
-    font-family: 'Pixeloid Sans Bold';
+    font-family: 'Pixeloid Sans';
     font-size: 4vh;
     text-align: center center;
     grid-area: 2/1/3/5;
 
     position: absolute;
-    left: 28%;
+    left: 30%;
     top: -20%;
 }
 

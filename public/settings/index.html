@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>VENNTURE</title>
     <link rel="preload" href="../assets/fonts/pixeloidsans-webfont.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="preload" href="../assets/fonts/super-pixel-personal-use-webfont.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="stylesheet" href="../assets/css/style.css">
@@ -24,22 +24,27 @@
                     <div class="personaje">
                         <div class="text">Personaje</div>
                     </div>
-                    <a class="btn btnperson hover" href="../characterSelect/index.html" ></a>
+                    <a class="btn btnperson hover" href="../characterSelect/" ></a>
                     <div class="idioma">
                         <div class="text">Idioma</div>
                     </div>
                     <button class="btn btndef hover" type="button">ES</button>
 
                     <div class="volumen"></div>
-                    <input class="slider" type="range" id="slider" min="0" max="100" value="0">
+                    <input class="slider" type="range" id="slider" min="0" max="100" value="50">
 
                     <button class="btn hover" type="submit">Cerrar Sesión</button>
                 </form>
+
+                <audio id="backgroundMusic" autoplay loop>
+                    <source src="../assets/sonido/sounds/forest-tales-background-orchestral-mystical-music-for-halloween-video-252003.mp3" type="audio/mp3">
+                </audio>
             </div>
         </div>
     </div>
 
     <script src="settings.js"></script>
+    <script src="../assets/sonido/sonido.js"></script>
 </body>
 
 </html>

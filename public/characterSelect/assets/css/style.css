@@ -46,7 +46,7 @@ body {
 .tittle {
     color: #C3C3C3;
     font-family: 'Pixeloid Sans';
-    font-size: 105px;
+    font-size: 85px;
     font-weight: 900;
     text-shadow:
         1px 1px 0 black,
@@ -239,10 +239,17 @@ body {
     grid-area: 1 / 2 / 3 / 3;
 
     width: 15vh;
-    height: 50%;
+    height: 41%;
 
     position: relative;
+    left: 50%;
 }
+
+.hover:hover {
+    filter: brightness(80%);
+    cursor: pointer;
+}
+
 .character:hover {
     filter: brightness(150%);
     cursor: pointer;

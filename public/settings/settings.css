@@ -151,8 +151,8 @@ input[type="range"]::-webkit-slider-thumb {
     grid-area: 1 / 2 / 3 / 3;
 
     width: 15vh;
-    height: 50%;
+    height: 45%;
 
     position: relative;
-    right: 1%;
+    left: 25%;
 }

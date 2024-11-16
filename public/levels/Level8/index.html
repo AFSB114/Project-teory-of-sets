@@ -18,23 +18,25 @@
                 <div class="contenido-modal-menu">
                     <div class="btn" id="continuar">Continuar</div>
                     <a href="" class="btn">Reiniciar</a>
-                    <a href="../../start/" class="btn">Mapa</a>
-                    <a href="../../start/" class="btn">Salir</a>
+                    <a href="../index.html" class="btn">Mapa</a>
+                    <a href="../index.html" class="btn">Salir</a>
                 </div>
             </div>
+
+            <div class="help" id="help"></div>
 
             <div id="timer" class="time">
                 00:00
             </div>
 
-            <div class="help" id="help"></div>
-
             <div class="modal modal-help">
                 <div class="contenido-modal-help">
-                    Enciende el computador
+                    Mueve el cofre
                 </div>
             </div>
 
+            <iframe src="../Level0/index.html" style="display:none;" id="audioFrame"></iframe>
+            
             <div class="modal modal-help">
                 <div class="img-help2">
 
@@ -47,74 +49,49 @@
             <div class="scenarios" id="scenarios">
 
                 <div class="scenario" id="scenario1">
-
-                    
-
+                    <div class="mesa" id="mesa"></div>
                 </div>
 
                 <div class="scenario" id="scenario2">
                     <div class="puerta" id="puerta"></div>
-                    <audio id="close" src="sounds/door-knock-1.mp3"></audio>
-                    <audio id="open" src="sounds/door-1-open.mp3"></audio>
+                    <audio id="close" src="./sounds/door-knock-1.mp3"></audio>
+                    <audio id="open1" src="./sounds/door-1-open.mp3"></audio>
+                    <div class="cande" id="cande"></div>
                 </div>
 
                 <div class="scenario" id="scenario3">
-                   
+                    <div class="cofre-container">
+                        <div class="cofre" id="cofre"></div>
+                        <div class="silla" id="silla"></div>
+                    </div>
                 </div>
 
 
                 <div id="character" class="character"></div>
             </div>
 
-        </div>
-
-        <div class="modal contrast" id="modal-ask">
-            <div class="contenido-modal-ask">
-                <a href="" class="btn-close"></a>
-
-                <div class="text-1">INGRESA <br> LA <br> CONTRASEÑA</div>
-                <div class="botellas"></div>
-                <div class="silla"></div>
-                <div class="florero"></div>
-
-                <div class="numeros">
-
-                    <div class="uno">
-                        <button type="button" class="btn-numbers">1</button>
-                    </div>
-                    <div class="dos">
-                        <button type="button" class="btn-numbers">2</button>
-                    </div>
-                    <div class="tres">
-                        <button type="button" class="btn-numbers">3</button>
-
-                    </div>
-                    <div class="cuatro">
-                        <button type="button" class="btn-numbers">4</button>
-                    </div>
-                    <div class="cinco">
-                        <button type="button" class="btn-numbers">5</button>
-                    </div>
-                    <div class="six">
-                        <button type="button" class="btn-numbers sub">6</button>
-                    </div>
-                    <div class="siete">
-                        <button type="button" class="btn-numbers sub">7</button>
-                    </div>
-                    <div class="ocho">
-                        <button type="button" class="btn-numbers sub">8</button>
-                    </div>
-                    <div class="nueve">
-                        <button type="button" class="btn-numbers sub">9</button>
-                    </div>
-                    <div class="cero">
-                        <button type="button" class="btn-numbers sub">0</button>
-                    </div>
-
+            <div class="modal contrast" id="modal-ask">
+                <div class="contenido-modal-ask">
+                    <a href="#" class="btn-close" id="close-modal">
+                        <div class="conjunto1"></div>
+                        <div class="conjunto2"></div>
+                        <div class="objeto1" id="objeto1"></div>
+                        <div class="objeto2" id="objeto2"></div>
+                        <div class="objeto3" id="objeto3"></div>
+                        <div class="objeto4" id="objeto4"></div>
+                        <div class="objeto5" id="objeto5"></div>
+                        <div class="objeto6" id="objeto6"></div>
+                        <div class="objeto7" id="objeto7"></div>
+                        <div class="objeto8" id="objeto8"></div>
+                        <div class="objeto9" id="objeto9"></div>
+                        <div class="signo" id="signo"></div>
+                    </a>
                 </div>
             </div>
 
         </div>
+
+
 
     </div>
     </div>
@@ -122,7 +99,8 @@
     <script src="js/game.js"></script>
     <script src="js/modal.js"></script>
     <script src="js/time.js"></script>
-    <script src="../../characterSelect/assets/js/spritesCharacter.js"></script>
+    <script src="../assets/js/spritesCharacter.js"></script>
+    <script src="../../assets/sonido/sonido.js"></script>
 </body>
 
 </html>

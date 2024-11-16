@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>VENNTURE</title>
     <link rel="preload" href="../../../log/assets/fonts/pixeloidsans-webfont.woff" as="font" type="font/woff" crossorigin>
     <link rel="preload" href="../../../log/assets/fonts/super-pixel-personal-use-webfont.woff" as="font" type="font/woff" crossorigin>
     <link rel="stylesheet" href="../assets/css/style.css">
@@ -18,17 +18,20 @@
                 <a href="../log_in/" class="btn-back"></a>
                 <div class="tittle">VENNTURE</div>
 
+                
+                <iframe src="../../start/index.html" style="display:none;" id="audioFrame"></iframe>
+
                 <form class="recuadro" id="form">
 
                     <div class="field" id="email">
                         <div class="text">Ingresa tu<br>Correo</div>
                         <div class="input-text">
-                            <input type="email" id="email" name="email" required>
+                            <input type="email" id="email" name="email" required aria-autocomplete="none">
                         </div>
                     </div>
 
                     
-                    <button class="btn" type="submit" id="btn-text">Enviar</button>
+                    <button class="btn" type="submit"><div id="btn-text">Enviar</div></button>
                   
                 </form>
             </div>
@@ -36,6 +39,7 @@
     </div>
 
     <script src="forgotPass.js"></script>
+    <script src="../../assets/sonido/sonido.js"></script>
 </body>
 
 </html>
