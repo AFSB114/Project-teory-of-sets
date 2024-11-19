@@ -4,7 +4,7 @@ export default class StoreLevelCompleted {
     }
 
     async addStartedLevel() {
-        console.log(this.idlevel)
+        // console.log(this.idlevel)
         await fetch('../../../php/controller/level.php', {
             method: 'POST',
             headers: { 'content-type': 'application/json' },
