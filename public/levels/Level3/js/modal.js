@@ -65,11 +65,10 @@ help.addEventListener('click', () => {
     showModal(modalToShow);
 });
 
-
 let llaveUsada = false;
 
 key.addEventListener('dragstart', (event) => {
-    console.log("Llave arrastrada");
+    console.log("Arrastrando llave");
     event.dataTransfer.setData('text', event.target.id);
 });
 
@@ -92,6 +91,64 @@ reja.addEventListener('drop', (event) => {
     ask.children[0].classList.add('show-ask');
 });
 
+let isDragging = false;
+let offsetX, offsetY;
+
+key.addEventListener('touchstart', (event) => {
+    console.log("Arrastrando llave");
+    const touch = event.touches[0]; // Obtener el primer toque
+    const rect = key.getBoundingClientRect();
+
+    // Calcular la diferencia entre la posición del toque y la posición del elemento
+    offsetX = touch.clientX - rect.left;
+    offsetY = touch.clientY - rect.top;
+
+    isDragging = true;
+    event.preventDefault(); // Prevenir comportamientos por defecto
+});
+
+document.addEventListener('touchmove', (event) => {
+    if (isDragging) {
+        const touch = event.touches[0];
+        
+        const leftPosition = touch.clientX - offsetX + 200; 
+        const topPosition = touch.clientY - offsetY;
+
+        // Mover la llave a la posición calculada
+        key.style.position = 'absolute';
+        key.style.left = leftPosition + 'px';
+        key.style.top = topPosition + 'px';
+
+        event.preventDefault();
+    }
+});
+
+document.addEventListener('touchend', (event) => {
+    if (isDragging) {
+        console.log("Llave soltada");
+
+        // Verificar si el área del "reja" ha sido tocada
+        const rejaRect = reja.getBoundingClientRect();
+        const touch = event.changedTouches[0];
+
+        if (touch.clientX >= rejaRect.left && touch.clientX <= rejaRect.right && 
+            touch.clientY >= rejaRect.top && touch.clientY <= rejaRect.bottom) {
+            
+            // Colocar la llave dentro de la reja
+            reja.appendChild(key);
+            key.style.position = 'relative'; // Restaurar la posición normal
+
+            llaveUsada = true;
+            key.style.display = 'none';
+
+            ask.style.display = 'block';
+            ask.children[0].classList.add('show-ask');
+        }
+
+        isDragging = false;
+        event.preventDefault();
+    }
+});
 reja.addEventListener('click', () => {
     if (llaveUsada) { 
         ask.style.display = 'block';
