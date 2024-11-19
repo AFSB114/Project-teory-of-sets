@@ -1,4 +1,5 @@
 <?php
+
 class Room
 {
     private string $code;
@@ -10,7 +11,8 @@ class Room
         protected string     $data,
         protected Connection $pdo
     )
-    { }
+    {
+    }
 
     private function generateCode(): void
     {
@@ -24,7 +26,7 @@ class Room
         }
 
         // Concatenar el primer dígito con los siguientes
-        $this->code= (int)($firstNum . $nextNums);
+        $this->code = (int)($firstNum . $nextNums);
     }
 
     public function createRoom(): array
@@ -70,5 +72,49 @@ class Room
         } while ($while);
 
         return ['code' => $this->code];
+    }
+
+    private function insertLevels(array $level, int $code): void
+    {
+        $conn = $this->pdo->connection();
+
+        $query = "INSERT INTO level_room (level_id, room_id) VALUES (:level_id, :room_id)";
+
+        $res = $conn->prepare($query);
+        $res->execute([
+            "level_id" => $level['id'],
+            "room_id" => $code
+        ]);
+    }
+
+    public function levelsToRoom(int $code): array
+    {
+        $conn = $this->pdo->connection();
+
+        try {
+
+            $query = "SELECT id, name FROM level ORDER BY RANDOM() LIMIT {$this->numLevels}";
+
+            $res = $conn->prepare($query);
+            $res->execute();
+
+            $levels = $res->fetchAll(PDO::FETCH_ASSOC);
+
+            try {
+                $conn->beginTransaction();
+                foreach ($levels as $level) {
+                    $this->insertLevels($level, $code);
+                }
+                $conn->commit();
+            }catch (PDOException $e){
+                return ["message", "Error al crear sala", 'data' => $e];
+                $conn->rollBack();
+            }
+
+            return $levels;
+
+        } catch (PDOException $e) {
+            return ["message", "Error al crear sala", 'data' => $e];
+        }
     }
 }

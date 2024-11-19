@@ -21,10 +21,10 @@ class LastLevel
                 'user_id' => $this->idUser
             ]);
 
-            if ($res->rowCount() > 0) {
+            if ($res->rowCount() !== 0) {
                 return $res->fetch(PDO::FETCH_ASSOC);
             } else {
-                return ['level'=>null];
+                return ['level'=>null, 'status'=>null];
             }
         } catch (PDOException $e) {
             return ['status' => false, 'message' => $e->getMessage()];

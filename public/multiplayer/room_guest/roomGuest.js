@@ -39,7 +39,7 @@ async function init() {
         }
     ).then(res => res.json())
 
-    const connection = new SocketConnection(`ws://localhost:8080?token=${sessionId}&id=${res.id}&nickname=${res.nickname}`)
+    const connection = new SocketConnection(`ws://192.168.94.201:8080?token=${sessionId}&id=${res.id}&nickname=${res.nickname}`)
 
     const urlParams = new URLSearchParams(window.location.search)
 
@@ -74,7 +74,7 @@ async function init() {
                 players.addPlayer(data.nickname)
                 break
             case 'PLAY':
-                window.location.href = `../../levels/Level1/?code=${data.code}`
+                window.location.href = `../../levels/${data.levels[0].name}/?code=${data.code}`
                 break
             case 'MESSAGE':
                 let message = document.createElement('div')
