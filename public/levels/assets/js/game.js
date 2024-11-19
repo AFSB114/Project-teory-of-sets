@@ -26,7 +26,7 @@ export default class Game {
             this.currentScenario = 0
         }
 
-        this.character.limitBottom = height - this.character.height - this.character.height / 2.25
+        this.character.limitBottom = this.character.height / 2.25
         this.character.limitRight = width * numScenarios - this.character.width - this.character.width / 3.4
 
         this.camera.scenarioWidth = width

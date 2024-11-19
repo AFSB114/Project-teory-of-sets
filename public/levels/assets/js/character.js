@@ -13,12 +13,12 @@ export default class Character {
         
         // Física mejorada
         this.gravity = 0.5
-        this.jumpForce = -10
+        this.jumpForce = 10
         this.isJumping = false
-        this.friction = 0.85 // Fricción para el movimiento horizontal
-        this.airFriction = 0.95 // Fricción diferente en el aire
-        this.acceleration = 1.5 // Aceleración al moverse
-        this.maxSpeed = 10 // Velocidad máxima horizontal
+        this.friction = 0.85 // Coeficiente de fricción en el eje X
+        this.airFriction = 0.95 // Coeficiente de fricción en el aire en el eje X
+        this.acceleration = 1.5 // Aceleración en el eje X
+        this.maxSpeed = 10 // Velocidad máxima en eje X
         
         // Animación
         this.frame = 0
@@ -35,23 +35,23 @@ export default class Character {
 
     updatePhysics() {
         // Aplicar gravedad
-        this.velocityY += this.gravity
+        this.velocityY -= this.gravity
         
-        // Actualizar posición vertical
+        // Actualizar posición Y
         this.posY += this.velocityY
         
         // Colisión con el suelo
-        if (this.posY > this.limitBottom) {
+        if (this.posY < this.limitBottom) {
             this.posY = this.limitBottom
             this.velocityY = 0
             this.isJumping = false
         }
 
-        // Aplicar fricción horizontal
+        // Aplicar fricción X
         const frictionToUse = this.isJumping ? this.airFriction : this.friction
         this.velocityX *= frictionToUse
 
-        // Limitar velocidad horizontal
+        // Limitar velocidad X
         if (Math.abs(this.velocityX) < 0.1) {
             this.velocityX = 0
         }
@@ -68,7 +68,7 @@ export default class Character {
             this.element.style.transform = 'scaleX(1)'
         }
 
-        // Actualizar posición horizontal
+        // Actualizar posición X
         this.posX += this.velocityX
         this.posX = Math.max(this.limitLeft, Math.min(this.limitRight, this.posX))
     }
@@ -77,8 +77,7 @@ export default class Character {
         if (!this.isJumping) {
             this.velocityY = this.jumpForce
             this.isJumping = true
-            // Mantener la velocidad horizontal al saltar
-            this.velocityX *= 1.2 // Opcional: dar un pequeño impulso al saltar
+            //this.velocityX *= 1.2
         }
     }
 
@@ -100,6 +99,6 @@ export default class Character {
 
     updatePosition() {
         this.element.style.left = `${this.posX}px`
-        this.element.style.top = `${this.posY}px`
+        this.element.style.bottom = `${this.posY}px`
     }
 }
