@@ -44,7 +44,7 @@ class Email
 
     public function sendVerification(array $data): bool
     {
-        $url = 'http://localhost:80/vennture/public/start/?data=' . urlencode($data['data']) . '&key=' . $data['key'];
+        $url = 'http://localhost/vennture/public/start/?data=' . urlencode($data['data']) . '&key=' . $data['key'];
         $body = '
             <!DOCTYPE html>
             <html lang="es">
@@ -127,7 +127,7 @@ class Email
 
     public function sendResetPass(array $data, string $token): bool
     {
-        $url = "http://localhost:80/vennture/public/logs/change_pass/?data=" . urlencode($data['data']) . '&key=' . $data['key'] . '&token=' . $token;
+        $url = "http://localhost/vennture/public/logs/change_pass/?data=" . urlencode($data['data']) . '&key=' . $data['key'] . '&token=' . $token;
 
         $body = '
             <!DOCTYPE html>
