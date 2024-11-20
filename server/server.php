@@ -33,7 +33,7 @@ class MultiplayerServer implements MessageComponentInterface
         $conn->nickname = $queryParams['nickname'];
 
         if ($this->rooms["{$queryParams['code']}"]) {
-            $this->rooms["{$queryParams['code']}"]->attach($conn);
+            $this->rooms["{$queryParams['code']}"]['players']->attach($conn);
         }
 
         echo "New connection ({$conn->nickname})\n";
@@ -45,13 +45,15 @@ class MultiplayerServer implements MessageComponentInterface
 
         switch ($data['action']) {
             case 'CREATE':
-                $room = new Room($from->id, $data['numLevels'], $data['timePerLevel'], $from->token, new Connection());
+                $room = new Room($from->id, $data['timePerLevel'], $data['numLevels'], $from->token, new Connection());
 
                 $code = $room->createRoom()['code'];
                 $from->code = $code;
 
-                $this->rooms["$code"] = new SplObjectStorage();
-                $this->rooms["$code"]->attach($from);
+                $this->rooms["$code"]['settings']['levels'] = $room->levelsToRoom($code);
+                $this->rooms["$code"]['settings']['maxTime'] = $data['timePerLevel'];
+                $this->rooms["$code"]['players'] = new SplObjectStorage();
+                $this->rooms["$code"]['players']->attach($from);
 
                 $from->send(json_encode(['action' => 'CREATE', 'code' => $code, 'nickname' => $from->nickname]));
 
@@ -65,9 +67,9 @@ class MultiplayerServer implements MessageComponentInterface
                 if ($join->checkRoom()['status'] == 'OK') {
                     if ($join->joinRoom()['status'] == 'OK') {
 
-                        $this->rooms["{$data['code']}"]->attach($from);
+                        $this->rooms["{$data['code']}"]['players']->attach($from);
 
-                        foreach ($this->rooms["{$data['code']}"] as $client) {
+                        foreach ($this->rooms["{$data['code']}"]['players'] as $client) {
                             if ($client != $from) {
                                 $client->send(json_encode(['action' => 'NEW_PLAYER', 'message' => 'New player has been joined!', 'nickname' => $from->nickname]));
                             }
@@ -79,13 +81,19 @@ class MultiplayerServer implements MessageComponentInterface
                 break;
             case 'PLAY':
 
-                foreach ($this->rooms["{$data['code']}"] as $client) {
-                    $client->send(json_encode(['action' => 'PLAY', 'code' => $data['code']]));
+                foreach ($this->rooms["{$data['code']}"]['players'] as $client) {
+                    $client->send(json_encode(['action' => 'PLAY', 'code' => $data['code'], 'levels' => $this->rooms["{$data['code']}"]['settings']['levels']]));
                 }
-                case 'MESSAGE':
-                    foreach ($this->rooms["{$data['code']}"] as $client) {
-                        $client->send(json_encode(['action' => 'MESSAGE', 'id' => $from->id, 'nickname'=>$from->nickname, 'message' => $data['message']]));
-                    }
+
+                break;
+            case 'MESSAGE':
+                foreach ($this->rooms["{$data['code']}"]['players'] as $client) {
+                    $client->send(json_encode(['action' => 'MESSAGE', 'id' => $from->id, 'nickname' => $from->nickname, 'message' => $data['message']]));
+                }
+                break;
+            case 'PASS_LEVEL':
+
+                break;
         }
 
     }
