@@ -23,20 +23,23 @@ class MultiplayerServer implements MessageComponentInterface
 
     public function onOpen(ConnectionInterface $conn): void
     {
-        $this->clients->attach($conn);
+        if (!$this->clients->contains($conn)) {
+            $this->clients->attach($conn);
 
-        $queryString = $conn->httpRequest->getUri()->getQuery(); //
-        parse_str($queryString, $queryParams);
+            $queryString = $conn->httpRequest->getUri()->getQuery();
+            parse_str($queryString, $queryParams);
 
-        $conn->id = $queryParams['id'];
-        $conn->token = $queryParams['token'];
-        $conn->nickname = $queryParams['nickname'];
+            $conn->id = $queryParams['id'];
+            $conn->token = $queryParams['token'];
+            $conn->nickname = $queryParams['nickname'];
 
-        if ($this->rooms["{$queryParams['code']}"]) {
-            $this->rooms["{$queryParams['code']}"]['players']->attach($conn);
+            if ($this->rooms["{$queryParams['code']}"]) {
+                $this->rooms["{$queryParams['code']}"]['players']->attach($conn);
+            }
+
+            echo "New connection ($conn->nickname)\n";
+            echo "Numero de jugadores ({$this->clients->count()})\n";
         }
-
-        echo "New connection ({$conn->nickname})\n";
     }
 
     public function onMessage(ConnectionInterface $from, $msg): void
@@ -45,7 +48,13 @@ class MultiplayerServer implements MessageComponentInterface
 
         switch ($data['action']) {
             case 'CREATE':
-                $room = new Room($from->id, $data['timePerLevel'], $data['numLevels'], $from->token, new Connection());
+                $room = new Room(
+                    $from->id,
+                    $data['timePerLevel'],
+                    $data['numLevels'],
+                    $from->token,
+                    new Connection()
+                );
 
                 $code = $room->createRoom()['code'];
                 $from->code = $code;
@@ -55,14 +64,22 @@ class MultiplayerServer implements MessageComponentInterface
                 $this->rooms["$code"]['players'] = new SplObjectStorage();
                 $this->rooms["$code"]['players']->attach($from);
 
-                $from->send(json_encode(['action' => 'CREATE', 'code' => $code, 'nickname' => $from->nickname]));
+                $from->send(json_encode([
+                    'action' => 'CREATE',
+                    'code' => $code,
+                    'nickname' => $from->nickname
+                ]));
 
                 break;
             case 'JOIN':
 
                 $from->code = $data['code'];
 
-                $join = new JoinRoom($data['code'], $from->id, $from->token);
+                $join = new JoinRoom(
+                    $data['code'],
+                    $from->id,
+                    $from->token
+                );
 
                 if ($join->checkRoom()['status'] == 'OK') {
                     if ($join->joinRoom()['status'] == 'OK') {
@@ -71,9 +88,17 @@ class MultiplayerServer implements MessageComponentInterface
 
                         foreach ($this->rooms["{$data['code']}"]['players'] as $client) {
                             if ($client != $from) {
-                                $client->send(json_encode(['action' => 'NEW_PLAYER', 'message' => 'New player has been joined!', 'nickname' => $from->nickname]));
+                                $client->send(json_encode([
+                                    'action' => 'NEW_PLAYER',
+                                    'message' => 'New player has been joined!',
+                                    'nickname' => $from->nickname
+                                ]));
                             }
-                            $from->send(json_encode(['action' => 'JOIN', 'message' => 'Joined to room successfully!', 'nickname' => $client->nickname]));
+                            $from->send(json_encode([
+                                'action' => 'JOIN',
+                                'message' => 'Joined to room successfully!',
+                                'nickname' => $client->nickname
+                            ]));
                         }
                     }
                 }
@@ -82,13 +107,22 @@ class MultiplayerServer implements MessageComponentInterface
             case 'PLAY':
 
                 foreach ($this->rooms["{$data['code']}"]['players'] as $client) {
-                    $client->send(json_encode(['action' => 'PLAY', 'code' => $data['code'], 'levels' => $this->rooms["{$data['code']}"]['settings']['levels']]));
+                    $client->send(json_encode([
+                        'action' => 'PLAY',
+                        'code' => $data['code'],
+                        'levels' => $this->rooms["{$data['code']}"]['settings']['levels']
+                    ]));
                 }
 
                 break;
             case 'MESSAGE':
                 foreach ($this->rooms["{$data['code']}"]['players'] as $client) {
-                    $client->send(json_encode(['action' => 'MESSAGE', 'id' => $from->id, 'nickname' => $from->nickname, 'message' => $data['message']]));
+                    $client->send(json_encode([
+                        'action' => 'MESSAGE',
+                        'id' => $from->id,
+                        'nickname' => $from->nickname,
+                        'message' => $data['message']
+                    ]));
                 }
                 break;
             case 'PASS_LEVEL':
@@ -104,10 +138,10 @@ class MultiplayerServer implements MessageComponentInterface
 //        $this->rooms["{$conn->code}"]->detach($conn);
         $this->clients->detach($conn);
 
-        echo "Exit ({$conn->nickname})\n";
+        echo "Exit ($conn->nickname)\n";
     }
 
-    public function onError(ConnectionInterface $conn, \Exception $e): void
+    public function onError(ConnectionInterface $conn, Exception $e): void
     {
         echo "Un error ha ocurrido: {$e->getMessage()}\n";
         $conn->close();
@@ -120,8 +154,7 @@ $server = IoServer::factory(
             new MultiplayerServer()
         )
     ),
-    8080,
-    '0.0.0.0'
+    8080
 );
 
 $server->run();

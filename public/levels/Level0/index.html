@@ -7,9 +7,14 @@
     <link rel="icon" href="../../assets/images/icon.png" type="image/x-icon">
     <title>Nivel 0</title>
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="../assets/css/loader.css">
 </head>
 
 <body>
+    <div class="loader" id="loader">
+        <div class="animation-loader" id="animation-loader"></div>
+        <div class="text-loader">¿Podrás escapar? Prepárate...</div>
+    </div>
     <div class="container">
         <div class="box-wrapper">
 
@@ -21,7 +26,7 @@
                 <div class="contenido-modal-menu">
                     <div class="btn" id="continuar">Continuar</div>
                     <a href="" class="btn">Reiniciar</a>
-                    <a href="../../start/" class="btn">Mapa</a>
+                    <a href="../../start/" class="btn">???</a>
                     <a href="../../start/" class="btn">Salir</a>
                 </div>
             </div>
@@ -93,8 +98,9 @@
 
         </div>
     </div>
+    <script src="../assets/js/loader.js"></script>
     <script src="../assets/js/spritesCharacter.js"></script>
-    <script src="js/movement.js"></script>
+    <script src="js/movement.js" type="module"></script>
     <script src="js/time.js"></script>
     <script src="js/game.js" type="module"></script>
     <script src="js/modal.js"></script>

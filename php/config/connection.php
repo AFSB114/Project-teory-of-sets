@@ -4,9 +4,9 @@ class DatabaseConnection {
 
     public function __construct(
         private string $host = "localhost",
-        private string $db = "vennture",
+        private string $db = "vennture2",
         private string $user = "postgres",
-        private string $password = "200820",
+        private string $password = "Af300407",
         private string $port = "5432"
     ) {
         $dsn = "pgsql:host=$this->host;port=$this->port;dbname=$this->db;";

@@ -24,6 +24,7 @@
       <excludeFolder url="file://$MODULE_DIR$/server/vendor/symfony/polyfill-php83" />
       <excludeFolder url="file://$MODULE_DIR$/server/vendor/symfony/routing" />
       <excludeFolder url="file://$MODULE_DIR$/php/vendor/phpmailer/phpmailer" />
+      <excludeFolder url="file://$MODULE_DIR$/.idea/dataSources" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />

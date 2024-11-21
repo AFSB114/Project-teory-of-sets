@@ -7,9 +7,14 @@
     <link rel="icon" href="../../assets/images/icon.png" type="image/x-icon">
     <title>Nivel 3</title>
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="../assets/css/loader.css">
 </head>
 
 <body>
+    <div class="loader" id="loader">
+        <div class="animation-loader" id="animation-loader"></div>
+        <div class="text-loader">¿Podrás escapar? Prepárate...</div>
+    </div>
     <div class="container">
         <div class="box-wrapper">
 
@@ -77,13 +82,13 @@
         <div class="modal contrast" id="modal-ask">
             <div class="contenido-modal-ask">
                 <div class="caja1">
-                    <h3>a</h3>
+                    <h3></h3>
                 </div>
                 <div class="caja2">
-                    <h3>b</h3>
+                    <h3></h3>
                 </div>
                 <div class="caja3">
-                    <h3>c</h3>
+                    <h3></h3>
                 </div>
 
                 <div class="text-muebles">
@@ -122,8 +127,8 @@
         </div>
 
     </div>
-    <!-- <script src="js/funcion.js"></script> -->
-    <script src="js/movement.js"></script>
+    <script src="../assets/js/loader.js"></script>
+    <script src="js/movement.js" type="module"></script>
     <script src="js/game.js"></script>
     <script src="js/modal.js"></script>
     <script src="js/time.js"></script>

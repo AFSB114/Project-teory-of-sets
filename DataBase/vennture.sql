@@ -41,6 +41,7 @@ CREATE TABLE users(
     surname VARCHAR(40) NOT NULL,
     birthday DATE,
     date_create DATE,
+    see_int_mlt BOOLEAN DEFAULT FALSE,
     rol_id INT DEFAULT 2,
     character_id INT DEFAULT 1,
     PRIMARY KEY(id),

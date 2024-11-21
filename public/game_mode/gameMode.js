@@ -13,7 +13,11 @@ document.getElementById('multiplayer').addEventListener('click', async (event) =
         .then(res => res.json())
         .then(res => {
             if (res.authenticated) {
-                window.location.href = `../multiplayer/intro_multiplayer/`
+                if (!res.see_int_mlt) {
+                    window.location.href = `../multiplayer/intro_multiplayer/`
+                } else {
+                    window.location.href = '../multiplayer/start/'
+                }
             } else {
                 window.location.href = '../logs/log_in/?message=Debes estar logueado para jugar'
             }

@@ -58,6 +58,7 @@ switch ($req["action"]) {
                 $_SESSION['email'] = $res['data']['email'];
                 $_SESSION['name'] = $res['data']['name'];
                 $_SESSION['surname'] = $res['data']['surname'];
+                $_SESSION['see_int_mlt'] = $res['data']['see_int_mlt'];
 
                 http_response_code(200);
                 echo json_encode(['status' => 'OK', 'message' => 'Usuario autenticado.', 'data' => $res['data']]);
@@ -75,7 +76,7 @@ switch ($req["action"]) {
         session_start();
 
         if (isset($_SESSION['id'])) {
-            echo json_encode(['authenticated' => true, 'id' => $_SESSION['id']]);
+            echo json_encode(['authenticated' => true, 'see_int_mlt' => $_SESSION['see_int_mlt']]);
         } else {
             echo json_encode(['authenticated' => false]);
         }
@@ -87,6 +88,17 @@ switch ($req["action"]) {
         echo json_encode($_SESSION);
         break;
 
+    case "see_int_mlt":
+        session_start();
+
+        $res = $log->see_int_mlt($_SESSION['id']);
+
+        if ($res['status'] == 'OK') {
+            $_SESSION['see_int_mlt'] = true;
+        }
+
+        echo json_encode($res);
+        break;
 
     case "logOut":
         session_start();
