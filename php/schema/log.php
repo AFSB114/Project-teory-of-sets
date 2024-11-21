@@ -48,7 +48,7 @@ class Log
     {
         $conn = $this->pdo->connection();
         try {
-            $query = "SELECT log.id, log.nickname, log.email, log.password, users.name, users.surname FROM log INNER JOIN users ON users.id = log.id WHERE log.nickname = :username";
+            $query = "SELECT log.id, log.nickname, log.email, log.password, users.name, users.surname, users.see_int_mlt FROM log INNER JOIN users ON users.id = log.id WHERE log.nickname = :username";
             $res = $conn->prepare($query);
             $res->execute([
                 "username" => $this->user->getNickname()
@@ -61,6 +61,23 @@ class Log
             } else {
                 return ['status' => 'ERROR', 'message' => 'Credenciales inválidas'];
             }
+        } catch (PDOException $e) {
+            return ['status' => 'ERROR', 'message' => 'Error en la consulta'];
+        }
+    }
+
+    public function see_int_mlt(int $id): array
+    {
+        $conn = $this->pdo->connection();
+        try {
+            $query  = "UPDATE users SET see_int_mlt = true WHERE id = :id";
+            $res = $conn->prepare($query);
+            $res->execute([
+                "id" => $id
+            ]);
+
+            return ["status"=>"OK", "message" => "Consulta realizada correctamente"];
+
         } catch (PDOException $e) {
             return ['status' => 'ERROR', 'message' => 'Error en la consulta'];
         }
