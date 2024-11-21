@@ -45,6 +45,7 @@ export default class Game {
             }
 
             if (key.code === 'Space') {
+                console.log('jumping')
                 this.character.jump()
                 this.start()
             }
@@ -107,9 +108,10 @@ export default class Game {
 
     stop() {
         if (this.animationFrameId) {
-            // Solo detenemos la animación si el personaje no está saltando
+            // Detener animacion si no esta saltando
             if (!this.character.isJumping) {
                 cancelAnimationFrame(this.animationFrameId)
+                this.character.velocityX = 0
                 this.animationFrameId = null
                 this.character.element.style.backgroundPosition = '0 0'
             }

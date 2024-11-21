@@ -16,7 +16,7 @@ export default class Character {
         this.jumpForce = 10
         this.isJumping = false
         this.friction = 0.85 // Coeficiente de fricción en el eje X
-        this.airFriction = 0.95 // Coeficiente de fricción en el aire en el eje X
+        this.airFriction = 1 // Coeficiente de fricción en el aire en el eje X
         this.acceleration = 1.5 // Aceleración en el eje X
         this.maxSpeed = 10 // Velocidad máxima en eje X
         
@@ -24,7 +24,7 @@ export default class Character {
         this.frame = 0
         this.numsFrame = 4
         this.widthFrame = this.width
-        this.animationSpeed = 9
+        this.animationSpeed = 4.5
         this.animationCounter = 0
         
         // Límites
@@ -77,12 +77,11 @@ export default class Character {
         if (!this.isJumping) {
             this.velocityY = this.jumpForce
             this.isJumping = true
-            //this.velocityX *= 1.2
+            // this.velocityX *= 1.2
         }
     }
 
     animate() {
-        // Animar solo si hay movimiento significativo
         if (Math.abs(this.velocityX) > 0.5) {
             this.animationCounter++
             if (this.animationCounter >= this.animationSpeed) {
