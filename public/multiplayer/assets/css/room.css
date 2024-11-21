@@ -152,8 +152,8 @@ a {
 
     width: 30vw;
 
-    height: auto;
-    max-height: 80vh;
+    height: 50%;
+   
 
     background-color: rgba(255, 247, 230, 0.7);
     border: 1.2vh solid black;
@@ -194,6 +194,8 @@ a {
     border: 0.5vh solid black;
 
     text-align: left;
+    position: relative;
+    top: 600%;
 }
 
 .send {
@@ -208,6 +210,9 @@ a {
 
     width: 15%;
     text-align: center;
+
+    position: relative;
+    top: 600%;
 }
 
 .message {
@@ -218,4 +223,26 @@ a {
 
 .me {
     text-align: right;
+}
+
+.mensajes{
+    background-image: url('../images/mensaje.png');
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center center;
+
+    width: 50%;
+    height: 10vh;
+    
+
+    grid-area: 2/8/4/9;
+
+    position: relative;
+    top: 20%;
+
+}
+
+.mensajes:hover{
+    filter: brightness(80%);
+    cursor: pointer;
 }

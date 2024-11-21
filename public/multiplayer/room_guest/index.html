@@ -6,8 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="../../assets/images/icon.png" type="image/x-icon">
     <title>VENNTURE</title>
-    <link rel="preload" href="../../../multiplayer/assets/fonts/pixeloidsans-webfont.woff" as="font" type="font/woff" crossorigin>
-    <link rel="preload" href="../../../multiplayer/assets/fonts/super-pixel-personal-use-webfont.woff" as="font" type="font/woff" crossorigin>
+    <link rel="preload" href="../../../multiplayer/assets/fonts/pixeloidsans-webfont.woff" as="font" type="font/woff"
+        crossorigin>
+    <link rel="preload" href="../../../multiplayer/assets/fonts/super-pixel-personal-use-webfont.woff" as="font"
+        type="font/woff" crossorigin>
     <link rel="stylesheet" href="../assets/css/style.css">
     <link rel="stylesheet" href="../assets/css/room.css">
 </head>
@@ -16,7 +18,7 @@
     <div class="container">
         <div class="box-wrapper">
             <div class="fondo">
-                
+
                 <iframe src="../../start/index.html" style="display:none;" id="audioFrame"></iframe>
 
                 <a href="../start/" class="btn-back"></a>
@@ -33,13 +35,20 @@
 
                 <button class="btn" type="button">Personaje</button>
 
-                <div class="chat">
+
+                <div class="mensajes" onclick="toggleChat()">
+                </div>
+
+                <div class="chat" id="chat" style="display: none;">
                     <div class="chat-messages" id="messages"></div>
                     <form action="" class="chat-form">
-                        <input type="text" name="message" id="message" placeholder="Escribe tu mensaje" class="message-sent">
+                        <input type="text" name="message" id="message" placeholder="Escribe tu mensaje"
+                            class="message-sent">
                         <button type="submit" id="send" class="send">Enviar</button>
                     </form>
                 </div>
+
+
 
             </div>
         </div>
@@ -47,6 +56,7 @@
 
     <script type="module" src="roomGuest.js"></script>
     <script src="../../assets/sonido/sonido.js"></script>
+    <script src="mensaje.js"></script>
 </body>
 
 </html>
