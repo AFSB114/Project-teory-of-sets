@@ -26,7 +26,7 @@ export default class Game {
             this.currentScenario = 0
         }
 
-        this.character.limitBottom = this.character.height / 2.25
+        this.character.limitBottom = this.character.height / 2.4
         this.character.limitRight = width * numScenarios - this.character.width - this.character.width / 3.4
 
         this.camera.scenarioWidth = width
@@ -107,9 +107,10 @@ export default class Game {
 
     stop() {
         if (this.animationFrameId) {
-            // Solo detenemos la animación si el personaje no está saltando
+            // Detener animacion si no esta saltando
             if (!this.character.isJumping) {
                 cancelAnimationFrame(this.animationFrameId)
+                this.character.velocityX = 0
                 this.animationFrameId = null
                 this.character.element.style.backgroundPosition = '0 0'
             }

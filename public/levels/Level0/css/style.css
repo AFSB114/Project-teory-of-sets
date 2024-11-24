@@ -177,16 +177,16 @@ body {
 }
 
 #character {
-    width: 23vh;
+    width: 22.5vh;
     height: 25vh;
 
-    /*background-image: url('../images/character.png');*/
+    background-image: url('../images/character.png');
     background-repeat: no-repeat;
     background-size: cover;
 
     position: absolute;
-    left: 10%;
-    top: 60%;
+    left: calc(50% - 11.25vh);
+    bottom: 10%;
 }
 
 .menu {
