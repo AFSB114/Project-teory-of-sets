@@ -4,7 +4,19 @@ const passCorrect = ['cuadro-1', 'cuadro-2', 'cuadro-3'];
 const puerta = document.getElementById('puerta');
 const knock = document.getElementById('close');
 const doorOpen = document.getElementById('open');
+const keys = document.querySelectorAll('.key');
 let passTrue = false;
+
+keys.forEach((key) => {
+    key.addEventListener('click', () => {
+        // Encuentra el audio dentro de la tecla
+        const audio = key.querySelector('audio');
+        if (audio) {
+            audio.currentTime = 0; // Reinicia el audio
+            audio.play();         // Reproduce el audio
+        }
+    });
+});
 
 cuadros.forEach(cuadro => {
     cuadro.addEventListener('click', () => {

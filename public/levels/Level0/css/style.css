@@ -487,3 +487,16 @@ body {
 .text-2 {
     grid-area: 3 / 1 / 4 / 6;
 }
+
+.reloj {
+    background-image: url('../images/bigClock.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+
+    width: 22.5vh;
+    height: 67.5vh;
+
+    position: absolute;
+    bottom: 10.5%;
+    left: 33.5%;
+}

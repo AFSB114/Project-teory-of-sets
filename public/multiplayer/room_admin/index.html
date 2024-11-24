@@ -9,12 +9,16 @@
     <link rel="preload" href="../../../multiplayer/assets/fonts/pixeloidsans-webfont.woff" as="font" type="font/woff" crossorigin>
     <link rel="preload" href="../../../multiplayer/assets/fonts/super-pixel-personal-use-webfont.woff" as="font" type="font/woff"
           crossorigin>
-        
+    <link rel="stylesheet" href="../../assets/css/loader.css">
     <link rel="stylesheet" href="../assets/css/style.css">
     <link rel="stylesheet" href="../assets/css/room.css">
 </head>
 
 <body>
+    <div class="loader" id="loader">
+        <div class="animation-loader" id="animation-loader"></div>
+        <div class="text-loader">¿Podrás escapar? Prepárate...</div>
+    </div>
     <div class="container">
         <div class="box-wrapper">
             <div class="fondo">
@@ -46,7 +50,8 @@
             </div>
         </div>
     </div>
-
+    <!--<script src="../../levels/assets/js/loader.js"></script>-->
+    <script src="../../assets/js/loader.js"></script>
     <script type="module" src="roomAdmin.js"></script>
     <script src="../../assets/sonido/sonido.js"></script>
 </body>
