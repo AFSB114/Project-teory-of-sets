@@ -35,7 +35,8 @@ document.getElementById('singleplayer').addEventListener('click', async (event) 
         })
     }).then(res => res.json())
         .then(res => {
-            if (res.level === null) {
+            console.log(res)
+            if (res.level === null || !res.level) {
                 window.location.href = `../intro_game/`
                 return
             } else {

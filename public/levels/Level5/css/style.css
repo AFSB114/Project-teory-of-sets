@@ -172,12 +172,17 @@ body {
     background-image: url('../images/LEVEL\ 5.3.png');
 }
 
-video {
-    width: 30%;
-    height: 25%;
+.reloj {
+    background-image: url('../images/clock.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+
+    width: 21.06vh;
+    height: 25vh;
+
     position: absolute;
-    top: 18%;
-    right: 35%;
+    bottom: 60%;
+    left: 40%;
 }
 
 .mueble-platos {
