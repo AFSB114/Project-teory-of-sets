@@ -27,9 +27,27 @@ class Socket {
             }
 
             this.socket.onmessage = (event) => {
-                console.log(event.data)
-             }
+                const data = JSON.parse(event.data)
+                console.log(data)
+
+                switch (data.action) {
+                    case 'NEXT_LEVEL':
+                        window.location.href = `../../levels/${data.level}/?play=true&id=${data.id}&indexLevel=${data.indexLevel}`
+                        break
+                    default:
+                        console.log(data)
+                        break
+                }
+            }
         })
+    }
+
+    sendPassLevel(indexLevel) {
+        this.socket.send(JSON.stringify({
+            action: 'PASS_LEVEL',
+            indexLevel: indexLevel,
+            time: document.getElementById('timer').innerHTML
+        }))
     }
 }
 

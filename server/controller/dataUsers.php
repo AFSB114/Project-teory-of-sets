@@ -19,6 +19,7 @@ class DataUsers
         try {
             $stmt = $pdo->prepare($this->query);
             $stmt->execute([
+                'id' => $this->id,
             ]);
 
             $res = ["status" => true, "data" => $stmt->fetch(PDO::FETCH_ASSOC)];

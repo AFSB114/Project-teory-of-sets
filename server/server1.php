@@ -9,6 +9,7 @@ use Ratchet\ConnectionInterface;
 require_once 'connection/connection.php';
 require_once 'controller/createRoom.php';
 require_once 'controller/joinRoom.php';
+require_once 'controller/dataUsers.php';
 
 require __DIR__ . '/vendor/autoload.php';
 
@@ -33,10 +34,6 @@ class MultiplayerServer implements MessageComponentInterface
 
     public function onOpen(ConnectionInterface $conn): void
     {
-        if ($this->clients->contains($conn)) {
-            return;
-        }
-
         $this->initializeConnection($conn);
         $this->logConnectionStatus($conn);
     }
@@ -54,8 +51,10 @@ class MultiplayerServer implements MessageComponentInterface
 
     public function onClose(ConnectionInterface $conn): void
     {
-        $this->clients->detach($conn);
-        $this->logDisconnection($conn);
+        if (!$conn->play) {
+            $this->clients->detach($conn);
+            $this->logDisconnection($conn);
+        }
     }
 
     public function onError(ConnectionInterface $conn, Exception $e): void
@@ -70,28 +69,54 @@ class MultiplayerServer implements MessageComponentInterface
         parse_str($queryString, $queryParams);
 
         $conn->id = $queryParams['id'];
-        $conn->token = $queryParams['token'];
-        $conn->nickname = $queryParams['nickname'];
+
+        foreach ($this->clients as $client) {
+            if ($conn->id === $client->id) {
+                $conn->code = $client->code;
+                $conn->times = $client->times;
+                $client->close();
+                break;
+            }
+        }
+
+        $dataUser = new DataUsers(
+            $conn->id,
+            new Connection()
+        );
+
+        $res = $dataUser->getData();
+
+        if ($res['status']) {
+            $conn->nickname = $res['data']['nickname'];
+            $conn->avatar = $res['data']['avatar'];
+            $conn->play = false;
+        } else {
+            $conn->send(json_encode($res));
+        }
+
 
         $this->clients->attach($conn);
 
-        if (isset($queryParams['code']) && isset($this->rooms[$queryParams['code']])) {
-            $this->rooms[$queryParams['code']]['players']->attach($conn);
+        if (isset($conn->code)) {
+            $this->rooms["$conn->code"]['players']->attach($conn);
         }
     }
 
     private function handleCreateRoom(ConnectionInterface $from, array $data): void
     {
+        echo "Se esta creando la sala\n";
         $room = new Room(
             $from->id,
             $data['timePerLevel'],
             $data['numLevels'],
-            $from->token,
             new Connection()
         );
 
         $code = $room->createRoom()['code'];
         $from->code = $code;
+
+        $from->idConn = "{$from->id}_$code";
+        echo "Este es el codigo de la sala {$from->idConn}\n" . json_encode($from) . "\n";
 
         $this->rooms[$code] = [
             'settings' => [
@@ -106,14 +131,15 @@ class MultiplayerServer implements MessageComponentInterface
         $this->sendResponse($from, [
             'action' => 'CREATE',
             'code' => $code,
-            'nickname' => $from->nickname
+            'nickname' => $from->nickname,
+            'avatar' => $from->avatar
         ]);
     }
 
     private function handleJoinRoom(ConnectionInterface $from, array $data): void
     {
         $from->code = $data['code'];
-        $join = new JoinRoom($data['code'], $from->id, $from->token);
+        $join = new JoinRoom($data['code'], $from->id);
 
         if (!$this->isValidJoin($join)) {
             return;
@@ -128,8 +154,8 @@ class MultiplayerServer implements MessageComponentInterface
         $roomCode = $data['code'];
         $response = [
             'action' => 'PLAY',
-            'code' => $roomCode,
-            'levels' => $this->rooms[$roomCode]['settings']['levels']
+            'level' => $this->rooms[$roomCode]['settings']['levels'][0],
+            'indexLevel' => 0
         ];
 
         $this->broadcastToRoom($roomCode, $response);
@@ -149,7 +175,17 @@ class MultiplayerServer implements MessageComponentInterface
 
     private function handlePassLevel(ConnectionInterface $from, array $data): void
     {
-        // Implementar lógica para manejar el paso de nivel
+        $from->times[$data['indexLevel']] = $data['time'];
+
+        $indexLevel = $data['indexLevel']++;
+
+        $response = [
+            'action' => 'NEXT_LEVEL',
+            'level' => $this->rooms["{$from->code}"]['settings']['levels'][$indexLevel],
+            'indexLevel' => $indexLevel
+        ];
+
+        $this->sendResponse($from, $response);
     }
 
     private function isValidJoin(JoinRoom $join): bool
@@ -165,14 +201,16 @@ class MultiplayerServer implements MessageComponentInterface
                 $this->sendResponse($client, [
                     'action' => 'NEW_PLAYER',
                     'message' => 'New player has been joined!',
-                    'nickname' => $newPlayer->nickname
+                    'nickname' => $newPlayer->nickname,
+                    'avatar' => $newPlayer->avatar
                 ]);
             }
 
             $this->sendResponse($newPlayer, [
                 'action' => 'JOIN',
                 'message' => 'Joined to room successfully!',
-                'nickname' => $client->nickname
+                'nickname' => $client->nickname,
+                'avatar' => $client->avatar
             ]);
         }
     }
@@ -180,6 +218,10 @@ class MultiplayerServer implements MessageComponentInterface
     private function broadcastToRoom(string $roomCode, array $message): void
     {
         foreach ($this->rooms[$roomCode]['players'] as $client) {
+            if ($message['action'] === 'PLAY') {
+                $client->play = true;
+                $message['id'] = $client->id;
+            }
             $this->sendResponse($client, $message);
         }
     }
