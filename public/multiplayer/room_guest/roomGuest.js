@@ -74,7 +74,7 @@ async function init() {
                 players.addPlayer({nickname: data.nickname,avatar: data.avatar })
                 break
             case 'PLAY':
-                window.location.href = `../../levels/level-test/?play=true&id=${data.id}&indexLevel=${data.indexLevel}`
+                window.location.href = `../../levels/${data.level.name}/?play=true&id=${data.id}&indexLevel=${data.indexLevel}`
                 break
             case 'MESSAGE':
                 let message = document.createElement('div')

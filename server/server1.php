@@ -54,6 +54,8 @@ class MultiplayerServer implements MessageComponentInterface
         if (!$conn->play) {
             $this->clients->detach($conn);
             $this->logDisconnection($conn);
+        }else{
+            echo "\n\nNo se desconectó\n\n";
         }
     }
 
@@ -68,12 +70,20 @@ class MultiplayerServer implements MessageComponentInterface
         $queryString = $conn->httpRequest->getUri()->getQuery();
         parse_str($queryString, $queryParams);
 
-        $conn->id = $queryParams['id'];
+        $conn->id = (int)$queryParams['id'];
+
+        echo "\n\nEste es el id de la persona: $conn->id\n\n";
 
         foreach ($this->clients as $client) {
+            echo "\n\nEmpezo a recorrer todos los clientes conectados\n\n";
+            var_dump($client->id);
             if ($conn->id === $client->id) {
                 $conn->code = $client->code;
+                echo "\n\nEste es el codigo de la sala en donde esta el usuario: $conn->code\n\n";
                 $conn->times = $client->times;
+
+                $this->clients->detach($client);
+                $client->play = true;
                 $client->close();
                 break;
             }
@@ -99,6 +109,7 @@ class MultiplayerServer implements MessageComponentInterface
 
         if (isset($conn->code)) {
             $this->rooms["$conn->code"]['players']->attach($conn);
+            echo "\n\nEste es el id de la persona: {$this->rooms["$conn->code"]['players']->count()}\n\n";
         }
     }
 
@@ -113,13 +124,12 @@ class MultiplayerServer implements MessageComponentInterface
         );
 
         $code = $room->createRoom()['code'];
-        $from->code = $code;
 
-        $from->idConn = "{$from->id}_$code";
-        echo "Este es el codigo de la sala {$from->idConn}\n" . json_encode($from) . "\n";
+        $from->code = $code;
 
         $this->rooms[$code] = [
             'settings' => [
+                'numLevels' => (int)$data['numLevels'],
                 'levels' => $room->levelsToRoom($code),
                 'maxTime' => $data['timePerLevel']
             ],
@@ -175,15 +185,27 @@ class MultiplayerServer implements MessageComponentInterface
 
     private function handlePassLevel(ConnectionInterface $from, array $data): void
     {
-        $from->times[$data['indexLevel']] = $data['time'];
+        $from->times[(int)$data['indexLevel']] = $data['time'];
 
-        $indexLevel = $data['indexLevel']++;
+        $code = $from->code;
 
-        $response = [
-            'action' => 'NEXT_LEVEL',
-            'level' => $this->rooms["{$from->code}"]['settings']['levels'][$indexLevel],
-            'indexLevel' => $indexLevel
-        ];
+        echo "\n\nEste es el codigo de la sala: $code\n\n";
+
+        $indexLevel = (int)$data['indexLevel'] + 1;
+
+        if ($indexLevel <= $this->rooms[$code]['settings']['numLevels']) {
+            $response = [
+                'action' => 'NEXT_LEVEL',
+                'level' => $this->rooms[$code]['settings']['levels'][$indexLevel],
+                'indexLevel' => $indexLevel,
+                'id' => $from->id
+            ];
+        } else {
+            echo "Ha finalizado\n";
+            $response = [
+                'action' => 'FINISHED'
+            ];
+        }
 
         $this->sendResponse($from, $response);
     }
@@ -240,6 +262,23 @@ class MultiplayerServer implements MessageComponentInterface
     private function logDisconnection(ConnectionInterface $conn): void
     {
         echo "Exit ({$conn->nickname})\n";
+    }
+
+    // Metodo para limpiar conexiones persistentes antiguas
+    public function cleanupPersistentConnections(): void
+    {
+        $now = time();
+        foreach ($this->persistentConnections as $id => $data) {
+            // Eliminar conexiones persistentes después de 1 hora
+            if ($now - $data['timestamp'] > 3600) {
+                unset($this->persistentConnections[$id]);
+            }
+        }
+    }
+
+    public function forcePersistentConnectionCleanup(): void
+    {
+        $this->cleanupPersistentConnections();
     }
 }
 

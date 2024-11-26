@@ -1,3 +1,25 @@
+import Socket from '../../assets/js/socket.js';
+
+const urlParams = new URLSearchParams(window.location.search);
+const play = JSON.parse(urlParams.get('play'));
+const id = parseInt(urlParams.get('id'));
+const indexLevel = parseInt(urlParams.get('indexLevel'));
+
+let socket = null;
+
+if (play) {
+    socket = new Socket(`ws://localhost:8080?&id=${id}`)
+    socket.connect()
+}
+
+// Quita los parámetros de la URL sin recargar la página
+const newUrl = window.location.protocol + "//" + window.location.host + window.location.pathname;
+window.history.pushState({ path: newUrl }, '', newUrl);
+
+import StoreLevelCompleted from '../../assets/js/storeLevelCompleted.js'
+const store = new StoreLevelCompleted(2)
+store.addStartedLevel()
+
 const conjuntoA = document.querySelector('.conjunto2'); // Conjunto de espejos
 const conjuntoB = document.querySelector('.conjunto1'); // Conjunto de cuadros
 const puerta = document.getElementById('puerta');
@@ -70,6 +92,10 @@ function abrirPuerta() {
 
     // Permitir abrir la puerta al hacer clic
     puerta.addEventListener('click', () => {
-        window.location.href = '../level3/index.html'; // Redirigir al siguiente nivel
+        if (play) {
+            socket.sendPassLevel(indexLevel)
+        } else {
+            store.addCompletedLevel(document.getElementById('timer').innerHTML, 'Level3')
+        }
     });
 }

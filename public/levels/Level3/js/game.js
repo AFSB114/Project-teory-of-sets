@@ -1,10 +1,4 @@
 import Socket from '../../assets/js/socket.js';
-import Game from '../../assets/js/game.js';
-
-// Inicializar el juego cuando el DOM esté listo
-window.addEventListener('DOMContentLoaded', () => {
-    new Game(0);
-});
 
 const urlParams = new URLSearchParams(window.location.search);
 const play = JSON.parse(urlParams.get('play'));
@@ -21,6 +15,18 @@ if (play) {
 // Quita los parámetros de la URL sin recargar la página
 const newUrl = window.location.protocol + "//" + window.location.host + window.location.pathname;
 window.history.pushState({ path: newUrl }, '', newUrl);
+
+import StoreLevelCompleted from '../../assets/js/storeLevelCompleted.js'
+const store = new StoreLevelCompleted(3)
+store.addStartedLevel()
+
+import Game from '../../assets/js/game.js';
+
+// Inicializar el juego cuando el DOM esté listo
+window.addEventListener('DOMContentLoaded', () => {
+    new Game(0);
+});
+
 
 const cajaA = document.querySelector('.caja1');  // Caja de los Muebles
 const cajaB = document.querySelector('.caja2');  //Caja de los Decorativos
@@ -188,7 +194,7 @@ puerta.addEventListener('click', () => {
         if (play) {
             socket.sendPassLevel(indexLevel)
         } else {
-            window.location.href = '../../levels/Level4/';
+            store.addCompletedLevel(document.getElementById('timer').innerHTML, 'Level4')
         }
     }
 });
