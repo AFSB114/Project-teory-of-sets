@@ -10,6 +10,7 @@ require_once 'connection/connection.php';
 require_once 'controller/createRoom.php';
 require_once 'controller/joinRoom.php';
 require_once 'controller/dataUsers.php';
+require_once 'controller/deletePlayer.php';
 
 require __DIR__ . '/vendor/autoload.php';
 
@@ -20,7 +21,8 @@ class MultiplayerServer implements MessageComponentInterface
         'JOIN' => 'handleJoinRoom',
         'PLAY' => 'handlePlay',
         'MESSAGE' => 'handleMessage',
-        'PASS_LEVEL' => 'handlePassLevel'
+        'PASS_LEVEL' => 'handlePassLevel',
+        'LEFT_ROOM' => 'handlePlayerLeft',
     ];
 
 
@@ -107,6 +109,8 @@ class MultiplayerServer implements MessageComponentInterface
         if (isset(self::ACTIONS[$action])) {
             $method = self::ACTIONS[$action];
             $this->$method($from, $data);
+        } else {
+            echo "Unknown action {$action}\n";
         }
     }
 
@@ -123,7 +127,7 @@ class MultiplayerServer implements MessageComponentInterface
 
         $from->code = $code;
         $from->rol = 'ADMIN';
-        var_dump($code);
+
         $from->time = '';
 
         $this->rooms[$code] = [
@@ -173,6 +177,7 @@ class MultiplayerServer implements MessageComponentInterface
                 $this->sendResponse($client, [
                     'action' => 'NEW_PLAYER',
                     'message' => 'New player has been joined!',
+                    'id' => $newPlayer->id,
                     'nickname' => $newPlayer->nickname,
                     'avatar' => $newPlayer->avatar
                 ]);
@@ -181,9 +186,26 @@ class MultiplayerServer implements MessageComponentInterface
             $this->sendResponse($newPlayer, [
                 'action' => 'JOIN',
                 'message' => 'Joined to room successfully!',
+                'id' => $client->id,
                 'nickname' => $client->nickname,
                 'avatar' => $client->avatar
             ]);
+        }
+    }
+
+    private function handlePlayerLeft(ConnectionInterface $conn, array $data): void
+    {
+        $deletePlayer = new DeletePlayer($conn);
+
+        if ($conn->rol === 'ADMIN') {
+            $res = $deletePlayer->leftAdmin();
+            $this->broadcastToRoom($conn->code, $res);
+            unset($this->rooms[$conn->code]);
+        } else {
+            $res = $deletePlayer->leftGuest();
+            $this->rooms[$conn->code]['players']->detach($conn);
+            $conn->play = false;
+            $this->broadcastToRoom($conn->code, $res);
         }
     }
 
