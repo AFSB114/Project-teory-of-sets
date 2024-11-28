@@ -39,10 +39,14 @@
 
                 <button class="btn" type="button" id="play">EMPEZAR</button>
 
-                <div class="chat">
+                <div class="mensajes" onclick="toggleChat()">
+                </div>
+
+                <div class="chat" id="chat" style="display: none;">
                     <div class="chat-messages" id="messages"></div>
                     <form action="" class="chat-form">
-                        <input type="text" name="message" id="message" placeholder="Escribe tu mensaje" class="message-sent">
+                        <input type="text" name="message" id="message" placeholder="Escribe tu mensaje"
+                            class="message-sent">
                         <button type="submit" id="send" class="send">Enviar</button>
                     </form>
                 </div>
@@ -54,6 +58,7 @@
     <script src="../../assets/js/loader.js"></script>
     <script type="module" src="roomAdmin.js"></script>
     <script src="../../assets/sonido/sonido.js"></script>
+    <script src="../room_guest/mensaje.js"></script>
 </body>
 
 </html>
