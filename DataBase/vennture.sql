@@ -128,3 +128,9 @@ CHECK (time ~ '^[0-5][0-9]:[0-5][0-9]$');
 
 ALTER TABLE user_level
 ALTER COLUMN time DROP NOT NULL;
+
+CREATE TABLE level_room(
+    level_id integer not null  references level,
+    room_id  integer not null  references room on delete cascade,
+    primary key (level_id, room_id)
+);

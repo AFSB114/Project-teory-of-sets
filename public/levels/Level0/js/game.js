@@ -1,3 +1,21 @@
+import Socket from '../../assets/js/socket.js';
+
+const urlParams = new URLSearchParams(window.location.search);
+const play = JSON.parse(urlParams.get('play'));
+const id = parseInt(urlParams.get('id'));
+const indexLevel = parseInt(urlParams.get('indexLevel'));
+
+let socket = null;
+
+if (play) {
+    socket = new Socket(`ws://localhost:8080?&id=${id}`)
+    socket.connect()
+}
+
+// Quita los parámetros de la URL sin recargar la página
+const newUrl = window.location.protocol + "//" + window.location.host + window.location.pathname;
+window.history.pushState({ path: newUrl }, '', newUrl);
+
 import StoreLevelCompleted from '../../assets/js/storeLevelCompleted.js'
 const store = new StoreLevelCompleted(0)
 store.addStartedLevel()
@@ -37,6 +55,10 @@ puerta.addEventListener('click', () => {
         pass.fill('');
     } else {
         doorOpen.play();
-        store.addCompletedLevel(document.getElementById('timer').innerHTML, 'Level1')
+        if (play) {
+            socket.sendPassLevel(indexLevel)
+        } else {
+            store.addCompletedLevel(document.getElementById('timer').innerHTML, 'Level1')
+        }
     }
 });

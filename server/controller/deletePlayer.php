@@ -2,54 +2,51 @@
 
 class DeletePlayer
 {
-    protected string $query1;
-    protected string $query2;
-
     public function __construct(
-        protected string     $sessionId,
-        protected int|string        $roomId,
-        protected Connection $dbConnection = new Connection()
+        protected $client,
+        protected Connection          $dbConnection = new Connection()
     )
     {
-        $this->query1 = "DELETE FROM user_room ur USING room r WHERE ur.data = :data AND ur.room_id = r.id AND r.id = :room_id";
-        $this->query2 = "DELETE FROM room WHERE id = :room_id";
     }
 
-    public function leftAdmin(): Res
+    public function leftAdmin(): array
     {
         $pdo = $this->dbConnection->connection();
 
         try {
+            $query = "DELETE FROM room WHERE id = :room_id";
 
-            $stm = $pdo->prepare($this->query2);
-            $stm->execute([
-                "room_id" => $this->roomId
+            $stmt = $pdo->prepare($query);
+            $stmt->execute([
+                'room_id' => $this->client->code
             ]);
 
-            $res = new Res('success', 'El admin ha abandonado la sala', $stm);
-        } catch (PDOException $error) {
-            $res = new Res('error', 'Error de conexión', $error);
-        } finally {
-            return $res;
+            echo "Admin left to room\n";
+
+            return ['status' => 'OK', 'message' => 'El administrador de la sala ha salido', 'action' => 'ADMIN_LEFT', 'id'=>$this->client->id];
+
+        } catch (PDOException $e) {
+            return ['status' => 'ERROR', 'message' => $e->getMessage()];
         }
     }
 
-    public function leftGuest(): Res
+    public function leftGuest(): array
     {
         $pdo = $this->dbConnection->connection();
 
         try {
-            $stm = $pdo->prepare($this->query1);
-            $stm->execute([
-                "data" => $this->sessionId,
-                "room_id" => $this->roomId
+            $query = "DELETE FROM user_room WHERE user_id = :user_id";
+
+            $stmt = $pdo->prepare($query);
+            $stmt->execute([
+                'user_id' => $this->client->id
             ]);
 
-            $res = new Res('success', 'El guest ha abandonado');
-        } catch (PDOException $error) {
-            $res = new Res('error', 'Error de conexión', $error);
-        } finally {
-            return $res;
+            echo "Guest left to room\n";
+
+            return ['status' => 'OK', 'action' => 'GUEST_LEFT', 'id'=>$this->client->id];
+        } catch (PDOException $e) {
+            return ['status' => 'ERROR', 'message' => $e->getMessage()];
         }
     }
 }

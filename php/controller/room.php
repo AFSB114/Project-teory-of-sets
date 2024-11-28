@@ -28,7 +28,7 @@ if ($resExistRoom['exist'] === 1) {
     } elseif (isset($resAlreadyJoined['error'])) {
         echo json_encode(['message' => $resAlreadyJoined['error']]);
     } else {
-        echo json_encode(['status' => false, 'message' => 'Ya te encuentras unido a esta sala en otro lugar']);
+        echo json_encode(['status' => false, 'message' => 'Ya te encuentras unido a una sala en otro lugar']);
     }
 } else {
     echo json_encode(['status' => false, 'message' => 'La sala no existe']);

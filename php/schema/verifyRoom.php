@@ -14,12 +14,11 @@ class VerifyRoom
 
         try {
 
-            $query = "SELECT * FROM user_room WHERE user_id = :user_id AND room_id = :room_id";
+            $query = "SELECT * FROM user_room WHERE user_id = :user_id";
 
             $res = $conn->prepare($query);
             $res->execute([
-                'user_id' => $this->idUser,
-                'room_id' => $this->idRoom
+                'user_id' => $this->idUser
             ]);
 
             return $res->rowCount() === 0;

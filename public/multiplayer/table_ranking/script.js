@@ -1,53 +1,41 @@
 import SocketConnection from '../assets/js/socket.js'
-import Players from '../assets/js/addPlayers.js'
-import TextToSpeech from '../assets/js/readText.js'
-const tts = new TextToSpeech()
-let players = new Players()
 
 async function init() {
-
-    let res = await fetch('../../../php/controller/log.php',
-        {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                action: 'getData'
-            })
-        }
-    ).then(res => res.json())
-
-    const connection = new SocketConnection(`ws://localhost:8080?id=${res.id}`)
-
-    const urlParams = new URLSearchParams(window.location.search)
 
     const newUrl = window.location.protocol + "//" + window.location.host + window.location.pathname
     window.history.pushState({ path: newUrl }, '', newUrl)
 
-    let code = urlParams.get('code')
+    
+
+    const connection = new SocketConnection(`ws://localhost:8080?&id=${res.id}`)
+
+    const urlParams = new URLSearchParams(window.location.search)
 
     try {
         const socketConn = await connection.connect()
 
-        connection.joinRoom(code)
+        connection.createRoom(numLevels, timePerLevel)
 
     } catch (err) {
         window.location.href = '../start/?message=No se pudo establecer conexión con el servidor'
-
     }
 
-    if (!code.includes('-')) {
-        code = code.replace(/(\d{3})(\d{3})/g, '$1-$2')
-    }
-
-    document.getElementById('code').innerHTML = code
+    document.getElementById('play').addEventListener('click', async () => {
+        let code = document.getElementById('code').innerHTML
+        code = code.replace('-', '')
+        code = parseInt(code)
+        connection.play(code)
+    })
 
     connection.socket.onmessage = (event) => {
         const data = JSON.parse(event.data)
+        console.log(data)
 
         switch (data.action) {
-            case 'JOIN':
+            case 'CREATE':
+                let code = `${data.code}`
+                code = code.replace(/(\d{3})(\d{3})/g, '$1-$2')
+                document.getElementById('code').innerHTML = code
                 players.addPlayer({ id: data.id, nickname: data.nickname, avatar: data.avatar })
                 break
             case 'NEW_PLAYER':
@@ -56,11 +44,8 @@ async function init() {
             case 'GUEST_LEFT':
                 players.removePlayer(data.id)
                 break
-            case 'ADMIN_LEFT':
-                window.location.href = `../start/?message=${data.message}`
-                break
             case 'PLAY':
-                window.location.href = `../../levels/${data.level.name}/?play=true&id=${data.id}&indexLevel=${data.indexLevel}`
+                // window.location.href = `../../levels/level-test/?play=true`
                 break
             case 'MESSAGE':
                 let message = document.createElement('div')
@@ -74,17 +59,15 @@ async function init() {
                 document.getElementById('messages').appendChild(message)
                 document.getElementById('messages').scrollTop = document.getElementById('messages').scrollHeight
                 break
-            case 'joined':
+            case 'exit':
+                alert(data.message)
                 break
             case 'error':
                 alert(data.message)
                 break
-            case 'closed':
-                // window.location.href = './start.html'
-                alert(data.data)
-                break
             default:
                 console.log(data)
+                alert(data.message)
                 break
         }
     }
@@ -98,15 +81,20 @@ async function init() {
         connection.sendMessage(message, code)
     })
 
-    document.getElementById('btn-back').addEventListener('click', (e) => { 
+    document.getElementById('btn-back').addEventListener('click', (e) => {
         e.preventDefault()
-        connection.leftRoom()
-        window.location.href = '../start/'
+        let res = confirm('¿Estás seguro de que deseas abandonar la sala?\n¡Si lo haces, se cerrará la sala!')
+        if (res) {
+            connection.leftRoom()
+            window.location.href = '../start/'
+        } else {
+            return
+        }
     })
 
     window.addEventListener('beforeunload', (event) => {
         event.preventDefault()
-        let res = confirm('Si haces esta accion saldras de la sala.\n¿Estás seguro?')
+        let res = confirm('Si haces esta accion se cerrará la sala.\n¿Estás seguro?')
         if (res) {
             connection.leftRoom()
             window.location.href = '../start/'

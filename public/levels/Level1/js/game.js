@@ -1,3 +1,21 @@
+import Socket from '../../assets/js/socket.js';
+
+const urlParams = new URLSearchParams(window.location.search);
+const play = JSON.parse(urlParams.get('play'));
+const id = parseInt(urlParams.get('id'));
+const indexLevel = parseInt(urlParams.get('indexLevel'));
+
+let socket = null;
+
+if (play) {
+    socket = new Socket(`ws://localhost:8080?&id=${id}`)
+    socket.connect()
+}
+
+// Quita los parámetros de la URL sin recargar la página
+const newUrl = window.location.protocol + "//" + window.location.host + window.location.pathname;
+window.history.pushState({ path: newUrl }, '', newUrl);
+
 import StoreLevelCompleted from '../../assets/js/storeLevelCompleted.js'
 const store = new StoreLevelCompleted(1)
 store.addStartedLevel()
@@ -11,7 +29,11 @@ puerta.addEventListener('click', () => {
     if (!passTrue) {
         knock.play();
     } else {
-        store.addCompletedLevel(document.getElementById('timer').innerHTML, 'Level2')
+        if (play) {
+            socket.sendPassLevel(indexLevel)
+        } else {
+            store.addCompletedLevel(document.getElementById('timer').innerHTML, 'Level2')
+        }
     }
 });
 
@@ -19,7 +41,7 @@ const botellas = document.getElementById('botellas');
 const silla = document.getElementById('silla');
 const florero = document.getElementById('florero');
 
-const images = [document.getElementById('botellas'),document.getElementById('silla'),document.getElementById('florero')];
+const images = [document.getElementById('botellas'), document.getElementById('silla'), document.getElementById('florero')];
 
 const numeros = document.getElementsByClassName('btn-numbers');
 
@@ -60,7 +82,7 @@ function checkPass() {
                 image.innerHTML = '';
                 image.classList.remove('num');
             }, 500);
-            
+
         });
         count = 1;
         pass = [];

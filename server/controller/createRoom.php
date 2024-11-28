@@ -11,7 +11,6 @@ class Room
         protected Connection $pdo
     )
     {
-        echo "Se crea nueva sala\n";
     }
 
     private function generateCode(): void
@@ -34,8 +33,6 @@ class Room
         $conn = $this->pdo->connection();
 
         $while = true;
-
-        echo "Se esta generando el codigo de la sala\n";
 
         do {
 
@@ -60,7 +57,7 @@ class Room
                 ]);
 
                 $conn->commit();
-                echo "Todo salió bien en la consulta";
+
 
                 $while = false;
             } catch (PDOException $e) {
@@ -96,7 +93,7 @@ class Room
 
         try {
 
-            $query = "SELECT id, name FROM level ORDER BY RANDOM() LIMIT {$this->numLevels}";
+            $query = "SELECT id, name FROM level WHERE id <= 7 ORDER BY RANDOM() LIMIT {$this->numLevels}";
 
             $res = $conn->prepare($query);
             $res->execute();
@@ -109,7 +106,7 @@ class Room
                     $this->insertLevels($level, $code);
                 }
                 $conn->commit();
-            }catch (PDOException $e){
+            } catch (PDOException $e) {
                 $conn->rollBack();
                 echo "{$e->getMessage()}\n";
                 return ["message", "Error al crear sala", 'data' => $e];

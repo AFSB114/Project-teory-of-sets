@@ -1,3 +1,25 @@
+import Socket from '../../assets/js/socket.js';
+
+const urlParams = new URLSearchParams(window.location.search);
+const play = JSON.parse(urlParams.get('play'));
+const id = parseInt(urlParams.get('id'));
+const indexLevel = parseInt(urlParams.get('indexLevel'));
+
+let socket = null;
+
+if (play) {
+    socket = new Socket(`ws://localhost:8080?&id=${id}`)
+    socket.connect()
+}
+
+// Quita los parámetros de la URL sin recargar la página
+const newUrl = window.location.protocol + "//" + window.location.host + window.location.pathname;
+window.history.pushState({ path: newUrl }, '', newUrl);
+
+import StoreLevelCompleted from '../../assets/js/storeLevelCompleted.js'
+const store = new StoreLevelCompleted(4)
+store.addStartedLevel()
+
 const stickers = Array.from(document.getElementsByClassName('sticker'));
 let passSticker = ['', '', ''];
 const passStickerCorrect = ['stickerNino', 'stickerNina', 'stickerMontana'];
@@ -72,6 +94,10 @@ puerta.addEventListener('click', () => {
         });
         pass.fill('');
     } else {
-        window.location.href = '../../levels/Level5/';
+        if (play) {
+            socket.sendPassLevel(indexLevel)
+        } else {
+            store.addCompletedLevel(document.getElementById('timer').innerHTML, 'Level5')
+        }
     }
 });
