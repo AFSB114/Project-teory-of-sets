@@ -7,12 +7,11 @@ class JoinRoom
     public function __construct(
         protected int                $roomId,
         protected int                $userId,
-        protected string             $data,
         protected Connection $pdo = new Connection()
     )
     {
         $this->query1 = "SELECT status_id FROM room WHERE id = :room_id AND status_id = 1";
-        $this->query2 = "INSERT INTO user_room (user_id, room_id, rol_id, data) VALUES (:user_id, :room_id, 4, :data)";
+        $this->query2 = "INSERT INTO user_room (user_id, room_id, rol_id) VALUES (:user_id, :room_id, 4)";
     }
 
     public function checkRoom(): array
@@ -45,8 +44,7 @@ class JoinRoom
             $stmt = $pdo->prepare($this->query2);
             $stmt->execute([
                 ':room_id' => $this->roomId,
-                ':user_id' => $this->userId,
-                ':data' => $this->data
+                ':user_id' => $this->userId
             ]);
 
             $res = ['status'=>"OK", 'message'=>"Te has unido correctamente a la sala"];

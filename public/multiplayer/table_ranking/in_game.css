@@ -68,11 +68,3 @@ tr>th:first-child {
 td {
     color: #737373;
 }
-
-.btn {
-    grid-area: 8 / 3 / 9 / 6;
-
-    background-image: url('../assets/images/btn-blue.svg');
-
-    font-size: 4vh;
-}

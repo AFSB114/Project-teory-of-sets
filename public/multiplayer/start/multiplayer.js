@@ -1,3 +1,14 @@
+const urlParams = new URLSearchParams(window.location.search)
+
+const newUrl = window.location.protocol + "//" + window.location.host + window.location.pathname
+window.history.pushState({ path: newUrl }, '', newUrl)
+
+let message = urlParams.get('message')
+
+if (message) {
+    showMessage('message', message)
+}
+
 document.getElementById('join').addEventListener('submit', async (event) => {
     event.preventDefault();
     let code = document.getElementById('codigo').value;

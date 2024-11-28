@@ -8,7 +8,6 @@ class Room
         protected int        $admin,
         protected int        $time,
         protected int        $numLevels,
-        protected string     $data,
         protected Connection $pdo
     )
     {
@@ -50,15 +49,15 @@ class Room
                     "num_levels" => $this->numLevels
                 ]);
 
-                $query = "INSERT INTO user_room (user_id, room_id, rol_id, data) VALUES (:user_id, :room_id, 3, :data)";
+                $query = "INSERT INTO user_room (user_id, room_id, rol_id) VALUES (:user_id, :room_id, 3)";
                 $res = $conn->prepare($query);
                 $res->execute([
                     "user_id" => $this->admin,
                     "room_id" => $this->code,
-                    "data" => $this->data
                 ]);
 
                 $conn->commit();
+
 
                 $while = false;
             } catch (PDOException $e) {
@@ -68,6 +67,7 @@ class Room
                     echo json_encode($e);
                     $while = false;
                 }
+                echo "Hubo un error al crear sala: " . $e->getMessage();
             }
         } while ($while);
 
@@ -93,7 +93,7 @@ class Room
 
         try {
 
-            $query = "SELECT id, name FROM level ORDER BY RANDOM() LIMIT {$this->numLevels}";
+            $query = "SELECT id, name FROM level WHERE id <= 7 ORDER BY RANDOM() LIMIT {$this->numLevels}";
 
             $res = $conn->prepare($query);
             $res->execute();
@@ -106,14 +106,16 @@ class Room
                     $this->insertLevels($level, $code);
                 }
                 $conn->commit();
-            }catch (PDOException $e){
-                return ["message", "Error al crear sala", 'data' => $e];
+            } catch (PDOException $e) {
                 $conn->rollBack();
+                echo "{$e->getMessage()}\n";
+                return ["message", "Error al crear sala", 'data' => $e];
             }
 
             return $levels;
 
         } catch (PDOException $e) {
+            echo "{$e->getMessage()}\n";
             return ["message", "Error al crear sala", 'data' => $e];
         }
     }

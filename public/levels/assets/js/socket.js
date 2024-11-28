@@ -27,9 +27,29 @@ class Socket {
             }
 
             this.socket.onmessage = (event) => {
-                console.log(event.data)
-             }
+                const data = JSON.parse(event.data)
+                console.log(data)
+
+                switch (data.action) {
+                    case 'NEXT_LEVEL':
+                        window.location.href = `../../levels/${data.level.name}/?play=true&id=${data.id}&indexLevel=${data.indexLevel}`
+                        break
+                    case 'FINISHED':
+                        window.location.href = `../../multiplayer/table_ranking/`
+                    default:
+                        console.log(data.message)
+                        break
+                }
+            }
         })
+    }
+
+    sendPassLevel(indexLevel) {
+        this.socket.send(JSON.stringify({
+            action: 'PASS_LEVEL',
+            indexLevel: indexLevel,
+            time: document.getElementById('timer').innerHTML
+        }))
     }
 }
 

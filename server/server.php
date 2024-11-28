@@ -9,145 +9,351 @@ use Ratchet\ConnectionInterface;
 require_once 'connection/connection.php';
 require_once 'controller/createRoom.php';
 require_once 'controller/joinRoom.php';
+require_once 'controller/dataUsers.php';
+require_once 'controller/deletePlayer.php';
 
 require __DIR__ . '/vendor/autoload.php';
 
 class MultiplayerServer implements MessageComponentInterface
 {
+    private const ACTIONS = [
+        'CREATE' => 'handleCreateRoom',
+        'JOIN' => 'handleJoinRoom',
+        'PLAY' => 'handlePlay',
+        'MESSAGE' => 'handleMessage',
+        'PASS_LEVEL' => 'handlePassLevel',
+        'LEFT_ROOM' => 'handlePlayerLeft',
+    ];
+
+
     public function __construct(
+        // Guarda las conexiones de los clientes
         protected SplObjectStorage $clients = new SplObjectStorage(),
-        protected array            $rooms = []
+        // Guarda las salas con sus datos
+        protected array            $rooms = [],
+        // Almacena datos persistentes
+        protected array            $persistentConnections = []
     )
     {
     }
 
     public function onOpen(ConnectionInterface $conn): void
     {
-        if (!$this->clients->contains($conn)) {
-            $this->clients->attach($conn);
+        $queryString = $conn->httpRequest->getUri()->getQuery();
+        parse_str($queryString, $queryParams);
 
-            $queryString = $conn->httpRequest->getUri()->getQuery();
-            parse_str($queryString, $queryParams);
+        $conn->id = (int)$queryParams['id'];
 
-            $conn->id = $queryParams['id'];
-            $conn->token = $queryParams['token'];
-            $conn->nickname = $queryParams['nickname'];
+        // Verificar si hay una conexión persistente para este ID
+        $this->checkAndRestorePersistentConnection($conn);
 
-            if ($this->rooms["{$queryParams['code']}"]) {
-                $this->rooms["{$queryParams['code']}"]['players']->attach($conn);
-            }
+        $this->initializeConnection($conn);
+        $this->logConnectionStatus($conn);
 
-            echo "New connection ($conn->nickname)\n";
-            echo "Numero de jugadores ({$this->clients->count()})\n";
+    }
+
+    private function checkAndRestorePersistentConnection(ConnectionInterface $conn): void
+    {
+        if (isset($this->persistentConnections[$conn->id])) {
+
+            echo "Recover user's data\n";
+
+            $persistentData = $this->persistentConnections[$conn->id];
+
+            // Restaurar propiedades específicas
+            $conn->code = $persistentData['code'] ?? null;
+            $conn->time = $persistentData['time'] ?? '';
+            $conn->play = true;
+
+            // Opcional: Eliminar la entrada persistente si ya no es necesaria
+            unset($this->persistentConnections[$conn->id]);
         }
+    }
+
+    private function initializeConnection(ConnectionInterface $conn): void
+    {
+        $dataUser = new DataUsers(
+            $conn->id,
+            new Connection()
+        );
+
+        echo "Getting user's data\n";
+
+        $res = $dataUser->getData();
+
+        if ($res['status']) {
+            $conn->nickname = $res['data']['nickname'];
+            $conn->avatar = $res['data']['avatar'];
+        } else {
+            $conn->send(json_encode($res));
+        }
+
+        $this->clients->attach($conn);
+
+        if (isset($conn->code)) {
+            $this->rooms[$conn->code]['players']->attach($conn);
+        }
+    }
+
+    private function logConnectionStatus(ConnectionInterface $conn): void
+    {
+        echo "New connection ({$conn->nickname})\n";
+        echo "Number of players: {$this->clients->count()}\n\n";
     }
 
     public function onMessage(ConnectionInterface $from, $msg): void
     {
         $data = json_decode($msg, true);
+        $action = $data['action'] ?? '';
 
-        switch ($data['action']) {
-            case 'CREATE':
-                $room = new Room(
-                    $from->id,
-                    $data['timePerLevel'],
-                    $data['numLevels'],
-                    $from->token,
-                    new Connection()
-                );
+        if (isset(self::ACTIONS[$action])) {
+            $method = self::ACTIONS[$action];
+            $this->$method($from, $data);
+        } else {
+            echo "Unknown action {$action}\n";
+        }
+    }
 
-                $code = $room->createRoom()['code'];
-                $from->code = $code;
+    private function handleCreateRoom(ConnectionInterface $from, array $data): void
+    {
+        $room = new Room(
+            $from->id,
+            $data['timePerLevel'],
+            $data['numLevels'],
+            new Connection()
+        );
 
-                $this->rooms["$code"]['settings']['levels'] = $room->levelsToRoom($code);
-                $this->rooms["$code"]['settings']['maxTime'] = $data['timePerLevel'];
-                $this->rooms["$code"]['players'] = new SplObjectStorage();
-                $this->rooms["$code"]['players']->attach($from);
+        $code = $room->createRoom()['code'];
 
-                $from->send(json_encode([
-                    'action' => 'CREATE',
-                    'code' => $code,
-                    'nickname' => $from->nickname
-                ]));
+        $from->code = $code;
+        $from->rol = 'ADMIN';
 
-                break;
-            case 'JOIN':
+        $from->time = '';
 
-                $from->code = $data['code'];
+        $this->rooms[$code] = [
+            'settings' => [
+                'numLevels' => (int)$data['numLevels'],
+                'levels' => $room->levelsToRoom($code),
+                'maxTime' => $data['timePerLevel']
+            ],
+            'players' => new SplObjectStorage()
+        ];
 
-                $join = new JoinRoom(
-                    $data['code'],
-                    $from->id,
-                    $from->token
-                );
+        $this->rooms[$code]['players']->attach($from);
 
-                if ($join->checkRoom()['status'] == 'OK') {
-                    if ($join->joinRoom()['status'] == 'OK') {
+        $this->sendResponse($from, [
+            'action' => 'CREATE',
+            'code' => $code,
+            'nickname' => $from->nickname,
+            'avatar' => $from->avatar
+        ]);
+    }
 
-                        $this->rooms["{$data['code']}"]['players']->attach($from);
+    private function handleJoinRoom(ConnectionInterface $from, array $data): void
+    {
+        $from->code = $data['code'];
+        $join = new JoinRoom($data['code'], $from->id);
 
-                        foreach ($this->rooms["{$data['code']}"]['players'] as $client) {
-                            if ($client != $from) {
-                                $client->send(json_encode([
-                                    'action' => 'NEW_PLAYER',
-                                    'message' => 'New player has been joined!',
-                                    'nickname' => $from->nickname
-                                ]));
-                            }
-                            $from->send(json_encode([
-                                'action' => 'JOIN',
-                                'message' => 'Joined to room successfully!',
-                                'nickname' => $client->nickname
-                            ]));
-                        }
-                    }
-                }
-
-                break;
-            case 'PLAY':
-
-                foreach ($this->rooms["{$data['code']}"]['players'] as $client) {
-                    $client->send(json_encode([
-                        'action' => 'PLAY',
-                        'code' => $data['code'],
-                        'levels' => $this->rooms["{$data['code']}"]['settings']['levels']
-                    ]));
-                }
-
-                break;
-            case 'MESSAGE':
-                foreach ($this->rooms["{$data['code']}"]['players'] as $client) {
-                    $client->send(json_encode([
-                        'action' => 'MESSAGE',
-                        'id' => $from->id,
-                        'nickname' => $from->nickname,
-                        'message' => $data['message']
-                    ]));
-                }
-                break;
-            case 'PASS_LEVEL':
-
-                break;
+        if (!$this->isValidJoin($join)) {
+            return;
         }
 
+        $from->rol = 'GUEST';
+
+        $this->rooms[$data['code']]['players']->attach($from);
+        $this->notifyRoomParticipants($from, $data['code']);
+    }
+
+    private function isValidJoin(JoinRoom $join): bool
+    {
+        return $join->checkRoom()['status'] === 'OK' &&
+            $join->joinRoom()['status'] === 'OK';
+    }
+
+    private function notifyRoomParticipants(ConnectionInterface $newPlayer, string $roomCode): void
+    {
+        foreach ($this->rooms[$roomCode]['players'] as $client) {
+            if ($client !== $newPlayer) {
+                $this->sendResponse($client, [
+                    'action' => 'NEW_PLAYER',
+                    'message' => 'New player has been joined!',
+                    'id' => $newPlayer->id,
+                    'nickname' => $newPlayer->nickname,
+                    'avatar' => $newPlayer->avatar
+                ]);
+            }
+
+            $this->sendResponse($newPlayer, [
+                'action' => 'JOIN',
+                'message' => 'Joined to room successfully!',
+                'id' => $client->id,
+                'nickname' => $client->nickname,
+                'avatar' => $client->avatar
+            ]);
+        }
+    }
+
+    private function handlePlayerLeft(ConnectionInterface $conn, array $data): void
+    {
+        $deletePlayer = new DeletePlayer($conn);
+
+        if ($conn->rol === 'ADMIN') {
+            $res = $deletePlayer->leftAdmin();
+            $this->broadcastToRoom($conn->code, $res);
+            unset($this->rooms[$conn->code]);
+        } else {
+            $res = $deletePlayer->leftGuest();
+            $this->rooms[$conn->code]['players']->detach($conn);
+            $conn->play = false;
+            $this->broadcastToRoom($conn->code, $res);
+        }
+    }
+
+    private function handlePlay(ConnectionInterface $from, array $data): void
+    {
+        $roomCode = $data['code'];
+        $response = [
+            'action' => 'PLAY',
+            'level' => $this->rooms[$roomCode]['settings']['levels'][0],
+            'indexLevel' => 0
+        ];
+
+        $this->broadcastToRoom($roomCode, $response);
+    }
+
+    private function handleMessage(ConnectionInterface $from, array $data): void
+    {
+        $response = [
+            'action' => 'MESSAGE',
+            'id' => $from->id,
+            'nickname' => $from->nickname,
+            'message' => $data['message']
+        ];
+
+        $this->broadcastToRoom($data['code'], $response);
+    }
+
+    private function handlePassLevel(ConnectionInterface $from, array $data): void
+    {
+        $indexLevel = (int)$data['indexLevel'];
+
+        $this->sumTime($from, $data['time']);
+
+        $code = $from->code;
+
+        $indexLevel += 1;
+
+        $from->indexLevel = $indexLevel;
+
+        if (isset($this->rooms[$code])) {
+            if ($indexLevel < (int)$this->rooms[$code]['settings']['numLevels']) {
+                $response = [
+                    'action' => 'NEXT_LEVEL',
+                    'level' => $this->rooms[$code]['settings']['levels'][$indexLevel],
+                    'indexLevel' => $indexLevel,
+                    'id' => $from->id
+                ];
+            } else {
+                $response = [
+                    'action' => 'FINISHED'
+                ];
+            }
+        } else {
+            $response = ['message' => 'no existe la sala', 'sala' => $this->rooms];
+        }
+
+        $this->sendResponse($from, $response);
+    }
+
+    private function sumTime(ConnectionInterface $from, string $time): void
+    {
+        list($newMin, $newSec) = explode(':', $time);
+        list($currentMin, $currentSec) = explode(':', $from->time);
+
+        $totNewSecs = (int)$newMin * 60 + (int)$newSec;
+        $totCurrentSecs = (int)$currentMin * 60 + (int)$currentSec;
+
+        $totSecs = $totNewSecs + $totCurrentSecs;
+
+        $mins = floor($totSecs / 60);
+        $secs = $totSecs % 60;
+
+
+        $from->time = str_pad($mins, 2, '0', STR_PAD_LEFT) . ':' . str_pad($secs, 2, '0', STR_PAD_LEFT);
+
+        echo "Time: {$from->time}\n";
+    }
+
+    private function broadcastToRoom(string $roomCode, array $message): void
+    {
+        foreach ($this->rooms[$roomCode]['players'] as $client) {
+            if ($message['action'] === 'PLAY') {
+                $client->play = true;
+                $client->indexLevel = $message['indexLevel'];
+                $message['id'] = $client->id;
+            }
+            $this->sendResponse($client, $message);
+        }
+    }
+
+    private function sendResponse(ConnectionInterface $client, array $data): void
+    {
+        $client->send(json_encode($data));
     }
 
     public function onClose(ConnectionInterface $conn): void
     {
+        // Condición para persistir la conexión
+        if ($this->shouldPersistConnection($conn)) {
+            $this->persistConnection($conn);
+        } else {
+            $this->clients->detach($conn);
+            $this->logDisconnection($conn);
+        }
+    }
 
-//        $this->rooms["{$conn->code}"]->detach($conn);
-        $this->clients->detach($conn);
+    private function shouldPersistConnection(ConnectionInterface $conn): bool
+    {
+        // Condición para persistir:
+        return
+            isset($conn->code) &&
+            $conn->play &&                 // 1. No ha terminado el juego
+            $this->isActiveInRoom($conn);   // 2. Está en una sala de juego
+    }
 
-        echo "Exit ($conn->nickname)\n";
+    private function isActiveInRoom(ConnectionInterface $conn): bool
+    {
+        // Verificar si la conexión está activa en alguna sala
+        return isset($this->rooms[$conn->code]) &&
+            $this->rooms[$conn->code]['players']->contains($conn);
+    }
+
+    private function persistConnection(ConnectionInterface $conn): void
+    {
+        // Guardar datos relevantes para la reconexión
+        $this->persistentConnections[$conn->id] = [
+            'code' => $conn->code ?? null,
+            'time' => $conn->time ?? ''
+        ];
+
+        // Opcional: Establecer la conexión como 'play' para evitar desconexión
+        $conn->play = false;
+        $this->onClose($conn);
+    }
+
+    private function logDisconnection(ConnectionInterface $conn): void
+    {
+        echo "Exit ({$conn->nickname})\n\n";
     }
 
     public function onError(ConnectionInterface $conn, Exception $e): void
     {
-        echo "Un error ha ocurrido: {$e->getMessage()}\n";
+        error_log("Error occurred: {$e->getMessage()}");
         $conn->close();
     }
 }
 
+// Server initialization
 $server = IoServer::factory(
     new HttpServer(
         new WsServer(

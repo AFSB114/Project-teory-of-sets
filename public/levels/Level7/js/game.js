@@ -1,3 +1,25 @@
+import Socket from '../../assets/js/socket.js';
+
+const urlParams = new URLSearchParams(window.location.search);
+const play = JSON.parse(urlParams.get('play'));
+const id = parseInt(urlParams.get('id'));
+const indexLevel = parseInt(urlParams.get('indexLevel'));
+
+let socket = null;
+
+if (play) {
+    socket = new Socket(`ws://localhost:8080?&id=${id}`)
+    socket.connect()
+}
+
+// Quita los parámetros de la URL sin recargar la página
+const newUrl = window.location.protocol + "//" + window.location.host + window.location.pathname;
+window.history.pushState({ path: newUrl }, '', newUrl);
+
+import StoreLevelCompleted from '../../assets/js/storeLevelCompleted.js'
+const store = new StoreLevelCompleted(7)
+store.addStartedLevel()
+
 const espejos = document.querySelectorAll('.espejo1, .espejo2, .espejo3, .espejo4, .cuadro1, .cuadro2, .cuadro3');
 const puerta = document.getElementById('puerta');
 let espejosSeleccionados = 0;
@@ -26,7 +48,11 @@ function abrirPuerta() {
 }
 
 function irAlNivel8() {
-    window.location.href = "../Level8/index.html"; 
+    if (play) {
+        socket.sendPassLevel(indexLevel)
+    } else {
+        store.addCompletedLevel(document.getElementById('timer').innerHTML, 'Level8')
+    }
 }
 
 document.getElementById('radio').addEventListener('click', function() {

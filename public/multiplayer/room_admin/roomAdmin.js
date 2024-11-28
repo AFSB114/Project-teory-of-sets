@@ -1,41 +1,10 @@
 import SocketConnection from '../assets/js/socket.js'
-import AddPlayer from '../assets/js/addPlayers.js'
+import Players from '../assets/js/addPlayers.js'
 import TextToSpeech from '../assets/js/readText.js'
 const tts = new TextToSpeech()
-let players = new AddPlayer()
-
-const links = document.getElementsByTagName('link')
-
-for (let link of links) {
-    if (link.rel === 'stylesheet') {
-        console.log(link.href)
-    }
-}
+let players = new Players()
 
 async function init() {
-
-    // Función para obtener el valor de una cookie por su nombre
-    function getCookie(nombre) {
-        // Dividir las cookies en un array
-        const cookies = document.cookie.split(';');
-
-        // Iterar sobre las cookies
-        for (let i = 0; i < cookies.length; i++) {
-            const cookie = cookies[i].trim(); // Eliminar espacios en blanco
-
-            // Verificar si la cookie comienza con el nombre deseado
-            if (cookie.startsWith(nombre + '=')) {
-                // Retornar el valor de la cookie
-                return cookie.substring(nombre.length + 1); // Extraer el valor
-            }
-        }
-
-        // Retornar null si la cookie no se encuentra
-        return null;
-    }
-
-    const sessionId = getCookie('PHPSESSID')
-
     let res = await fetch('../../../php/controller/log.php',
         {
             method: 'POST',
@@ -48,7 +17,7 @@ async function init() {
         }
     ).then(res => res.json())
 
-    const connection = new SocketConnection(`ws://localhost:8080?token=${sessionId}&id=${res.id}&nickname=${res.nickname}`)
+    const connection = new SocketConnection(`ws://localhost:8080?&id=${res.id}`)
 
     const urlParams = new URLSearchParams(window.location.search)
 
@@ -64,7 +33,7 @@ async function init() {
         connection.createRoom(numLevels, timePerLevel)
 
     } catch (err) {
-        console.error('No se pudo establecer conexión', err)
+        window.location.href = '../start/?message=No se pudo establecer conexión con el servidor'
     }
 
     document.getElementById('play').addEventListener('click', async () => {
@@ -83,13 +52,16 @@ async function init() {
                 let code = `${data.code}`
                 code = code.replace(/(\d{3})(\d{3})/g, '$1-$2')
                 document.getElementById('code').innerHTML = code
-                players.addPlayer(data.nickname)
+                players.addPlayer({ id: data.id, nickname: data.nickname, avatar: data.avatar })
                 break
             case 'NEW_PLAYER':
-                players.addPlayer(data.nickname)
+                players.addPlayer({ id: data.id, nickname: data.nickname, avatar: data.avatar })
+                break
+            case 'GUEST_LEFT':
+                players.removePlayer(data.id)
                 break
             case 'PLAY':
-                window.location.href = `../../levels/${data.levels[0].name}/?code=${data.code}`
+                // window.location.href = `../../levels/level-test/?play=true`
                 break
             case 'MESSAGE':
                 let message = document.createElement('div')
@@ -123,6 +95,26 @@ async function init() {
         let code = document.getElementById('code').innerHTML
         code = code.replace('-', '')
         connection.sendMessage(message, code)
+    })
+
+    document.getElementById('btn-back').addEventListener('click', (e) => {
+        e.preventDefault()
+        let res = confirm('¿Estás seguro de que deseas abandonar la sala?\n¡Si lo haces, se cerrará la sala!')
+        if (res) {
+            connection.leftRoom()
+            window.location.href = '../start/'
+        } else {
+            return
+        }
+    })
+
+    window.addEventListener('beforeunload', (event) => {
+        event.preventDefault()
+        let res = confirm('Si haces esta accion se cerrará la sala.\n¿Estás seguro?')
+        if (res) {
+            connection.leftRoom()
+            window.location.href = '../start/'
+        }
     })
 }
 

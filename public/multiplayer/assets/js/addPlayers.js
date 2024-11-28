@@ -1,28 +1,29 @@
-class AddPlayer {
+class Players {
 
     constructor() {
         this.players = [];
         this.maxPlayers = 8;
     }
-    
+
     updatePlayersList() {
         const listaJugadoresDiv = document.getElementById('listaJugadores');
         listaJugadoresDiv.innerHTML = '';  // Limpiar lista antes de actualizarla
-        
-        this.players.forEach((nickname) => {
+
+        this.players.forEach((data) => {
             const jugadorDiv = document.createElement('div');
             jugadorDiv.className = 'jugador';
-            
+
             const cuadroDiv = document.createElement('div');
             cuadroDiv.className = 'cuadroPersonaje';
-            
+
             const personajeDiv = document.createElement('div');
             personajeDiv.className = 'personaje';
-            
+            personajeDiv.style.backgroundImage = `url('../../assets/character/${data.avatar}')`;
+
             const nombreJugadorDiv = document.createElement('div');
             nombreJugadorDiv.className = 'nombreJugador';
-            nombreJugadorDiv.textContent = nickname;
-            
+            nombreJugadorDiv.textContent = data.nickname;
+
             jugadorDiv.appendChild(nombreJugadorDiv);
             cuadroDiv.appendChild(personajeDiv);
             jugadorDiv.appendChild(cuadroDiv);
@@ -30,16 +31,21 @@ class AddPlayer {
         });
     }
 
-    addPlayer(nickname) {
+    addPlayer(data) {
         if (this.players.length < this.maxPlayers) {
-            this.players.push(nickname);
-    
+            this.players.push(data);
+
             this.updatePlayersList();
         }
         else {
             null
         }
     }
+
+    removePlayer(id) {
+        this.players = this.players.filter(player => player.id !== id)
+        this.updatePlayersList()
+    }
 }
 
-export default AddPlayer
+export default Players

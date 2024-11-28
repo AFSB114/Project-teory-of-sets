@@ -1,3 +1,33 @@
+import Socket from '../../assets/js/socket.js';
+
+const urlParams = new URLSearchParams(window.location.search);
+const play = JSON.parse(urlParams.get('play'));
+const id = parseInt(urlParams.get('id'));
+const indexLevel = parseInt(urlParams.get('indexLevel'));
+
+let socket = null;
+
+if (play) {
+    socket = new Socket(`ws://localhost:8080?&id=${id}`)
+    socket.connect()
+}
+
+// Quita los parámetros de la URL sin recargar la página
+const newUrl = window.location.protocol + "//" + window.location.host + window.location.pathname;
+window.history.pushState({ path: newUrl }, '', newUrl);
+
+import StoreLevelCompleted from '../../assets/js/storeLevelCompleted.js'
+const store = new StoreLevelCompleted(3)
+store.addStartedLevel()
+
+import Game from '../../assets/js/game.js';
+
+// Inicializar el juego cuando el DOM esté listo
+window.addEventListener('DOMContentLoaded', () => {
+    new Game(0);
+});
+
+
 const cajaA = document.querySelector('.caja1');  // Caja de los Muebles
 const cajaB = document.querySelector('.caja2');  //Caja de los Decorativos
 const cajaC = document.querySelector('.caja3');  // Caja de  Leer/Beber
@@ -11,6 +41,8 @@ const leerBeber = ['revista', 'libro', 'copa', 'taza'];
 
 let objetosCorrectos = 0;
 const totalObjetos = muebles.length + decorativos.length + leerBeber.length;
+
+let passTrue = false;
 
 // Hacer que las cajas permitan el soltar los objetos
 [cajaA, cajaB, cajaC].forEach(caja => {
@@ -159,6 +191,10 @@ puerta.addEventListener('click', () => {
         knock.play();
         alert('La puerta no se abrirá hasta que todos los objetos estén en sus cajas correctas.');
     } else {
-        window.location.href = '../../levels/Level4/';
+        if (play) {
+            socket.sendPassLevel(indexLevel)
+        } else {
+            store.addCompletedLevel(document.getElementById('timer').innerHTML, 'Level4')
+        }
     }
 });
