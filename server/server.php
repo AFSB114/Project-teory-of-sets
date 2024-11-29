@@ -23,8 +23,8 @@ class MultiplayerServer implements MessageComponentInterface
         'MESSAGE' => 'handleMessage',
         'PASS_LEVEL' => 'handlePassLevel',
         'LEFT_ROOM' => 'handlePlayerLeft',
+        'RANKING' => 'handleRanking'
     ];
-
 
     public function __construct(
         // Guarda las conexiones de los clientes
@@ -63,6 +63,7 @@ class MultiplayerServer implements MessageComponentInterface
             // Restaurar propiedades específicas
             $conn->code = $persistentData['code'] ?? null;
             $conn->time = $persistentData['time'] ?? '';
+            $conn->indexLevel = $persistentData['indexLevel'] ?? null;
             $conn->play = true;
 
             // Opcional: Eliminar la entrada persistente si ya no es necesaria
@@ -93,6 +94,11 @@ class MultiplayerServer implements MessageComponentInterface
         if (isset($conn->code)) {
             $this->rooms[$conn->code]['players']->attach($conn);
         }
+
+        $this->sendResponse($conn, [
+            'action' => 'CHARGE_DATA',
+            'message' => 'Carga de datos completada'
+        ]);
     }
 
     private function logConnectionStatus(ConnectionInterface $conn): void
@@ -161,7 +167,7 @@ class MultiplayerServer implements MessageComponentInterface
         $from->rol = 'GUEST';
 
         $this->rooms[$data['code']]['players']->attach($from);
-        $this->notifyRoomParticipants($from, $data['code']);
+        $this->notifyRoomParticipants($from, $data['code'], 'JOIN');
     }
 
     private function isValidJoin(JoinRoom $join): bool
@@ -170,26 +176,34 @@ class MultiplayerServer implements MessageComponentInterface
             $join->joinRoom()['status'] === 'OK';
     }
 
-    private function notifyRoomParticipants(ConnectionInterface $newPlayer, string $roomCode): void
+    private function notifyRoomParticipants(ConnectionInterface $conn, string $roomCode, string $action): void
     {
+        echo "Number of players in the room:" . $this->rooms[$roomCode]['players']->count() . "\n";
         foreach ($this->rooms[$roomCode]['players'] as $client) {
-            if ($client !== $newPlayer) {
-                $this->sendResponse($client, [
-                    'action' => 'NEW_PLAYER',
-                    'message' => 'New player has been joined!',
-                    'id' => $newPlayer->id,
-                    'nickname' => $newPlayer->nickname,
-                    'avatar' => $newPlayer->avatar
-                ]);
-            }
+            switch ($action) {
+                case 'JOIN':
+                    if ($client !== $conn) {
+                        $this->sendResponse($client, [
+                            'action' => 'NEW_PLAYER',
+                            'message' => 'New player has been joined!',
+                            'id' => $conn->id,
+                            'nickname' => $conn->nickname,
+                            'avatar' => $conn->avatar
+                        ]);
+                    }
 
-            $this->sendResponse($newPlayer, [
-                'action' => 'JOIN',
-                'message' => 'Joined to room successfully!',
-                'id' => $client->id,
-                'nickname' => $client->nickname,
-                'avatar' => $client->avatar
-            ]);
+                    $this->sendResponse($conn, [
+                        'action' => 'JOIN',
+                        'message' => 'Joined to room successfully!',
+                        'id' => $client->id,
+                        'nickname' => $client->nickname,
+                        'avatar' => $client->avatar
+                    ]);
+                    break;
+                default:
+                    echo "Unknown action {$action}\n";
+                    break;
+            }
         }
     }
 
@@ -233,6 +247,29 @@ class MultiplayerServer implements MessageComponentInterface
         $this->broadcastToRoom($data['code'], $response);
     }
 
+    private function handleRanking(ConnectionInterface $conn, array $data): void
+    {
+        foreach ($this->rooms[$conn->code]['players'] as $player) {
+            if ($player->indexLevel === 'Esperando') {
+                echo "Send time again to {$player->nickname}\n\n";
+                $players = [];
+                foreach ($this->rooms[$conn->code]['players'] as $client) {
+                    $players[$client->id] = [
+                        'nickname' => $client->nickname,
+                        'time' => $client->time,
+                        'level' => $client->indexLevel
+                    ];
+                }
+                $this->sendResponse($player, [
+                    'action' => 'RANKING',
+                    'players' => $players
+                ]);
+            } else {
+                echo "{$client->nickname} stay in level {$client->indexLevel}\n";
+            }
+        }
+    }
+
     private function handlePassLevel(ConnectionInterface $from, array $data): void
     {
         $indexLevel = (int)$data['indexLevel'];
@@ -254,15 +291,22 @@ class MultiplayerServer implements MessageComponentInterface
                     'id' => $from->id
                 ];
             } else {
+                $from->indexLevel = 'Esperando';
+                echo "{$from->nickname} esta en el nivel {$from->indexLevel}\n\n";
                 $response = [
-                    'action' => 'FINISHED'
+                    'action' => 'FINISHED',
+                    'id' => $from->id
                 ];
             }
+
         } else {
-            $response = ['message' => 'no existe la sala', 'sala' => $this->rooms];
+            $response = ['message' => 'no existe la sala'];
         }
 
+        $this->handleRanking($from, []);
+
         $this->sendResponse($from, $response);
+
     }
 
     private function sumTime(ConnectionInterface $from, string $time): void
@@ -307,6 +351,9 @@ class MultiplayerServer implements MessageComponentInterface
         if ($this->shouldPersistConnection($conn)) {
             $this->persistConnection($conn);
         } else {
+            if (isset($this->rooms[$conn->code])) {
+                $this->rooms[$conn->code]['players']->detach($conn);
+            }
             $this->clients->detach($conn);
             $this->logDisconnection($conn);
         }
@@ -333,12 +380,15 @@ class MultiplayerServer implements MessageComponentInterface
         // Guardar datos relevantes para la reconexión
         $this->persistentConnections[$conn->id] = [
             'code' => $conn->code ?? null,
-            'time' => $conn->time ?? ''
+            'time' => $conn->time ?? '',
+            'indexLevel' => $conn->indexLevel ?? null
         ];
 
         // Opcional: Establecer la conexión como 'play' para evitar desconexión
         $conn->play = false;
+        $this->rooms[$conn->code]['players']->detach($conn);
         $this->onClose($conn);
+//        $conn->close();
     }
 
     private function logDisconnection(ConnectionInterface $conn): void

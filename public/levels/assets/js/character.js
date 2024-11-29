@@ -13,7 +13,7 @@ export default class Character {
         
         // Física mejorada
         this.gravity = 0.5
-        this.jumpForce = 10
+        this.jumpForce = 7.5
         this.isJumping = false
         this.friction = 0.8 // Coeficiente de fricción en el eje X
         this.airFriction = 0.95 // Coeficiente de fricción en el aire en el eje X

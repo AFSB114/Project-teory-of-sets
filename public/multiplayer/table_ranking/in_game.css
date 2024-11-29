@@ -1,8 +1,8 @@
 .fondo {
     background-image: url('../assets/images/Fondo_in_game.svg');
 
-    grid-template-columns: 2fr 2fr 3fr 2fr 2fr;
-    grid-template-rows: 2fr 3fr 3fr 3fr 1fr;
+    grid-template-columns: 2fr 2fr auto 2fr 2fr;
+    grid-template-rows: 1fr 3fr 3fr 3fr 1fr;
 }
 
 .tittle {
@@ -49,9 +49,9 @@
 }
 
 table {
-    grid-area: 2 / 2 / 5 / 7;
+    grid-area: 2 / 2 / 3 / 7;
 
-    font-size: 4vh;
+    font-size: 3.8dvh;
     font-family: 'Pixeloid Sans';
     font-weight: bolder;
 }
@@ -67,4 +67,11 @@ tr>th:first-child {
 
 td {
     color: #737373;
+}
+
+.text {
+    grid-area: 8 / 3 / 9 / 6;
+    text-align: center;
+    font-size: 3.5dvh;
+    font-family: 'Pixeloid Sans';
 }

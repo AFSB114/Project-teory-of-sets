@@ -61,7 +61,7 @@ async function init() {
                 players.removePlayer(data.id)
                 break
             case 'PLAY':
-                // window.location.href = `../../levels/level-test/?play=true`
+                window.location.href = `../../levels/${data.level.name}/?play=true&id=${data.id}&indexLevel=${data.indexLevel}e`
                 break
             case 'MESSAGE':
                 let message = document.createElement('div')
@@ -75,10 +75,7 @@ async function init() {
                 document.getElementById('messages').appendChild(message)
                 document.getElementById('messages').scrollTop = document.getElementById('messages').scrollHeight
                 break
-            case 'exit':
-                alert(data.message)
-                break
-            case 'error':
+            case 'ERROR':
                 alert(data.message)
                 break
             default:
