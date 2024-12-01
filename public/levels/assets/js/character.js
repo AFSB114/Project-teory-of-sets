@@ -16,7 +16,7 @@ export default class Character {
         this.jumpForce = 7.5
         this.isJumping = false
         this.friction = 0.8 // Coeficiente de fricción en el eje X
-        this.airFriction = 0.95 // Coeficiente de fricción en el aire en el eje X
+        this.airFriction = 1 // Coeficiente de fricción en el aire en el eje X
         this.acceleration = 1.5 // Aceleración en el eje X
         this.maxSpeed = 10 // Velocidad máxima en eje X
         
@@ -24,7 +24,7 @@ export default class Character {
         this.frame = 0
         this.numsFrame = 4
         this.widthFrame = this.width
-        this.animationSpeed = 9
+        this.animationSpeed = 10
         this.animationCounter = 0
         
         // Límites

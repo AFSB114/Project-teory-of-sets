@@ -9,29 +9,26 @@ async function init() {
     const newUrl = window.location.protocol + "//" + window.location.host + window.location.pathname
     window.history.pushState({ path: newUrl }, '', newUrl)
 
-    let id = parseInt(urlParams.get('id'))
+    const id = parseInt(urlParams.get('id'))
 
     const connection = new SocketConnection(`ws://localhost:8080?&id=${id}`)
 
     try {
         const socketConn = await connection.connect()
+
+        connection.socket.send(JSON.stringify({
+            action: 'RANKING'
+        }))
+
     } catch (err) {
         window.location.href = '../start/?message=No se pudo establecer conexión con el servidor'
     }
-
-    
 
     connection.socket.onmessage = (event) => {
         const data = JSON.parse(event.data)
         console.log(data)
 
         switch (data.action) {
-            case 'CHARGE_DATA':
-                connection.socket.send(JSON.stringify({
-                    action: 'RANKING'
-                }))
-                console.log(data.message)
-                break;
             case 'RANKING':
                 players.addToRanking(data.players)
                 break
@@ -52,6 +49,9 @@ async function init() {
                 }
                 document.getElementById('messages').appendChild(message)
                 document.getElementById('messages').scrollTop = document.getElementById('messages').scrollHeight
+                break
+            case 'ALL_FINISHED':
+                window.location.href = `../winners/?id=${id}`
                 break
             case 'ERROR':
                 alert(data.message)
