@@ -69,7 +69,7 @@ const totalObjetos = espejos.length + cuadros.length;
                 abrirPuerta();
             }
         } else {
-            alert('Este objeto no pertenece a este conjunto.');
+            mostrarMensajeError('Este objeto no pertenece a este conjunto.');
         }
 
         conjunto.classList.remove('conjunto-hover');
@@ -98,4 +98,15 @@ function abrirPuerta() {
             store.addCompletedLevel(document.getElementById('timer').innerHTML, 'Level3')
         }
     });
+}
+
+
+function mostrarMensajeError(mensaje) {
+    const mensajeError = document.getElementById('mensaje-error');
+    mensajeError.textContent = mensaje;
+    mensajeError.classList.remove('oculto');
+
+    setTimeout(() => {
+        mensajeError.classList.add('oculto');
+    }, 1000);
 }
