@@ -32,10 +32,13 @@ class Socket {
 
                 switch (data.action) {
                     case 'NEXT_LEVEL':
+                        this.socket.close()
                         window.location.href = `../../levels/${data.level.name}/?play=true&id=${data.id}&indexLevel=${data.indexLevel}`
                         break
                     case 'FINISHED':
-                        window.location.href = `../../multiplayer/table_ranking/`
+                        this.socket.close()
+                        window.location.href = `../../multiplayer/table_ranking/?id=${data.id}`
+                        break
                     default:
                         console.log(data.message)
                         break

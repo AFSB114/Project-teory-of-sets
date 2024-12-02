@@ -74,14 +74,8 @@ async function init() {
                 document.getElementById('messages').appendChild(message)
                 document.getElementById('messages').scrollTop = document.getElementById('messages').scrollHeight
                 break
-            case 'joined':
-                break
-            case 'error':
+            case 'ERROR':
                 alert(data.message)
-                break
-            case 'closed':
-                // window.location.href = './start.html'
-                alert(data.data)
                 break
             default:
                 console.log(data)
