@@ -8,6 +8,7 @@
     <title>Nivel 3</title>
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="../assets/css/loader.css">
+    <link rel="stylesheet" href="../assets/css/mensajeError.css">
 </head>
 
 <body>
@@ -121,11 +122,15 @@
                     <div class="lampara objeto" id="lampara" draggable="true"></div>
                     <div class="taza objeto" id="taza" draggable="true"></div>
                     <div class="silla objeto" id="silla" draggable="true"></div>
-                
+
+                    <div id="message-container" class="message-container">
+                        <div id="mensaje-error" class="mensaje-error"></div>
+                    </div>
             </div>
 
         </div>
-
+        
+    
     </div>
     <script src="../assets/js/loader.js"></script>
     <script src="js/game.js" type="module"></script>
@@ -133,6 +138,7 @@
     <script src="js/time.js"></script>
     <script src="../assets/js/spritesCharacter.js"></script>
     <script src="../../assets/sonido/sonido.js"></script>
+    <script src="../assets/js/mensaje_Error.js"></script>
 </body>
 
 </html>
