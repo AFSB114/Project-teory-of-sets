@@ -1,29 +1,29 @@
 @font-face {
     font-family: 'Super Pixel';
-    src: url('/assets/fonts/Super-Pixel-Personal-Use.ttf') format('truetype'),
-        url('/assets/fonts/super-pixel-personal-use-webfont.woff') format('woff'),
-        url('/assets/fonts/super-pixel-personal-use-webfont.woff2') format('woff2');
+    src: url('../../../assets/fonts/Super-Pixel-Personal-Use.ttf') format('truetype'),
+        url('../../../assets/fonts/super-pixel-personal-use-webfont.woff') format('woff'),
+        url('../../../assets/fonts/super-pixel-personal-use-webfont.woff2') format('woff2');
 }
 
 @font-face {
     font-family: 'Pixeloid Sans';
-    src: url('/assets/fonts/PixeloidSans.ttf') format('truetype'),
-        url('/assets/fonts/pixeloidsans-webfont.woff') format('woff'),
-        url('/assets/fonts/pixeloidsans-webfont.woff2') format('woff2');
+    src: url('../../../assets/fonts/PixeloidSans.ttf') format('truetype'),
+        url('../../../assets/fonts/pixeloidsans-webfont.woff') format('woff'),
+        url('../../../assets/fonts/pixeloidsans-webfont.woff2') format('woff2');
 }
 
 @font-face {
     font-family: 'Pixeloid Sans Bold';
-    src: url('/assets/fonts/PixeloidSans-Bold.ttf') format('truetype'),
-        url('/assets/fonts/pixeloidsans-bold-webfont.woff') format('woff'),
-        url('/assets/fonts/pixeloidsans-bold-webfont.woff2') format('woff2');
+    src: url('../../../assets/fonts/PixeloidSans-Bold.ttf') format('truetype'),
+        url('../../../assets/fonts/pixeloidsans-bold-webfont.woff') format('woff'),
+        url('../../../assets/fonts/pixeloidsans-bold-webfont.woff2') format('woff2');
 }
 
 @font-face {
     font-family: 'Press Start 2P';
-    src: url('/assets/fonts/PressStart2P.ttf') format('truetype'),
-        url('/assets/fonts/pressstart2p-webfont.woff') format('woff'),
-        url('/assets/fonts/pressstart2p-webfont.woff2') format('woff2');
+    src: url('../../../assets/fonts/PressStart2P.ttf') format('truetype'),
+        url('../../../assets/fonts/pressstart2p-webfont.woff') format('woff'),
+        url('../../../assets/fonts/pressstart2p-webfont.woff2') format('woff2');
 }
 
 html,

@@ -87,6 +87,7 @@ async function init() {
         switch (data.action) {
             case 'WINNERS':
                 showWinners(data.sortedPlayers)
+                connection.socket.send(JSON.stringify({action: 'LEFT_ROOM'}))
                 break
             case 'ERROR':
                 alert(data.message)

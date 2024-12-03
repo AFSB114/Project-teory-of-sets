@@ -16,7 +16,7 @@ require __DIR__ . '/vendor/autoload.php';
 
 class MultiplayerServer implements MessageComponentInterface
 {
-    private const ACTIONS = [
+    private const array ACTIONS = [
         'CREATE' => 'handleCreateRoom',
         'JOIN' => 'handleJoinRoom',
         'PLAY' => 'handlePlay',
@@ -366,11 +366,11 @@ class MultiplayerServer implements MessageComponentInterface
 
         $totSecs = $totNewSecs + $totCurrentSecs;
 
-        $mins = floor($totSecs / 60);
-        $secs = $totSecs % 60;
+        $minutes = floor($totSecs / 60);
+        $seconds = $totSecs % 60;
 
 
-        $from->time = str_pad($mins, 2, '0', STR_PAD_LEFT) . ':' . str_pad($secs, 2, '0', STR_PAD_LEFT);
+        $from->time = str_pad($minutes, 2, '0', STR_PAD_LEFT) . ':' . str_pad($seconds, 2, '0', STR_PAD_LEFT);
 
         echo "Time: {$from->time}\n";
     }

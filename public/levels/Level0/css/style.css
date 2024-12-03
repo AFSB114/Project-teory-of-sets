@@ -1,3 +1,17 @@
+@font-face {
+    font-family: 'Super Pixel';
+    src: url('../../../assets/fonts/Super-Pixel-Personal-Use.ttf') format('truetype'),
+        url('../../../assets/fonts/super-pixel-personal-use-webfont.woff') format('woff'),
+        url('../../../assets/fonts/super-pixel-personal-use-webfont.woff2') format('woff2');
+}
+
+@font-face {
+    font-family: 'Pixeloid Sans';
+    src: url('../../../assets/fonts/PixeloidSans.ttf') format('truetype'),
+        url('../../../assets/fonts/pixeloidsans-webfont.woff') format('woff'),
+        url('../../../assets/fonts/pixeloidsans-webfont.woff2') format('woff2');
+}
+
 html,
 body {
     height: 100%;
