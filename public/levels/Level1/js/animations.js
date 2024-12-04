@@ -1,9 +1,9 @@
 const clock = document.getElementById('reloj');
-const numsFrameClock = 8;
+const numsFrameClock = 64;
 const widthFrameClock = clock.clientWidth;
 let frameClock = 0;
 let animationCounterClock = 0;
-const animationSpeedClock = 110; // Cuanto mayor sea este valor, más lenta será la animación
+const animationSpeedClock = 120; // Cuanto mayor sea este valor, más lenta será la animación
 let isRunningClock = true;
 
 function updateAnimationFrameClock() {

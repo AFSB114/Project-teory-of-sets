@@ -39,13 +39,15 @@
 
             <div class="modal modal-help">
                 <div class="contenido-modal-help">
-                    Piano
+                    Todo buen pianista necesita una guía.<br>
+                    Encuentra la tuya..
                 </div>
             </div>
-
             <div class="modal modal-help">
-                <div class="img-help2">
-
+                <div class="contenido-modal-help">
+                    Cada disco tiene su tono, pero algunos<br>
+                    comparten una melodía. Escucha bien,<br>
+                    las notas se entrelazan.
                 </div>
             </div>
 
@@ -55,7 +57,9 @@
             <div class="scenarios" id="scenarios">
 
                 <div class="scenario" id="scenario1">
-
+                    <div class="cuadro_nota" id="cuadro_nota"></div>
+                    <audio id="fall" src="sounds/hit.mp3""></audio>
+                    <div class="paper" id="paper"></div>
                 </div>
 
                 <div class="scenario" id="scenario2">
@@ -69,6 +73,40 @@
                     <div class="reloj" id="reloj"></div>
                 </div>
 
+                <div class="scenario" id="scenario4">
+                    <div class="gramofono" id="gramofono"></div>
+                    <div class="ondas"></div>
+                    <div class="disco disco_rosa" id="disco_rosa" draggable="true"></div>
+                    <div class="disco disco_morado" id="disco_morado" draggable="true"></div>
+                    <div class="disco disco_azul" id="disco_azul" draggable="true"></div>
+                    <div class="diagrama"></div>
+                    <div class="notesQuestion">
+                        <div class="D4">
+                            <button type="button" class="btn-notes note" id="D4">D4</button>
+                        </div>
+                        <div class="E4">
+                            <button type="button" class="btn-notes note" id="E4">E4</button>
+                        </div>
+                        <div class="G4">
+                            <button type="button" class="btn-notes note" id="G4">G4</button>
+                        </div>
+                        <div class="A4">
+                            <button type="button" class="btn-notes note" id="A4">A4</button>
+                        </div>
+                        <div class="B4">
+                            <button type="button" class="btn-notes note" id="B4">B4</button>
+                        </div>
+                        <div class="G-sostenido-4">
+                            <button type="button" class="btn-notes note" id="G-sostenido-4">G#4</button>
+                        </div>
+                        <div class="F-sostenido-4">
+                            <button type="button" class="btn-notes note" id="F-sostenido-4">F#4</button>
+                        </div>
+                        <div class="G-sostenido-5">
+                            <button type="button" class="btn-notes note" id="G-sostenido-5">G#5</button>
+                        </div>
+                    </div>
+                </div>
 
                 <div id="character" class="character"></div>
             </div>
@@ -77,104 +115,115 @@
 
         <div class="modal contrast" id="modal-ask">
             <div class="contenido-modal-ask">
+                <div class="partidura" id="partidura" style="display: none;">
+                    <div class="notas-partidura nota1">E5</div>
+                    <div class="notas-partidura nota2">D#5</div>
+                    <div class="notas-partidura nota3">E5</div>
+                    <div class="notas-partidura nota4">D#5</div>
+                    <div class="notas-partidura nota5">E5</div>
+                    <div class="notas-partidura nota6">B4</div>
+                    <div class="notas-partidura nota7">D5</div>
+                    <div class="notas-partidura nota8">C5</div>
+                    <div class="notas-partidura nota9">A4</div>
+                </div>
                 <div class="octava4">4</div>
                 <div class="do white key">
-                    <audio src="sounds/do.mp3" id="do"></audio>
-                    do
+                    <audio src="sounds/do.mp3" id="do " class="C4"></audio>
+                    C
                 </div>
                 <div class="re white key">
-                    <audio src="sounds/re.mp3" id="re"></audio>
-                    re
+                    <audio src="sounds/re.mp3" id="re" class="D4"></audio>
+                    D
                 </div>
                 <div class="mi white key">
-                    <audio src="sounds/mi.mp3" id="mi"></audio>
-                    mi
+                    <audio src="sounds/mi.mp3" id="mi" class="E4"></audio>
+                    E
                 </div>
                 <div class="fa white key">
-                    <audio src="sounds/fa.mp3" id="fa"></audio>
-                    fa
+                    <audio src="sounds/fa.mp3" id="fa" class="F4"></audio>
+                    F
                 </div>
                 <div class="sol white key">
-                    <audio src="sounds/sol.mp3" id="sol"></audio>
-                    sol
+                    <audio src="sounds/sol.mp3" id="sol" class="G4"></audio>
+                    G
                 </div>
                 <div class="la white key">
-                    <audio src="sounds/la.mp3" id="la"></audio>
-                    la
+                    <audio src="sounds/la.mp3" id="la" class="A4"></audio>
+                    A
                 </div>
                 <div class="si white key">
-                    <audio src="sounds/si.mp3" id="si"></audio>
-                    si
+                    <audio src="sounds/si.mp3" id="si" class="B4"></audio>
+                    B
                 </div>
                 <div class="octava5">5</div>
                 <div class="do-5 white key">
-                    <audio src="sounds/do5.mp3" id="do-5"></audio>
-                    do
+                    <audio src="sounds/do5.mp3" id="do-5" class="C5"></audio>
+                    C
                 </div>
                 <div class="re-5 white key">
-                    <audio src="sounds/re5.mp3" id="re-5"></audio>
-                    re
+                    <audio src="sounds/re5.mp3" id="re-5" class="D5"></audio>
+                    D
                 </div>
                 <div class="mi-5 white key">
-                    <audio src="sounds/mi5.mp3" id="mi-5"></audio>
-                    mi
+                    <audio src="sounds/mi5.mp3" id="mi-5" class="E5"></audio>
+                    E
                 </div>
                 <div class="fa-5 white key">
-                    <audio src="sounds/fa5.mp3" id="fa-5"></audio>
-                    fa
+                    <audio src="sounds/fa5.mp3" id="fa-5" class="F5"></audio>
+                    F
                 </div>
                 <div class="sol-5 white key">
-                    <audio src="sounds/sol5.mp3" id="sol-5"></audio>
-                    sol
+                    <audio src="sounds/sol5.mp3" id="sol-5" class="G5"></audio>
+                    G
                 </div>
                 <div class="la-5 white key">
-                    <audio src="sounds/la5.mp3" id="la-5"></audio>
-                    la
+                    <audio src="sounds/la5.mp3" id="la-5" class="A5"></audio>
+                    A
                 </div>
                 <div class="si-5 white key">
-                    <audio src="sounds/si5.mp3" id="si-5"></audio>
-                    si
+                    <audio src="sounds/si5.mp3" id="si-5" class="B5"></audio>
+                    B
                 </div>
 
                 <div class="do-sostenido black key">
-                    <audio src="sounds/dosostenido.mp3" id="do-sostenido"></audio>
-                    do#
+                    <audio src="sounds/dosostenido.mp3" id="do-sostenido" class="C#4"></audio>
+                    C#
                 </div>
                 <div class="re-sostenido black key">
-                    <audio src="sounds/resostenido.mp3" id="re-sostenido"></audio>
-                    re#
+                    <audio src="sounds/resostenido.mp3" id="re-sostenido" class="D#4"></audio>
+                    D#
                 </div>
                 <div class="fa-sostenido black key">
-                    <audio src="sounds/fasostenido.mp3" id="fa-sostenido"></audio>
-                    fa#
+                    <audio src="sounds/fasostenido.mp3" id="fa-sostenido" class="F#4"></audio>
+                    F#
                 </div>
                 <div class="sol-sostenido black key">
-                    <audio src="sounds/solsostenido.mp3" id="sol-sostenido"></audio>
-                    sol#
+                    <audio src="sounds/solsostenido.mp3" id="sol-sostenido" class="G#4"></audio>
+                    G#
                 </div>
                 <div class="la-sostenido black key">
-                    <audio src="sounds/lasostenido.mp3" id="la-sostenido"></audio>
-                    la#
+                    <audio src="sounds/lasostenido.mp3" id="la-sostenido" class="A#4"></audio>
+                    A#
                 </div>
                 <div class="do-sostenido-5 black key">
-                    <audio src="sounds/dosostenido5.mp3" id="do-sostenido-5"></audio>
-                    do#
+                    <audio src="sounds/dosostenido5.mp3" id="do-sostenido-5" class="C-sostenido-5"></audio>
+                    C#
                 </div>
                 <div class="re-sostenido-5 black key">
-                    <audio src="sounds/resostenido5.mp3" id="re-sostenido-5"></audio>
-                    re#
+                    <audio src="sounds/resostenido5.mp3" id="re-sostenido-5" class="D#5"></audio>
+                    D#
                 </div>
                 <div class="fa-sostenido-5 black key">
-                    <audio src="sounds/fasostenido5.mp3" id="fa-sostenido-5"></audio>
-                    fa#
+                    <audio src="sounds/fasostenido5.mp3" id="fa-sostenido-5" class="F#5"></audio>
+                    F#
                 </div>
                 <div class="sol-sostenido-5 black key">
-                    <audio src="sounds/solsostenido5.mp3" id="sol-sostenido-5"></audio>
-                    sol#
+                    <audio src="sounds/solsostenido5.mp3" id="sol-sostenido-5" class="G#5"></audio>
+                    G#
                 </div>
                 <div class="la-sostenido-5 black key">
-                    <audio src="sounds/lasostenido5.mp3" id="la-sostenido-5"></audio>
-                    la#
+                    <audio src="sounds/lasostenido5.mp3" id="la-sostenido-5" class="A#5"></audio>
+                    A#
                 </div>
             </div>
         </div>

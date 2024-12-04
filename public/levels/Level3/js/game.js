@@ -77,7 +77,7 @@ let passTrue = false;
                 abrirPuerta();  // Esto me llama la funcion para abrir la puerta
             }
         } else {
-            alert('Este objeto no pertenece a esta caja.');
+            showMessage('Este objeto no pertenece a esta caja.');
         }
         caja.classList.remove('caja-hover');  // Quitar estilo de hover
     });
@@ -116,13 +116,12 @@ objetos.forEach(objeto => {
 
 [cajaA, cajaB, cajaC].forEach(caja => {
     document.addEventListener('touchmove', (event) => {
-        if (Dragging) {
+        if (Dragging && event.target.id !== 'key') {
             const touch = event.touches[0];
             
             const leftPosition = touch.clientX - setX - 400; 
             const topPosition = touch.clientY - setY - 250;
     
-            // Mover la llave a la posición calculada
             objetoArrastrado.style.position = 'absolute';
             objetoArrastrado.style.left = leftPosition + 'px';
             objetoArrastrado.style.top = topPosition + 'px';
@@ -147,6 +146,10 @@ objetos.forEach(objeto => {
                 ) {
                     cajaCorrecta = caja;
                 }
+                else {
+                    objetoArrastrado.style.left = posicionInicial[objetoId].left;
+                    objetoArrastrado.style.top = posicionInicial[objetoId].top;
+                }
             });
     
             if (cajaCorrecta) {
@@ -165,7 +168,7 @@ objetos.forEach(objeto => {
                         abrirPuerta();  // Llamar a la función para abrir la puerta
                     }
                 } else {
-                    alert('Este objeto no pertenece a esta caja.');
+                    showMessage('Este objeto no pertenece a este conjunto.');
                     // Restablecer la posición inicial del objeto
                     objetoArrastrado.style.left = posicionInicial[objetoId].left;
                     objetoArrastrado.style.top = posicionInicial[objetoId].top;
@@ -191,7 +194,7 @@ function abrirPuerta() {
 puerta.addEventListener('click', () => {
     if (!passTrue) {  
         knock.play();
-        alert('La puerta no se abrirá hasta que todos los objetos estén en sus cajas correctas.');
+        showMessage('Este objeto no pertenece a este conjunto.');
     } else {
         if (play) {
             socket.sendPassLevel(indexLevel)

@@ -774,12 +774,12 @@ body {
     background-size: contain;
     background-repeat: no-repeat;
 
-    width: 10vh;
-    height: 10vh;
+    width: 12vh;
+    height: 12vh;
     z-index: 1;
 
     position: absolute;
-    top: 80%;
+    bottom: 10%;
     left: 7%;
 }
 
@@ -789,12 +789,27 @@ body {
     background-size: contain;
     background-repeat: no-repeat;
 
-    width: 10vh;
-    height: 10vh;
+    width: 12vh;
+    height: 12vh;
     z-index: 1;
 
     position: absolute;
-    top: 80%;
+    bottom: 10%;
+    left: 18%;
+}
+
+.jump {
+    background-image: url('../images/button_jump.png');
+    background-position: center center;
+    background-size: contain;
+    background-repeat: no-repeat;
+
+    width: 12vh;
+    height: 12vh;
+    z-index: 1;
+
+    position: absolute;
+    bottom: 10%;
     right: 7%;
 }
 
