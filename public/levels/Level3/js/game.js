@@ -116,13 +116,12 @@ objetos.forEach(objeto => {
 
 [cajaA, cajaB, cajaC].forEach(caja => {
     document.addEventListener('touchmove', (event) => {
-        if (Dragging) {
+        if (Dragging && event.target.id !== 'key') {
             const touch = event.touches[0];
             
             const leftPosition = touch.clientX - setX - 400; 
             const topPosition = touch.clientY - setY - 250;
     
-            // Mover la llave a la posición calculada
             objetoArrastrado.style.position = 'absolute';
             objetoArrastrado.style.left = leftPosition + 'px';
             objetoArrastrado.style.top = topPosition + 'px';
@@ -146,6 +145,10 @@ objetos.forEach(objeto => {
                     touch.clientY >= cajaRect.top && touch.clientY <= cajaRect.bottom
                 ) {
                     cajaCorrecta = caja;
+                }
+                else {
+                    objetoArrastrado.style.left = posicionInicial[objetoId].left;
+                    objetoArrastrado.style.top = posicionInicial[objetoId].top;
                 }
             });
     

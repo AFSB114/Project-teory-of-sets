@@ -35,12 +35,12 @@ const totalObjetos = espejos.length + cuadros.length;
 
 [conjuntoA, conjuntoB].forEach((conjunto) => {
     conjunto.addEventListener('dragover', (event) => {
-        event.preventDefault();
-        conjunto.classList.add('conjunto-hover');
+        event.preventDefault(); 
+        conjunto.classList.add('conjunto-hover'); 
     });
 
     conjunto.addEventListener('dragleave', () => {
-        conjunto.classList.remove('conjunto-hover');
+        conjunto.classList.remove('conjunto-hover'); 
     });
 
     conjunto.addEventListener('drop', (event) => {
@@ -52,27 +52,17 @@ const totalObjetos = espejos.length + cuadros.length;
             (conjunto === conjuntoA && espejos.includes(objetoId)) ||
             (conjunto === conjuntoB && cuadros.includes(objetoId))
         ) {
-            // Posiciona el objeto en las coordenadas del evento drop
-            const rect = conjunto.getBoundingClientRect();
-            const offsetX = event.clientX - rect.left;
-            const offsetY = event.clientY - rect.top;
-
-            objeto.style.position = 'absolute';
-            objeto.style.left = `${offsetX - objeto.offsetWidth / 2}px`;
-            objeto.style.top = `${offsetY - objeto.offsetHeight / 2}px`;
-
-            conjunto.appendChild(objeto);
-            objetosCorrectos++;
+            conjunto.appendChild(objeto); 
+            objeto.classList.add('newposition');
+            objetosCorrectos++; 
 
             // Verificar si todos los objetos están en su lugar
             if (objetosCorrectos === totalObjetos) {
-                abrirPuerta();
+                abrirPuerta(); 
             }
         } else {
             showMessage('Este objeto no pertenece a este conjunto.');
         }
-
-        conjunto.classList.remove('conjunto-hover');
     });
 });
 
@@ -83,6 +73,99 @@ objetos.forEach((objeto) => {
         event.dataTransfer.setData('text', event.target.id);
     });
 });
+
+let Dragging = false;
+let objetoArrastrado = null;
+let posicionInicial = {};
+let setX, setY;
+
+objetos.forEach(objeto => {
+    objeto.addEventListener('touchstart', (event) => {
+        console.log('Arrastrando objeto');
+        const touch = event.touches[0]; // Obtener el primer toque
+        const rect = objeto.getBoundingClientRect();
+
+        posicionInicial[objeto.id] = { left: objeto.style.left, top: objeto.style.top };
+    
+        // Calcular la diferencia entre la posición del toque y la posición del elemento
+        setX = touch.clientX - rect.left;
+        setY = touch.clientY - rect.top;
+    
+        Dragging = true;
+        objetoArrastrado = objeto;
+        event.preventDefault(); // Prevenir comportamientos por defecto
+    });
+});
+
+[conjuntoA, conjuntoB].forEach((conjunto) => {
+    document.addEventListener('touchmove', (event) => {
+        if (Dragging) {
+            const touch = event.touches[0];
+
+            const leftPosition = touch.clientX - setX - 400; 
+            const topPosition = touch.clientY - setY - 200;
+    
+            // Mover la llave a la posición calculada
+            objetoArrastrado.style.position = 'absolute';
+            objetoArrastrado.style.left = leftPosition + 'px';
+            objetoArrastrado.style.top = topPosition + 'px';
+    
+            event.preventDefault();
+        }
+    });
+    document.addEventListener('touchend', (event) => {
+        if (Dragging) {
+            console.log("Objeto soltado");
+            const objetoId = objetoArrastrado.id;
+            const touch = event.changedTouches[0];
+    
+            // Verificar en qué conjunto se ha soltado el objeto
+            let conjuntoCorrecto = null;
+    
+            [conjuntoA, conjuntoB].forEach((conjunto) => {
+                const conjuntoRect = conjunto.getBoundingClientRect();
+                if (
+                    touch.clientX >= conjuntoRect.left && touch.clientX <= conjuntoRect.right && 
+                    touch.clientY >= conjuntoRect.top && touch.clientY <= conjuntoRect.bottom
+                ) {
+                    conjuntoCorrecto = conjunto;
+                }
+                else {
+                    objetoArrastrado.style.left = posicionInicial[objetoId].left;
+                    objetoArrastrado.style.top = posicionInicial[objetoId].top;
+                }
+            });
+    
+            if (conjuntoCorrecto) {
+                // Verificar si el objeto pertenece al conjunto correcto
+                if (
+                    (conjuntoCorrecto === conjuntoA && espejos.includes(objetoId)) ||
+                    (conjuntoCorrecto === conjuntoB && cuadros.includes(objetoId))
+                ) {
+                    conjuntoCorrecto.appendChild(objetoArrastrado);  // Añadir objeto al conjunto
+                    objetosCorrectos++;  // Incrementar contador de objetos correctos
+                    objetoArrastrado.classList.add('newposition1');
+    
+                    // Verificar si todos los objetos están en sus conjuntos correctos
+                    if (objetosCorrectos === totalObjetos) {
+                        abrirPuerta();  // Llamar a la función para abrir la puerta
+                    }
+                } else {
+                    alert('Este objeto no pertenece a este conjunto.');
+                    // Restablecer la posición inicial del objeto
+                    objetoArrastrado.style.left = posicionInicial[objetoId].left;
+                    objetoArrastrado.style.top = posicionInicial[objetoId].top;
+                    }
+            }
+    
+            Dragging = false;
+            objetoArrastrado = null;
+
+            event.preventDefault();
+        }
+    });
+});
+
 
 // Función para abrir la puerta
 function abrirPuerta() {

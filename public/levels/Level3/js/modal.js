@@ -93,22 +93,25 @@ reja.addEventListener('drop', (event) => {
 
 let isDragging = false;
 let offsetX, offsetY;
+let posicionInicial = {};
 
 key.addEventListener('touchstart', (event) => {
     console.log("Arrastrando llave");
     const touch = event.touches[0]; // Obtener el primer toque
-    const rect = key.getBoundingClientRect();
+    const keyRect = key.getBoundingClientRect();
+
+    posicionInicial[key.id] = { left: key.style.left, top: key.style.top };
 
     // Calcular la diferencia entre la posición del toque y la posición del elemento
-    offsetX = touch.clientX - rect.left;
-    offsetY = touch.clientY - rect.top;
+    offsetX = touch.clientX - keyRect.left;
+    offsetY = touch.clientY - keyRect.top;
 
     isDragging = true;
     event.preventDefault(); // Prevenir comportamientos por defecto
 });
 
 document.addEventListener('touchmove', (event) => {
-    if (isDragging) {
+    if (isDragging && event.target.id === 'key') {
         const touch = event.touches[0];
         
         const leftPosition = touch.clientX - offsetX + 200; 
@@ -126,6 +129,7 @@ document.addEventListener('touchmove', (event) => {
 document.addEventListener('touchend', (event) => {
     if (isDragging) {
         console.log("Llave soltada");
+        const keyid = key.id;
 
         // Verificar si el área del "reja" ha sido tocada
         const rejaRect = reja.getBoundingClientRect();
@@ -143,6 +147,9 @@ document.addEventListener('touchend', (event) => {
 
             ask.style.display = 'block';
             ask.children[0].classList.add('show-ask');
+        } else {
+            key.style.left = posicionInicial[keyid].left;
+            key.style.top = posicionInicial[keyid].top;
         }
 
         isDragging = false;
