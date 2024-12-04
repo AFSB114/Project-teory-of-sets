@@ -40,7 +40,7 @@ document.getElementById('singleplayer').addEventListener('click', async (event) 
                 window.location.href = `../intro_game/`
                 return
             } else {
-                window.location.href = `../levels/${res.level}/`
+                window.location.href = `../levels/map/?level=${res.level}`
             }
         })
 })

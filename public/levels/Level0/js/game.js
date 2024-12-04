@@ -10,6 +10,9 @@ let socket = null;
 if (play) {
     socket = new Socket(`ws://localhost:8080?&id=${id}`)
     socket.connect()
+
+    document.getElementById('restart').style.display = 'none'
+    document.getElementById('map').style.display = 'none'
 }
 
 // Quita los parámetros de la URL sin recargar la página

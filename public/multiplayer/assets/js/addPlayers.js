@@ -2,6 +2,7 @@ class Players {
 
     constructor() {
         this.players = [];
+        this.playersRanking = [];
         this.maxPlayers = 8;
     }
 
@@ -45,6 +46,39 @@ class Players {
     removePlayer(id) {
         this.players = this.players.filter(player => player.id !== id)
         this.updatePlayersList()
+    }
+
+    updateRanking() {
+        // this.playersRanking = this.playersRanking.sort((a, b) => b.time - a.time)
+
+        const ranking = document.getElementById('ranking')
+        ranking.innerHTML = ''
+
+        this.playersRanking.forEach(player => { 
+            const tr = document.createElement('tr')
+            tr.innerHTML = `<td>${player.nickname}</td>
+                            <td>${player.time}</td>`
+            if (player.level !== 'Esperando') {
+                tr.innerHTML += `<td>${player.level + 1}</td>`
+            } else {
+                tr.innerHTML += `<td>${player.level}</td>`
+            }
+            ranking.appendChild(tr)  
+        })
+
+        this.playersRanking = [];
+    }
+
+    addToRanking(data) {
+        for (let index in data) {
+            this.playersRanking.push(data[index])
+        }
+        this.updateRanking()
+    }
+
+    removeFromRanking(id) {
+        this.playersRanking = this.playersRanking.filter(player => player.id !== id)
+        this.updateRanking()
     }
 }
 

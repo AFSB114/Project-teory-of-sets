@@ -5,6 +5,9 @@ const tts = new TextToSpeech()
 let players = new Players()
 
 async function init() {
+    // Variable para rastrear si la sala está activa
+    let salaActiva = false;
+
     let res = await fetch('../../../php/controller/log.php',
         {
             method: 'POST',
@@ -31,6 +34,7 @@ async function init() {
         const socketConn = await connection.connect()
 
         connection.createRoom(numLevels, timePerLevel)
+        salaActiva = true;
 
     } catch (err) {
         window.location.href = '../start/?message=No se pudo establecer conexión con el servidor'
@@ -61,7 +65,9 @@ async function init() {
                 players.removePlayer(data.id)
                 break
             case 'PLAY':
-                // window.location.href = `../../levels/level-test/?play=true`
+                // Marcar que se está navegando intencionalmente
+                salaActiva = false;
+                window.location.href = `../../levels/${data.level.name}/?play=true&id=${data.id}&indexLevel=${data.indexLevel}e`
                 break
             case 'MESSAGE':
                 let message = document.createElement('div')
@@ -75,15 +81,11 @@ async function init() {
                 document.getElementById('messages').appendChild(message)
                 document.getElementById('messages').scrollTop = document.getElementById('messages').scrollHeight
                 break
-            case 'exit':
-                alert(data.message)
-                break
-            case 'error':
+            case 'ERROR':
                 alert(data.message)
                 break
             default:
                 console.log(data)
-                alert(data.message)
                 break
         }
     }
@@ -101,6 +103,7 @@ async function init() {
         e.preventDefault()
         let res = confirm('¿Estás seguro de que deseas abandonar la sala?\n¡Si lo haces, se cerrará la sala!')
         if (res) {
+            salaActiva = false;
             connection.leftRoom()
             window.location.href = '../start/'
         } else {
@@ -109,13 +112,12 @@ async function init() {
     })
 
     window.addEventListener('beforeunload', (event) => {
-        event.preventDefault()
-        let res = confirm('Si haces esta accion se cerrará la sala.\n¿Estás seguro?')
-        if (res) {
-            connection.leftRoom()
-            window.location.href = '../start/'
+        if (salaActiva) {
+            event.preventDefault()
+            event.returnValue = '';
+            return '¿Estás seguro de que deseas salir? La sala se cerrará.';
         }
-    })
+    });
 }
 
 init()

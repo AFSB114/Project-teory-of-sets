@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="../../assets/images/icon.png" type="image/x-icon">
+    <title>Nivel 0</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="../assets/css/loader.css">
+</head>
+
+<body>
+
+    <div class="loader" id="loader">
+        <div class="animation-loader" id="animation-loader"></div>
+        <div class="text-loader">¿Podrás escapar? Prepárate...</div>
+    </div>
+
+    <div class="container">
+        <div class="box-wrapper">
+
+            <a href="../../game_mode/" class="btn-back"></a>
+
+            <audio id="backgroundMusic" autoplay loop>
+                <source src="../../assets/sonido/sounds/dark-drone-intrigue-suspence-horror-drone-245048.mp3" type="audio/mp3">
+            </audio> 
+
+            <div class="marco"></div>
+
+            <div class="scenarios" id="scenarios">
+
+                <div class="scenario" id="scenario1">
+                    <a href="../Level0" class="puerta"><p>NIVEL<br>0</p></a>
+                </div>
+                <div class="scenario" id="scenario2">
+                    <a href="../Level1" class="puerta"><p>NIVEL<br>1</p></a>
+                </div>
+                <div class="scenario" id="scenario3">
+                    <a href="../Level2" class="puerta"><p>NIVEL<br>2</p></a>
+                </div>
+                <div class="scenario" id="scenario4">
+                    <a href="../Level3" class="puerta"><p>NIVEL<br>3</p></a>
+                </div>
+                <div class="scenario" id="scenario5">
+                    <a href="../Level4" class="puerta"><p>NIVEL<br>4</p></a>
+                </div>
+                <div class="scenario" id="scenario6">
+                    <a href="../Level5" class="puerta"><p>NIVEL<br>5</p></a>
+                </div>
+                <div class="scenario" id="scenario7">
+                    <a href="../Level6" class="puerta"><p>NIVEL<br>6</p></a>
+                </div>
+
+                <div id="character" class="character"></div>
+            </div>
+
+        </div>
+    </div>
+    <script src="../assets/js/loader.js"></script>
+    <script src="../assets/js/spritesCharacter.js"></script>
+    <script src="js/script.js" type="module"></script>
+</body>
+
+</html>

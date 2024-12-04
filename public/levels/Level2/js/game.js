@@ -10,6 +10,8 @@ let socket = null;
 if (play) {
     socket = new Socket(`ws://localhost:8080?&id=${id}`)
     socket.connect()
+    document.getElementById('restart').style.display = 'none'
+    document.getElementById('map').style.display = 'none'
 }
 
 // Quita los parámetros de la URL sin recargar la página
@@ -61,7 +63,7 @@ const totalObjetos = espejos.length + cuadros.length;
                 abrirPuerta(); 
             }
         } else {
-            alert('Este objeto no pertenece a este conjunto.');
+            mostrarMensajeError('Este objeto no pertenece a este conjunto.');
         }
     });
 });
@@ -183,10 +185,13 @@ function abrirPuerta() {
     });
 }
 
-// Control de clic en la puerta si no están todos los objetos
-puerta.addEventListener('click', () => {
-    if (objetosCorrectos < totalObjetos) {
-        knock.play(); // Reproducir sonido de golpe
-        alert('La puerta no se abrirá hasta que todos los objetos estén en sus conjuntos correctos.');
-    }
-});
+
+function mostrarMensajeError(mensaje) {
+    const mensajeError = document.getElementById('mensaje-error');
+    mensajeError.textContent = mensaje;
+    mensajeError.classList.remove('oculto');
+
+    setTimeout(() => {
+        mensajeError.classList.add('oculto');
+    }, 1000);
+}

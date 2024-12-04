@@ -14,7 +14,7 @@ class LastLevel
         $conn = $this->pdo->connection();
 
         try {
-            $query = "SELECT le.name AS level, st.name AS status  FROM user_level us_le INNER JOIN level le ON le.id = us_le.level_id INNER JOIN status st ON us_le.status_id = st.id WHERE us_le.user_id = :user_id ORDER BY date DESC LIMIT 1;";
+            $query = "SELECT le.id AS level, st.name AS status  FROM user_level us_le INNER JOIN level le ON le.id = us_le.level_id INNER JOIN status st ON us_le.status_id = st.id WHERE us_le.user_id = :user_id ORDER BY date DESC LIMIT 1;";
 
             $res = $conn->prepare($query);
             $res->execute([

@@ -12,11 +12,13 @@ const cargarPersonaje = async () => {
         const res = await response.json();
 
         // Verificar si la respuesta fue exitosa
-        if (res.status === 'success') {
+        if (res.data) {
             const character = res.data;
             mostrarPersonaje(character.spritesurl);
         } else {
             console.error("Error al obtener el personaje:", res.message);
+            const characterDefault = 'femaleCharacter/sprites/femaleCharacter1.png';
+            mostrarPersonaje(characterDefault);
         }
     } catch (error) {
         const characterDefault = 'femaleCharacter/sprites/femaleCharacter1.png';

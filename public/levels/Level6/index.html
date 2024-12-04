@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="../assets/css/loader.css">
     <link rel="icon" href="../../assets/images/icon.png" type="image/x-icon">
+ 
 </head>
 
 <body>
@@ -23,9 +24,9 @@
             <div class="modal contrast" id="modal-menu">
                 <div class="contenido-modal-menu">
                     <div class="btn" id="continuar">Continuar</div>
-                    <a href="" class="btn">Reiniciar</a>
-                    <a href="../../start/" class="btn">Mapa</a>
-                    <a href="../../start/" class="btn">Salir</a>
+                    <a href="" class="btn" id="restart">Reiniciar</a>
+                    <a href="../map/?level=6" class="btn" id="map">Mapa</a>
+                    <a href="../../start/" class="btn" id="exit">Salir</a>
                 </div>
             </div>
 
@@ -120,10 +121,14 @@
                     </div>
                     <button id="verifyButton">Verificar selección</button>
                     <div id="error-message"></div>
+
+                    <div id="message-container" class="message-container">
+                        <div id="mensaje-error" class="mensaje-error"></div>
+                    </div>
                 </div>
 
             </div>
-
+             
         </div>
     </div>
     <script src="../assets/js/loader.js"></script>
@@ -134,6 +139,7 @@
     <script src="../assets/js/spritesCharacter.js"></script>
     <script src="../../assets/sonido/sonido.js"></script>
     <script src="../assets/js/script.js"></script>
+    <script src="../assets/js/mensaje_Error.js"></script>
 
 </body>
 
