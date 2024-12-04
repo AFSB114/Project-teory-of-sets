@@ -67,7 +67,7 @@ items.forEach(item => {
                 selectedItems.push(item);
             }
         } else {
-            errorMessage.textContent = 'Seleccionaste un objeto incorrecto. Reintenta.';
+            showMessage('Seleccionaste un objeto incorrecto. Reintenta.');
         }
     });
 });
@@ -82,16 +82,16 @@ verifyButton.addEventListener('click', () => {
 
     if (activeColor === selectedColorA && allASelected) {
         activeColor = selectedColorB;
-        errorMessage.textContent = 'Ahora selecciona los objetos del Conjunto B.';
+        showMessage('Ahora selecciona los objetos del Conjunto B.');
     } else if (activeColor === selectedColorB && allBSelected) {
         passTrue = true;
         doorOpen.play();
-        errorMessage.textContent = '¡Selección correcta! Ahora puedes abrir la puerta.';
+        showMessage('¡Selección correcta! Ahora puedes abrir la puerta.');
 
         // Abre el telón añadiendo la clase 'active' al elemento teatro
         teatro.classList.add('active');
     } else {
-        errorMessage.textContent = 'No todos los elementos están seleccionados correctamente. Intenta de nuevo.';
+        showMessage('No todos los elementos están seleccionados correctamente. Intenta de nuevo.');
     }
 });
 

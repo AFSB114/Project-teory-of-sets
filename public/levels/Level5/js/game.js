@@ -93,6 +93,6 @@ btn_send.addEventListener('click', () => {
         passTrue = true;  // Desbloquea la puerta
         doorOpen.play();  // Reproduce el sonido de la puerta abriéndose
     } else {
-        alert("Algunas respuestas son incorrectas. Intenta de nuevo.");
+        showMessage("Algunas respuestas son incorrectas. Intenta de nuevo.");
     }
 })

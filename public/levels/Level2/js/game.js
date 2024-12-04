@@ -10,8 +10,6 @@ let socket = null;
 if (play) {
     socket = new Socket(`ws://localhost:8080?&id=${id}`)
     socket.connect()
-    document.getElementById('restart').style.display = 'none'
-    document.getElementById('map').style.display = 'none'
 }
 
 // Quita los parámetros de la URL sin recargar la página
@@ -71,7 +69,7 @@ const totalObjetos = espejos.length + cuadros.length;
                 abrirPuerta();
             }
         } else {
-            mostrarMensajeError('Este objeto no pertenece a este conjunto.');
+            showMessage('Este objeto no pertenece a este conjunto.');
         }
 
         conjunto.classList.remove('conjunto-hover');
@@ -100,15 +98,4 @@ function abrirPuerta() {
             store.addCompletedLevel(document.getElementById('timer').innerHTML, 'Level3')
         }
     });
-}
-
-
-function mostrarMensajeError(mensaje) {
-    const mensajeError = document.getElementById('mensaje-error');
-    mensajeError.textContent = mensaje;
-    mensajeError.classList.remove('oculto');
-
-    setTimeout(() => {
-        mensajeError.classList.add('oculto');
-    }, 1000);
 }
