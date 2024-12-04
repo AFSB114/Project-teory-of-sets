@@ -108,13 +108,18 @@ body {
 }
 
 #scenario2 {
-    left: 98.8%;
+    left: 100%;
     background-image: url('../images/LEVEL\ 13.2.png');
 }
 
 #scenario3 {
-    left: 198%;
+    left: 200%;
     background-image: url('../images/LEVEL\ 13.3.png');
+}
+
+#scenario4 {
+    left: 299.9%;
+    background-image: url('../images/LEVEL\ 13.4.png');
 }
 
 .puerta {
@@ -128,8 +133,8 @@ body {
     height: 40vh;
 
     position: absolute;
-    bottom: 21.8%;
-    left: 20%;
+    bottom: 22%;
+    left: 28%;
 }
 
 .puerta:hover {
@@ -389,7 +394,7 @@ body {
 
 .contenido-modal-ask {
     width: 50%;
-    height: 55vh;
+    height: 56vh;
 
     background-color: #4c3d2e;
     /*
@@ -405,7 +410,7 @@ body {
     left: 25%;
 
     display: grid;
-    grid-template-rows: 2fr 4fr 4fr 1fr;
+    grid-template-rows: 1fr 4fr 4fr 2fr 5fr 5fr 1fr;
     grid-template-columns: 1fr 2fr 2fr 2fr 2fr 2fr 2fr 2fr 2fr 2fr 2fr 2fr 2fr 2fr 2fr 1fr;
 
     font-size: 4vh;
@@ -498,28 +503,28 @@ body {
     background-size: contain;
     background-repeat: no-repeat;
 
-    width: 69vh;
+    width: 67vh;
     height: 69vh;
 
     position: absolute;
     bottom: 7.5%;
-    left: 48.7%;
+    left: 52%;
 }
 
 .octava4 {
-    grid-area: 1 / 2 / 2 / 3;
+    grid-area: 4 / 2 / 5 / 3;
     color: #ff6969;
     align-content: end;
     text-align: center;
-    font-size: 5vh;
+    font-size: 4vh;
 }
 
 .octava5 {
-    grid-area: 1 / 9 / 2 / 10;
+    grid-area: 4 / 9 / 5 / 10;
     color: #ff6969;
     align-content: end;
     text-align: center;
-    font-size: 5vh;
+    font-size: 4vh;
 }
 
 .white {
@@ -536,59 +541,59 @@ body {
 }
 
 .do {
-    grid-area: 2 / 2 / 4 / 3;
+    grid-area: 5 / 2 / 7 / 3;
 }
 
 .re {
-    grid-area: 2 / 3 / 4 / 4;
+    grid-area: 5 / 3 / 7 / 4;
 }
 
 .mi {
-    grid-area: 2 / 4 / 4 / 5;
+    grid-area: 5 / 4 / 7 / 5;
 }
 
 .fa {
-    grid-area: 2 / 5 / 4 / 6;
+    grid-area: 5 / 5 / 7 / 6;
 }
 
 .sol {
-    grid-area: 2 / 6 / 4 / 7;
+    grid-area: 5 / 6 / 7 / 7;
 }
 
 .la {
-    grid-area: 2 / 7 / 4 / 8;
+    grid-area: 5 / 7 / 7 / 8;
 }
 
 .si {
-    grid-area: 2 / 8 / 4 / 9;
+    grid-area: 5 / 8 / 7 / 9;
 }
 
 .do-5 {
-    grid-area: 2 / 9 / 4 / 10;
+    grid-area: 5 / 9 / 7 / 10;
 }
 
 .re-5 {
-    grid-area: 2 / 10 / 4 / 11;
+    grid-area: 5 / 10 / 7 / 11;
 }
 
 .mi-5 {
-    grid-area: 2 / 11 / 4 / 12;
+    grid-area: 5 / 11 / 7 / 12;
 }
 
 .fa-5 {
-    grid-area: 2 / 12 / 4 / 13;
+    grid-area: 5 / 12 / 7 / 13;
 }
 
 .sol-5 {
-    grid-area: 2 / 13 / 4 / 14;
+    grid-area: 5 / 13 / 7 / 14;
 }
 
 .la-5 {
-    grid-area: 2 / 14 / 4 / 15;
+    grid-area: 5 / 14 / 7 / 15;
 }
 
 .si-5 {
-    grid-area: 2 / 15 / 4 / 16;
+    grid-area: 5 / 15 / 7 / 16;
 }
 
 .black {
@@ -606,41 +611,330 @@ body {
 }
 
 .do-sostenido {
-    grid-area: 2 / 2 / 3 / 4;
+    grid-area: 5 / 2 / 6 / 4;
 }
 
 .re-sostenido {
-    grid-area: 2 / 3 / 3 / 5;
+    grid-area: 5 / 3 / 6 / 5;
 }
 
 .fa-sostenido {
-    grid-area: 2 / 5 / 3 / 7;
+    grid-area: 5 / 5 / 6 / 7;
 }
 
 .sol-sostenido {
-    grid-area: 2 / 6 / 3 / 8;
+    grid-area: 5 / 6 / 6 / 8;
 }
 
 .la-sostenido {
-    grid-area: 2 / 7 / 3 / 9;
+    grid-area: 5 / 7 / 6 / 9;
 }
 
 .do-sostenido-5 {
-    grid-area: 2 / 9 / 3 / 11;
+    grid-area: 5 / 9 / 6 / 11;
 }
 
 .re-sostenido-5 {
-    grid-area: 2 / 10 / 3 / 12;
+    grid-area: 5 / 10 / 6 / 12;
 }
 
 .fa-sostenido-5 {
-    grid-area: 2 / 12 / 3 / 14;
+    grid-area: 5 / 12 / 6 / 14;
 }
 
 .sol-sostenido-5 {
-    grid-area: 2 / 13 / 3 / 15;
+    grid-area: 5 / 13 / 6 / 15;
 }
 
 .la-sostenido-5 {
-    grid-area: 2 / 14 / 3 / 16;
+    grid-area: 5 / 14 / 6 / 16;
+}
+
+.partidura {
+    grid-area: 2 / 2 / 4 / 16;
+    background-color: #33291f;
+    background-image: url('../images/partidura.png');
+    background-position: center center;
+    background-size: contain;
+    background-repeat: no-repeat;
+    
+    font-size: 3vh;
+
+    display: grid;
+    grid-template-columns:  0.5fr repeat(12, 1fr);
+    grid-template-rows: 1.5fr 1fr 1fr;
+    justify-content: center;
+
+    width: 100%;
+    height: 100%;
+
+    position: relative;
+}
+
+.nota1 {
+    grid-area: 2 / 4 / 3 / 5;
+    justify-self: center;
+}
+
+.nota2 {
+    grid-area: 2 / 5 / 3 / 6;
+    justify-self: center;
+}
+
+.nota3 {
+    grid-area: 2 / 6 / 3 / 7;
+    justify-self: center;
+}
+
+.nota4 {
+    grid-area: 2 / 7 / 3 / 8;
+    justify-self: center;
+}
+
+.nota5 {
+    grid-area: 2 / 8 / 3 / 9;
+    justify-self: center;
+}
+
+.nota6 {
+    grid-area: 2 / 9 / 3 / 10;
+    justify-self: center;
+}
+
+.nota7 {
+    grid-area: 2 / 10 / 3 / 11;
+    justify-self: center;
+}
+
+.nota8 {
+    grid-area: 2 / 11 / 3 / 12;
+    justify-self: center;
+}
+
+.nota9 {
+    grid-area: 2 / 12 / 3 / 13;
+    justify-self: center;
+}
+
+.cuadro_nota {
+    background-image: url('../images/notePicture.png');
+    background-position: center center;
+    background-size: contain;
+    background-repeat: no-repeat;
+
+    width: 25vh;
+    height: 25vh;
+
+    position: absolute;
+    bottom: 60%;
+    left: 9%;
+    z-index: 1;
+}
+
+.cuadro-caido {
+    transform: rotate(-40deg);
+    bottom: 15%;
+    z-index: 0;
+}
+
+.paper{
+    background-image: url('../images/paper.png');
+    background-position: center center;
+    background-size: contain;
+    background-repeat: no-repeat;
+
+    width: 10vh;
+    height: 10vh;
+
+    position: absolute;
+    bottom: 64%;
+    left: 14%;
+    cursor: pointer;
+}
+
+.gramofono {
+    background-image: url('../images/gramophone.png');
+    background-position: center center;
+    background-size: contain;
+    background-repeat: no-repeat;
+
+    width: 22vh;
+    height: 30vh;
+
+    position: absolute;
+    bottom: 35%;
+    left: -10%;
+}
+
+.gramofonoOcupado {
+    filter: drop-shadow(0 0 1vh rgba(255, 255, 255, 0.249));
+    cursor: pointer;
+}
+
+.ondas{
+    font-size: 3vh;
+    color: #ff0000b7;
+    font-family: 'Press Start 2P';
+    
+    width: 10%;
+    height: 10%;
+
+    position: absolute;
+    bottom: 55%;
+    left: 5%;
+    z-index: 10;
+}
+
+.disco_rosa {
+    background-image: url('../images/disco\ rosa.png');
+    background-position: center center;
+    background-size: contain;
+    background-repeat: no-repeat;
+
+    aspect-ratio: 1 / 1;
+    width: 15vh;
+    height: 15vh;
+
+    position: absolute;
+    bottom: 65%;
+    left: 17%;
+    cursor: grab;
+    z-index: 1;
+}
+
+.disco_morado {
+    background-image: url('../images/disco\ morado.png');
+    background-position: center center;
+    background-size: contain;
+    background-repeat: no-repeat;
+
+    aspect-ratio: 1 / 1;
+    width: 15vh;
+    height: 15vh;
+
+    position: absolute;
+    bottom: 52%;
+    left: 23%;
+    cursor: grab;
+    z-index: 1;
+}
+
+.disco_azul {
+    background-image: url('../images/disco\ azul.png');
+    background-position: center center;
+    background-size: contain;
+    background-repeat: no-repeat;
+
+    aspect-ratio: 1 / 1;
+    width: 15vh;
+    height: 15vh;
+
+    position: absolute;
+    bottom: 65%;
+    left: 29%;
+    cursor: grab;
+    z-index: 1;
+}
+
+.diagrama {
+    background-image: url('../images/diagrama.png');
+    background-position: center center;
+    background-size: contain;
+    background-repeat: no-repeat;
+
+    width: 24vh;
+    height: 22vh;
+
+    position: absolute;
+    bottom: 54%;
+    left: 64%;
+}
+
+.notesQuestion {
+    width: 37%;
+    height: 6%;
+
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
+    grid-template-rows: 1fr 1fr 1fr;
+    position: absolute;
+    justify-content: center;
+    bottom: 49%;
+    left: 54%;
+}
+
+.btn-notes{
+    border: none;
+    background-color: transparent;
+    color: #d7d7d7;
+    aspect-ratio: 1 / 1;
+    width: 12.5%;
+    height: auto;
+    font-family: 'Press Start 2P';
+
+    font-size: 2vh;
+    transition: all 0.2s ease-in;
+
+}
+
+.btn-notes:hover{
+    filter: drop-shadow(0 0 3px #00e00b);
+    color: #d7d7d7;
+    cursor: pointer;
+}
+
+.G4 {
+    grid-row: 2 / 3;
+    justify-self: center;
+    bottom: 50%;
+    left: 63%;
+}
+
+.A4 {
+    grid-row: 2 / 3;
+    justify-self: center;
+    bottom: 50%;
+    left: 63%;
+}
+
+.B4 {
+    grid-row: 2 / 3;
+    justify-self: center;
+    bottom: 50%;
+    left: 63%;
+}
+
+.D4 {
+    grid-row: 2 / 3;
+    justify-self: center;
+    bottom: 50%;
+    left: 63%;
+}
+
+.E4 {
+    grid-row: 2 / 3;
+    justify-self: center;
+    bottom: 50%;
+    left: 63%;
+}
+
+.F-sostenido-4 {
+    grid-row: 2 / 3;
+    justify-self: center;
+    bottom: 50%;
+    left: 63%;
+}
+
+.G-sostenido-4 {
+    grid-row: 2 / 3;
+    justify-self: center;
+    bottom: 50%;
+    left: 63%;
+}
+
+.G-sostenido-5 {
+    grid-row: 2 / 3;
+    justify-self: center;
+    bottom: 50%;
+    left: 63%;
 }
