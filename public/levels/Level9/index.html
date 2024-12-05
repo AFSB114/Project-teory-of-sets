@@ -39,7 +39,7 @@
 
             <div class="modal modal-help">
                 <div class="contenido-modal-help">
-                    Enciende el computador
+                    Química
                 </div>
             </div>
 
@@ -55,21 +55,26 @@
             <div class="scenarios" id="scenarios">
 
                 <div class="scenario" id="scenario1">
-
-                    
-
+                    <div class="objeto1" id="objeto1"></div>
+                    <div class="objeto2" id="objeto2"></div>
+                    <div class="objeto3" id="objeto3"></div>
+                    <div class="objeto4" id="objeto4"></div>
                 </div>
 
                 <div class="scenario" id="scenario2">
                     <div class="puerta" id="puerta"></div>
-                    <audio id="close" src="sounds/door-knock-1.mp3"></audio>
-                    <audio id="open" src="sounds/door-1-open.mp3"></audio>
+                    <audio id="close" src="./sounds/door-knock-1.mp3"></audio>
+                    <audio id="open" src="./sounds/door-1-open.mp3"></audio>
+
+                    <div class="objeto6" id="objeto6"></div>
+                    <div class="objeto7" id="objeto7"></div>
+                    <div class="objeto10" id="objeto10"></div>
                 </div>
 
                 <div class="scenario" id="scenario3">
-                    
+                    <div class="objeto8" id="objeto8"></div>
+                    <div class="objeto9" id="objeto9"></div>
                 </div>
-
 
                 <div id="character" class="character"></div>
             </div>
@@ -80,17 +85,36 @@
             <div class="contenido-modal-ask">
                 <a href="" class="btn-close"></a>
 
-                <div class="text-1">INGRESA <br> LA <br> CONTRASEÑA</div>
-                <div class="botellas"></div>
-                <div class="silla"></div>
-                <div class="florero"></div>
-
-                
+                <div class="text-1">El rojo refleja grandeza y ocupa espacio,
+                    mientras que el blanco es pequeño y encaja en lo discreto.
+                    Pinta cada objeto según su naturaleza y ordena este lugar.
+                    Solo así encontrarás el próximo paso.
+                </div>
+                <button id="selectButton">Seleccionar</button>
             </div>
+
 
         </div>
 
-    </div>
+        <div class="cuadro blanco" id="cuadro-blanco"></div>
+        <div class="cuadro gris" id="cuadro-gris"></div>
+
+        <div id="cuadro-derecha" class="cuadro">
+            Abrir Modal
+        </div>
+
+        <div id="modal-completado" class="modal">
+            <div class="modal-content">
+                <div class="text-2">SELECCIONA LOS OBJETOS QUE COMPARTEN LA
+                    MISMA FORMA EN COMUN.</div>
+                <div class="objeto11" id="objeto11"></div>
+                <div class="objeto12" id="objeto12"></div>
+                <div class="objeto13" id="objeto13"></div>
+                <div class="objeto14" id="objeto14"></div>
+                <span class="close">&times;</span>
+            </div>
+        </div>
+
     </div>
     <script src="../assets/js/loader.js"></script>
     <script src="js/movement.js" type="module"></script>

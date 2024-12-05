@@ -22,5 +22,49 @@
 
     justify-self: center;
 
+    position: relative;
+    left: 5%;
     width: 11vh;
+}
+
+.logCharacter {
+    background-image: url('../assets/images/iconPersonaje.png');
+    grid-area: 5 / 1 / 6 / 2;
+    background-size: contain;
+    background-position: center center;
+    background-repeat: no-repeat;
+
+    justify-self: center;
+    /* border: 1px solid #e21414; */
+    width: 15vh;
+    position: relative;
+    left: 16%;
+}
+
+.text-Nombre {
+    font-size: 3vh;
+    color: #f9f4f4;
+    text-align: center;
+    font-family: 'Press Start 2P';
+    position: relative;
+    left: 110%;
+    top: -5%;
+}
+
+.character {
+    width: 12vh;
+    height: 12vh;
+    background-size: contain;
+    background-position: center center;
+    background-repeat: no-repeat;
+    position: relative;
+    top: 24%;
+    left: 10%;
+}
+
+.character:hover {
+    filter: brightness(80%);
+    cursor: pointer;
+    transform: scale(1.03);
+    transition: transform 0.2s;
 }

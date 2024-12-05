@@ -22,22 +22,53 @@ import StoreLevelCompleted from '../../assets/js/storeLevelCompleted.js'
 const store = new StoreLevelCompleted(7)
 store.addStartedLevel()
 
+const radio = document.getElementById('radio');
 const espejos = document.querySelectorAll('.espejo1, .espejo2, .espejo3, .espejo4, .cuadro1, .cuadro2, .cuadro3');
 const puerta = document.getElementById('puerta');
+let radioClicked = false;
 let espejosSeleccionados = 0;
+
+
+espejos.forEach((espejo) => {
+    espejo.style.pointerEvents = 'none';
+    espejo.classList.add('disabled');
+});
+
+radio.addEventListener('click', function() {
+    let audioElement = document.getElementById('radio-audio');
+    audioElement.play().catch(error => {
+        console.error("Error al intentar reproducir el audio:", error);
+    });
+
+
+    espejos.forEach((espejo) => {
+        espejo.style.pointerEvents = 'auto';
+        espejo.classList.remove('disabled');
+    });
+
+    radioClicked = true;
+});
 
 espejos.forEach((espejo) => {
     espejo.addEventListener('click', () => {
-        // Agregar clase 'seleccionado' y 'activo' al elemento clicado
+
+        if (!radioClicked) {
+            console.log('Primero debes hacer clic en la radio');
+            return;
+        }
+
         if (!espejo.classList.contains('seleccionado')) {
             espejo.classList.add('seleccionado');
-            espejo.classList.add('activo'); // Mantener el filtro activo
+            espejo.classList.add('activo');
             espejosSeleccionados++;
 
-            // Si todos los espejos y cuadros han sido seleccionados, abrir la puerta
             if (espejosSeleccionados === espejos.length) {
                 abrirPuerta();
+            } else {
+                console.log(`Espejos seleccionados: ${espejosSeleccionados}`);
             }
+        } else {
+            console.log('Este objeto ya está seleccionado.');
         }
     });
 });
@@ -45,21 +76,9 @@ espejos.forEach((espejo) => {
 function abrirPuerta() {
     puerta.classList.add('abierta');
     document.getElementById('open').play();
-  
     puerta.addEventListener('click', irAlNivel8);
 }
 
 function irAlNivel8() {
-    if (play) {
-        socket.sendPassLevel(indexLevel)
-    } else {
-        store.addCompletedLevel(document.getElementById('timer').innerHTML, 'Level8')
-    }
+    window.location.href = "../Level8/index.html";
 }
-
-document.getElementById('radio').addEventListener('click', function() {
-    let audioElement = document.getElementById('radio-audio');
-    audioElement.play().catch(error => {
-        console.error("Error al intentar reproducir el audio:", error);
-    });
-});

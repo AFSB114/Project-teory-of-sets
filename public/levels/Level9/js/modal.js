@@ -4,7 +4,7 @@ const continuar = document.getElementById('continuar');
 const modalContent = modalMenu.children[0];
 const help = document.getElementById('help');
 const modalHelp = document.getElementsByClassName('modal-help');
-const computador = document.getElementById('computador');
+const objeto10 = document.getElementById('objeto10');
 const ask = document.getElementById('modal-ask');
 
 let seeAsk = false;
@@ -65,9 +65,8 @@ help.addEventListener('click', () => {
     showModal(modalToShow);
 });
 
-computador.addEventListener('click', () => {
+objeto10.addEventListener('click', () => {   
     ask.style.display = 'block';
     ask.children[0].classList.add('show-ask');
-
     seeAsk = true
 });

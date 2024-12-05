@@ -17,8 +17,8 @@
         <div class="box-wrapper">
             <div class="fondo">
                 <div class="tittle">VENNTURE</div>
-                
-                <iframe src="../settings/index.html" style="display:none;" id="audioFrame"></iframe> 
+
+                <iframe src="../settings/index.html" style="display:none;" id="audioFrame"></iframe>
 
                 <div class="button">
                     <a href="../game_mode/" class="btn hover" id="jugar">Jugar</a>
@@ -27,6 +27,15 @@
 
 
                 <a href="../logs/log_in/" class="log hover"></a>
+                <div class="logCharacter" id="characterContainer" style="display: none;">
+                    <a href="../characterSelect/index.html">
+                        <div class="character"></div>
+                        
+                    </a>
+                    <div class="text-Nombre" id="nombreUsuario"></div>
+                </div>
+
+               
 
                 <div class="container-modal" id="message">
                     <div class="modal"></div>
@@ -39,6 +48,7 @@
     <script src="../assets/js/modal.js"></script>
     <script src="index.js"></script>
     <script src="../assets/sonido/sonido.js"></script>
+    <script src="../levels/assets/js/profileCharacter.js"></script>
 </body>
 
 </html>

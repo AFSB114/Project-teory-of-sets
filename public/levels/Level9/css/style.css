@@ -396,10 +396,10 @@ body {
 }
 
 .contenido-modal-ask {
-    width: 30%;
-    height: 55vh;
+    width: 60vh;
+    height: 80vh;
 
-    background-image: url('../images/Question\ Pass.png');
+    background-image: url('../images/quimica2.png');
     background-repeat: no-repeat;
     background-size: contain;
 
@@ -408,16 +408,28 @@ body {
     opacity: 0;
 
     position: absolute;
-    top: 20%;
-    left: 35%;
+    top: 2%;
+    left: 37%;
 
     display: grid;
     grid-template-rows: 2fr 2fr 1fr 1fr;
     grid-template-columns: repeat(5, 1fr);
 
     font-size: 4vh;
+    /* border: 1px #af2b2b solid; */
     font-family: 'Pixeloid Sans';
     text-align: center;
+}
+
+#selectButton{
+    background-color: rgb(195, 17, 195);
+    border-radius: 8%;
+    border: 2%;
+    width: 20vh;
+    height: 5vh;
+    margin-top: 130%;
+    right: 35%;
+    position: absolute;
 }
 
 .show-ask {
@@ -452,13 +464,13 @@ body {
     }
 }
 
-.btn-close {
+/* .btn-close {
     background-image: url('../images/exit.png');
     background-repeat: no-repeat;
     background-size: contain;
     background-position: center;
 
-    /* border: 1px #af2b2b solid; */
+    border: 1px #af2b2b solid;
     width: 5vh;
     height: 5vh;
     grid-area: 1/5/2/6;
@@ -469,175 +481,377 @@ body {
 
     margin-bottom: 50%;
 
-}
-
-.botellas {
-    background-image: url('../images/Water\ Bottle\ 1.png');
-    background-repeat: no-repeat;
-    background-size: contain;
-    background-position: center center;
-
-    /* border: 1px #af2b2b solid; */
-    width: 7vh;
-    height: 7vh;
-    grid-area: 2/ 2 / 3 / 3;
-    display: grid;
-
-    justify-self: center;
-    align-self: center;
-
-    margin-bottom: 10%;
-    /* bottom: 45%; */
-}
-
-.silla {
-    background-image: url('../images/armchair_left.png');
-    background-repeat: no-repeat;
-    background-size: contain;
-    background-position: center;
-
-    /* border: 1px #af2b2b solid; */
-    width: 7vh;
-    height: 7vh;
-    grid-area: 2/ 3 / 3 / 4;
-    display: grid;
-
-    justify-self: center;
-    align-self: center;
-
-    margin-bottom: 9%;
-    /* bottom: 45%; */
-
-}
-
-.florero {
-    background-image: url('../images/cactus_pot\ 2.png');
-    background-repeat: no-repeat;
-    background-size: contain;
-    background-position: center;
-
-    /* border: 1px #af2b2b solid; */
-    width: 7vh;
-    height: 7vh;
-    grid-area: 2/ 4 / 3 / 5;
-    display: grid;
-
-    justify-self: center;
-    align-self: center;
-
-    margin-bottom: 4%;
-
-    /* bottom: 40%; */
-
-}
-
+} */
 
 .text-1 {
     /* border: 1px #af2b2b solid; */
-    color: #00BD09;
+    color: #ffffff;
     grid-area: 1 / 1 / 2 / 6;
     text-align: center;
     display: grid;
-
+    width: 55%;
+    height: 4%;
+    font-size: 42%;
     justify-self: center;
     align-self: center;
 
-    margin-top: 10%;
+    position: relative;
+    margin-top: 75%;
+    margin-right: 5%;
     font-family: 'Press Start 2P';
 }
-
-.numeros{
-
-    grid-area: 3/2/5/5;
-
-    width: 100%;
-    height: 100%;
-
+.text-2 {
+    /* border: 1px #af2b2b solid; */
+    color: #ffffff;
+    grid-area: 1 / 1 / 2 / 6;
+    text-align: center;
     display: grid;
-    grid-template-rows: 1fr 1fr;
-    grid-template-columns: repeat(5, 1fr);
+    width: 65%;
+    height: 4%;
+    font-size: 105%;
+    justify-self: center;
+    align-self: center;
+
+    margin-top: 4%;
+    margin-right: -2%;
+    font-family: 'Press Start 2P';
+}
+.objeto1 {
+    background-image: url('../images/objeto1.png');
+    background-position: center center;
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 11vh;
+    height: 11.5vh;
+    position: absolute;
+    
+    right:79%;
+    top: 74.5%;
+    cursor: pointer;
+    z-index: 0;
+
+}
+.objeto2 {
+    background-image: url('../images/objeto2.png');
+    background-position: center center;
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 14vh;
+    height: 14.5vh;
+    position: absolute;
+    
+    right:63%;
+    top: 28.5%;
+    cursor: pointer;
+    z-index: 0;
+
+}
+.objeto3 {
+    background-image: url('../images/objeto3.png');
+    background-position: center center;
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 8vh;
+    height: 8vh;
+    position: absolute;
+    
+    right:83.8%;
+    top: 65.6%;
+    cursor: pointer;
+    z-index: 0;
+}
+.objeto4{
+    background-image: url('../images/objeto4.png');
+    background-position: center center;
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 7vh;
+    height: 7vh;
+    position: absolute;
+    
+    right:44%;
+    top: 55%;
+    cursor: pointer;
+    z-index: 0;
+
 }
 
-.btn-numbers{
-    border: none;
-    background-color: transparent;
-    color: #00BD09;
+.objeto6 {
+    background-image: url('../images/objeto6.png');
+    background-position: center center;
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 63vh;
+    height: 63vh;
+    position: absolute;
+    
+    right:7%;
+    top: 35%;
+    cursor: pointer;
+    z-index: 0;
+
+}
+.objeto8 {
+    background-image: url('../images/objeto7.png');
+    background-position: center center;
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 50vh;
+    height: 50vh;
+    position: absolute;
+    
+    right:35%;
+    top: 45%;
+    cursor: pointer;
+    z-index: 0;
+
+}
+.objeto7{
+    background-image: url('../images/objeto8.png');
+    background-position: center center;
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 22.5vh;
+    height: 22.5vh;
+    position: absolute;
+    
+    right:47.5%;
+    top: 15%;
+    cursor: pointer;
+    z-index: 0;
+
+}
+.objeto9 {
+    background-image: url('../images/objeto5.png');
+    background-position: center center;
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 63vh;
+    height: 63vh;
+    position: absolute;
+    
+    right:67%;
+    top: 46%;
+    cursor: pointer;
+    z-index: 0;
+
+}
+.objeto10 {
+    background-image: url('../images/quimica.png');
+    background-position: center center;
+    background-size: contain;
+    background-repeat: no-repeat;
     width: 5vh;
     height: 5vh;
-    font-family: 'Press Start 2P';
-
-
-    font-size: 4vh;
+    position: absolute;
+    
+    right:92%;
+    top: 61%;
+    cursor: pointer;
+    z-index: 0;
 
 }
 
-.btn-numbers :hover{
+.cuadro {
+    position: absolute;
+    width: 5vh;
+    height: 5vh;
+    border-radius: 10px; 
+    z-index: 1; 
+    opacity: 0; 
+    transition: opacity 0.5s ease;
+}
+
+
+.cuadro.blanco {
+    background-color: white;
+    border: 2px solid #ccc; 
+    top: 20%; 
+    left: 25%;
+}
+
+
+.cuadro.gris {
+    background-color: rgb(255, 0, 0);
+    border: 2px solid #ccc; 
+    top: 26.5%; 
+    left: 25%; 
+}
+
+
+.cuadro.mostrar {
+    opacity: 1; 
+}
+.cuadro:hover {
     filter: brightness(80%);
+}
+
+.cuadro:active {
+    filter: brightness(90%);
+}
+.chulito {
+    position: absolute;
+    background-image: url('../images/chulito.png'); 
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 5vh;
+    height: 5vh;
+    top: -5%;
+    right: -5%;
+}
+
+.objeto-blanco.seleccionado {
+    transform: scale(1.05);
+    filter: drop-shadow(0 0 1vh rgba(255, 255, 255, 0.87));
+}
+
+
+.objeto-gris.seleccionado {
+    transform: scale(1.05); 
+    filter: drop-shadow(0 0 1vh rgb(255, 17, 0));
+}
+
+.modal {
+    display: none; 
+    position: fixed; 
+    z-index: 1; 
+    left: 0;
+    top: 0;
+    width: 100%; 
+    height: 100%; 
+    overflow: auto; 
+    background-color: rgb(0,0,0); 
+    background-color: rgba(0,0,0,0.4); 
+    padding-top: 60px;
+}
+
+
+@keyframes slideDown {
+    from {
+        transform: translateY(-100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.modal-content {
+    background: url('../images/modal2.png') no-repeat center center;
+    background-size: contain;
+    margin: 5% auto; 
+    padding: 20px;
+    width: 80%;
+    max-width: 660px;
+    height: 450px; 
+    right: 0%;
+    margin-top: 1%;
+    position: relative;
+    transform: translateY(-100%);
+    opacity: 0;
+    animation: slideDown 0.5s forwards; 
+}
+
+.close {
+    color: #aaa;
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
     cursor: pointer;
 }
-.uno {
-    grid-area: 1 / 1 / 2 / 2;
-    justify-self: center;
-}
 
-.dos {
-    grid-area: 1 / 2 / 2 / 3;
-
-    justify-self: center;
-}
-
-.tres {
-    grid-area: 1 / 3 / 2 / 4;
-    justify-self: center;
-
-}
-
-.cuatro {
-    grid-area: 1 / 4 / 2 / 5;
-   
-}
-
-.cinco {
-    grid-area: 1 / 5 / 2 / 6;
- 
-
-    justify-self: center;
-}
-
-.sub{
-    position: relative;
-    bottom: 4vh;
-}
-
-.six {
-    grid-area: 2 / 1 / 3 / 2;
+.objeto11 {
+    background-image: url('../images/objeto11.png');
+    background-position: center center;
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 14vh;
+    height: 14.5vh;
+    position: absolute;
     
-    justify-self: center;
-    align-self: center;
+    right:58%;
+    top: 28.5%;
+    cursor: pointer;
+    z-index: 0;
+
 }
-
-.siete {
-    grid-area: 2 / 2 / 3 / 3;
-
-    align-self: center;
-}
-
-.ocho {
-    grid-area: 2 / 3 / 3 / 4;
-
-    justify-self: center;
-    align-self: center;
-}
-
-.nueve {
-    grid-area: 2 / 4 / 3 / 5;
+.objeto12 {
+    background-image: url('../images/objeto12.png');
+    background-position: center center;
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 14vh;
+    height: 14.5vh;
+    position: absolute;
     
-    align-self: center;
+    right:25%;
+    top: 28.5%;
+    cursor: pointer;
+    z-index: 0;
+
+}
+.objeto13 {
+    background-image: url('../images/objeto13.png');
+    background-position: center center;
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 20vh;
+    height: 20vh;
+    position: absolute;
+    
+    right:55%;
+    top:53%;
+    cursor: pointer;
+    z-index: 0;
+
+}
+.objeto14{
+    background-image: url('../images/objeto14.png');
+    background-position: center center;
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 13vh;
+    height: 13.5vh;
+    position: absolute;
+    
+    right:25%;
+    top: 60%;
+    cursor: pointer;
+    z-index: 0;
+
+}
+#objeto11:hover {
+    content: url('../images/objeto2.png');
+}
+#objeto12:hover {
+    content: url('../images/objeto3.png');
+}
+#objeto13:hover {
+    content: url('../images/objeto5.png');
+}
+#objeto14:hover {
+    content: url('../images/objeto8.png');
 }
 
-.cero {
-    grid-area: 2 / 5 / 3 / 6;
+#objeto11.seleccionado,
+#objeto14.seleccionado {
+    border: 3px solid green; 
+}
 
-    justify-self: center;
-    align-self: center;
+
+
+#objeto14.seleccionado:hover {
+    content: url('../images/objeto8.png'); 
+}
+#objeto11.seleccionado:hover{
+    content: url('../images/objeto2.png');
 }

@@ -40,13 +40,13 @@
 
             <div class="modal modal-help">
                 <div class="contenido-modal-help">
-                    Enciende el computador
+                    Habla con alguien
                 </div>
             </div>
 
             <div class="modal modal-help">
-                <div class="img-help2">
-
+                <div class="contenido-modal-help">
+                    Busca los objetos de la lista
                 </div>
             </div>
 
@@ -56,19 +56,23 @@
             <div class="scenarios" id="scenarios">
 
                 <div class="scenario" id="scenario1">
-
-
-
+                    <div class="cuadro1" id="cuadro1"></div>
+                    <div class="cojin3" id="cojin3"></div>
+                    <div class="cojin4" id="cojin4"></div>
                 </div>
 
                 <div class="scenario" id="scenario2">
                     <div class="puerta" id="puerta"></div>
-                    <audio id="close" src="sounds/door-knock-1.mp3"></audio>
-                    <audio id="open" src="sounds/door-1-open.mp3"></audio>
+                    <audio id="close" src="./sounds/door-knock-1.mp3"></audio>
+                    <audio id="open" src="./sounds/door-1-open.mp3"></audio>
+                    <div class="cuadro2" id="cuadro2"></div>
+                    <div class="telefono" id="telefono"></div>
                 </div>
 
                 <div class="scenario" id="scenario3">
-
+                    <div class="cuadro3" id="cuadro3"></div>
+                    <div class="cojin1" id="cojin1"></div>
+                    <div class="cojin2" id="cojin2"></div>
                 </div>
 
                 <div id="character" class="character"></div>
@@ -80,14 +84,14 @@
             <div class="contenido-modal-ask">
                 <a href="" class="btn-close"></a>
 
-                <div class="text-1">INGRESA <br> LA <br> CONTRASEÑA</div>
-                <div class="botellas"></div>
-                <div class="silla"></div>
-                <div class="florero"></div>
+                <div class="text-1">OBSERVA LAS LISTAS</div>
+                <div class="lista1" id="lista1"></div>
+                <div class="lista2" id="lista2"></div>
             </div>
 
         </div>
-
+        <div class="lista-seleccionada" id="lista-seleccionada"></div>
+        <ul id="items-lista"></ul>
     </div>
     </div>
     <script src="../assets/js/loader.js"></script>

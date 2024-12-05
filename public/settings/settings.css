@@ -48,33 +48,33 @@ body {
 
     font-family: 'Super Pixel';
 }
-
+/* 
 .idioma {
     grid-area: 2 / 4 / 3 / 5;
 
     display: grid;
-    
+
     font-family: 'Super Pixel';
     color: black;
-}
+} */
 
-.personaje {
+/* .personaje {
     grid-area: 2 / 2 / 3 / 3;
 
     display: grid;
     font-family: 'Super Pixel';
     color: black;
-}
+} */
 
 .text {
-    grid-row: 2 / 3;
+    grid-area:  2/2/ 4/5;
     text-align: center;
-    font-size: 4vh;
+    font-size: 6vh;
     place-self: center center;
 }
 
 .btn {
-    grid-area: 6 / 2 / 8 / 5;
+    grid-area: 5 / 2 / 8 / 5;
 
     background-image: url('../assets/images/btnLogOut.svg');
 
@@ -108,7 +108,8 @@ body {
 }
 
 .volumen {
-    grid-area: 5 / 2 / 6 / 3;
+    grid-area: 4 / 1 / 5 / 2;
+    justify-self: end;
 
     background-color: #00000000;
 
@@ -117,22 +118,29 @@ body {
     background-position: center center;
     background-repeat: no-repeat;
 
-    min-width: 4vh;
-    max-width: 8vh;
-    min-height: 6vh;
+    position: relative;
+    left: 70%;
+    
+
+    min-width: 10vh;
+    max-width: 10vh;
+    min-height: 12vh;
     max-height: 12vh;
 }
 
-.slider{
-    grid-area: 5 / 2 / 6 / 5;
+.slider {
+    grid-area: 4 / 2 / 5 / 5;
     place-self: center end;
 }
 
 input[type="range"] {
-    -webkit-appearance: none; /* Elimina el estilo predeterminado de la barra en WebKit */
+    -webkit-appearance: none;
+    /* Elimina el estilo predeterminado de la barra en WebKit */
     width: 48vh;
-    height: 0.5vh; /* Altura de la barra */
-    background: #ddd; /* Color de la barra */
+    height: 0.5vh;
+    /* Altura de la barra */
+    background: #ddd;
+    /* Color de la barra */
     border: #000000 solid;
 }
 
