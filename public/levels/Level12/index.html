@@ -41,13 +41,13 @@
 
             <div class="modal modal-help">
                 <div class="contenido-modal-help">
-                    Enciende el computador
+                    Enrollado
                 </div>
             </div>
 
             <div class="modal modal-help">
-                <div class="img-help2">
-
+                <div class="contenido-modal-help">
+                    Para limpiar
                 </div>
             </div>
 
@@ -57,19 +57,20 @@
             <div class="scenarios" id="scenarios">
 
                 <div class="scenario" id="scenario1">
-                    
+                    <div class="escoba" id="escoba"></div>
                 </div>
 
                 <div class="scenario" id="scenario2">
-                   
+                    <div class="puerta" id="puerta"></div>
+                    <audio id="close" src="./sounds/door-knock-1.mp3"></audio>
+                    <audio id="open" src="./sounds/door-1-open.mp3"></audio>
+                    <div class="papel" id="papel"></div>
                 </div>
 
                 <div class="scenario" id="scenario3">
-                    <div class="puerta" id="puerta"></div>
-                    <audio id="close" src="sounds/door-knock-1.mp3"></audio>
-                    <audio id="open" src="sounds/door-1-open.mp3"></audio>
-
-                    <div class="fusil" id="fusil"></div>
+                    <div class="cajon1" id="cajon1"></div>
+                    <div class="cajon2" id="cajon2"></div>
+                    <div class="cajon3" id="cajon3"></div>
                 </div>
 
                 <div id="character" class="character"></div>
@@ -80,15 +81,30 @@
         <div class="modal contrast" id="modal-ask">
             <div class="contenido-modal-ask">
 
-                <div class="text-1">INGRESA <br> LA <br> CONTRASEÑA</div>
-                <div class="botellas"></div>
-                <div class="silla"></div>
-                <div class="florero"></div>
+                <div class="text-1">MIRA ESTOS OBJETOS</div>
+                <div class="objeto1" id="objeto1"></div>
+                <div class="objeto2" id="objeto2"></div>
+                <div class="objeto3" id="objeto3"></div>
+                <div class="objeto4" id="objeto4"></div>
+                <div class="objeto5" id="objeto5"></div>
+                <div class="objeto6" id="objeto6"></div>
+                <div class="text-2">ENCUENTRA EL ACERTIJO<BR> EN UNO DE ESTOS</div>
             </div>
 
         </div>
 
-    </div>
+        <div class="modal1" id="modal-escoba">
+            <div class="contenido-modal1">
+                <div class="text-3">Tienen puertas y cajones,<br>
+                    y en su interior puedes guardar montones.<br>
+                    Busca y elige con atención,<br>
+                    los tres que tienen función de almacenación.</div>
+            </div>
+            <button class="modal1-button" id="selectCajonesButton">Seleccionar cajones</button>
+            
+        </div>
+
+
     </div>
     <script src="../assets/js/loader.js"></script>
     <script src="js/movement.js" type="module"></script>
@@ -98,7 +114,7 @@
     <script src="../assets/js/spritesCharacter.js"></script>
     <script src="../../assets/sonido/sonido.js"></script>
     <script src="../assets/js/script.js"></script>
-
+    <!-- <script src="../assets/js/mensaje_Error.js"></script> -->
 </body>
 
 </html>
