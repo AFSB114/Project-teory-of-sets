@@ -10,6 +10,8 @@ let socket = null;
 if (play) {
     socket = new Socket(`ws://localhost:8080?&id=${id}`)
     socket.connect()
+    document.getElementById('restart').style.display = 'none'
+    document.getElementById('map').style.display = 'none'
 }
 
 // Quita los parámetros de la URL sin recargar la página
@@ -143,12 +145,12 @@ objetos.forEach(objeto => {
                     (conjuntoCorrecto === conjuntoB && cuadros.includes(objetoId))
                 ) {
                     conjuntoCorrecto.appendChild(objetoArrastrado);  // Añadir objeto al conjunto
-                    objetosCorrectos++;  // Incrementar contador de objetos correctos
+                    objetosCorrectos++;
                     objetoArrastrado.classList.add('newposition1');
     
                     // Verificar si todos los objetos están en sus conjuntos correctos
                     if (objetosCorrectos === totalObjetos) {
-                        abrirPuerta();  // Llamar a la función para abrir la puerta
+                        abrirPuerta();
                     }
                 } else {
                     alert('Este objeto no pertenece a este conjunto.');

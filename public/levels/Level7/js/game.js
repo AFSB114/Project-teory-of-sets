@@ -22,6 +22,8 @@ import StoreLevelCompleted from '../../assets/js/storeLevelCompleted.js'
 const store = new StoreLevelCompleted(7)
 store.addStartedLevel()
 
+const knock = document.getElementById('close');
+const doorOpen = document.getElementById('open');
 const espejos = document.querySelectorAll('.espejo1, .espejo2, .espejo3, .espejo4, .cuadro1, .cuadro2, .cuadro3');
 const puerta = document.getElementById('puerta');
 let espejosSeleccionados = 0;
@@ -44,7 +46,7 @@ espejos.forEach((espejo) => {
 
 function abrirPuerta() {
     puerta.classList.add('abierta');
-    document.getElementById('open').play();
+    doorOpen.play();
   
     puerta.addEventListener('click', irAlNivel8);
 }

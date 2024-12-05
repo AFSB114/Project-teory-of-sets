@@ -480,13 +480,13 @@ body {
 }
 
 .contenido-modal-ask {
-    width: 90%;
+    width: 70%;
     height: 75%;
     
-   
     background-image: url('../images/papel.png');
     background-repeat: no-repeat;
     background-size: contain;
+    background-position: center center;
     
     padding: 2vh;
     
@@ -494,8 +494,7 @@ body {
     
     position: absolute;
     top: 10%;
-    left: 12%;
-    z-index: 8;
+    left: 14%;
 
     display: grid;
     grid-template-rows: 2fr 2fr 1fr 1fr;
@@ -512,22 +511,18 @@ body {
     background-size: contain;
     background-position: center center;
 
-    /* border: 1px #af2b2b solid; */
     width: 40vh;
     aspect-ratio: 1/1;
-    grid-area: 3/ 1/ 5/ 4;
+    grid-area: 1/ 1/ 3/ 4;
 
     position: relative;
-    right: 230%;
-    top: 45%;
+    bottom: -15%;
+    left: 12%;
 
     display: grid;
 
     justify-self: center;
     align-self: end;
-
-    /* margin-bottom: 10%; */
-    /* bottom: 45%; */
 }
 .conjunto2{
     background-image: url('../images/conjunto1.png');
@@ -538,11 +533,11 @@ body {
     /* border: 1px #af2b2b solid; */
     width: 40vh;
     aspect-ratio: 1/1;
-    grid-area: 3/ 1/ 5/ 4;
+    grid-area: 1/ 1/ 3/ 4;
 
     position: relative;
-    right: 170%;
-    top: 45%;
+    bottom: -15%;
+    left: 54%;
 
     display: grid;
 
@@ -561,8 +556,8 @@ body {
     height: auto;
     aspect-ratio: 1/1;
     position: absolute;
-    right: 65%;
-    top: 30%;
+    right: 55%;
+    top: 25%;
 }
 .objeto2{
     background-image: url('../images/mesa.png'); 
@@ -573,8 +568,8 @@ body {
     height: auto;
     aspect-ratio: 1/1;
     position: absolute;
-    right: 72%;
-    top: 45%;
+    right: 62%;
+    top: 40%;
 }
 .objeto3{
     background-image: url('../images/estante.png'); 
@@ -585,8 +580,8 @@ body {
     height: auto;
     aspect-ratio: 1/1;
     position: absolute;
-    right: 72%;
-    top: 55%;
+    right: 62%;
+    top: 50%;
 }
 .objeto4{
     background-image: url('../images/silla.png'); 
@@ -597,8 +592,8 @@ body {
     height: auto;
     aspect-ratio: 1/1;
     position: absolute;
-    right: 63%;
-    top: 65%;
+    right: 53%;
+    top: 60%;
 }
 .objeto5{
     background-image: url('../images/cala1.png'); 
@@ -609,8 +604,8 @@ body {
     height: auto;
     aspect-ratio: 1/1;
     position: absolute;
-    right: 40%;
-    top: 65%;
+    right: 30%;
+    top: 60%;
 }
 .objeto6{
     background-image: url('../images/cala2.png'); 
@@ -621,8 +616,8 @@ body {
     height: auto;
     aspect-ratio: 1/1;
     position: absolute;
-    right: 48%;
-    top: 31%;
+    right: 36%;
+    top: 26%;
 }
 .objeto7{
     background-image: url('../images/cande.png'); 
@@ -633,8 +628,8 @@ body {
     height: auto;
     aspect-ratio: 1/1;
     position: absolute;
-    right: 42%;
-    top: 35%;
+    right: 30%;
+    top: 30%;
 }
 .objeto8{
     background-image: url('../images/cuadro.png'); 
@@ -645,8 +640,8 @@ body {
     height: auto;
     aspect-ratio: 1/1;
     position: absolute;
-    right: 40%;
-    top: 49%;
+    right: 30%;
+    top: 44%;
 }
 .objeto9{
     background-image: url('../images/fantasma.png'); 
@@ -657,8 +652,8 @@ body {
     height: auto;
     aspect-ratio: 1/1;
     position: absolute;
-    right: 45%;
-    top: 63%;
+    right: 35%;
+    top: 58%;
 }
 .signo{
     background-image: url('../images/signo.png'); 
@@ -669,8 +664,8 @@ body {
     height: auto;
     aspect-ratio: 1/1;
     position: absolute;
-    right: 54%;
-    top: 47%;
+    right: 44%;
+    top: 42%;
 }
 .mesa{
     background-image: url('../images/mesa.png'); 

@@ -106,4 +106,3 @@ puerta.addEventListener('click', () => {
         }
     }
 });
-
