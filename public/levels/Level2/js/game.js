@@ -10,6 +10,8 @@ let socket = null;
 if (play) {
     socket = new Socket(`ws://localhost:8080?&id=${id}`)
     socket.connect()
+    document.getElementById('restart').style.display = 'none'
+    document.getElementById('map').style.display = 'none'
 }
 
 // Quita los parámetros de la URL sin recargar la página
@@ -72,6 +74,100 @@ objetos.forEach((objeto) => {
     });
 });
 
+let Dragging = false;
+let objetoArrastrado = null;
+let posicionInicial = {};
+let setX, setY;
+
+objetos.forEach(objeto => {
+    objeto.addEventListener('touchstart', (event) => {
+        console.log('Arrastrando objeto');
+        const touch = event.touches[0]; // Obtener el primer toque
+        const rect = objeto.getBoundingClientRect();
+
+        posicionInicial[objeto.id] = { left: objeto.style.left, top: objeto.style.top };
+    
+        // Calcular la diferencia entre la posición del toque y la posición del elemento
+        setX = touch.clientX - rect.left;
+        setY = touch.clientY - rect.top;
+    
+        Dragging = true;
+        objetoArrastrado = objeto;
+        event.preventDefault(); // Prevenir comportamientos por defecto
+    });
+});
+
+[conjuntoA, conjuntoB].forEach((conjunto) => {
+    document.addEventListener('touchmove', (event) => {
+        if (Dragging) {
+            const touch = event.touches[0];
+
+            const leftPosition = touch.clientX - setX - 400; 
+            const topPosition = touch.clientY - setY - 200;
+    
+            // Mover la llave a la posición calculada
+            objetoArrastrado.style.position = 'absolute';
+            objetoArrastrado.style.left = leftPosition + 'px';
+            objetoArrastrado.style.top = topPosition + 'px';
+    
+            event.preventDefault();
+        }
+    });
+    document.addEventListener('touchend', (event) => {
+        if (Dragging) {
+            console.log("Objeto soltado");
+            const objetoId = objetoArrastrado.id;
+            const touch = event.changedTouches[0];
+    
+            // Verificar en qué conjunto se ha soltado el objeto
+            let conjuntoCorrecto = null;
+    
+            [conjuntoA, conjuntoB].forEach((conjunto) => {
+                const conjuntoRect = conjunto.getBoundingClientRect();
+                if (
+                    touch.clientX >= conjuntoRect.left && touch.clientX <= conjuntoRect.right && 
+                    touch.clientY >= conjuntoRect.top && touch.clientY <= conjuntoRect.bottom
+                ) {
+                    conjuntoCorrecto = conjunto;
+                }
+                else {
+                    objetoArrastrado.style.left = posicionInicial[objetoId].left;
+                    objetoArrastrado.style.top = posicionInicial[objetoId].top;
+                }
+            });
+    
+            if (conjuntoCorrecto) {
+                // Verificar si el objeto pertenece al conjunto correcto
+                if (
+                    (conjuntoCorrecto === conjuntoA && espejos.includes(objetoId)) ||
+                    (conjuntoCorrecto === conjuntoB && cuadros.includes(objetoId))
+                ) {
+                    conjuntoCorrecto.appendChild(objetoArrastrado);  // Añadir objeto al conjunto
+                    objetosCorrectos++;  // Incrementar contador de objetos correctos
+                    objetoArrastrado.classList.add('newposition1');
+    
+                    // Verificar si todos los objetos están en sus conjuntos correctos
+                    if (objetosCorrectos === totalObjetos) {
+                        abrirPuerta();  // Llamar a la función para abrir la puerta
+                    }
+                } else {
+                    alert('Este objeto no pertenece a este conjunto.');
+                    // Restablecer la posición inicial del objeto
+                    objetoArrastrado.style.left = posicionInicial[objetoId].left;
+                    objetoArrastrado.style.top = posicionInicial[objetoId].top;
+                    }
+            }
+    
+            Dragging = false;
+            objetoArrastrado = null;
+
+            event.preventDefault();
+        }
+    });
+});
+
+
+// Función para abrir la puerta
 function abrirPuerta() {
     console.log('¡Todos los objetos están en su lugar! La puerta se abre.');
     doorOpen.play();

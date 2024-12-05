@@ -70,16 +70,16 @@ let passTrue = false;
         ) {
             caja.appendChild(objeto);  // Añadir objeto a la caja
             objeto.style.display = 'none';  // Oculta el objeto para que no aparezca en la pantalla
-            objetosCorrectos++;  // Incrementar contador de objetos correctos
+            objetosCorrectos++;
 
             // Este condicional basicamente verifica si todos los objetos están en sus cajas correctas
             if (objetosCorrectos === totalObjetos) {
-                abrirPuerta();  // Esto me llama la funcion para abrir la puerta
+                abrirPuerta();
             }
         } else {
             showMessage('Este objeto no pertenece a esta caja.');
         }
-        caja.classList.remove('caja-hover');  // Quitar estilo de hover
+        caja.classList.remove('caja-hover');
     });
 });
 
@@ -161,11 +161,11 @@ objetos.forEach(objeto => {
                 ) {
                     cajaCorrecta.appendChild(objetoArrastrado);  // Añadir objeto a la caja
                     objetoArrastrado.style.display = 'none';  // Ocultar el objeto
-                    objetosCorrectos++;  // Incrementar contador de objetos correctos
+                    objetosCorrectos++;
     
                     // Verificar si todos los objetos están en sus cajas correctas
                     if (objetosCorrectos === totalObjetos) {
-                        abrirPuerta();  // Llamar a la función para abrir la puerta
+                        abrirPuerta();
                     }
                 } else {
                     showMessage('Este objeto no pertenece a este conjunto.');
@@ -194,7 +194,6 @@ function abrirPuerta() {
 puerta.addEventListener('click', () => {
     if (!passTrue) {  
         knock.play();
-        showMessage('Este objeto no pertenece a este conjunto.');
     } else {
         if (play) {
             socket.sendPassLevel(indexLevel)
