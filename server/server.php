@@ -11,6 +11,7 @@ require_once 'controller/createRoom.php';
 require_once 'controller/joinRoom.php';
 require_once 'controller/dataUsers.php';
 require_once 'controller/deletePlayer.php';
+require_once 'controller/finishedGame.php';
 
 require __DIR__ . '/vendor/autoload.php';
 
@@ -25,6 +26,7 @@ class MultiplayerServer implements MessageComponentInterface
         'LEFT_ROOM' => 'handlePlayerLeft',
         'RANKING' => 'handleRanking',
         'WINNERS' => 'handleWinners',
+        'FINISH' => 'handleFinish',
     ];
 
     public function __construct(
@@ -346,8 +348,6 @@ class MultiplayerServer implements MessageComponentInterface
 
     private function sortPlayers($players)
     {
-        var_dump($players);
-
         usort($players, function ($player1, $player2) {
 
             $seconds1 = $this->convertToSeconds($player1['time']);
@@ -373,6 +373,19 @@ class MultiplayerServer implements MessageComponentInterface
         $from->time = str_pad($minutes, 2, '0', STR_PAD_LEFT) . ':' . str_pad($seconds, 2, '0', STR_PAD_LEFT);
 
         echo "Time: {$from->time}\n";
+    }
+
+    private function handleFinish(ConnectionInterface $conn, array $data): void
+    {
+        $finished = new FinishedGame($conn->code);
+
+        $finished->exitRoom();
+
+        if (isset($this->rooms[$conn->code])) {
+            unset($this->rooms[$conn->code]);
+        }
+
+        echo "Game to room {$conn->code} has finished\n";
     }
 
     private

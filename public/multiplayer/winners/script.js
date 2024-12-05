@@ -87,7 +87,9 @@ async function init() {
         switch (data.action) {
             case 'WINNERS':
                 showWinners(data.sortedPlayers)
-                connection.socket.send(JSON.stringify({action: 'LEFT_ROOM'}))
+                setTimeout(() => {
+                    connection.socket.send(JSON.stringify({action: 'FINISH'}))
+                }, 5000)
                 break
             case 'ERROR':
                 alert(data.message)
