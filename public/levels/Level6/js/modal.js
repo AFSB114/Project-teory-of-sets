@@ -42,6 +42,9 @@ const hideAsk = () => {
     }, 500)
 }
 
+const closeAskBtn = document.getElementById('closeAsk');
+closeAskBtn.addEventListener('click', hideAsk);
+
 const handleWindowClick = (event) => {
     if (event.target === modalMenu) {
         closeModal();

@@ -22,6 +22,8 @@ import StoreLevelCompleted from '../../assets/js/storeLevelCompleted.js'
 const store = new StoreLevelCompleted(3)
 store.addStartedLevel()
 
+const knock = document.getElementById('close');
+const doorOpen = document.getElementById('open');
 const silla = document.querySelector('.silla');
 const mesa = document.querySelector('.mesa');
 const cande = document.querySelector('.cande');
@@ -42,6 +44,7 @@ function verificarCambio() {
 
     if (sillaCambiada && mesaCambiada && candeCambiada) {
         passTrue = true;
+        doorOpen.play();
     } else {
         passTrue = false;
     }
@@ -61,13 +64,11 @@ cande.addEventListener('click', function () {
 
 puerta.addEventListener('click', () => {
     if (!passTrue) {
-        document.getElementById('close').play();
+        knock.play();
     } else {
-        document.getElementById('open1').play();
         window.location.href = '../Level9/index.html';
     }
 });
-
 
 
 const cofre = document.getElementById('cofre');
