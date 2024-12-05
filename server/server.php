@@ -48,14 +48,14 @@ class MultiplayerServer implements MessageComponentInterface
         $conn->id = (int)$queryParams['id'];
 
         // Verificar si hay una conexión persistente para este ID
-        $this->checkAndRestorePersistentConnection($conn);
+        $this->checkAndRestorePersistentConnection($conn, $queryParams);
 
         $this->initializeConnection($conn);
         $this->logConnectionStatus($conn);
 
     }
 
-    private function checkAndRestorePersistentConnection(ConnectionInterface $conn): void
+    private function checkAndRestorePersistentConnection(ConnectionInterface $conn, array $params): void
     {
         if (isset($this->persistentConnections[$conn->id])) {
 
@@ -71,7 +71,11 @@ class MultiplayerServer implements MessageComponentInterface
 
             // Opcional: Eliminar la entrada persistente si ya no es necesaria
             unset($this->persistentConnections[$conn->id]);
+        } else{
+            $conn->code = $params['code'] ?? null;
         }
+
+
     }
 
     private function initializeConnection(ConnectionInterface $conn): void
@@ -454,12 +458,12 @@ class MultiplayerServer implements MessageComponentInterface
         $conn->play = false;
         $this->rooms[$conn->code]['players']->detach($conn);
         $this->onClose($conn);
-//        $conn->close();
     }
 
     private
     function logDisconnection(ConnectionInterface $conn): void
     {
+        echo "Number players ({$this->clients->count()})\n";
         echo "Exit ({$conn->nickname})\n\n";
     }
 

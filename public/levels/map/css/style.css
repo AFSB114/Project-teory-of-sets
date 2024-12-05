@@ -68,37 +68,77 @@ body {
 }
 
 .scenario:nth-child(1) {
-    background-image: url('../images/MAP1.png');
+    background-image: url('../images/MAP0.png');
 }
 
 .scenario:nth-child(2) {
     left: 100%;
-    background-image: url('../images/MAP2.png');
+    background-image: url('../images/MAP1.png');
 }
 
 .scenario:nth-child(3) {
     left: 200%;
-    background-image: url('../images/MAP3.png');
+    background-image: url('../images/MAP2.png');
 }
 
 .scenario:nth-child(4) {
     left: 300%;
-    background-image: url('../images/MAP4.png');
+    background-image: url('../images/MAP3.png');
 }
 
 .scenario:nth-child(5) {
     left: 400%;
-    background-image: url('../images/MAP5.png');
+    background-image: url('../images/MAP4.png');
 }
 
 .scenario:nth-child(6) {
     left: 500%;
-    background-image: url('../images/MAP6.png');
+    background-image: url('../images/MAP5.png');
 }
 
 .scenario:nth-child(7) {
     left: 600%;
+    background-image: url('../images/MAP6.png');
+}
+
+.scenario:nth-child(8) {
+    left: 700%;
     background-image: url('../images/MAP7.png');
+}
+
+.scenario:nth-child(9) {
+    left: 800%;
+    background-image: url('../images/MAP8.png');
+}
+
+.scenario:nth-child(10) {
+    left: 900%;
+    background-image: url('../images/MAP9.png');
+}
+
+.scenario:nth-child(11) {
+    left: 1000%;
+    background-image: url('../images/MAP10.png');
+}
+
+.scenario:nth-child(12) {
+    left: 1100%;
+    background-image: url('../images/MAP11.png');
+}
+
+.scenario:nth-child(13) {
+    left: 1200%;
+    background-image: url('../images/MAP12.png');
+}
+
+.scenario:nth-child(14) {
+    left: 1300%;
+    background-image: url('../images/MAP13.png');
+}
+
+.scenario:nth-child(15) {
+    left: 1400%;
+    background-image: url('../images/MAP14.png');
 }
 
 .marco {
@@ -136,7 +176,7 @@ body {
     text-decoration: none;
 }
 
-.puerta > p {
+.puerta>p {
     font-size: 5dvh;
 
     font-family: 'Pixeloid Sans Bold';
