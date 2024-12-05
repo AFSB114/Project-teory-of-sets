@@ -9,16 +9,16 @@ export default class Character {
         this.posY = 0
         this.velocityX = 0
         this.velocityY = 0
-        this.speed = 60
+        this.speed = 10
         
         // Física mejorada
         this.gravity = 0.5
         this.jumpForce = 7.5
         this.isJumping = false
-        this.friction = 10 // Coeficiente de fricción en el eje X
-        this.airFriction = 1 // Coeficiente de fricción en el aire en el eje X
+        this.friction = 0.95 // Coeficiente de fricción en el suelo en el eje X
+        this.airFriction = 1.25 // Coeficiente de fricción en el aire en el eje X
         this.acceleration = 1.5 // Aceleración en el eje X
-        this.maxSpeed = 50 // Velocidad máxima en eje X
+        this.maxSpeed = 10 // Velocidad máxima en eje X
         
         // Animación
         this.frame = 0
