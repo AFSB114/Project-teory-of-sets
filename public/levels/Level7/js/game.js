@@ -80,5 +80,5 @@ function abrirPuerta() {
 }
 
 function irAlNivel8() {
-    window.location.href = "../Level8/index.html";
+    store.addCompletedLevel(document.getElementById('timer').innerHTML, 'Level8')
 }

@@ -189,7 +189,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (puerta) puerta.addEventListener('click', () => {
         if (gameCompleted) {
-            window.location.href = "../Level12/index.html";
+            store.addCompletedLevel(document.getElementById('timer').innerHTML, 'Level12')
         } else {
             if (closeSound) closeSound.play();  
         }

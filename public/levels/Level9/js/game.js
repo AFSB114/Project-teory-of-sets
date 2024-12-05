@@ -197,7 +197,7 @@ puerta.addEventListener('click', function() {
     } else {
         
         this.classList.add('abierta');
-        window.location.href = "../Level10/index.html";
+        store.addCompletedLevel(document.getElementById('timer').innerHTML, 'Level10')
     }
 });
 

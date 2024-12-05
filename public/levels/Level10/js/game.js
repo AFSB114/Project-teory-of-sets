@@ -145,7 +145,7 @@ document.addEventListener("DOMContentLoaded", () => {
         puerta.addEventListener('click', function() {
             if (acertijoResuelto1 && acertijoResuelto2) {
                 this.classList.add('abierta'); 
-                window.location.href = "../Level11/index.html";
+                store.addCompletedLevel(document.getElementById('timer').innerHTML, 'Level11')
             } else {
                 const closeSound = document.getElementById('close');
                 if (closeSound) closeSound.play();

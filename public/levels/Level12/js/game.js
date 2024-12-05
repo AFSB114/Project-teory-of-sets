@@ -120,7 +120,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
     puerta.addEventListener('click', () => {
         if (cajonesSelectionCompleted) {
             puerta.classList.add('abierta');
-            window.location.href = "../Level13/index.html";
+            store.addCompletedLevel(document.getElementById('timer').innerHTML, 'Level13')
         } else {
 
             if (closeSound) closeSound.play();

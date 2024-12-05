@@ -1,27 +1,3 @@
-import Socket from '../../assets/js/socket.js';
-
-const urlParams = new URLSearchParams(window.location.search);
-const play = JSON.parse(urlParams.get('play'));
-const id = parseInt(urlParams.get('id'));
-const indexLevel = parseInt(urlParams.get('indexLevel'));
-
-let socket = null;
-
-if (play) {
-    socket = new Socket(`ws://localhost:8080?&id=${id}`)
-    socket.connect()
-    document.getElementById('restart').style.display = 'none'
-    document.getElementById('map').style.display = 'none'
-}
-
-// Quita los parámetros de la URL sin recargar la página
-const newUrl = window.location.protocol + "//" + window.location.host + window.location.pathname;
-window.history.pushState({ path: newUrl }, '', newUrl);
-
-import StoreLevelCompleted from '../../assets/js/storeLevelCompleted.js'
-const store = new StoreLevelCompleted(2)
-store.addStartedLevel()
-
 const conjuntoA = document.querySelector('.conjunto2'); // Conjunto de espejos
 const conjuntoB = document.querySelector('.conjunto1'); // Conjunto de cuadros
 const puerta = document.getElementById('puerta');
@@ -62,7 +38,7 @@ const totalObjetos = espejos.length + cuadros.length;
                 abrirPuerta(); 
             }
         } else {
-            showMessage('Este objeto no pertenece a este conjunto.');
+            alert('Este objeto no pertenece a este conjunto.');
         }
 
         
@@ -85,7 +61,7 @@ function abrirPuerta() {
 
     // Permitir abrir la puerta al hacer clic
     puerta.addEventListener('click', () => {
-        store.addCompletedLevel(document.getElementById('timer').innerHTML, 'Level3') // Redirigir al siguiente nivel
+        window.location.href = '../level3/index.html'; // Redirigir al siguiente nivel
     });
 }
 
@@ -93,6 +69,6 @@ function abrirPuerta() {
 puerta.addEventListener('click', () => {
     if (objetosCorrectos < totalObjetos) {
         knock.play(); // Reproducir sonido de golpe
-        showMessage('La puerta no se abrirá hasta que todos los objetos estén en sus conjuntos correctos.');
+        alert('La puerta no se abrirá hasta que todos los objetos estén en sus conjuntos correctos.');
     }
 });

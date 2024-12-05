@@ -572,6 +572,20 @@ body {
     top: 58%;
     z-index: 0;
 }
+.sillas{
+    background-image: url('../images/silla.png');
+    background-position:center center ;
+    background-size: cover;
+    background-repeat: no-repeat;
+
+    width: 12vh;
+    height: 12vh;
+    position: absolute;
+    cursor: pointer;
+    left:3%;
+    top: 72%;
+    z-index: 0;
+}
 .cuadroo{
     background-image: url('../images/cuadro.png');
     background-position: center center;
