@@ -22,44 +22,120 @@ import StoreLevelCompleted from '../../assets/js/storeLevelCompleted.js'
 const store = new StoreLevelCompleted(12)
 store.addStartedLevel()
 
-const cuadros = Array.from(document.getElementsByClassName('cuadro'));
-let pass = ['', '', ''];
-const passCorrect = ['cuadro-1', 'cuadro-2', 'cuadro-3'];
-const puerta = document.getElementById('puerta');
-const knock = document.getElementById('close');
-const doorOpen = document.getElementById('open');
-let passTrue = false;
+document.addEventListener('DOMContentLoaded', (event) => {
+    const modalAsk = document.getElementById('modal-ask');
+    const modalEscoba = document.getElementById('modal-escoba');
+    const escoba = document.getElementById('escoba');
+    const papel = document.getElementById('papel');
+    const selectCajonesButton = document.getElementById('selectCajonesButton');
+    const cajon1 = document.getElementById('cajon1');
+    const cajon2 = document.getElementById('cajon2');
+    const cajon3 = document.getElementById('cajon3');
+    const cajones = [cajon1, cajon2, cajon3];
+    
+    const puerta = document.getElementById('puerta');
+    const closeSound = document.getElementById('close');
+    const openSound = document.getElementById('open');
 
-cuadros.forEach(cuadro => {
-    cuadro.addEventListener('click', () => {
-        cuadro.style.filter = 'drop-shadow(0 0 2vh rgba(255, 255, 255, 0.249))';
-        
-        for (let i = 0; i < pass.length; i++) {
-            if (pass[i] === '') {
-                pass[i] = cuadro.id;
-                break;
-            }
+    let isPapelModalOpened = false;
+    let isCajonesSelectable = false;
+    let cajonesSelectionCompleted = false;
+    let selectedCajones = [];
+
+
+    function disableCajonSelection() {
+        cajones.forEach(cajon => {
+            cajon.classList.remove('cajon', 'cajon-hover', 'selected');
+            cajon.style.pointerEvents = 'none';
+        });
+    }
+
+    function enableCajonSelection() {
+        cajones.forEach(cajon => {
+            cajon.classList.add('cajon', 'cajon-hover');
+            cajon.style.pointerEvents = 'auto';
+        });
+    }
+
+    disableCajonSelection();
+
+    papel.onclick = function() {
+        if (!cajonesSelectionCompleted) {
+            modalAsk.style.display = "block";
+            isPapelModalOpened = true;
         }
+    }
 
-        if (pass.join('') === passCorrect.join('')) {
-            doorOpen.play();
-            passTrue = true;
+
+    escoba.onclick = function() {
+        if (isPapelModalOpened && !cajonesSelectionCompleted) {
+            modalEscoba.style.display = "block";
+        }
+    }
+
+    selectCajonesButton.onclick = function() {
+        modalEscoba.style.display = "none";
+        enableCajonSelection();
+        isCajonesSelectable = true;
+        cajones.forEach(cajon => {
+
+            cajon.addEventListener('mouseenter', function() {
+                if (!this.classList.contains('selected')) {
+                    this.classList.add('hover');
+                }
+            });
+
+            cajon.addEventListener('mouseleave', function() {
+                if (!this.classList.contains('selected')) {
+                    this.classList.remove('hover');
+                }
+            })
+
+            cajon.onclick = function() {
+                if (!isCajonesSelectable) return;
+
+
+                if (!this.classList.contains('selected')) {
+
+                    if (selectedCajones.length < 3) {
+                        this.classList.add('selected');
+                        this.classList.remove('hover');
+                        selectedCajones.push(this.id);
+                    }
+                }
+
+                if (selectedCajones.length === 3) {
+                    console.log('Selected cajones:', selectedCajones);
+
+                    isCajonesSelectable = false;
+                    cajonesSelectionCompleted = true;
+
+
+                    if (openSound) openSound.play();
+                }
+            };
+        });
+    }
+
+    puerta.addEventListener('click', () => {
+        if (cajonesSelectionCompleted) {
+            puerta.classList.add('abierta');
+            store.addCompletedLevel(document.getElementById('timer').innerHTML, 'Level13')
+        } else {
+
+            if (closeSound) closeSound.play();
         }
     });
-});
 
-puerta.addEventListener('click', () => {
-    if (!passTrue) {
-        knock.play();
-        cuadros.forEach(cuadro => {
-            cuadro.style.filter = '';
-        });
-        pass.fill('');
-    } else {
-        if (play) {
-            socket.sendPassLevel(indexLevel)
-        } else {
-            store.addCompletedLevel(document.getElementById('timer').innerHTML, 'Level13')
+
+    window.onclick = function(event) {
+        if (!cajonesSelectionCompleted) {
+            if (event.target == modalAsk) {
+                modalAsk.style.display = "none";
+            }
+            if (event.target == modalEscoba) {
+                modalEscoba.style.display = "none";
+            }
         }
     }
 });

@@ -26,6 +26,7 @@
         url('../../../assets/fonts/pressstart2p-webfont.woff2') format('woff2');
 }
 
+
 html,
 body {
     height: 100%;
@@ -96,25 +97,30 @@ body {
 }
 
 .lampara {
-    background-image: url('../images/lampara.png');
+    background-image: url('../images/lampara.svg');
     background-position: center center;
     background-size: contain;
     background-repeat: no-repeat;
 
-    width: 16vh;
-    height: 16vh;
+    width: 20vh;
+    height: 20vh;
 
     position: absolute;
     bottom: 24%;
-    left: 63.4%;
+    right: 26%;
 }
 
 .lampara:hover {
     filter: drop-shadow(0 0 1vh rgba(255, 255, 255, 0.249));
     cursor: pointer;
-    background-image: url('../images/lampara2.png');
+    background-image: url('../images/lampara2.svg');
+    width: 15.7vh;
+    height: 15.7vh;
 
     position: absolute;
+    bottom: 24.3%;
+    right: 28.3%;
+
 }
 
 .marco {
@@ -132,7 +138,7 @@ body {
 
 #scenario2 {
     left: 99%;
-    background-image: url('../images/Level\ 2.2.png');
+    background-image: url('../images/level2.2.svg');
 }
 
 #scenario3 {
@@ -430,12 +436,12 @@ body {
     opacity: -5;
 
     position: absolute;
-    top: 15%;
+    top: 10%;
     left: calc(50% - 20%);
 
     display: grid;
-    grid-template-rows: 1fr 2fr 3fr 1fr;
-    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 2fr 2fr 1fr 1fr;
+    grid-template-columns: repeat(6, 1fr);
 
     font-size: 4vh;
     font-family: 'Pixeloid Sans';
@@ -500,11 +506,15 @@ body {
 
     width: 28vh;
     aspect-ratio: 1/1;
-    grid-area: 3/ 1/ 4/ 2;
+    grid-area: 3/ 1/ 5/ 4;
 
-    display: flex;
-    flex-direction: column;
-    margin-left: 10%;
+    display: grid;
+
+    justify-self: center;
+    align-self: end;
+
+    /* margin-bottom: 10%; */
+    /* bottom: 45%; */
 }
 
 .conjunto2 {
@@ -515,25 +525,56 @@ body {
 
     width: 28vh;
     aspect-ratio: 1/1;
-    grid-area: 3/ 1/ 4/ 2;
 
-    display: flex;
-    flex-direction: column;
-    justify-self: end;
-    margin-right: 10%;
+    grid-area: 3/ 4/ 5 / 7;
+    transform: rotateY(180deg);
+
+    display: grid;
+    justify-self: center;
+    align-self: end;
+
+    /* margin-bottom: 10%; */
+    /* bottom: 45%; */
 }
 
 
 .text-1 {
     /* border: 1px #af2b2b solid; */
     color: #000000;
-    grid-area: 1 / 1 / 2 / 2;
+    grid-area: 1 / 2 / 2 / 6;
     text-align: center;
 
     display: grid;
     justify-self: center;
     align-self: center;
 
+    margin-top: 0%;
+    font-family: 'Press Start 2P';
+}
+.text-2 {
+    /* border: 1px #af2b2b solid; */
+    color: #000000;
+    grid-area: 1 / 2 / 2 / 6;
+    text-align: center;
+    position: absolute;
+    display: grid;
+    justify-self: center;
+    align-self: center;
+    right: 65%;
+    margin-top: 90%;
+    font-family: 'Press Start 2P';
+}
+.text-3 {
+    /* border: 1px #af2b2b solid; */
+    color: #000000;
+    grid-area: 1 / 2 / 2 / 6;
+    text-align: center;
+    position: absolute;
+    display: grid;
+    justify-self: center;
+    align-self: center;
+    right: -12%;
+    margin-top: 90%;
     font-family: 'Press Start 2P';
 }
 
@@ -551,13 +592,11 @@ body {
     background-repeat: no-repeat;
     background-size: contain;
     background-position: center center;
-    width: 9vh;
-    height: 10vh;
+    width: 70%;
+    height: 70%;
 
     grid-area: 2 / 1 /3 /2;
-    position: relative;
-    left: 1%;
-    align-self: center;
+    position: absolute;
 }
 
 .cuadro2 {
@@ -565,13 +604,12 @@ body {
     background-repeat: no-repeat;
     background-size: contain;
     background-position: center center;
-    width: 10vh;
-    height: 7vh;
+    width: 70%;
+    height: 70%;
 
-    grid-area: 2 / 1 /3 /2;
-    position: relative;
-    left: 15%;
-    align-self: center;
+    grid-area: 2 / 2 /3 /3;
+    position: absolute;
+    right: 10%;
 }
 
 .cuadro3 {
@@ -579,13 +617,12 @@ body {
     background-repeat: no-repeat;
     background-size: contain;
     background-position: center center;
-    width: 10vh;
-    height: 10vh;
+    width: 70%;
+    height: 70%;
 
-    grid-area: 2 / 1 /3 /2;
+    grid-area: 2 / 3 /3 /4;
     position: relative;
-    left: 30%;
-    align-self: center;
+    right: 25%;
 }
 
 .cuadro4 {
@@ -593,13 +630,12 @@ body {
     background-repeat: no-repeat;
     background-size: contain;
     background-position: center center;
-    width: 10vh;
-    height: 10vh;
+    width: 70%;
+    height: 70%;
 
-    grid-area: 2 / 1 /3 /2;
+    grid-area: 2 / 4 / 3 / 5;
     position: relative;
-    left: 45%;
-    align-self: center;
+    right: 33%;
 }
 
 .espejo1 {
@@ -607,14 +643,14 @@ body {
     background-repeat: no-repeat;
     background-size: contain;
     background-position: center center;
-    width: 9vh;
-    height: 10vh;
+    width: 62%;
+    height: 62%;
 
     cursor: grab;
-    grid-area: 2 / 1 /3 /2;
+    grid-area: 2 / 5 /3 /6;
     position: relative;
-    left: 60%;
-    align-self: center;
+    right: 30%;
+    top: 2%;
 }
 
 .espejo2 {
@@ -622,28 +658,28 @@ body {
     background-repeat: no-repeat;
     background-size: contain;
     background-position: center center;
-    width: 7vh;
-    height: 10vh;
+    width: 65%;
+    height: 65%;
 
     cursor: grab;
-    grid-area: 2 / 1 /3 /2;
+    grid-area: 2 / 6 /3 /8;
     position: relative;
-    left: 90%;
-    align-self: center;
+    right: -30%;
+    top: 2%;
 }
 .espejo3 {
     background-image: url('../images/espejo3.png');
     background-repeat: no-repeat;
     background-size: contain;
     background-position: center center;
-    width: 7vh;
-    height: 10vh;
+    width: 65%;
+    height: 65%;
 
     cursor: grab;
-    grid-area: 2 / 1 /3 /2;
+    grid-area: 2 / 5 /3 /7;
     position: relative;
-    left: 75%;
-    align-self: center;
+    right: -7%;
+    top: 2%;
 }
 
 .imagen-arrastrable {
@@ -655,7 +691,57 @@ body {
 .imagen-arrastrable:active {
     cursor: grabbing;
 }
+.conjunto1, .conjunto2 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 28vh;
+    height: 28vh;
+    position: relative;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}
 
-.newposition {
-    left: 0%;
+.conjunto1 > div, 
+.conjunto2 > div {
+    position: absolute;
+    width: 25%;
+    height: 25%;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.conjunto1 > div:nth-child(1),
+.conjunto2 > div:nth-child(1) {
+    top: 20%;
+    left: 20%;
+}
+
+.conjunto1 > div:nth-child(2),
+.conjunto2 > div:nth-child(2) {
+    top: 20%;
+    right: 20%;
+}
+
+.conjunto1 > div:nth-child(3),
+.conjunto2 > div:nth-child(3) {
+    bottom: 20%;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.conjunto1 img,
+.conjunto2 img {
+    max-width: 80%;
+    max-height: 80%;
+    object-fit: contain;
+    transition: transform 0.3s ease;
+}
+
+.conjunto1 img:hover,
+.conjunto2 img:hover {
+    transform: scale(1.1);
 }

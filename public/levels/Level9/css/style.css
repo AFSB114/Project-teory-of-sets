@@ -513,7 +513,8 @@ body {
     align-self: center;
 
     margin-top: 4%;
-    margin-right: -2%;
+    position: relative;
+    right: -18%;
     font-family: 'Press Start 2P';
 }
 .objeto1 {

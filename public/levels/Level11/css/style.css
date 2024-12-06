@@ -136,9 +136,8 @@ body {
 
     position: absolute;
     bottom: 20.8%;
-    left: 6.3%;
+    left: 70%;
 }
-
 .puerta:hover {
     filter: drop-shadow(0 0 1vh rgba(255, 255, 255, 0.249));
     cursor: pointer;
@@ -398,7 +397,7 @@ body {
     width: 30%;
     height: 55vh;
 
-    background-image: url('../images/Question\ Pass.png');
+    background-image: url('../images/nota.png');
     background-repeat: no-repeat;
     background-size: contain;
 
@@ -408,7 +407,7 @@ body {
 
     position: absolute;
     top: 20%;
-    left: 35%;
+    left: 33.5%;
 
     display: grid;
     grid-template-rows: 2fr 2fr 1fr 1fr;
@@ -470,70 +469,9 @@ body {
 
 }
 
-.botellas {
-    background-image: url('../images/Water\ Bottle\ 1.png');
-    background-repeat: no-repeat;
-    background-size: contain;
-    background-position: center center;
-
-    /* border: 1px #af2b2b solid; */
-    width: 7vh;
-    height: 7vh;
-    grid-area: 2/ 2 / 3 / 3;
-    display: grid;
-
-    justify-self: center;
-    align-self: center;
-
-    margin-bottom: 10%;
-    /* bottom: 45%; */
-}
-
-.silla {
-    background-image: url('../images/armchair_left.png');
-    background-repeat: no-repeat;
-    background-size: contain;
-    background-position: center;
-
-    /* border: 1px #af2b2b solid; */
-    width: 7vh;
-    height: 7vh;
-    grid-area: 2/ 3 / 3 / 4;
-    display: grid;
-
-    justify-self: center;
-    align-self: center;
-
-    margin-bottom: 9%;
-    /* bottom: 45%; */
-
-}
-
-.florero {
-    background-image: url('../images/cactus_pot\ 2.png');
-    background-repeat: no-repeat;
-    background-size: contain;
-    background-position: center;
-
-    /* border: 1px #af2b2b solid; */
-    width: 7vh;
-    height: 7vh;
-    grid-area: 2/ 4 / 3 / 5;
-    display: grid;
-
-    justify-self: center;
-    align-self: center;
-
-    margin-bottom: 4%;
-
-    /* bottom: 40%; */
-
-}
-
-
 .text-1 {
     /* border: 1px #af2b2b solid; */
-    color: #00BD09;
+    color: #ffffff;
     grid-area: 1 / 1 / 2 / 6;
     text-align: center;
     display: grid;
@@ -541,102 +479,265 @@ body {
     justify-self: center;
     align-self: center;
 
-    margin-top: 10%;
+    margin-top: 28%;
+    margin-left: 13%;
+    height: 16vh;
     font-family: 'Press Start 2P';
 }
+#buscar{
+    margin-right: -10%;
+}
+.nota{
+    background-image: url('../images/nota.png');
+    background-position: center center;
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 15vh;
+    height: 15vh;
+    position: absolute;
+    
+    right:27.9%;
+    top: 61%;
+    cursor: pointer;
+    z-index: 0;
+}
+.bolso{
+    background-image: url('../images/bolso.png');
+    background-position: center center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    width: 18vh;
+    height: 18vh;
+    position: absolute;
+    
+    right:24%;
+    top: 66.7%;
+    z-index: 0;
+}
+.objeto1{
+    background-image: url('../images/objeto1.png');
+    background-position: center center;
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 14vh;
+    height: 12vh;
+    
+    position: absolute;
+    
+    right:70%;
+    top: 59%;
+    cursor: pointer;
+    z-index: 0;
+}
+.objeto1-2{
+    background-image: url('../images/1\,1.png');
+    background-position: center center;
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 20vh;
+    height: 31.7vh;
+    
+    position: absolute;
+    
+    right:76.6%;
+    top: 55%;
+    cursor: pointer;
+    z-index: 0;
+}
+.objeto1-3{
+    background-image: url('../images/1\,2.png');
+    background-position: center center;
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 20vh;
+    height: 31.7vh;
+    
+    position: absolute;
+    
+    right:58.6%;
+    top: 57%;
+    cursor: pointer;
+    z-index: 0;
+}
+.sofa{
+    background-image: url('../images/sofa.png');
+    background-position: center center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    width: 55vh;
+    height: 27vh;
+    position: absolute;
+    cursor: pointer;
+    right:36%;
+    top: 58%;
+    z-index: 0;
+}
+.sillas{
+    background-image: url('../images/silla.png');
+    background-position:center center ;
+    background-size: cover;
+    background-repeat: no-repeat;
 
-.numeros{
+    width: 12vh;
+    height: 12vh;
+    position: absolute;
+    cursor: pointer;
+    left:3%;
+    top: 72%;
+    z-index: 0;
+}
+.cuadroo{
+    background-image: url('../images/cuadro.png');
+    background-position: center center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    width: 17vh;
+    height: 16vh;
+    position: absolute;
+    cursor: pointer;
+    right:46%;
+    top: 27%;
+    z-index: 0;
+}
+.deco{
+    background-image: url('../images/deco.png');
+    background-position: center center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    width: 17vh;
+    height: 16vh;
+    position: absolute;
+    cursor: pointer;
+    right:46%;
+    top: 20%;
+    z-index: 0;
+}
 
-    grid-area: 3/2/5/5;
 
+.contrast {
+    background-color: rgba(0, 0, 0, 0);
+}
+
+.non-selectable {
+    pointer-events: none; 
+}
+
+
+.highlight-enabled {
+    cursor: pointer; 
+}
+
+.selected {
+    filter: brightness(0.6); 
+}
+.lampara{
+    background-image: url('../images/lampara.png');
+    background-position: center center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    width: 14vh;
+    height: 35vh;
+    position: absolute;
+    cursor: pointer;
+    right: 38.9%;
+    top: 52%;
+    z-index: 0;
+}
+.modal1 {
+    display: none; /* Ocultar por defecto */
+    position: fixed;
+    top: 0;
+    left: 0;
     width: 100%;
     height: 100%;
-
-    display: grid;
-    grid-template-rows: 1fr 1fr;
-    grid-template-columns: repeat(5, 1fr);
+    background-color: rgba(0, 0, 0, 0.5);
+    justify-content: center;
+    align-items: center;
 }
 
-.btn-numbers{
-    border: none;
-    background-color: transparent;
-    color: #00BD09;
-    width: 5vh;
-    height: 5vh;
-    font-family: 'Press Start 2P';
-
-
+.contenido-modal-lamp {
+    background-image: url('../images/lam.png');
+    background-position: center center;
+    background-size: cover;
+    height: 50vh;
+    width: 50;
+    background-repeat: no-repeat;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+}
+.texto{
+    width: 65%;
+    height: 30%;
+    margin-top: 35%;
+    margin-left: 22%;
     font-size: 4vh;
-
+}
+.btn-close-lamp{
+    margin-left: 11%;
+}
+.reloj{
+    background-image: url('../images/reloj.png');
+    background-position: center center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    width: 19vh;
+    height: 50vh;
+    position: absolute;
+    cursor: pointer;
+    right: 16%;
+    top: 40%;
+    z-index: 0;
 }
 
-.btn-numbers :hover{
-    filter: brightness(80%);
+.modal-reloj {
+    display: none; 
+    position: fixed; 
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6); 
+    justify-content: center;
+    align-items: center;
+    z-index: 999; 
+}
+
+.contenido-modal-reloj {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    width: 45vh;
+    height: 55vh;
+    text-align: center;
+    position: relative;
+}
+
+.hora-imagen {
+    width: 30vh;
+    height: 55vh;
+    background-color: #ffffff;
+    margin-left: 15%;
     cursor: pointer;
 }
-.uno {
-    grid-area: 1 / 1 / 2 / 2;
-    justify-self: center;
+
+.hora-imagen img {
+    width: 50%;
+    height: 100%;
+    object-fit: cover;
 }
 
-.dos {
-    grid-area: 1 / 2 / 2 / 3;
-
-    justify-self: center;
+#seleccionarHora {
+    position: absolute;
+    top: 84%;
+    right: 35%;
+    background-color: #f44336;
+    color: white;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    border-radius: 5px;
 }
-
-.tres {
-    grid-area: 1 / 3 / 2 / 4;
-    justify-self: center;
-
-}
-
-.cuatro {
-    grid-area: 1 / 4 / 2 / 5;
-   
-}
-
-.cinco {
-    grid-area: 1 / 5 / 2 / 6;
- 
-
-    justify-self: center;
-}
-
-.sub{
-    position: relative;
-    bottom: 4vh;
-}
-
-.six {
-    grid-area: 2 / 1 / 3 / 2;
-    
-    justify-self: center;
-    align-self: center;
-}
-
-.siete {
-    grid-area: 2 / 2 / 3 / 3;
-
-    align-self: center;
-}
-
-.ocho {
-    grid-area: 2 / 3 / 3 / 4;
-
-    justify-self: center;
-    align-self: center;
-}
-
-.nueve {
-    grid-area: 2 / 4 / 3 / 5;
-    
-    align-self: center;
-}
-
-.cero {
-    grid-area: 2 / 5 / 3 / 6;
-
-    justify-self: center;
-    align-self: center;
+#seleccionarHora {
+    background-color: #ff3333;
 }

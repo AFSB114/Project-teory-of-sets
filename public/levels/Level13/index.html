@@ -5,7 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="../../assets/images/icon.png" type="image/x-icon">
-    <title>Nivel 13</title>
+    <title>Nivel 13
+    </title>
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="../assets/css/loader.css">
 </head>
@@ -13,7 +14,7 @@
 <body>
     <div class="loader" id="loader">
         <div class="animation-loader" id="animation-loader"></div>
-        <div class="text-loader">Las puertas están a punto de abrirse...</div>
+        <div class="text-loader">¿Podrás escapar? Prepárate...</div>
     </div>
     <div class="container">
         <div class="box-wrapper">
@@ -24,7 +25,7 @@
                 <div class="contenido-modal-menu">
                     <div class="btn" id="continuar">Continuar</div>
                     <a href="" class="btn" id="restart">Reiniciar</a>
-                    <a href="../map/?level=13" class="btn" id="map">Mapa</a>
+                    <a href="../map/?level=12" class="btn" id="map">Mapa</a>
                     <a href="../../start/" class="btn" id="exit">Salir</a>
                 </div>
             </div>
@@ -33,21 +34,23 @@
                 00:00
             </div>
 
+
             <div class="help" id="help"></div>
 
             <iframe src="../Level0/index.html" style="display:none;" id="audioFrame"></iframe>
 
             <div class="modal modal-help">
                 <div class="contenido-modal-help">
-                    Todo buen pianista necesita una guía.<br>
-                    Encuentra la tuya..
+                    En la pared me verás, <br>
+                    herramientas podrás contar, <br>
+                    aunque no puedo trabajar, <br>
+                    todos me pueden observar.
                 </div>
             </div>
+
             <div class="modal modal-help">
-                <div class="contenido-modal-help">
-                    Cada disco tiene su tono, pero algunos<br>
-                    comparten una melodía. Escucha bien,<br>
-                    las notas se entrelazan.
+                <div class="img-help2">
+
                 </div>
             </div>
 
@@ -57,55 +60,25 @@
             <div class="scenarios" id="scenarios">
 
                 <div class="scenario" id="scenario1">
-                    <div class="cuadro_nota" id="cuadro_nota"></div>
-                    <audio id="fall" src="sounds/hit.mp3""></audio>
-                    <div class="paper" id="paper"></div>
+
+                    <div class="cherramientas" id="herramientas">
+
+                    </div>
+                    <div class="maquina" id="maquinaCoser"></div>
                 </div>
 
                 <div class="scenario" id="scenario2">
-                    <div class="piano" id="piano"></div>
-                </div>
-
-                <div class="scenario" id="scenario3">
                     <div class="puerta" id="puerta"></div>
                     <audio id="close" src="sounds/door-knock-1.mp3"></audio>
                     <audio id="open" src="sounds/door-1-open.mp3"></audio>
-                    <div class="reloj" id="reloj"></div>
+                </div>
+
+                <div class="scenario" id="scenario3">
+
                 </div>
 
                 <div class="scenario" id="scenario4">
-                    <div class="gramofono" id="gramofono"></div>
-                    <div class="ondas"></div>
-                    <div class="disco disco_rosa" id="disco_rosa" draggable="true"></div>
-                    <div class="disco disco_morado" id="disco_morado" draggable="true"></div>
-                    <div class="disco disco_azul" id="disco_azul" draggable="true"></div>
-                    <div class="diagrama"></div>
-                    <div class="notesQuestion">
-                        <div class="D4">
-                            <button type="button" class="btn-notes note" id="D4">D4</button>
-                        </div>
-                        <div class="E4">
-                            <button type="button" class="btn-notes note" id="E4">E4</button>
-                        </div>
-                        <div class="G4">
-                            <button type="button" class="btn-notes note" id="G4">G4</button>
-                        </div>
-                        <div class="A4">
-                            <button type="button" class="btn-notes note" id="A4">A4</button>
-                        </div>
-                        <div class="B4">
-                            <button type="button" class="btn-notes note" id="B4">B4</button>
-                        </div>
-                        <div class="G-sostenido-4">
-                            <button type="button" class="btn-notes note" id="G-sostenido-4">G#4</button>
-                        </div>
-                        <div class="F-sostenido-4">
-                            <button type="button" class="btn-notes note" id="F-sostenido-4">F#4</button>
-                        </div>
-                        <div class="G-sostenido-5">
-                            <button type="button" class="btn-notes note" id="G-sostenido-5">G#5</button>
-                        </div>
-                    </div>
+
                 </div>
 
                 <div id="character" class="character"></div>
@@ -115,129 +88,45 @@
 
         <div class="modal contrast" id="modal-ask">
             <div class="contenido-modal-ask">
-                <div class="partidura" id="partidura" style="display: none;">
-                    <div class="notas-partidura nota1">E5</div>
-                    <div class="notas-partidura nota2">D#5</div>
-                    <div class="notas-partidura nota3">E5</div>
-                    <div class="notas-partidura nota4">D#5</div>
-                    <div class="notas-partidura nota5">E5</div>
-                    <div class="notas-partidura nota6">B4</div>
-                    <div class="notas-partidura nota7">D5</div>
-                    <div class="notas-partidura nota8">C5</div>
-                    <div class="notas-partidura nota9">A4</div>
+                <div class="contenido">
+                    <div class="texto">En el cuadro verás muchos objetos similares, <br>
+                        lupas, linternas, herramientas y botiquines, en su unión. <br>
+                        Pero hay algunos que no pertenecen a la acción, <br>
+                        encuentra los que no siguen la misma intención.
+                    </div>
                 </div>
-                <div class="octava4">4</div>
-                <div class="do white key">
-                    <audio src="sounds/do.mp3" id="do " class="C4"></audio>
-                    C
-                </div>
-                <div class="re white key">
-                    <audio src="sounds/re.mp3" id="re" class="D4"></audio>
-                    D
-                </div>
-                <div class="mi white key">
-                    <audio src="sounds/mi.mp3" id="mi" class="E4"></audio>
-                    E
-                </div>
-                <div class="fa white key">
-                    <audio src="sounds/fa.mp3" id="fa" class="F4"></audio>
-                    F
-                </div>
-                <div class="sol white key">
-                    <audio src="sounds/sol.mp3" id="sol" class="G4"></audio>
-                    G
-                </div>
-                <div class="la white key">
-                    <audio src="sounds/la.mp3" id="la" class="A4"></audio>
-                    A
-                </div>
-                <div class="si white key">
-                    <audio src="sounds/si.mp3" id="si" class="B4"></audio>
-                    B
-                </div>
-                <div class="octava5">5</div>
-                <div class="do-5 white key">
-                    <audio src="sounds/do5.mp3" id="do-5" class="C5"></audio>
-                    C
-                </div>
-                <div class="re-5 white key">
-                    <audio src="sounds/re5.mp3" id="re-5" class="D5"></audio>
-                    D
-                </div>
-                <div class="mi-5 white key">
-                    <audio src="sounds/mi5.mp3" id="mi-5" class="E5"></audio>
-                    E
-                </div>
-                <div class="fa-5 white key">
-                    <audio src="sounds/fa5.mp3" id="fa-5" class="F5"></audio>
-                    F
-                </div>
-                <div class="sol-5 white key">
-                    <audio src="sounds/sol5.mp3" id="sol-5" class="G5"></audio>
-                    G
-                </div>
-                <div class="la-5 white key">
-                    <audio src="sounds/la5.mp3" id="la-5" class="A5"></audio>
-                    A
-                </div>
-                <div class="si-5 white key">
-                    <audio src="sounds/si5.mp3" id="si-5" class="B5"></audio>
-                    B
+                <div class="linterna hover" id="li" data-correct="false"></div>
+                <div class="linterna2 hover" id="li" data-correct="false"></div>
+                <div class="linterna3 hover" id="lc" data-correct="true"></div>
+                <div class="lupa hover" id="lui" data-correct="false"></div>
+                <div class="lupa2 hover" id="luc" data-correct="true"></div>
+                <div class="lupa3 hover" id="lui" data-correct="false"></div>
+                <div class="botiquin hover" id="bc" data-correct="true"></div>
+                <div class="botiquin2 hover" id="bi" data-correct="false"></div>
+                <div class="botiquin3 hover" id="bi" data-correct="false"></div>
+                <div class="herramienta hover" id="hi" data-correct="false"></div>
+                <div class="herramienta2 hover" id="hi" data-correct="false"></div>
+                <div class="herramienta3 hover" id="hc" data-correct="true"></div>
+
+                <div id="message-container" class="message-container hide">
+                    <div id="mensaje-error" class="mensaje-error"></div>
                 </div>
 
-                <div class="do-sostenido black key">
-                    <audio src="sounds/dosostenido.mp3" id="do-sostenido" class="C#4"></audio>
-                    C#
-                </div>
-                <div class="re-sostenido black key">
-                    <audio src="sounds/resostenido.mp3" id="re-sostenido" class="D#4"></audio>
-                    D#
-                </div>
-                <div class="fa-sostenido black key">
-                    <audio src="sounds/fasostenido.mp3" id="fa-sostenido" class="F#4"></audio>
-                    F#
-                </div>
-                <div class="sol-sostenido black key">
-                    <audio src="sounds/solsostenido.mp3" id="sol-sostenido" class="G#4"></audio>
-                    G#
-                </div>
-                <div class="la-sostenido black key">
-                    <audio src="sounds/lasostenido.mp3" id="la-sostenido" class="A#4"></audio>
-                    A#
-                </div>
-                <div class="do-sostenido-5 black key">
-                    <audio src="sounds/dosostenido5.mp3" id="do-sostenido-5" class="C-sostenido-5"></audio>
-                    C#
-                </div>
-                <div class="re-sostenido-5 black key">
-                    <audio src="sounds/resostenido5.mp3" id="re-sostenido-5" class="D#5"></audio>
-                    D#
-                </div>
-                <div class="fa-sostenido-5 black key">
-                    <audio src="sounds/fasostenido5.mp3" id="fa-sostenido-5" class="F#5"></audio>
-                    F#
-                </div>
-                <div class="sol-sostenido-5 black key">
-                    <audio src="sounds/solsostenido5.mp3" id="sol-sostenido-5" class="G#5"></audio>
-                    G#
-                </div>
-                <div class="la-sostenido-5 black key">
-                    <audio src="sounds/lasostenido5.mp3" id="la-sostenido-5" class="A#5"></audio>
-                    A#
-                </div>
             </div>
         </div>
 
+
+    </div>
     </div>
     <script src="../assets/js/loader.js"></script>
     <script src="js/movement.js" type="module"></script>
-    <script src="js/animations.js"></script>
     <script src="js/game.js" type="module"></script>
     <script src="js/modal.js"></script>
     <script src="js/time.js"></script>
     <script src="../assets/js/spritesCharacter.js"></script>
     <script src="../../assets/sonido/sonido.js"></script>
     <script src="../assets/js/script.js"></script>
+    <!-- <script src="../assets/js/mensaje_Error.js"></script> -->
 </body>
 
 </html>

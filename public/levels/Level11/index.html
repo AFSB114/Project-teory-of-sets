@@ -40,13 +40,16 @@
 
             <div class="modal modal-help">
                 <div class="contenido-modal-help">
-                    Enciende el computador
+                    En un papel suelo estar,<br>
+                    algo importante te quiero recordar. <br>
+                    ¿Qué soy?
                 </div>
             </div>
 
             <div class="modal modal-help">
-                <div class="img-help2">
-
+                <div class="contenido-modal-help">
+                    Mira la lámpara.<br> 
+                    Y despues, mira el reloj.<br>
                 </div>
             </div>
 
@@ -56,17 +59,26 @@
             <div class="scenarios" id="scenarios">
 
                 <div class="scenario" id="scenario1">
-                    <div class="puerta" id="puerta"></div>
-                    <audio id="close" src="sounds/door-knock-1.mp3"></audio>
-                    <audio id="open" src="sounds/door-1-open.mp3"></audio>
+                    <div class="objeto1" id="objeto1"></div>
+                    <div class="objeto1-2 selectable" id="objeto1-2 selectable"></div>
+                    <div class="objeto1-3 selectable" id="objeto1-3 selectable"></div>
+                    <div class="nota" id="nota"></div>
+                    <div class="bolso" id="bolso"></div>
+                    <div class="cuadroo" id="cuadroo"></div>
                 </div>
 
                 <div class="scenario" id="scenario2">
-
+                    <div class="sofa selectable" id="sofa selectable"></div>
+                    <div class="reloj" id="reloj"></div>
                 </div>
 
                 <div class="scenario" id="scenario3">
-
+                    <div class="puerta" id="puerta"></div>
+                    <div class="sillas selectable" id="sillas selectable"></div>
+                    <audio id="close" src="./sounds/door-knock-1.mp3"></audio>
+                    <audio id="open" src="./sounds/door-1-open.mp3"></audio>
+                    <div class="deco" id="deco"></div>
+                    <div class="lampara" id="lampara"></div>
                 </div>
 
                 <div id="character" class="character"></div>
@@ -74,19 +86,37 @@
 
         </div>
 
-        <div class="modal contrast" id="modal-ask">
-            <div class="contenido-modal-ask">
-                <a href="" class="btn-close"></a>
-
-                <div class="text-1">INGRESA <br> LA <br> CONTRASEÑA</div>
-                <div class="botellas"></div>
-                <div class="silla"></div>
-                <div class="florero"></div>
+        <div class="modal1" id="lamp-modal">
+            <div class="contenido-modal-lamp">
+                <p class="texto">AHORA,<BR> BUSCA OBJETOS DECORATIVOS</p>
+                <button class="btn-close-lamp">Buscar</button>
             </div>
+        </div>
+    </div>
+
+    <div class="modal contrast" id="modal-ask">
+        <div class="contenido-modal-ask">
+
+            <div class="text-1">
+                BUSCA OBJETOS<BR> DONDE <BR>PODRIAS SENTARTE
+            </div>
+            <button id="buscar">Buscar</button>
 
         </div>
 
     </div>
+    <div id="modal-reloj" class="modal-reloj">
+        <div class="contenido-modal-reloj">
+            <div id="relojImagen" class="hora-imagen"></div>
+            <button id="seleccionarHora">Seleccionar Hora</button>
+        </div>
+    </div>
+    <div id="error-modal" class="modal" style="display:none;">
+        <div class="modal-content">
+            <p>¡Hora incorrecta! Debes seleccionar la hora 7.</p>
+        </div>
+    </div>
+
     </div>
     <script src="../assets/js/loader.js"></script>
     <script src="js/movement.js" type="module"></script>

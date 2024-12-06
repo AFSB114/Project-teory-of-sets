@@ -66,7 +66,7 @@ puerta.addEventListener('click', () => {
     if (!passTrue) {
         knock.play();
     } else {
-        window.location.href = '../Level9/index.html';
+        store.addCompletedLevel(document.getElementById('timer').innerHTML, 'Level9')
     }
 });
 
