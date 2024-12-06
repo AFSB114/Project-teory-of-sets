@@ -19,7 +19,7 @@ const newUrl = window.location.protocol + "//" + window.location.host + window.l
 window.history.pushState({ path: newUrl }, '', newUrl);
 
 import StoreLevelCompleted from '../../assets/js/storeLevelCompleted.js'
-const store = new StoreLevelCompleted(13)
+const store = new StoreLevelCompleted(14)
 store.addStartedLevel()
 
 const paper = document.getElementById('paper');

@@ -15,8 +15,8 @@ export default class Character {
         this.gravity = 0.5
         this.jumpForce = 7.5
         this.isJumping = false
-        this.friction = 0.95 // Coeficiente de fricción en el suelo en el eje X
-        this.airFriction = 1.25 // Coeficiente de fricción en el aire en el eje X
+        this.friction = 0.85 // Coeficiente de fricción en el suelo en el eje X
+        this.airFriction = 1 // Coeficiente de fricción en el aire en el eje X
         this.acceleration = 1.5 // Aceleración en el eje X
         this.maxSpeed = 10 // Velocidad máxima en eje X
         

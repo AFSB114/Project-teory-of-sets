@@ -13,12 +13,12 @@ export default class StoreLevelCompleted {
                 idLevel: this.idlevel
             })
         }).then(res => res.json())
-        .then(res => {
-            // console.log(res)
-        })
+            .then(res => {
+                // console.log(res)
+            })
     }
-    
-    async addCompletedLevel(time,level) {
+
+    async addCompletedLevel(time, level) {
         await fetch('../../../php/controller/level.php', {
             method: 'POST',
             headers: { 'content-type': 'application/json' },
@@ -28,8 +28,12 @@ export default class StoreLevelCompleted {
                 time: time
             })
         }).then(res => res.json())
-        .then(res => {
-            window.location.href = `../../levels/${level}/`;
-        })
+            .then(res => {
+                if (level != 'Level14') {
+                    window.location.href = `../../levels/${level}/`;
+                } else {
+                    window.location.href = `../map/?level=${this.idlevel}`;
+                }
+            })
     }
 }
