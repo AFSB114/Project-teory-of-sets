@@ -19,6 +19,13 @@
         url('../fonts/pixeloidsans-bold-webfont.woff2') format('woff2');
 }
 
+@font-face {
+    font-family: 'Press Start 2P';
+    src: url('../fonts/PressStart2P-Regular.ttf') format('truetype'),
+        url('../fonts/pressstart2p-regular-webfont.woff') format('woff'),
+        url('../fonts/pressstart2p-regular-webfont.woff2') format('woff2');
+}
+
 html,
 body {
     height: 100%;

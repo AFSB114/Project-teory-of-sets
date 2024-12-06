@@ -28,6 +28,7 @@
 }
 
 .logCharacter {
+    display: none;
     background-image: url('../assets/images/iconPersonaje.png');
     grid-area: 5 / 1 / 6 / 2;
     background-size: contain;
@@ -43,9 +44,9 @@
 
 .text-Nombre {
     font-size: 3vh;
-    color: #f9f4f4;
+    color: #ffffff;
     text-align: center;
-    font-family: 'Press Start 2P';
+    font-family: 'Pixeloid Sans';
     position: relative;
     left: 110%;
     top: -5%;
