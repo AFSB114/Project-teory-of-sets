@@ -165,7 +165,7 @@ body {
 
 #scenario4 {
     left: 297%;
-    background-image: url('../images/LEVEL\ 12.3.png');
+    background-image: url('../images/LEVEL\ 12.4.png');
 }
 
 .puerta {
@@ -727,7 +727,7 @@ body {
 
     position: absolute;
     z-index: 3;
-    right: -20%;
+    right: -28%;
     bottom: -40%;
 
     width: auto;
@@ -779,4 +779,231 @@ body {
     position: absolute;
     right: -1%;
     top: 4%;
+}
+
+.mesa-cosedora {
+    width: 35%;
+    height: 60vh;
+
+    background-image: url('../images/mesadecoser.png');
+    background-repeat: no-repeat;
+    background-size: contain;
+
+    padding: 2vh;
+
+    opacity: 0;
+
+    position: absolute;
+    top: 15%;
+    left: 32%;
+
+    display: grid;
+    grid-template-rows: 1fr 1fr 1fr;
+    grid-template-columns: repeat(4, 1fr);
+
+    font-size: 4vh;
+    font-family: 'Pixeloid Sans';
+    text-align: center;
+    /* border: 1px solid #09cf23; */
+}
+
+.show-coser {
+    animation: show-coser 0.5s ease-in-out forwards;
+}
+
+@keyframes show-coser {
+    from {
+        opacity: 0;
+        top: -20%;
+    }
+
+    to {
+        opacity: 1;
+        top: 20;
+    }
+}
+
+.hide-coser {
+    animation: hide-coser 0.5s ease-in-out forwards;
+}
+
+@keyframes hide-coser {
+    from {
+        opacity: 1;
+        top: 20;
+    }
+
+    to {
+        opacity: 0;
+        top: -20%;
+    }
+}
+
+.hNegro {
+    background-image: url('../images/hNegro.png');
+    background-position: center center; 
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 20vh;
+    height: 20vh;
+    position: absolute;
+    cursor: pointer;
+    left: 2%;
+    top: 10%;
+    z-index: 0;
+    grid-area: 1/1/2/2;
+    /* border: 1px solid #09cf23; */
+}
+.hAmarillo {
+    background-image: url('../images/hAmarillo.png');
+    background-position: center center; 
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 20vh;
+    height: 20vh;
+    position: absolute;
+    cursor: pointer;
+    left: -5%;
+    top: 10%;
+    z-index: 0;
+    grid-area: 1/2/2/3;
+     /* border: 1px solid #09cf23; */
+}
+.hAzul {
+    background-image: url('../images/hAzul.png');
+    background-position: center center; 
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 20vh;
+    height: 20vh;
+    position: absolute;
+    cursor: pointer;
+    left: -5%;
+    top: 10%;
+    z-index: 0;
+    grid-area: 1/3/2/4;
+     /* border: 1px solid #09cf23; */
+}
+.hRojo {
+    background-image: url('../images/hRojo.png');
+    background-position: center center; 
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 20vh;
+    height: 20vh;
+    position: absolute;
+    cursor: pointer;
+    left: -5%;
+    top: 10%;
+    z-index: 0;
+    grid-area: 1/4/2/5;
+     /* border: 1px solid #09cf23; */
+}
+.hRosa {
+    background-image: url('../images/hRosa.png');
+    background-position: center center; 
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 20vh;
+    height: 20vh;
+    position: absolute;
+    cursor: pointer;
+    left: 5%;
+    top: 15%;
+    z-index: 0;
+    grid-area: 2/1/3/2;
+     /* border: 1px solid #09cf23; */
+}
+.hVerde {
+    background-image: url('../images/hVerde.png');
+    background-position: center center; 
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 20vh;
+    height: 20vh;
+    position: absolute;
+    cursor: pointer;
+    left: -5%;
+    top: 15%;
+    z-index: 0;
+    grid-area: 2/2/3/3;
+     /* border: 1px solid #09cf23; */
+}
+.hBlanco {
+    background-image: url('../images/hBlanco.png');
+    background-position: center center; 
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 20vh;
+    height: 20vh;
+    position: absolute;
+    cursor: pointer;
+    left: -5%;
+    top: 15%;
+    z-index: 0;
+    grid-area: 2/3/3/4;
+     /* border: 1px solid #09cf23; */
+}
+.hMorado {
+    background-image: url('../images/hMorado.png');
+    background-position: center center; 
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 20vh;
+    height: 20vh;
+    position: absolute;
+    cursor: pointer;
+    left: -5%;
+    top: 15%;
+    z-index: 0;
+    grid-area: 2/4/3/5;
+     /* border: 1px solid #09cf23; */
+}
+
+.radio {
+    background-image: url('../images/radio.png');
+    background-position: center center; 
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 10vh;
+    height: 10vh;
+    position: absolute;
+    cursor: pointer;
+    right: 49.9%;
+    bottom: 25.8%;
+    z-index: 0;
+    grid-area: 3/1/4/2;
+     /* border: 1px solid #09cf23; */
+}
+
+.hilo.selected {
+    box-shadow: 0 0 10px rgb(156, 132, 61);
+}
+
+.contenido2{
+    position: absolute;
+    z-index: 3;
+    left: 10%;
+
+    bottom: -18%;
+    width: 75%;
+    height: 30%;
+    font-size: 2vh;
+    font-family: 'Pixeloid Sans';
+    text-align: center;
+
+    padding: 2%;
+    background-color: rgb(199, 199, 199);
+    border: 1.5vh solid black;
+
+}
+
+.texto-Res {
+    font-size: 2.8vh;
+    color: black;
+    text-align: center center;
+    width: 100%;
+    position: absolute;
+    right: -1%;
+    top: 10%;
 }

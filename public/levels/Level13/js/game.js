@@ -22,73 +22,16 @@ import StoreLevelCompleted from '../../assets/js/storeLevelCompleted.js'
 const store = new StoreLevelCompleted(12)
 store.addStartedLevel()
 
-const cuadros = Array.from(document.getElementsByClassName('cuadro'));
-let pass = ['', '', ''];
-const passCorrect = ['cuadro-1', 'cuadro-2', 'cuadro-3'];
-const puerta = document.getElementById('puerta');
-const knock = document.getElementById('close');
-const doorOpen = document.getElementById('open');
-let passTrue = false;
-
-cuadros.forEach(cuadro => {
-    cuadro.addEventListener('click', () => {
-        cuadro.style.filter = 'drop-shadow(0 0 2vh rgba(255, 255, 255, 0.249))';
-        
-        for (let i = 0; i < pass.length; i++) {
-            if (pass[i] === '') {
-                pass[i] = cuadro.id;
-                break;
-            }
-        }
-
-        if (pass.join('') === passCorrect.join('')) {
-            doorOpen.play();
-            passTrue = true;
-        }
-    });
-});
-
-puerta.addEventListener('click', () => {
-    if (!passTrue) {
-        knock.play();
-        cuadros.forEach(cuadro => {
-            cuadro.style.filter = '';
-        });
-        pass.fill('');
-    } else {
-        if (play) {
-            socket.sendPassLevel(indexLevel)
-        } else {
-            store.addCompletedLevel(document.getElementById('timer').innerHTML, 'Level14')
-        }
-    }
-});
-
 
 document.addEventListener('DOMContentLoaded', () => {
-    const modal = document.getElementById('modal-ask');
+    // Variables del primer ejercicio
+    const modalAsk = document.getElementById('modal-ask');
     const items = document.querySelectorAll('.hover');
     const correctItems = Array.from(items).filter(item => item.getAttribute('data-correct') === 'true');
     let selectedCorrect = 0;
+    let primerEjercicioCompletado = false; // Controla si se completó el primer ejercicio
 
-
-    function showMessage(message) {
-        const messageContainer = document.getElementById('message-container');
-        const mensajeError = document.getElementById('mensaje-error');
-    
-        mensajeError.textContent = message;
-        messageContainer.classList.remove('hide'); 
-        messageContainer.classList.add('show');
-    
-        setTimeout(() => {
-            messageContainer.classList.add('hide');
-            setTimeout(() => {
-                messageContainer.classList.remove('show');
-            }, 500);
-        }, 2000); 
-    }
-    
-
+    const errorSound = document.getElementById('error-sound');
 
     items.forEach(item => {
         item.addEventListener('click', () => {
@@ -97,27 +40,95 @@ document.addEventListener('DOMContentLoaded', () => {
             if (isCorrect) {
                 if (!item.classList.contains('selected')) {
                     item.classList.add('selected');
-                    item.style.borderColor = 'limegreen'; // Resaltar correctos
+                    item.style.borderColor = 'limegreen';
                     selectedCorrect++;
 
-                   
                     if (selectedCorrect === correctItems.length) {
-                        showMessage('Seleccionaste todos los elementos correctos!');
+                        primerEjercicioCompletado = true; // Marca como completado
                         setTimeout(() => {
-                            modal.style.display = 'none';
-                        }, 2000);
-                     
+                            modalAsk.style.display = 'none';
+                        }, 1000);
                     }
                 }
             } else {
-                showMessage('Seleccionaste un objeto incorrecto. Reintenta.');
-                item.style.borderColor = 'red'; // Indicar incorrecto
+                errorSound.play().catch(err => {
+                    console.log('Error al reproducir el sonido:', err);
+                });
+                item.style.borderColor = 'red';
                 setTimeout(() => {
-                    item.style.borderColor = ''; // Restaurar color después de un tiempo
+                    item.style.borderColor = '';
                 }, 1000);
             }
         });
     });
 
-});
+    // Variables del segundo ejercicio (máquina de coser)
+    const radio = document.getElementById('radio');
+    const audioPista = document.getElementById('audio-pista');
+    const hilos = document.querySelectorAll('.hilo');
+    const modalCosedora = document.getElementById('modal-cosedora');
+    const puerta = document.getElementById('puerta');
+    const knock = document.getElementById('close'); // Sonido de golpear puerta
+    const doorOpen = document.getElementById('open'); // Sonido de puerta abriéndose
 
+    let passTrue = false;
+    let secuenciaUsuario = [];
+
+    const secuenciaCorrecta = [
+        'blanco', 'blanco', 'negro', 'verde',
+        'azul', 'rojo', 'rojo',
+        'amarillo', 'rosado', 'morado', 'morado'
+    ];
+
+    // Reproducir pista al hacer clic en el radio
+    radio.addEventListener('click', () => {
+        if (primerEjercicioCompletado) {
+            audioPista.play().catch(err => console.log('Error al reproducir la pista:', err));
+        } else {
+            console.log('Completa el primer ejercicio para desbloquear el siguiente.');
+        }
+    });
+
+    // Manejador de clics en los hilos
+    hilos.forEach(hilo => {
+        hilo.addEventListener('click', () => {
+            if (!primerEjercicioCompletado) {
+                console.log('No puedes interactuar con los hilos hasta completar el primer ejercicio.');
+                return;
+            }
+
+            const color = hilo.getAttribute('data-color');
+
+            if (secuenciaUsuario.length < secuenciaCorrecta.length) {
+                secuenciaUsuario.push(color);
+                hilo.classList.add('selected');
+            }
+
+            const esCorrecto = secuenciaUsuario.every((color, index) => color === secuenciaCorrecta[index]);
+
+            if (!esCorrecto) {
+                secuenciaUsuario = [];
+                hilos.forEach(h => h.classList.remove('selected'));
+                console.log('Secuencia incorrecta. Inténtalo de nuevo.');
+            } else if (secuenciaUsuario.length === secuenciaCorrecta.length) {
+                passTrue = true;
+                console.log('¡Secuencia correcta! Abriendo la puerta...');
+                setTimeout(() => {
+                    doorOpen.play();
+                    modalCosedora.style.display = 'none';
+                }, 2000);
+            }
+        });
+    });
+
+    // Interacción con la puerta
+    puerta.addEventListener('click', () => {
+        if (!passTrue) {
+            knock.play(); // Sonido si no se ha completado la secuencia
+        } else {
+            console.log('¡Puerta abierta!');
+            puerta.classList.add('abierta');
+            store.addCompletedLevel(document.getElementById('timer').innerHTML, 'Level14');
+        }
+    });
+});

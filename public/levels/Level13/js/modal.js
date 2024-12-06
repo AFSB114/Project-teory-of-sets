@@ -6,6 +6,8 @@ const help = document.getElementById('help');
 const modalHelp = document.getElementsByClassName('modal-help');
 const computador = document.getElementById('herramientas');
 const ask = document.getElementById('modal-ask');
+const modalCoser = document.getElementById('modal-cosedora');
+const coser = document.getElementById('maquinaCoser');
 
 let seeAsk = false;
 
@@ -42,6 +44,15 @@ const hideAsk = () => {
     }, 500)
 }
 
+const hideCoser = () => {
+    modalCoser.children[0].classList.remove('show-coser')
+    modalCoser.children[0].classList.add('hide-coser')
+    setTimeout(() => {
+        modalCoser.children[0].classList.remove('hide-coser')
+        modalCoser.style.display = 'none'
+    }, 500)
+}
+
 const handleWindowClick = (event) => {
     if (event.target === modalMenu) {
         closeModal();
@@ -49,6 +60,8 @@ const handleWindowClick = (event) => {
         hideModal(event.target);
     } else if (event.target === ask) {
         hideAsk()
+    }else if(event.target === modalCoser){
+        hideCoser()
     }
 };
 
@@ -68,6 +81,13 @@ help.addEventListener('click', () => {
 computador.addEventListener('click', () => {
     ask.style.display = 'block';
     ask.children[0].classList.add('show-ask');
+
+    seeAsk = true
+});
+
+coser.addEventListener('click', () => {
+    modalCoser.style.display = 'block';
+    modalCoser.children[0].classList.add('show-coser');
 
     seeAsk = true
 });
