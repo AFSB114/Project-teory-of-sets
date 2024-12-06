@@ -19,7 +19,7 @@ const newUrl = window.location.protocol + "//" + window.location.host + window.l
 window.history.pushState({ path: newUrl }, '', newUrl);
 
 import StoreLevelCompleted from '../../assets/js/storeLevelCompleted.js'
-const store = new StoreLevelCompleted(12)
+const store = new StoreLevelCompleted(13)
 store.addStartedLevel()
 
 
@@ -128,7 +128,7 @@ document.addEventListener('DOMContentLoaded', () => {
         } else {
             console.log('¡Puerta abierta!');
             puerta.classList.add('abierta');
-            store.addCompletedLevel(document.getElementById('timer').innerHTML, 'Level14');
+            store.addCompletedLevel(document.getElementById('timer').innerHTML, 'Level14')
         }
     });
 });

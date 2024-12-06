@@ -352,7 +352,7 @@ puerta.addEventListener('click', () => {
         if (play) {
             socket.sendPassLevel(indexLevel)
         } else {
-            store.addCompletedLevel(document.getElementById('timer').innerHTML, 'Level14')
+            store.addCompletedLevel(document.getElementById('timer').innerHTML, 'Finished')
         }
     }
 });

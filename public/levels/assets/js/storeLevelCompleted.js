@@ -29,7 +29,7 @@ export default class StoreLevelCompleted {
             })
         }).then(res => res.json())
             .then(res => {
-                if (level != 'Level14') {
+                if (level != 'Finished') {
                     window.location.href = `../../levels/${level}/`;
                 } else {
                     window.location.href = `../map/?level=${this.idlevel}`;
