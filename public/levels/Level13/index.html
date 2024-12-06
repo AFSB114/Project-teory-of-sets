@@ -9,6 +9,7 @@
     </title>
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="../assets/css/loader.css">
+    <link rel="stylesheet" href="../assets/css/mensajeError.css">
 </head>
 
 <body>
@@ -49,10 +50,15 @@
             </div>
 
             <div class="modal modal-help">
-                <div class="img-help2">
-
+                <div class="contenido-modal-help">
+                    Con mis dientes y aguja, me verás, <br>
+                    en tela y con hilos, mi trabajo harás. <br>
+                    Sin moverme, pero con ritmo y compás, <br>
+                    dejo marcas que se verán al final. <br>
+                    ¿Qué soy?
                 </div>
             </div>
+
 
             <div class="marco"></div>
 
@@ -73,8 +79,9 @@
                     <audio id="open" src="sounds/door-1-open.mp3"></audio>
                 </div>
 
+                <audio id="audio-pista" src="sounds/pista.mp3"></audio>
                 <div class="scenario" id="scenario3">
-
+                    <div class="radio" id="radio"></div>
                 </div>
 
                 <div class="scenario" id="scenario4">
@@ -86,6 +93,7 @@
 
         </div>
 
+        <audio id="error-sound" src="../Level1/sounds/error-126627.mp3"></audio>
         <div class="modal contrast" id="modal-ask">
             <div class="contenido-modal-ask">
                 <div class="contenido">
@@ -111,7 +119,34 @@
                 <div id="message-container" class="message-container hide">
                     <div id="mensaje-error" class="mensaje-error"></div>
                 </div>
+            </div>
+        </div>
 
+        <div class="modal contrast" id="modal-cosedora">
+            <div class="mesa-cosedora">
+                <div class="contenido2">
+                    <div class="texto-Res">A veces hablo, a veces canto, <br>
+                        mi voz recorre el aire y te encuentro. <br>
+                        Solo tienes que girarme para escuchar, <br>
+                        y en muchos hogares me podrás hallar. <br>
+                        ¿Qué soy?
+                    </div>
+                </div>
+
+
+                <div class="hNegro hilo" id="hNegro" data-color="negro"></div>
+                <div class="hAmarillo hilo" id="hAmarillo" data-color="amarillo"></div>
+                <div class="hAzul hilo" id="hAzul" data-color="azul"></div>
+                <div class="hRojo hilo" id="hRojo" data-color="rojo"></div>
+                <div class="hRosa hilo" id="hRosa" data-color="rosado"></div>
+                <div class="hVerde hilo" id="hVerde" data-color="verde"></div>
+                <div class="hBlanco hilo" id="hBlanco" data-color="blanco"></div>
+                <div class="hMorado hilo" id="hMorado" data-color="morado"></div>
+
+
+                <div id="message-container" class="message-container hide">
+                    <div id="mensaje-error" class="mensaje-error"></div>
+                </div>
             </div>
         </div>
 
@@ -126,6 +161,7 @@
     <script src="../assets/js/spritesCharacter.js"></script>
     <script src="../../assets/sonido/sonido.js"></script>
     <script src="../assets/js/script.js"></script>
+    <script src="../assets/js/mensaje_Error.js"></script>
     <!-- <script src="../assets/js/mensaje_Error.js"></script> -->
 </body>
 
